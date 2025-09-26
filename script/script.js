@@ -22,49 +22,59 @@ const btnComprar = document.getElementById("btnComprar");
 // -----------------------------
 // VARIABLES
 // -----------------------------
-let carrito = []; // [{id, tipo}]
+// Intentamos cargar el carrito desde localStorage, si no hay creamos uno vacío
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+// Actualizamos el contador de carrito al cargar
+carritoCount.textContent = carrito.length;
 
 // -----------------------------
-// RENDERIZAR CURSOS
+// FUNCIONES
 // -----------------------------
-function renderCursos() {
-  if (!cursosContainer) return;
-  cursosContainer.innerHTML = "";
-  cursos.forEach(curso => {
-    const card = document.createElement("div");
-    card.classList.add("course-card");
-    card.innerHTML = `
-      <img src="${curso.img}" alt="${curso.titulo}">
-      <h3>${curso.titulo}</h3>
-      <p>$${curso.precio}</p>
-      <button class="btn-ver" onclick="verDescripcion(${curso.id})">Ver descripción</button>
-      <button class="btn-carrito" onclick="agregarCarrito(${curso.id}, 'curso')">Agregar al carrito</button>
-    `;
-    cursosContainer.appendChild(card);
+
+function guardarCarrito() {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  carritoCount.textContent = carrito.length;
+}
+
+function agregarCarrito(id, tipo = "curso") {
+  carrito.push({ id, tipo });
+  guardarCarrito();
+  alert(`${tipo === "curso" ? "Curso" : "Preset"} agregado al carrito ✅`);
+}
+
+function eliminarDelCarrito(index) {
+  carrito.splice(index, 1);
+  guardarCarrito();
+  renderCarrito();
+}
+
+function renderCarrito() {
+  carritoItems.innerHTML = "";
+  let total = 0;
+
+  carrito.forEach((item, index) => {
+    let producto = item.tipo === "curso"
+      ? cursos.find(c => c.id === item.id)
+      : presets.find(p => p.id === item.id);
+
+    if (producto) {
+      total += producto.precio;
+      const div = document.createElement("div");
+      div.classList.add("carrito-item");
+      div.innerHTML = `
+        <p>${producto.titulo} - $${producto.precio}</p>
+        <button onclick="eliminarDelCarrito(${index})" class="btn">Eliminar</button>
+      `;
+      carritoItems.appendChild(div);
+    }
   });
+
+  totalCarrito.innerHTML = `<strong>Total:</strong> $${total}`;
 }
 
 // -----------------------------
-// RENDERIZAR PRESETS
-// -----------------------------
-function renderPresets() {
-  if (!presetsContainer) return;
-  presetsContainer.innerHTML = "";
-  presets.forEach(preset => {
-    const card = document.createElement("div");
-    card.classList.add("course-card");
-    card.innerHTML = `
-      <img src="${preset.img}" alt="${preset.titulo}">
-      <h3>${preset.titulo}</h3>
-      <p>$${preset.precio}</p>
-      <button class="btn-carrito" onclick="agregarCarrito(${preset.id}, 'preset')">Agregar al carrito</button>
-    `;
-    presetsContainer.appendChild(card);
-  });
-}
-
-// -----------------------------
-// MODAL DE DESCRIPCIÓN (cursos y presets)
+// MODAL
 // -----------------------------
 function verDescripcion(id, tipo = "curso") {
   let item;
@@ -80,7 +90,6 @@ function verDescripcion(id, tipo = "curso") {
   modalTitle.textContent = item.titulo;
   modalDesc.textContent = item.desc;
 
-  // Si tiene video lo muestra, si no lo oculta
   if (item.video) {
     modalVideo.src = item.video;
     modalVideo.style.display = "block";
@@ -108,16 +117,9 @@ window.onclick = (e) => {
   }
 };
 
-
 // -----------------------------
-// CARRITO
+// EVENTOS
 // -----------------------------
-function agregarCarrito(id, tipo = "curso") {
-  carrito.push({ id, tipo });
-  carritoCount.textContent = carrito.length;
-  alert(`${tipo === "curso" ? "Curso" : "Preset"} agregado al carrito ✅`);
-}
-
 document.querySelector(".carrito").addEventListener("click", () => {
   renderCarrito();
   carritoModal.style.display = "flex";
@@ -127,39 +129,6 @@ closeCarrito.onclick = () => {
   carritoModal.style.display = "none";
 };
 
-function renderCarrito() {
-  carritoItems.innerHTML = "";
-  let total = 0;
-
-  carrito.forEach((item, index) => {
-    let producto = item.tipo === "curso"
-      ? cursos.find(c => c.id === item.id)
-      : presets.find(p => p.id === item.id);
-
-    if (producto) {
-      total += producto.precio;
-      const div = document.createElement("div");
-      div.classList.add("carrito-item");
-      div.innerHTML = `
-        <p>${producto.titulo} - $${producto.precio}</p>
-        <button onclick="eliminarDelCarrito(${index})" class="btn">Eliminar</button>
-      `;
-      carritoItems.appendChild(div);
-    }
-  });
-
-  totalCarrito.innerHTML = `<strong>Total:</strong> $${total}`;
-}
-
-function eliminarDelCarrito(index) {
-  carrito.splice(index, 1);
-  carritoCount.textContent = carrito.length;
-  renderCarrito();
-}
-
-// -----------------------------
-// BOTÓN DE COMPRA
-// -----------------------------
 btnComprar.onclick = () => {
   if (carrito.length === 0) {
     alert("Tu carrito está vacío ❌");
@@ -195,7 +164,7 @@ btnComprar.onclick = () => {
       return actions.order.capture().then((details) => {
         alert(`Pago realizado ✅\nGracias ${details.payer.name.given_name}`);
         carrito = [];
-        carritoCount.textContent = "0";
+        guardarCarrito();
         carritoModal.style.display = "none";
       });
     },
@@ -207,14 +176,7 @@ btnComprar.onclick = () => {
 };
 
 // -----------------------------
-// INICIALIZAR
-// -----------------------------
-renderCursos();
-renderPresets();
-
-
-// -----------------------------
-// RENDERIZAR CURSOS
+// RENDERIZAR CURSOS Y PRESETS
 // -----------------------------
 function renderCursos() {
   if (!cursosContainer) return;
@@ -233,9 +195,6 @@ function renderCursos() {
   });
 }
 
-// -----------------------------
-// RENDERIZAR PRESETS
-// -----------------------------
 function renderPresets() {
   if (!presetsContainer) return;
   presetsContainer.innerHTML = "";
@@ -252,3 +211,9 @@ function renderPresets() {
     presetsContainer.appendChild(card);
   });
 }
+
+// -----------------------------
+// INICIALIZAR
+// -----------------------------
+renderCursos();
+renderPresets();
