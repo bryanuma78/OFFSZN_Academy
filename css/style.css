@@ -1,0 +1,205 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    background-color: #0e0e0e;
+    line-height: 1.6;
+  }
+  
+  /* NAVBAR */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: #111;
+    position: sticky;
+    top: 0;
+  }
+  
+  .navbar .logo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f0483e;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .navbar a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .navbar a:hover {
+    color: #f0483e;
+  }
+  
+  /* HERO */
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem;
+    background: linear-gradient(135deg, #111, #1c1c1c);
+  }
+  
+  .hero-content {
+    flex: 1;
+    min-width: 300px;
+    padding: 1rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #f0483e;
+  }
+  
+  .hero-content p {
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-image {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .hero-image img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  /* BOTONES */
+  .btn {
+    display: inline-block;
+    background: #f0483e;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  
+  .btn:hover {
+    background: #c7362d;
+  }
+  
+  /* SECCIONES */
+  section {
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .about p {
+    max-width: 700px;
+    margin: 1rem auto;
+  }
+  
+  .offer .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .card {
+    background: #1c1c1c;
+    padding: 2rem;
+    border-radius: 12px;
+    flex: 1 1 250px;
+  }
+  
+  .testimonials .testi-grid {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  blockquote {
+    background: #1c1c1c;
+    padding: 1.5rem;
+    border-radius: 10px;
+    font-style: italic;
+  }
+  
+  /* CTA */
+  .cta {
+    background: #f0483e;
+    color: #fff;
+  }
+  
+  .cta .btn {
+    background: #111;
+  }
+  
+  .cta .btn:hover {
+    background: #333;
+  }
+  
+  /* FOOTER */
+  .footer {
+    background: #111;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    color: #f0483e;
+  }
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  position: relative;
+  max-width: 600px;
+  width: 90%;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px; 
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}

@@ -1,0 +1,15 @@
+CREATE DATABASE panel_admin;
+
+USE panel_admin;
+
+CREATE TABLE items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tipo ENUM('curso','preset') NOT NULL,
+    titulo VARCHAR(255) NOT NULL,
+    precio DECIMAL(10,2) NOT NULL,
+    descuento INT DEFAULT 0,
+    imagen VARCHAR(255),
+    video VARCHAR(255),
+    descripcion TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OFFSZN Academy</title>
+  <link rel="stylesheet" href="/css/cursos.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">OFFSZN Academy</div>
+    <nav>
+      <ul>
+        <li><a href="/pages/index.html">Inicio</a></li>
+        <li><a href="/pages/cursos.html">Cursos</a></li>
+        <li><a href="/pages/Preset.html">Presets</a></li>
+        <li><a href="#comunidad">Comunidad</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="carrito">
+      🛒 <span id="carritoCount">0</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <h1>OFFSZN Academy – Aprende a mezclar y sonar pro desde cero</h1>
+      <p>“Aprende a mezclar voces y beats como un profesional.<br>
+      Cursos online + presets listos para usar + acceso a la comunidad OFFSZN.”</p>
+      <a href="#cursos" class="btn">Explorar Cursos</a>
+    </div>
+  </section>
+
+  <!-- CURSOS -->
+  <section id="cursos" class="cursos">
+    <h2>Nuestros Cursos</h2>
+    <div id="cursosContainer" class="cursos-grid">
+      <!-- Tarjetas generadas con JS -->
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <video id="modalVideo" controls width="100%"></video>
+    </div>
+  </div>
+
+  <!-- MODAL CARRITO -->
+  <div id="carritoModal" class="modal">
+    <div class="modal-content">
+      <span id="closeCarrito" class="close">&times;</span>
+      <h3>Tu Carrito</h3>
+      <div id="carritoItems"></div>
+      <p id="totalCarrito"><strong>Total:</strong> $0</p>
+      <button id="btnComprar" class="btn">Realizar Compra</button>
+      <div id="paypal-button-container" style="margin-top: 1rem;"></div>
+    </div>
+  </div>
+  
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>OFFSZN 2025 © – Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="/script/app.js"></script>
+  <script src="/script/script.js"></script>
+  <!-- SDK de PayPal Checkout -->
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+
+</body>
+</html>

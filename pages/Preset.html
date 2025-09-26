@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OFFSZN Academy - Presets</title>
+  <link rel="stylesheet" href="/css/cursos.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">OFFSZN Academy</div>
+    <nav>
+      <ul>
+        <li><a href="/pages/index.html">Inicio</a></li>
+        <li><a href="/pages/cursos.html">Cursos</a></li>
+        <li><a href="/pages/preset.html" class="active">Presets</a></li>
+        <li><a href="#comunidad">Comunidad</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="carrito">
+      🛒 <span id="carritoCount">0</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="presetsHero">
+    <div class="hero-content">
+      <h1>Presets OFFSZN – Suena pro al instante</h1>
+      <p>Presets listos para mezclar y grabar voces como un profesional.<br>
+      Compatibles con tus DAWs favoritos.</p>
+      <a href="#presets" class="btn">Explorar Presets</a>
+    </div>
+  </section>
+
+  <!-- PRESETS -->
+  <section id="presets" class="cursos">
+    <h2>Presets Exclusivos</h2>
+    <div id="presetsContainer" class="cursos-grid">
+      <!-- Se llena con JS -->
+    </div>
+  </section>
+
+  <!-- MODAL DESCRIPCIÓN -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <video id="modalVideo" controls style="width:100%; display:none;"></video>
+      <img id="modalImg" style="width:100%; border-radius:10px; display:none;">
+    </div>
+  </div>
+
+  <!-- MODAL CARRITO -->
+  <div id="carritoModal" class="modal">
+    <div class="modal-content">
+      <span id="closeCarrito" class="close">&times;</span>
+      <h3>Tu Carrito</h3>
+      <div id="carritoItems"></div>
+      <p id="totalCarrito"><strong>Total:</strong> $0</p>
+      <button id="btnComprar" class="btn">Realizar Compra</button>
+      <div id="paypal-button-container" style="margin-top: 1rem;"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>OFFSZN 2025 © – Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="/script/app.js"></script>
+  <script src="/script/script.js"></script>
+  <!-- SDK de PayPal Checkout -->
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+</body>
+</html>
