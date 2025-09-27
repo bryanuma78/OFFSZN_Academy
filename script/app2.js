@@ -16,7 +16,7 @@ const playlist = [
     {
       titulo: "Lugar",
       artista: "Ñuls",
-      productor: "h4nn y Willie Inspired",
+      productor: "H4nn, Impede, Whyonly18 y Willie Inspired",
       portada: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj97nEJp5WnVKD2zF3h3JJTkBc4X6mtDDBmw&s",
       audio: "/audio/Ñuls - Lugar (prod.impede).mp3"
   },
