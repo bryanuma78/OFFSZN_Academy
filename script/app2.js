@@ -12,7 +12,21 @@ const playlist = [
         productor: "Willie Inspired",
         portada: "https://cdn-images.dzcdn.net/images/cover/a837a7c2484d6580ec588c887106a658/1900x1900-000000-80-0-0.jpg",
         audio: "/audio/Lin JH ft Dey Dan  MT V6.wav"
-    }
+    },
+    {
+      titulo: "Lugar",
+      artista: "Ñuls",
+      productor: "h4nn y Willie Inspired",
+      portada: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj97nEJp5WnVKD2zF3h3JJTkBc4X6mtDDBmw&s",
+      audio: "/audio/Ñuls - Lugar (prod.impede).mp3"
+  },
+  {
+    titulo: "TXNXRTX",
+    artista: "J Wolf La Bestia",
+    productor: "Willie Inspired",
+    portada: "https://i.scdn.co/image/ab67616d00001e028b8a962a612292497159d622",
+    audio: "/audio/Txnxrtx.wav"
+  }
 ];
 
 const container = document.getElementById("playlist-container");
