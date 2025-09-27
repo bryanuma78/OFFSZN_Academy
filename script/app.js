@@ -178,6 +178,12 @@ btnComprar.onclick = () => {
 function renderCursos() {
   if (!cursosContainer) return;
   cursosContainer.innerHTML = "";
+
+  if (cursos.length === 0) {
+    cursosContainer.innerHTML = "<p>No se pudieron cargar los cursos 😕</p>";
+    return;
+  }
+
   cursos.forEach(curso => {
     const card = document.createElement("div");
     card.classList.add("course-card");
@@ -195,6 +201,12 @@ function renderCursos() {
 function renderPresets() {
   if (!presetsContainer) return;
   presetsContainer.innerHTML = "";
+
+  if (presets.length === 0) {
+    presetsContainer.innerHTML = "<p>No se pudieron cargar los presets 😕</p>";
+    return;
+  }
+
   presets.forEach(preset => {
     const card = document.createElement("div");
     card.classList.add("course-card");
@@ -213,7 +225,10 @@ function renderPresets() {
 // FETCH AL BACKEND
 // -----------------------------
 fetch("https://willie.lovestoblog.com/api/getProductos.php")
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error("Error HTTP " + res.status);
+    return res.json();
+  })
   .then(data => {
     cursos = data.filter(p => p.categoria === "curso");
     presets = data.filter(p => p.categoria === "preset");
@@ -221,4 +236,8 @@ fetch("https://willie.lovestoblog.com/api/getProductos.php")
     renderCursos();
     renderPresets();
   })
-  .catch(err => console.error("Error al cargar productos:", err));
+  .catch(err => {
+    console.error("Error al cargar productos:", err);
+    if (cursosContainer) cursosContainer.innerHTML = "<p>Error al cargar cursos 😕</p>";
+    if (presetsContainer) presetsContainer.innerHTML = "<p>Error al cargar presets 😕</p>";
+  });
