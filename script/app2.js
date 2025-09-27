@@ -13,14 +13,17 @@ const playlist = [
         portada: "https://cdn-images.dzcdn.net/images/cover/a837a7c2484d6580ec588c887106a658/1900x1900-000000-80-0-0.jpg",
         audio: "/audio/Lin JH ft Dey Dan  MT V6.wav"
     }
-  ];
-  
-  const container = document.getElementById("playlist-container");
-  
-  playlist.forEach(track => {
+];
+
+const container = document.getElementById("playlist-container");
+
+// Variable para controlar el audio actual
+let currentAudio = null;
+
+playlist.forEach(track => {
     const card = document.createElement("div");
     card.classList.add("track-card");
-  
+
     card.innerHTML = `
       <img src="${track.portada}" alt="${track.titulo}">
       <div class="track-info">
@@ -33,7 +36,18 @@ const playlist = [
         <p><b>Prod:</b> ${track.productor}</p>
       </div>
     `;
-  
+
     container.appendChild(card);
-  });
-  
+
+    // Obtener el audio de esta tarjeta
+    const audioEl = card.querySelector("audio");
+
+    // Escuchar cuando el usuario le da play
+    audioEl.addEventListener("play", () => {
+        // Si hay otro audio reproduciéndose, pausarlo
+        if (currentAudio && currentAudio !== audioEl) {
+            currentAudio.pause();
+        }
+        currentAudio = audioEl;
+    });
+});
