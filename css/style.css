@@ -1,178 +1,180 @@
 /* Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: "Poppins", sans-serif;
-    color: #fff;
-    background-color: #0e0e0e;
-    line-height: 1.6;
-  }
-  
-  /* NAVBAR */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 3rem;
-    background: #111;
-    position: sticky;
-    top: 0;
-  }
-  
-  .navbar .logo {
-    font-family: "Montserrat", sans-serif;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #f0483e;
-  }
-  
-  .navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .navbar a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  
-  .navbar a:hover {
-    color: #f0483e;
-  }
-  
-  /* HERO */
-  .hero {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: 3rem;
-    background: linear-gradient(135deg, #111, #1c1c1c);
-  }
-  
-  .hero-content {
-    flex: 1;
-    min-width: 300px;
-    padding: 1rem;
-  }
-  
-  .hero-content h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #f0483e;
-  }
-  
-  .hero-content p {
-    margin-bottom: 1.5rem;
-  }
-  
-  .hero-image {
-    flex: 1;
-    min-width: 300px;
-  }
-  
-  .hero-image img {
-    width: 100%;
-    border-radius: 10px;
-  }
-  
-  /* BOTONES */
-  .btn {
-    display: inline-block;
-    background: #f0483e;
-    color: #fff;
-    padding: 0.8rem 1.5rem;
-    border-radius: 30px;
-    text-decoration: none;
-    transition: background 0.3s;
-  }
-  
-  .btn:hover {
-    background: #c7362d;
-  }
-  
-  /* SECCIONES */
-  section {
-    padding: 4rem 2rem;
-    text-align: center;
-  }
-  
-  .about p {
-    max-width: 700px;
-    margin: 1rem auto;
-  }
-  
-  .offer .cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-  
-  .card {
-    background: #1c1c1c;
-    padding: 2rem;
-    border-radius: 12px;
-    flex: 1 1 250px;
-  }
-  
-  .testimonials .testi-grid {
-    display: grid;
-    gap: 1.5rem;
-    max-width: 800px;
-    margin: auto;
-  }
-  
-  blockquote {
-    background: #1c1c1c;
-    padding: 1.5rem;
-    border-radius: 10px;
-    font-style: italic;
-  }
-  
-  /* CTA */
-  .cta {
-    background: #f0483e;
-    color: #fff;
-  }
-  
-  .cta .btn {
-    background: #111;
-  }
-  
-  .cta .btn:hover {
-    background: #333;
-  }
-  
-  /* FOOTER */
-  .footer {
-    background: #111;
-    padding: 2rem;
-    text-align: center;
-  }
-  
-  .footer ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  
-  .footer a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .footer a:hover {
-    color: #f0483e;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  background-color: #0e0e0e;
+  line-height: 1.6;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background: #111;
+  position: sticky;
+  top: 0;
+}
+
+.navbar .logo {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f0483e;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #f0483e;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem;
+  background: linear-gradient(135deg, #111, #1c1c1c);
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 300px;
+  padding: 1rem;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #f0483e;
+}
+
+.hero-content p {
+  margin-bottom: 1.5rem;
+}
+
+.hero-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* BOTONES */
+.btn {
+  display: inline-block;
+  background: #f0483e;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #c7362d;
+}
+
+/* SECCIONES */
+section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.about p {
+  max-width: 700px;
+  margin: 1rem auto;
+}
+
+.offer .cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.card {
+  background: #1c1c1c;
+  padding: 2rem;
+  border-radius: 12px;
+  flex: 1 1 250px;
+}
+
+.testimonials .testi-grid {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+blockquote {
+  background: #1c1c1c;
+  padding: 1.5rem;
+  border-radius: 10px;
+  font-style: italic;
+}
+
+/* CTA */
+.cta {
+  background: #f0483e;
+  color: #fff;
+}
+
+.cta .btn {
+  background: #111;
+}
+
+.cta .btn:hover {
+  background: #333;
+}
+
+/* FOOTER */
+.footer {
+  background: #111;
+  padding: 2rem;
+  text-align: center;
+}
+
+.footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #f0483e;
+}
+
+/* POPUP */
 .popup-overlay {
   display: none;
   position: fixed;
@@ -206,16 +208,16 @@
 
 /* FAQ */
 .faq {
-  padding: 4rem 2rem;
-  text-align: left;
   max-width: 900px;
-  margin: 0 auto;
+  margin: 2rem auto;
+  text-align: left;
+  padding: 0 1rem;
 }
 
 .faq h2 {
-  text-align: center;
   color: #f0483e;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .faq-category {
@@ -223,35 +225,47 @@
 }
 
 .faq-category h3 {
-  color: #d8b4fe; /* Morado acorde con las tarjetas */
+  color: #d8b4fe; /* morado de la tarjeta */
   margin-bottom: 1rem;
 }
 
 .faq-item {
-  margin-bottom: 1rem;
-  border-left: 3px solid #f0483e;
-  padding-left: 1rem;
-  transition: background 0.3s;
-}
-
-.faq-item:hover {
-  background: rgba(216, 180, 254, 0.1); /* Morado suave */
-  border-left-color: #d8b4fe;
-}
-
-.question {
-  font-weight: 600;
+  background: #1c1c1c;
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
   cursor: pointer;
+}
+
+.faq-item .question {
+  padding: 1rem 1.5rem;
+  font-weight: 600;
   color: #fff;
+  position: relative;
 }
 
-.answer {
-  display: none;
-  margin-top: 0.5rem;
+.faq-item .question::after {
+  content: '+';
+  position: absolute;
+  right: 1.5rem;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.faq-item.active .question::after {
+  content: '-';
+}
+
+.faq-item .answer {
+  max-height: 0;
+  padding: 0 1.5rem;
   color: #ddd;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-/* Mostrar respuesta al hacer click (JS toggle) */
 .faq-item.active .answer {
-  display: block;
+  padding: 1rem 1.5rem;
+  max-height: 500px; /* suficiente para la mayoría de respuestas */
 }
