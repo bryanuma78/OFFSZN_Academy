@@ -203,3 +203,55 @@
   font-size: 18px;
   cursor: pointer;
 }
+
+/* FAQ */
+.faq {
+  padding: 4rem 2rem;
+  text-align: left;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faq h2 {
+  text-align: center;
+  color: #f0483e;
+  margin-bottom: 2rem;
+}
+
+.faq-category {
+  margin-bottom: 2rem;
+}
+
+.faq-category h3 {
+  color: #d8b4fe; /* Morado acorde con las tarjetas */
+  margin-bottom: 1rem;
+}
+
+.faq-item {
+  margin-bottom: 1rem;
+  border-left: 3px solid #f0483e;
+  padding-left: 1rem;
+  transition: background 0.3s;
+}
+
+.faq-item:hover {
+  background: rgba(216, 180, 254, 0.1); /* Morado suave */
+  border-left-color: #d8b4fe;
+}
+
+.question {
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+}
+
+.answer {
+  display: none;
+  margin-top: 0.5rem;
+  color: #ddd;
+}
+
+/* Mostrar respuesta al hacer click (JS toggle) */
+.faq-item.active .answer {
+  display: block;
+}

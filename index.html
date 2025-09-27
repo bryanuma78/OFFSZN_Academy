@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OFFSZN Academy</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/faq.css"> <!-- nuevo CSS para FAQ -->
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
@@ -80,6 +81,62 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <h2>❓ Preguntas Frecuentes (FAQ)</h2>
+
+    <div class="faq-category">
+      <h3>📀 Sobre los cursos</h3>
+      <div class="faq-item">
+        <p class="question">¿Qué ofrecen tus cursos?</p>
+        <p class="answer">Mis cursos están diseñados para ayudarte a mejorar tus habilidades de producción musical, desde lo más básico hasta técnicas avanzadas. Aprenderás mezcla, masterización, grabación de voces, uso de MIDI y efectos, siempre con un enfoque práctico en tus propios proyectos desde la primera clase.</p>
+      </div>
+      <div class="faq-item">
+        <p class="question">¿Cómo funcionan las clases?</p>
+        <p class="answer">Las clases son 100% en vivo por videollamada (Zoom, Meet o Teams). Cada sesión dura entre 40 y 60 minutos, incluye explicación paso a paso y práctica directa sobre tu canción o beat. Además, recibirás la grabación de cada clase para repasar.</p>
+      </div>
+      <div class="faq-item">
+        <p class="question">¿Necesito experiencia previa para tomar el curso?</p>
+        <p class="answer">No. Puedes empezar sin conocimientos o con un nivel intermedio. Yo adapto cada clase a tu nivel y estilo musical de preferencia.</p>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h3>🎚 Sobre presets y recursos</h3>
+      <div class="faq-item">
+        <p class="question">¿Qué incluyen los presets?</p>
+        <p class="answer">Mis presets están optimizados para FL Studio y plugins de Waves, pero siempre indico compatibilidad en la descripción. También incluyo presets nativos para que todos puedan usarlos sin problema.</p>
+      </div>
+      <div class="faq-item">
+        <p class="question">¿Cómo recibo mis presets después de la compra?</p>
+        <p class="answer">Una vez que completes el pago, recibirás un link de descarga inmediato y también lo tendrás guardado en tu cuenta en la página.</p>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h3>💳 Pagos y soporte</h3>
+      <div class="faq-item">
+        <p class="question">¿Qué métodos de pago aceptas?</p>
+        <p class="answer">Se acepta los siguientes métodos de pago: PayPal, tarjeta de crédito y Yape.</p>
+      </div>
+      <div class="faq-item">
+        <p class="question">¿Qué hago si tengo problemas/dudas con mi compra?</p>
+        <p class="answer">Escríbeme directo a WhatsApp +51 993 525 005 o por Instagram @willieinspired y te respondo lo más rápido posible.</p>
+      </div>
+    </div>
+
+    <div class="faq-category">
+      <h3>🎶 Comunidad y novedades</h3>
+      <div class="faq-item">
+        <p class="question">¿Dónde puedo estar al día con lo nuevo?</p>
+        <p class="answer">En mi servidor de Discord y en mi Instagram @willieinspired, donde comparto tips, presets gratis, lanzamientos y concursos.</p>
+      </div>
+      <div class="faq-item">
+        <p class="question">¿Ofreces descuentos?</p>
+        <p class="answer">Sí, en lanzamientos y promociones especiales anuncio descuentos limitados en mis redes.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -94,9 +151,21 @@
       </ul>
     </div>
   </footer>
-</div>
-</div>
-<script async src="https://eomail5.com/form/6d6c94f4-936c-11f0-a6b1-2398b9a18ea0.js" data-form="6d6c94f4-936c-11f0-a6b1-2398b9a18ea0"></script>
+
+  <!-- JS para FAQ (acordeón) -->
+  <script>
+    const questions = document.querySelectorAll('.faq-item .question');
+    questions.forEach(q => {
+      q.addEventListener('click', () => {
+        // cerrar todas las respuestas
+        questions.forEach(item => {
+          if(item !== q) item.parentElement.classList.remove('active');
+        });
+        // abrir/cerrar la seleccionada
+        q.parentElement.classList.toggle('active');
+      });
+    });
+  </script>
 
 </body>
 </html>
