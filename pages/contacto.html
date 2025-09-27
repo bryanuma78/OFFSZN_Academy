@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto – OFFSZN Academy</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/contact.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">OFFSZN Academy</div>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Inicio</a></li>
+        <li><a href="/pages/cursos.html">Cursos</a></li>
+        <li><a href="/pages/preset.html">Presets</a></li>
+        <li><a href="/pages/contact.html" class="active">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CONTACTO -->
+  <section class="contact" id="contacto">
+    <h2>Contáctanos</h2>
+    <p>¿Tienes dudas sobre los cursos, presets o la comunidad? Escríbenos y te responderemos lo más pronto posible.</p>
+    
+    <div class="contact-container">
+      <!-- FORM -->
+      <form id="contactForm" class="contact-form">
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <input type="email" name="email" placeholder="Tu correo" required>
+        <textarea name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+        <button type="submit" class="btn">Enviar</button>
+      </form>
+
+      <!-- INFO -->
+      <div class="contact-info">
+        <h3>Información</h3>
+        <p><i class="bi bi-envelope-fill"></i> Williebeatsyt@gmail.com</p>
+        <p><i class="bi bi-discord"></i> <a href="https://discord.gg/vX7XktMeBU" target="_blank">Únete al Discord</a></p>
+        <p><i class="bi bi-instagram"></i> <a href="https://instagram.com/willieinspired" target="_blank">@willieinspired</a></p>
+        <p><i class="bi bi-telephone-fill"></i> +51 993525005</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>OFFSZN 2025 © – Todos los derechos reservados.</p>
+      <ul>
+        <li><a href="/index.html">Inicio</a></li>
+        <li><a href="/pages/cursos.html">Cursos</a></li>
+        <li><a href="/pages/preset.html">Presets</a></li>
+        <li><a href="/pages/playlist.html">Playlist</a></li>
+        <li><a href="/pages/contact.html">Contacto</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="/script/script.js"></script>
+</body>
+</html>
