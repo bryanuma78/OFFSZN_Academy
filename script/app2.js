@@ -4,7 +4,7 @@ const playlist = [
       artista: "J Wolf La Bestia",
       productor: "Willie Inspired",
       portada: "https://i.scdn.co/image/ab67616d00001e02809ea567c2c2e4e5e69773a5",
-      audio: "/audio/Klk.mp3" // desde la raíz pública
+      audio: "/audio/klk.mp3"// desde la raíz pública
     },
     {
       titulo: "Energía",
