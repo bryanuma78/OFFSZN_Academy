@@ -17,7 +17,6 @@
     <div class="logo">
       <a href="/index.html">OFFSZN Academy</a>
     </div>
-    
     <nav>
       <ul>
         <li><a href="/index.html">Inicio</a></li>
@@ -35,7 +34,7 @@
     <p>¿Tienes dudas sobre los cursos, presets o la comunidad? Escríbenos y te responderemos lo más pronto posible.</p>
     
     <div class="contact-container">
-      <!-- FORM -->
+      <!-- FORMULARIO -->
       <form id="contactForm" class="contact-form">
         <input type="text" name="nombre" placeholder="Tu nombre" required>
         <input type="email" name="email" placeholder="Tu correo" required>
@@ -43,7 +42,7 @@
         <button type="submit" class="btn">Enviar</button>
       </form>
 
-      <!-- INFO -->
+      <!-- INFO DE CONTACTO -->
       <div class="contact-info">
         <h3>Información</h3>
         <p><i class="bi bi-envelope-fill"></i> Williebeatsyt@gmail.com</p>
@@ -68,8 +67,26 @@
     </div>
   </footer>
 
-  <!-- SCRIPT -->
+  <!-- SCRIPT EMAILJS -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script src="/script/script.js"></script>
+  <script>
+    // Inicializar EmailJS
+    emailjs.init("If_WAVcuXiGSPp2SB");
+
+    const contactForm = document.getElementById("contactForm");
+
+    contactForm.addEventListener("submit", function(e) {
+      e.preventDefault(); // Evita recarga de página
+
+      emailjs.sendForm("service_w50l62y", "template_bgp3zb5", this)
+        .then(() => {
+          alert("¡Mensaje enviado correctamente!");
+          contactForm.reset(); // Limpia los campos
+        }, (error) => {
+          console.error("Error al enviar:", error);
+          alert("Hubo un error al enviar el mensaje. Intenta de nuevo.");
+        });
+    });
+  </script>
 </body>
 </html>
