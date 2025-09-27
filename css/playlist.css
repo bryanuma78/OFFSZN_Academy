@@ -162,3 +162,9 @@ body {
 .footer-content ul li a:hover {
     color: #f0483e;
 }
+.navbar ul li a.active {
+    color: #f0483e;  /* rojo */
+    font-weight: bold;
+    border-bottom: 2px solid #f0483e; /* línea debajo */
+  }
+  

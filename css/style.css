@@ -269,3 +269,8 @@ blockquote {
   padding: 1rem 1.5rem;
   max-height: 500px; /* suficiente para la mayoría de respuestas */
 }
+.navbar ul li a.active {
+  color: #f0483e;  /* rojo */
+  font-weight: bold;
+  border-bottom: 2px solid #f0483e; /* línea debajo */
+}
