@@ -5,6 +5,13 @@ const playlist = [
       productor: "Willie Inspired",
       portada: "https://i.scdn.co/image/ab67616d00001e02809ea567c2c2e4e5e69773a5",
       audio: "/audio/klk.mp3"
+    },
+    {
+        titulo: "La Nena",
+        artista: "Lin Jh ft Dey Dan",
+        productor: "Willie Inspired",
+        portada: "https://cdn-images.dzcdn.net/images/cover/a837a7c2484d6580ec588c887106a658/1900x1900-000000-80-0-0.jpg",
+        audio: "/audio/Lin JH ft Dey Dan  MT V6.wav"
     }
   ];
   
