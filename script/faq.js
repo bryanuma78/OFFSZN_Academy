@@ -1,7 +1,12 @@
-// script/faq.js
-document.querySelectorAll(".faq-item .question").forEach(question => {
-  question.addEventListener("click", () => {
-    const parent = question.parentElement;
-    parent.classList.toggle("active");
+
+document.addEventListener('DOMContentLoaded', () => {
+  const questions = document.querySelectorAll('.faq-item .question');
+  questions.forEach(q => {
+    q.addEventListener('click', () => {
+      questions.forEach(item => {
+        if(item !== q) item.parentElement.classList.remove('active');
+      });
+      q.parentElement.classList.toggle('active');
+    });
   });
 });
