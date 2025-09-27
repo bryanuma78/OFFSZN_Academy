@@ -124,70 +124,99 @@ section {
   color: #ddd;
 }
 
-/* OFERTAS */
-.offer .cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.card {
-  background: #1c1c1c;
-  padding: 2rem;
-  border-radius: 12px;
-  flex: 1 1 250px;
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-/* TESTIMONIOS */
-.testimonials .testi-grid {
+/* TARJETAS (Usadas en OFERTAS y TESTIMONIOS) */
+.cards,
+.testi-grid {
   display: grid;
-  gap: 1.5rem;
-  max-width: 900px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  max-width: 1000px;
   margin: auto;
 }
 
-.testimonial-card {
+.card,
+.testi-card {
   background: #1c1c1c;
-  padding: 2rem;
-  border-radius: 12px;
+  border-radius: 15px;
+  padding: 2rem 1.5rem;
   text-align: center;
-  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #d8b4fe; /* morado */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 320px;
+}
+
+.card:hover,
+.testi-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(240, 72, 62, 0.3);
+}
+
+.card h3,
+.testi-card h3 {
+  color: #f0483e;
+  margin-bottom: 0.8rem;
+}
+
+.card p,
+.testi-card p {
+  color: #ddd;
+  font-size: 0.95rem;
+}
+
+.card-image img,
+.testi-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 1rem auto 0;
+  border-radius: 12px;
+  border: 3px solid #f0483e;
   transition: transform 0.3s ease;
 }
 
-.testimonial-card:hover {
-  transform: translateY(-5px);
+.card-image img:hover,
+.testi-card img:hover {
+  transform: scale(1.05);
 }
 
-.testimonial-card p {
-  font-style: italic;
-  margin-bottom: 1rem;
+/* TESTIMONIOS */
+.testimonials {
+  text-align: center;
+  padding: 4rem 2rem;
 }
 
-.testimonial-card h4 {
+.testimonials h2 {
   color: #f0483e;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
-.testimonial-card .social-icons {
+.testi-card h3 {
+  color: #d8b4fe; /* morado */
+}
+
+.testi-card p {
+  font-style: italic;
+}
+
+/* Íconos Sociales en Testimonios */
+.social-icons {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  margin-top: 1rem;
 }
 
-.testimonial-card .social-icons a {
-  color: #d8b4fe; /* morado */
-  font-size: 1.2rem;
-  transition: color 0.3s;
+.social-icons a {
+  color: #fff;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
 }
 
-.testimonial-card .social-icons a:hover {
+.social-icons a:hover {
   color: #f0483e;
 }
 
@@ -324,77 +353,4 @@ section {
 .faq-item.active .answer {
   padding: 1rem 1.5rem;
   max-height: 500px;
-}
-.testimonials {
-  text-align: center;
-  padding: 4rem 2rem;
-}
-
-.testimonials h2 {
-  color: #f0483e;
-  margin-bottom: 2rem;
-}
-
-.testi-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: auto;
-}
-
-.testi-card {
-  background: #1c1c1c;
-  border-radius: 15px;
-  padding: 2rem 1.5rem;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid #d8b4fe; /* morado */
-}
-
-.testi-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(240, 72, 62, 0.3);
-}
-
-.testi-card img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 15px;
-  margin-bottom: 1rem;
-  border: 3px solid #f0483e; /* borde rojo */
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.testi-card img:hover {
-  transform: scale(1.05);
-}
-
-.testi-card h3 {
-  color: #d8b4fe; /* morado */
-  margin-bottom: 0.5rem;
-}
-
-.testi-card p {
-  color: #ddd;
-  font-style: italic;
-  margin-bottom: 1rem;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.social-icons a {
-  color: #fff;
-  font-size: 1.5rem;
-  transition: color 0.3s ease;
-}
-
-.social-icons a:hover {
-  color: #f0483e; /* rojo al hover */
 }
