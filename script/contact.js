@@ -1,18 +1,20 @@
-// Inicializa EmailJS con tu Public Key
-emailjs.init("If_WAVcuXiGSPp2SB");
+document.addEventListener("DOMContentLoaded", function() {
+  // Inicializa EmailJS
+  emailjs.init("If_WAVcuXiGSPp2SB");
 
-const contactForm = document.getElementById("contactForm");
+  const form = document.getElementById("contactForm");
 
-contactForm.addEventListener("submit", function(e) {
-  e.preventDefault();
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
 
-  emailjs.sendForm("service_w50l62y", "template_bgp3z", this)
-    .then(() => {
-      alert("¡Mensaje enviado con éxito!");
-      contactForm.reset(); // limpia el formulario
-    })
-    .catch((error) => {
-      console.error("Error al enviar el mensaje:", error);
-      alert("Ocurrió un error. Intenta nuevamente.");
-    });
+    emailjs.sendForm("service_w50l62y", "template_bgp3z", this)
+      .then(() => {
+        alert("Mensaje enviado correctamente!");
+        form.reset();
+      })
+      .catch((error) => {
+        console.error("Error al enviar el mensaje:", error);
+        alert("Ocurrió un error al enviar el mensaje.");
+      });
+  });
 });
