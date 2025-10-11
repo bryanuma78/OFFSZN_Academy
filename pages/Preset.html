@@ -3,89 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OFFSZN Academy - Presets</title>
-  <link rel="stylesheet" href="/css/cursos.css">
-  <link rel="stylesheet" href="/css/contact.css">
+  <title>OFFSZN Academy – Presets</title>
+  <link rel="stylesheet" href="/css/preset.css">
+
+  <style>
+    .payhip-embed-wrapper {
+      display: inline-block;
+      transform: scale(0.7);
+      transform-origin: top left;
+      position: relative;
+      overflow-y: scroll;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .payhip-embed-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Tooltip flotante */
+    .scroll-tooltip {
+      position: fixed; /* Cambiado a fixed para que no dependa del transform */
+      pointer-events: none;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 9999;
+      white-space: nowrap;
+    }
+
+    .payhip-embed-wrapper:hover + .scroll-tooltip {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
   <!-- NAVBAR -->
   <header class="navbar">
-    <div class="logo">
-      <a href="/index.html">OFFSZN Academy</a>
-    </div>
-    
+    <div class="logo"><a href="/index.html">OFFSZN Academy</a></div>
     <nav>
       <ul>
         <li><a href="/index.html">Inicio</a></li>
-        <li><a href="/pages/cursos.html" >Cursos</a></li>
+        <li><a href="/pages/cursos.html">Cursos</a></li>
         <li><a href="/pages/preset.html" class="active">Presets</a></li>
         <li><a href="/pages/playlist.html">Playlist</a></li>
         <li><a href="/pages/contacto.html">Contacto</a></li>
       </ul>
     </nav>
-    <div class="carrito">
-      🛒 <span id="carritoCount">0</span>
-    </div>
   </header>
 
   <!-- HERO -->
-  <section class="hero" id="presetsHero">
+  <section class="hero">
     <div class="hero-content">
-      <h1>Presets OFFSZN – Suena pro al instante</h1>
-      <p>Presets listos para mezclar y grabar voces como un profesional.<br>
-      Compatibles con tus DAWs favoritos.</p>
-      <a href="#presets" class="btn">Explorar Presets</a>
+      <h1>OFFSZN Academy – Presets Profesionales</h1>
+      <p>Descarga presets listos para tus mezclas y suena como un profesional.</p>
     </div>
   </section>
 
-  <!-- PRESETS -->
+  <!-- SECCIÓN DE PRESETS -->
   <section id="presets" class="cursos">
-    <h2>Presets Exclusivos</h2>
-    <div id="presetsContainer" class="cursos-grid">
-      <!-- Se llena con JS -->
+    <h2>Nuestros Presets</h2>
+
+    <!-- Embed de Payhip reducido -->
+    <div class="payhip-embed-wrapper" id="payhip-wrapper">
+      <div class="payhip-embed-page" data-key="gjuQZ"></div>
     </div>
+
+    <!-- Tooltip (fuera del wrapper, para evitar conflicto con el transform) -->
+    <div class="scroll-tooltip" id="scroll-tooltip">💡 Desliza</div>
+
+    <script type="text/javascript" src="https://payhip.com/embed-page.js?v=24u68984"></script>
   </section>
 
-  <!-- MODAL DESCRIPCIÓN -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span id="closeModal" class="close">&times;</span>
-      <h2 id="modalTitle"></h2>
-      <p id="modalDesc"></p>
-      <video id="modalVideo" controls style="width:100%; display:none;"></video>
-      <img id="modalImg" style="width:100%; border-radius:10px; display:none;">
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>OFFSZN 2025 © – Todos los derechos reservados.</p>
+      <ul>
+        <li><a href="/index.html">Inicio</a></li>
+        <li><a href="/pages/cursos.html">Cursos</a></li>
+        <li><a href="/pages/preset.html">Presets</a></li>
+        <li><a href="/pages/playlist.html">Playlist</a></li>
+        <li><a href="/pages/contacto.html">Contacto</a></li>
+      </ul>
     </div>
-  </div>
+  </footer>
 
-  <!-- MODAL CARRITO -->
-  <div id="carritoModal" class="modal">
-    <div class="modal-content">
-      <span id="closeCarrito" class="close">&times;</span>
-      <h3>Tu Carrito</h3>
-      <div id="carritoItems"></div>
-      <p id="totalCarrito"><strong>Total:</strong> $0</p>
-      <button id="btnComprar" class="btn">Realizar Compra</button>
-      <div id="paypal-button-container" style="margin-top: 1rem;"></div>
-    </div>
-  </div>
+  <script>
+    const wrapper = document.getElementById('payhip-wrapper');
+    const tooltip = document.getElementById('scroll-tooltip');
 
- <!-- FOOTER -->
- <footer class="footer">
-  <div class="footer-content">
-    <p>OFFSZN 2025 © – Todos los derechos reservados.</p>
-    <ul>
-      <li><a href="/index.html">Inicio</a></li>
-      <li><a href="/pages/cursos.html">Cursos</a></li>
-      <li><a href="/pages/preset.html">Presets</a></li>
-      <li><a href="/pages/playlist.html">Playlist</a></li>
-      <li><a href="/pages/contact.html">Contacto</a></li>
-    </ul>
-  </div>
-</footer>
+    wrapper.addEventListener('mousemove', e => {
+      tooltip.style.opacity = '1';
+      tooltip.style.left = e.pageX + 15 + 'px';
+      tooltip.style.top = e.pageY + 15 + 'px';
+    });
 
-  <script src="/script/app.js"></script>
-  <script src="/script/script.js"></script>
-  <!-- SDK de PayPal Checkout -->
-  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+    wrapper.addEventListener('mouseleave', () => {
+      tooltip.style.opacity = '0';
+    });
+  </script>
 </body>
 </html>

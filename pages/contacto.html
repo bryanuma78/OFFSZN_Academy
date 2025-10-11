@@ -32,18 +32,12 @@
     
     <div class="contact-container">
       <!-- FORMULARIO -->
-      <form
-      id="contactForm"
-      class="contact-form"
-      data-service-id="service_w50l62y"
-      data-template-id="template_bgp3zb5"
-      data-public-key="If_WAVcuXiGSPp2SB"
-    >
-      <input type="text" name="nombre" placeholder="Tu nombre" required>
-      <input type="email" name="email" placeholder="Tu correo" required>
-      <textarea name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
-      <button type="submit" class="btn">Enviar</button>
-    </form>
+      <form id="contactForm" class="contact-form">
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <input type="email" name="email" placeholder="Tu correo" required>
+        <textarea name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+        <button type="submit" class="btn">Enviar</button>
+      </form>
 
       <!-- INFO DE CONTACTO -->
       <div class="contact-info">
@@ -71,22 +65,7 @@
   </footer>
 
   <!-- SCRIPT LOCAL -->
-  <script src="/js/email.min.js"></script>
-  <script>
-    const form = document.getElementById('contactForm');
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      emailjs.sendForm(
-        form.dataset.serviceId,
-        form.dataset.templateId,
-        form,
-        form.dataset.publicKey
-      ).then(
-        () => alert('Mensaje enviado'),
-        () => alert('Ocurrió un error')
-      );
-    });
-  </script>
-  
+  <script src="/script/email.min.js"></script>
+  <script src="/script/contact.js"></script>
 </body>
 </html>

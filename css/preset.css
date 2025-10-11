@@ -384,3 +384,32 @@ blockquote {
   border-bottom: 2px solid #f0483e; /* línea debajo */
 }
 
+/* NAVBAR: siempre al frente */
+.navbar {
+  position: sticky; /* ya lo tienes */
+  top: 0;
+  z-index: 9999;    /* valor alto para que esté encima de todo */
+}
+
+.payhip-embed-wrapper {
+  display: block;
+  width: 100%;
+  max-width: 500px;     /* controla el ancho */
+  max-height: 800px;    /* controla el alto visible */
+  overflow-y: scroll;   /* permite desplazarse verticalmente */
+  scrollbar-width: none; /* oculta scroll en Firefox */
+  -ms-overflow-style: none; /* oculta scroll en IE y Edge antiguos */
+  position: relative;
+  left: 0;
+  margin: 2rem 0;
+  z-index: 1;
+}
+
+/* oculta barra en Chrome, Edge y Safari */
+.payhip-embed-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
