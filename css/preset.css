@@ -450,3 +450,20 @@ blockquote {
       overflow-y: scroll;
     }
     
+    .presets-info {
+      font-size: 1rem;
+      color: #f0483e;        /* color principal de tu marca */
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      text-align: center;
+      opacity: 0.9;
+    }
+    .presets-iframe-wrapper {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    
