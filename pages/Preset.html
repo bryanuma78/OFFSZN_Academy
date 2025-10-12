@@ -6,10 +6,6 @@
   <title>OFFSZN Academy – Presets</title>
   <link rel="stylesheet" href="/css/preset.css">
   <link rel="stylesheet" href="/css/style.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
   <!-- NAVBAR -->
@@ -41,11 +37,10 @@
   <!-- SECCIÓN DE PRESETS -->
   <section id="presets" class="cursos">
     <h2>Nuestros Presets</h2>
-
-    <!-- Embed de Payhip vía Netlify Functions -->
+    <!-- Embed completo de Payhip -->
     <div class="presets-iframe-wrapper">
       <iframe
-      src="/netlify/functions/payhip-proxy.js"
+      src="/.netlify/functions/payhip-proxy"
       width="100%"
       height="1800"
       style="border:none;overflow:hidden;"
@@ -53,9 +48,10 @@
   </iframe>
   
     </div>
-
-    <!-- Tooltip de scroll -->
+    <!-- Tooltip -->
     <div class="scroll-tooltip" id="scroll-tooltip">💡 Desliza</div>
+    <script type="text/javascript" src="https://payhip.com/embed-page.js?v=24u68984"></script>
+    <script src="/script/menu.js"></script>
   </section>
 
   <!-- FOOTER -->
@@ -72,8 +68,6 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="/script/menu.js"></script>
   <script>
     // Toggle menú hamburguesa
     const toggle = document.getElementById('menu-toggle');
