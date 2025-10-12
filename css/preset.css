@@ -413,3 +413,26 @@ blockquote {
 
 
 
+
+    /* Tooltip flotante */
+    .scroll-tooltip {
+      position: fixed; /* Cambiado a fixed para que no dependa del transform */
+      pointer-events: none;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 9999;
+      white-space: nowrap;
+    }
+
+    .payhip-embed-wrapper:hover + .scroll-tooltip {
+      opacity: 1;
+    }
+
+
+
+
