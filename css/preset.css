@@ -21,7 +21,7 @@ body {
   background: #111;
   position: sticky;
   top: 0;
-  flex-wrap: wrap;
+  z-index: 1000;
 }
 
 .navbar .logo {
@@ -29,25 +29,29 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   color: #f0483e;
+  cursor: pointer;
 }
 
 .navbar ul {
   list-style: none;
   display: flex;
   gap: 1.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 0.5rem;
 }
 
 .navbar a {
   color: #fff;
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.3s, border-bottom 0.3s;
 }
 
 .navbar a:hover {
   color: #f0483e;
+}
+
+.navbar ul li a.active {
+  color: #f0483e;
+  font-weight: bold;
+  border-bottom: 2px solid #f0483e;
 }
 
 /* ICONO DEL CARRITO */
@@ -466,4 +470,210 @@ blockquote {
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
+    
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  background-color: #0e0e0e;
+  line-height: 1.6;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background: #111;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  flex-wrap: wrap;
+}
+
+.navbar .logo {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f0483e;
+}
+
+.navbar nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.navbar nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.navbar nav ul li a:hover,
+.navbar nav ul li a.active {
+  color: #f0483e;
+  font-weight: bold;
+  border-bottom: 2px solid #f0483e;
+}
+
+/* Botón hamburguesa */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ICONO DEL CARRITO */
+.carrito {
+  cursor: default;
+  font-size: 1.3rem;
+  background: linear-gradient(135deg, #f0483e, #c7362d);
+  padding: 0.2rem 0.6rem;
+  border-radius: 30px;
+  color: #fff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.carrito:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(240, 72, 62, 0.6);
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 2rem;
+}
+
+.hero-content {
+  flex: 1 1 300px;
+  padding: 1rem;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #f0483e;
+}
+
+.hero-content p {
+  margin-bottom: 1.5rem;
+}
+
+/* BOTONES */
+.btn {
+  display: inline-block;
+  background: #f0483e;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #c7362d;
+}
+
+/* SECCIÓN PRESETS */
+.presets-iframe-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.scroll-tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+/* FOOTER */
+.footer {
+  background: #111;
+  padding: 2rem;
+  text-align: center;
+}
+
+.footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #f0483e;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .navbar nav ul {
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .navbar nav ul.active {
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.2rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+
     

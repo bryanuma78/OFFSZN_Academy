@@ -167,4 +167,30 @@ body {
     font-weight: bold;
     border-bottom: 2px solid #f0483e; /* línea debajo */
   }
-  
+  /* Responsive para móviles */
+@media (max-width: 768px) {
+    .playlist-grid {
+        grid-template-columns: 1fr; /* 1 tarjeta por fila */
+    }
+
+    .track-card {
+        flex-direction: column; /* Imagen arriba, info debajo */
+        align-items: center;
+        text-align: center;
+        gap: 0.8rem;
+    }
+
+    .track-card img {
+        width: 80%;
+        max-width: 200px;
+        height: auto;
+    }
+
+    .track-info {
+        width: 100%;
+    }
+
+    .track-info audio {
+        width: 100%;
+    }
+}
