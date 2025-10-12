@@ -394,8 +394,8 @@ blockquote {
 .payhip-embed-wrapper {
   display: block;
   width: 100%;
-  max-width: 500px;     /* controla el ancho */
-  max-height: 800px;    /* controla el alto visible */
+  max-width: 450px;     /* controla el ancho */
+  max-height: 650px;    /* controla el alto visible */
   overflow-y: scroll;   /* permite desplazarse verticalmente */
   scrollbar-width: none; /* oculta scroll en Firefox */
   -ms-overflow-style: none; /* oculta scroll en IE y Edge antiguos */
@@ -436,3 +436,17 @@ blockquote {
 
 
 
+    .presets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 columnas cuando haya espacio */
+      gap: 2rem;
+      justify-items: center; /* centra cada embed */
+    }
+    
+    .payhip-embed-wrapper {
+      width: 100%;
+      max-width: 350px;   /* ajusta al tamaño de cada embed */
+      height: 650px;      /* altura del embed */
+      overflow-y: scroll;
+    }
+    
