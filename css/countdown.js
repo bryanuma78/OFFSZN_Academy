@@ -1,4 +1,4 @@
-// Countdown Timer - 30 Días
+// Countdown Timer - 30 Días con Horas, Minutos y Segundos
 (function() {
   'use strict';
   
@@ -10,25 +10,25 @@
     const now = new Date().getTime();
     const distance = endDate - now;
     
-    // Si el tiempo terminó
     if (distance < 0) {
       document.getElementById('days').textContent = '00';
+      document.getElementById('hours').textContent = '00';
+      document.getElementById('minutes').textContent = '00';
+      document.getElementById('seconds').textContent = '00';
       return;
     }
     
-    // Calcular días restantes
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
-    // Actualizar el DOM
     document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
   }
   
-  // Iniciar cuando el DOM esté listo
-  document.addEventListener('DOMContentLoaded', function() {
-    // Actualizar inmediatamente
-    updateCountdown();
-    
-    // Actualizar cada día (cada 24 horas)
-    setInterval(updateCountdown, 1000 * 60 * 60 * 24);
-  });
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 })();
