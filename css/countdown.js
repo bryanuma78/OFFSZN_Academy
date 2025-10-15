@@ -1,34 +1,57 @@
-// Countdown Timer - 30 Días con Horas, Minutos y Segundos
+// Countdown con persistencia en localStorage
 (function() {
   'use strict';
   
-  // Configurar fecha final: 30 días desde hoy
-  const endDate = new Date();
-  endDate.setDate(endDate.getDate() + 30);
+  const STORAGE_KEY = 'offszn_countdown_end_date';
+  const COUNTDOWN_BANNER = document.querySelector('.countdown-banner');
+  
+  function getEndDate() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    
+    if (stored) {
+      const endDate = new Date(stored);
+      // Verificar que no sea una fecha vieja
+      if (endDate > new Date()) {
+        return endDate;
+      }
+    }
+    
+    // Si no existe o pasó, crear nueva fecha: 30 días desde ahora
+    const newEndDate = new Date();
+    newEndDate.setDate(newEndDate.getDate() + 30);
+    localStorage.setItem(STORAGE_KEY, newEndDate.toISOString());
+    return newEndDate;
+  }
   
   function updateCountdown() {
     const now = new Date().getTime();
+    const endDate = getEndDate();
     const distance = endDate - now;
     
-    if (distance < 0) {
-      document.getElementById('days').textContent = '00';
-      document.getElementById('hours').textContent = '00';
-      document.getElementById('minutes').textContent = '00';
-      document.getElementById('seconds').textContent = '00';
+    const daysElement = document.getElementById('days');
+    const bannerContent = document.querySelector('.countdown-content');
+    
+    if (!daysElement || !bannerContent) return;
+    
+    if (distance <= 0) {
+      // Tiempo terminado
+      COUNTDOWN_BANNER.innerHTML = `
+        <div class="countdown-content">
+          <span class="countdown-text">✨ DISPONIBLE SOLO POR HOY ✨</span>
+        </div>
+      `;
+      localStorage.removeItem(STORAGE_KEY);
       return;
     }
     
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-    document.getElementById('days').textContent = String(days).padStart(2, '0');
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    daysElement.textContent = String(days).padStart(2, '0');
   }
   
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  // Iniciar cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', function() {
+    updateCountdown();
+    // Actualizar cada segundo
+    setInterval(updateCountdown, 1000);
+  });
 })();
