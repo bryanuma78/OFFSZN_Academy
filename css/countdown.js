@@ -10,13 +10,11 @@
     
     if (stored) {
       const endDate = new Date(stored);
-      // Verificar que no sea una fecha vieja
       if (endDate > new Date()) {
         return endDate;
       }
     }
     
-    // Si no existe o pasó, crear nueva fecha: 30 días desde ahora
     const newEndDate = new Date();
     newEndDate.setDate(newEndDate.getDate() + 30);
     localStorage.setItem(STORAGE_KEY, newEndDate.toISOString());
@@ -29,15 +27,18 @@
     const distance = endDate - now;
     
     const daysElement = document.getElementById('days');
-    const bannerContent = document.querySelector('.countdown-content');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
     
-    if (!daysElement || !bannerContent) return;
+    if (!daysElement) return;
     
     if (distance <= 0) {
-      // Tiempo terminado
       COUNTDOWN_BANNER.innerHTML = `
         <div class="countdown-content">
           <span class="countdown-text">✨ DISPONIBLE SOLO POR HOY ✨</span>
+          <a href="/pages/Preset.html" class="countdown-btn">CONSEGUIRLO</a>
+          <button class="countdown-close" onclick="this.closest('.countdown-banner').style.display='none';">×</button>
         </div>
       `;
       localStorage.removeItem(STORAGE_KEY);
@@ -45,13 +46,18 @@
     }
     
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
     daysElement.textContent = String(days).padStart(2, '0');
+    if (hoursElement) hoursElement.textContent = String(hours).padStart(2, '0');
+    if (minutesElement) minutesElement.textContent = String(minutes).padStart(2, '0');
+    if (secondsElement) secondsElement.textContent = String(seconds).padStart(2, '0');
   }
   
-  // Iniciar cuando el DOM esté listo
   document.addEventListener('DOMContentLoaded', function() {
     updateCountdown();
-    // Actualizar cada segundo
     setInterval(updateCountdown, 1000);
   });
 })();
