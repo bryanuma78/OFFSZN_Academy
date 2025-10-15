@@ -13,9 +13,9 @@ body {
   padding-top: 70px;
 }
 
-/* ===== COUNTDOWN BANNER MORADO (UNA LÍNEA) ===== */
+/* ===== COUNTDOWN BANNER (FONDO NEGRO, NÚMEROS MORADOS) ===== */
 .countdown-banner {
-  background: linear-gradient(90deg, #1a0533 0%, #2d0a5e 50%, #1a0533 100%);
+  background: linear-gradient(90deg, #000 0%, #0a0118 50%, #000 100%);
   color: #fff;
   padding: 12px 20px;
   position: fixed;
@@ -23,8 +23,8 @@ body {
   left: 0;
   right: 0;
   z-index: 10000;
-  box-shadow: 0 3px 15px rgba(138, 43, 226, 0.5);
-  border-bottom: 2px solid rgba(138, 43, 226, 0.6);
+  box-shadow: 0 4px 20px rgba(114, 9, 183, 0.6);
+  border-bottom: 2px solid rgba(114, 9, 183, 0.8);
   animation: slideDown 0.5s ease;
 }
 
@@ -43,7 +43,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 18px;
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
@@ -63,48 +63,50 @@ body {
 .countdown-timer {
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  gap: 5px;
 }
 
 .time-block {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 5px 10px;
-  border-radius: 5px;
-  min-width: 45px;
-  border: 1px solid rgba(138, 43, 226, 0.5);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 6px 11px;
+  border-radius: 6px;
+  min-width: 48px;
+  border: 1px solid rgba(114, 9, 183, 0.6);
 }
 
 .time-number {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   color: #c9a7eb;
   font-family: 'Montserrat', sans-serif;
   line-height: 1;
+  text-shadow: 0 0 10px rgba(201, 167, 235, 0.8);
 }
 
 .time-label {
-  font-size: 7px;
-  color: #c9a7eb;
+  font-size: 8px;
+  color: #999;
   text-transform: uppercase;
-  margin-top: 1px;
-  letter-spacing: 0.3px;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
   font-weight: 600;
 }
 
 .time-separator {
   font-size: 18px;
   font-weight: 700;
-  color: #c9a7eb;
+  color: #666;
   margin: 0 2px;
 }
 
 .countdown-btn {
   background: linear-gradient(90deg, #7209b7, #560bad);
   color: #fff;
-  padding: 8px 24px;
+  padding: 8px 26px;
   border-radius: 25px;
   text-decoration: none;
   font-weight: 700;
@@ -112,62 +114,65 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: all 0.3s ease;
-  box-shadow: 0 0 20px rgba(114, 9, 183, 0.5);
-  border: 1px solid rgba(201, 167, 235, 0.3);
+  box-shadow: 0 0 25px rgba(114, 9, 183, 0.6);
+  border: 1px solid rgba(201, 167, 235, 0.4);
   white-space: nowrap;
 }
 
 .countdown-btn:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 35px rgba(114, 9, 183, 0.8);
+  box-shadow: 0 0 40px rgba(114, 9, 183, 0.9);
   background: linear-gradient(90deg, #560bad, #3c096c);
 }
 
 .countdown-close {
   background: none;
   border: none;
-  color: #c9a7eb;
-  font-size: 24px;
+  color: #999;
+  font-size: 26px;
   cursor: pointer;
   transition: all 0.3s;
-  padding: 0 5px;
+  padding: 0 8px;
   line-height: 1;
+  margin-left: auto;
 }
 
 .countdown-close:hover {
-  color: #e9d5ff;
-  text-shadow: 0 0 10px rgba(114, 9, 183, 0.8);
+  color: #c9a7eb;
+  text-shadow: 0 0 10px rgba(201, 167, 235, 0.8);
 }
 
 @media (max-width: 1000px) {
   .countdown-content {
-    gap: 10px;
+    gap: 12px;
   }
 
   .countdown-text {
     font-size: 13px;
-    letter-spacing: 1px;
   }
 
   .time-block {
-    min-width: 40px;
-    padding: 4px 8px;
+    min-width: 42px;
+    padding: 5px 9px;
   }
 
   .time-number {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .countdown-btn {
     font-size: 11px;
-    padding: 7px 18px;
+    padding: 7px 20px;
   }
 }
 
 @media (max-width: 600px) {
+  .countdown-banner {
+    padding: 10px 12px;
+  }
+
   .countdown-content {
     gap: 8px;
-    padding: 0 10px;
   }
 
   .countdown-text {
@@ -176,25 +181,26 @@ body {
   }
 
   .time-block {
-    min-width: 35px;
-    padding: 3px 6px;
+    min-width: 38px;
+    padding: 4px 7px;
   }
 
   .time-number {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .time-label {
-    font-size: 6px;
+    font-size: 7px;
   }
 
   .countdown-btn {
     font-size: 10px;
-    padding: 6px 14px;
+    padding: 6px 16px;
   }
 
   .countdown-close {
-    font-size: 18px;
+    font-size: 22px;
+    padding: 0 4px;
   }
 }
 
