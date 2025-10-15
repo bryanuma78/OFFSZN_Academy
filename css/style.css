@@ -10,7 +10,8 @@ body {
   color: #e9d5ff;
   background-color: #000;
   line-height: 1.6;
-  padding-top: 70px;
+  padding-top: 60px;
+  transition: padding-top 0.3s ease;
 }
 
 /* ===== COUNTDOWN BANNER ===== */
