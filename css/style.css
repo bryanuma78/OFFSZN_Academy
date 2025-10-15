@@ -10,6 +10,7 @@ body {
   color: #fff;
   background-color: #06070b;
   line-height: 1.6;
+  padding-top: 55px;
 }
 
 /* ===== NAVBAR ===== */
@@ -71,10 +72,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 150px 10%;
+  padding: 60px 10% 80px;
   position: relative;
-  background: radial-gradient(circle at top right, rgba(0, 255, 255, 0.05), transparent 60%);
-  min-height: 85vh;
+  background: radial-gradient(circle at top right, rgba(114, 9, 183, 0.08), transparent 60%);
+  min-height: 75vh;
 }
 
 .hero-content {
@@ -82,17 +83,14 @@ body {
   z-index: 2;
 }
 
-/* TÍTULO NEON "OFFSZN PRESETS PACK" */
+/* TÍTULO MORADO SIN GLOW */
 .hero-content h1 {
-  font-size: 85px;
+  font-size: 70px;
   font-weight: 600;
-  letter-spacing: 3px;
-  color: #00f0ff;
-  text-shadow: 
-    0 0 20px rgba(0, 240, 255, 0.6),
-    0 0 40px rgba(0, 240, 255, 0.4),
-    0 0 60px rgba(0, 240, 255, 0.2);
-  margin: 0 0 25px;
+  letter-spacing: 2px;
+  color: #b794f6;
+  text-shadow: none;
+  margin: 0 0 20px;
   line-height: 1.1;
   transition: all 0.3s ease;
   text-transform: uppercase;
@@ -100,10 +98,7 @@ body {
 }
 
 .hero-content h1:hover {
-  text-shadow: 
-    0 0 30px rgba(0, 240, 255, 0.9),
-    0 0 60px rgba(0, 240, 255, 0.6),
-    0 0 90px rgba(0, 240, 255, 0.3);
+  color: #c9b1fd;
 }
 
 .hero-content p {
@@ -113,18 +108,18 @@ body {
   margin-bottom: 35px;
 }
 
-/* BOTÓN CTA */
+/* BOTÓN MORADO */
 .btn {
   display: inline-block;
-  background: linear-gradient(90deg, #00f0ff, #0078ff);
-  color: #06070b;
+  background: linear-gradient(90deg, #7209b7, #560bad);
+  color: #fff;
   font-weight: 600;
   padding: 18px 50px;
   border-radius: 12px;
   text-decoration: none;
   font-size: 17px;
   letter-spacing: 0.6px;
-  box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 20px rgba(114, 9, 183, 0.4);
   transition: all 0.35s ease;
   position: relative;
   overflow: hidden;
@@ -135,7 +130,8 @@ body {
 
 .btn:hover {
   transform: scale(1.07);
-  box-shadow: 0 0 60px rgba(0, 240, 255, 0.7);
+  box-shadow: 0 0 40px rgba(114, 9, 183, 0.7);
+  background: linear-gradient(90deg, #560bad, #3c096c);
 }
 
 .btn:after {
@@ -208,7 +204,7 @@ section {
 }
 
 .about h2 {
-  color: #00f0ff;
+  color: #9d4edd;
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
 }
@@ -227,7 +223,7 @@ section {
 }
 
 .offer h2 {
-  color: #00f0ff;
+  color: #9d4edd;
   font-size: 2.5rem;
   margin-bottom: 3rem;
 }
@@ -246,7 +242,7 @@ section {
   padding: 2rem 1.5rem;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid rgba(0, 240, 255, 0.3);
+  border: 2px solid rgba(157, 78, 221, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -255,11 +251,11 @@ section {
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 30px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 8px 30px rgba(114, 9, 183, 0.4);
 }
 
 .card h3 {
-  color: #00f0ff;
+  color: #9d4edd;
   margin-bottom: 0.8rem;
   font-size: 1.5rem;
 }
@@ -276,7 +272,7 @@ section {
   object-fit: cover;
   margin: 1rem auto 0;
   border-radius: 12px;
-  border: 3px solid #00f0ff;
+  border: 3px solid #9d4edd;
   transition: transform 0.3s ease;
 }
 
@@ -291,7 +287,7 @@ section {
 }
 
 .testimonials h2 {
-  color: #00f0ff;
+  color: #9d4edd;
   font-size: 2.5rem;
   margin-bottom: 3rem;
 }
@@ -310,7 +306,7 @@ section {
   padding: 2rem 1.5rem;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid rgba(0, 240, 255, 0.3);
+  border: 2px solid rgba(157, 78, 221, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -319,7 +315,7 @@ section {
 
 .testi-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 30px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 8px 30px rgba(114, 9, 183, 0.4);
 }
 
 .testi-card img {
@@ -327,7 +323,7 @@ section {
   height: 100px;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid #00f0ff;
+  border: 3px solid #9d4edd;
   margin-bottom: 1rem;
   transition: transform 0.3s ease;
 }
@@ -337,7 +333,7 @@ section {
 }
 
 .testi-card h3 {
-  color: #00f0ff;
+  color: #9d4edd;
   margin-bottom: 0.8rem;
 }
 
@@ -363,7 +359,7 @@ section {
 }
 
 .social-icons a:hover {
-  color: #00f0ff;
+  color: #9d4edd;
 }
 
 /* ===== FAQ ===== */
@@ -376,7 +372,7 @@ section {
 }
 
 .faq h2 {
-  color: #00f0ff;
+  color: #9d4edd;
   margin-bottom: 2rem;
   text-align: center;
   font-size: 2.5rem;
@@ -387,7 +383,7 @@ section {
 }
 
 .faq-category h3 {
-  color: #00f0ff;
+  color: #9d4edd;
   margin-bottom: 1rem;
   font-size: 1.5rem;
 }
@@ -399,11 +395,11 @@ section {
   overflow: hidden;
   transition: all 0.3s ease;
   cursor: pointer;
-  border: 1px solid rgba(0, 240, 255, 0.2);
+  border: 1px solid rgba(157, 78, 221, 0.2);
 }
 
 .faq-item:hover {
-  border-color: rgba(0, 240, 255, 0.5);
+  border-color: rgba(157, 78, 221, 0.5);
 }
 
 .faq-item .question {
@@ -418,7 +414,7 @@ section {
   position: absolute;
   right: 1.5rem;
   font-weight: bold;
-  color: #00f0ff;
+  color: #9d4edd;
   transition: transform 0.3s ease;
 }
 
@@ -466,7 +462,7 @@ section {
 }
 
 .footer a:hover {
-  color: #00f0ff;
+  color: #9d4edd;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -549,17 +545,16 @@ section {
 
 /* ===== COUNTDOWN BANNER MORADO ===== */
 .countdown-banner {
-  background: linear-gradient(90deg, #1a0a2e 0%, #4a0e78 50%, #1a0a2e 100%);
+  background: linear-gradient(90deg, #1a0533 0%, #2d0a5e 50%, #1a0533 100%);
   color: #fff;
-  padding: 14px 20px;
+  padding: 8px 15px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 10000;
-  box-shadow: 0 4px 20px rgba(138, 43, 226, 0.4);
-  animation: slideDown 0.5s ease;
-  border-bottom: 2px solid rgba(186, 85, 211, 0.5);
+  box-shadow: 0 3px 15px rgba(74, 14, 120, 0.5);
+  border-bottom: 1px solid rgba(138, 43, 226, 0.4);
 }
 
 @keyframes slideDown {
@@ -604,30 +599,29 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(186, 85, 211, 0.2);
-  padding: 10px 16px;
-  border-radius: 10px;
-  min-width: 70px;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(186, 85, 211, 0.4);
-  box-shadow: 0 0 20px rgba(186, 85, 211, 0.3);
+  background: rgba(74, 14, 120, 0.3);
+  padding: 5px 10px;
+  border-radius: 6px;
+  min-width: 50px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(138, 43, 226, 0.4);
 }
 
 .time-number {
-  font-size: 28px;
+  font-size: 18px;
   font-weight: 700;
-  color: #d8b4fe;
+  color: #9d4edd;
   font-family: 'Montserrat', sans-serif;
   line-height: 1;
-  text-shadow: 0 0 15px rgba(216, 180, 254, 0.8);
+  text-shadow: 0 0 10px rgba(157, 78, 221, 0.6);
 }
 
 .time-label {
-  font-size: 12px;
-  color: #e9d5ff;
+  font-size: 8px;
+  color: #c9a7eb;
   text-transform: uppercase;
-  margin-top: 5px;
-  letter-spacing: 1px;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
   font-weight: 600;
 }
 
@@ -651,10 +645,11 @@ section {
   box-shadow: 0 0 40px rgba(168, 85, 247, 0.8);
   background: linear-gradient(90deg, #9333ea, #6d28d9);
 }
-
 /* Ajustar navbar para que no quede debajo del banner */
 .navbar {
-  margin-top: 70px;
+  margin-top: 0;
+  top: 55px;
+  position: sticky;
 }
 
 /* Responsive */
