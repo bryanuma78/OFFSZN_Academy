@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OFFSZN</title>
+  <title>OFFSZN Academy</title>
 
   <link rel="stylesheet" href="/css/style.css">
 
@@ -12,12 +12,137 @@
 
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <style>
+    /* Transición suave del navbar */
+    .navbar {
+      transition: top 0.3s ease, padding-top 0.3s ease;
+    }
+    
+    /* Carrito estilo */
+    .cart-icon {
+      display: none;
+      width: 40px;
+      height: 40px;
+      background: rgba(114, 9, 183, 0.3);
+      border: 2px solid rgba(114, 9, 183, 0.6);
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c9a7eb;
+      font-size: 20px;
+      transition: all 0.3s;
+    }
+
+    .cart-icon:hover {
+      background: rgba(114, 9, 183, 0.5);
+      box-shadow: 0 0 15px rgba(114, 9, 183, 0.5);
+    }
+
+    /* Mostrar carrito en desktop */
+    @media (min-width: 901px) {
+      .cart-icon {
+        display: flex;
+      }
+    }
+
+    /* Menú móvil desde la izquierda */
+    .navbar nav {
+      position: fixed;
+      left: -300px;
+      top: 70px;
+      width: 280px;
+      height: calc(100vh - 70px);
+      background: rgba(0, 0, 0, 0.98);
+      backdrop-filter: blur(10px);
+      transition: left 0.3s ease;
+      z-index: 999;
+      overflow-y: auto;
+      border-right: 1px solid rgba(114, 9, 183, 0.3);
+    }
+
+    .navbar nav.active {
+      left: 0;
+    }
+
+    .navbar nav ul {
+      flex-direction: column;
+      gap: 0;
+      padding: 20px 0;
+    }
+
+    .navbar nav ul li {
+      border-bottom: 1px solid rgba(114, 9, 183, 0.2);
+    }
+
+    .navbar nav ul li a {
+      display: block;
+      padding: 18px 25px;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    .navbar nav ul li a:hover,
+    .navbar nav ul li a.active {
+      background: rgba(114, 9, 183, 0.2);
+      padding-left: 35px;
+      text-shadow: 0 0 10px rgba(114, 9, 183, 0.8);
+    }
+
+    /* Desktop navbar normal */
+    @media (min-width: 901px) {
+      .navbar nav {
+        position: static;
+        width: auto;
+        height: auto;
+        background: none;
+        border: none;
+        left: auto;
+      }
+
+      .navbar nav ul {
+        flex-direction: row;
+        gap: 2rem;
+      }
+
+      .navbar nav ul li {
+        border: none;
+      }
+
+      .navbar nav ul li a {
+        padding: 0;
+      }
+
+      .navbar nav ul li a:hover,
+      .navbar nav ul li a.active {
+        background: none;
+        padding-left: 0;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 900px) {
+      .navbar {
+        padding: 1rem 1.5rem;
+      }
+
+      .navbar nav {
+        width: 250px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <!-- COUNTDOWN BANNER -->
-<div class="countdown-banner">
+<div class="countdown-banner" id="countdownBanner">
   <div class="countdown-content">
     <span class="countdown-text">VOCAL PRESET EXCLUSIVO 25% OFF</span>
     <div class="countdown-timer">
@@ -42,217 +167,219 @@
       </div>
     </div>
     <a href="/pages/Preset.html" class="countdown-btn">CONSEGUIRLO</a>
-    <button class="countdown-close" onclick="this.closest('.countdown-banner').style.display='none';">×</button>
+    <button class="countdown-close" id="countdownClose">×</button>
   </div>
 </div>
   
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="logo">
-      <a href="/index.html">OFFSZN</a>
-    </div>
-    <button class="menu-toggle" aria-label="Abrir menú">
-      <i class="bi bi-list"></i>
-    </button>
-    <nav>
-      <ul>
-        <li><a href="/index.html" class="active">Inicio</a></li>
-        <li><a href="/pages/cursos.html">Cursos</a></li>
-        <li><a href="/pages/Preset.html">Presets</a></li>
-        <li><a href="/pages/playlist.html">Playlist</a></li>
-        <li><a href="/pages/contacto.html">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="logo">
+    <a href="/index.html">OFFSZN</a>
+  </div>
+  
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+    <i class="bi bi-list"></i>
+  </button>
 
-  <!-- HERO -->
-  <section class="hero" id="inicio">
-    <div class="hero-content">
-      <h1>VOCAL PRESETS PACK</h1>
-      <p>
-        Consigue todos los presets gratis que tenemos y mucho más en este pack exclusivo.<br>
-        Listo para usar en FL Studio.
-      </p>
-      <a href="#" class="btn" data-eo-form-toggle-id="c6ea1c0a-a946-11f0-a963-2d3399b4bc98">DESCARGA GRATIS BETA</a>
-      <span class="small-text">Versión Beta — lanzamiento completo pronto</span>
-    </div>
+  <nav id="navMenu">
+    <ul id="navbarLinks">
+      <li><a href="/index.html" class="active">Inicio</a></li>
+      <li><a href="/pages/cursos.html">Cursos</a></li>
+      <li><a href="/pages/Preset.html">Presets</a></li>
+      <li><a href="/pages/playlist.html">Playlist</a></li>
+      <li><a href="/pages/contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
 
-    <div class="hero-image">
-      <div class="image-placeholder">
-        <!-- 📸 AQUÍ VA TU IMAGEN -->
-        <!-- Cuando la tengas, reemplaza este div completo con:
-        <img src="/images/TU-IMAGEN.jpg" alt="OFFSZN" style="width: 450px; height: 450px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 80px rgba(0, 240, 255, 0.3);">
-        -->
-        X imagen
-      </div>
-    </div>
-  </section>
+  <div class="cart-icon" title="Carrito">
+    <i class="bi bi-cart3"></i>
+  </div>
+</header>
 
-  <!-- SOBRE OFFSZN -->
-  <section class="about">
-    <h2>¿Qué es OFFSZN?</h2>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <h1>VOCAL PRESETS PACK</h1>
     <p>
-      OFFSZN es una comunidad de productores y artistas creada por <b>Willie Inspired</b>.
-      Aquí encuentras cursos prácticos de mezcla, recursos gratis y acceso a presets listos para aplicar en tu música.
+      Consigue todos los presets gratis que tenemos y mucho más en este pack exclusivo.<br>
+      Listo para usar en FL Studio.
     </p>
-  </section>
+    <a href="#" class="btn" data-eo-form-toggle-id="c6ea1c0a-a946-11f0-a963-2d3399b4bc98">DESCARGA GRATIS BETA</a>
+    <span class="small-text">Versión Beta — lanzamiento completo pronto</span>
+  </div>
 
-  <!-- QUÉ OFRECEMOS -->
-  <section class="offer">
-    <h2>Lo que ofrecemos</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="card-content">
-          <h3>Cursos online</h3>
-          <p>Aprende paso a paso mezcla y producción.</p>
-        </div>
-        <div class="card-image">
-          <img src="https://m.media-amazon.com/images/I/91fsiSGgEWL._UF350,350_QL80_.jpg" alt="Cursos online">
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-content">
-          <h3>Presets exclusivos</h3>
-          <p>Acelera tu workflow con cadenas listas.</p>
-        </div>
-        <div class="card-image">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHOQ93P_svWGAsBu045f6RTlvqZElYw5hu7AHeM8GiCVeue1iOg2gT0FrNFJ27OCJhmYE&usqp=CAU" alt="Presets">
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-content">
-          <h3>Comunidad privada</h3>
-          <p>Discord con feedback, eventos y concursos.</p>
-        </div>
-        <div class="card-image">
-          <img src="https://observatorioblockchain.com/wp-content/uploads/2022/03/discord.jpg" alt="Comunidad">
-        </div>
-      </div>
+  <div class="hero-image">
+    <div class="image-placeholder">
+      X imagen
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- TESTIMONIOS -->
-  <section class="testimonials">
-    <h2>Testimonios</h2>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <a href="https://www.instagram.com/_nachoorh_?igsh=MWR4ODVmdm5kNGduaw==" target="_blank">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimonio 1">
-        </a>
-        <h3>Productor Independiente</h3>
-        <p>"Los presets de OFFSZN me ahorraron horas de trabajo. Suenan brutales."</p>
-        <div class="social-icons">
-          <a href="https://www.instagram.com/_nachoorh_?igsh=MWR4ODVmdm5kNGduaw==" target="_blank"><i class="bi bi-instagram"></i></a>
-        </div>
+<!-- SOBRE OFFSZN -->
+<section class="about">
+  <h2>¿Qué es OFFSZN?</h2>
+  <p>
+    OFFSZN es una comunidad de productores y artistas creada por <b>Willie Inspired</b>.
+    Aquí encuentras cursos prácticos de mezcla, recursos gratis y acceso a presets listos para aplicar en tu música.
+  </p>
+</section>
+
+<!-- QUÉ OFRECEMOS -->
+<section class="offer">
+  <h2>Lo que ofrecemos</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="card-content">
+        <h3>Cursos online</h3>
+        <p>Aprende paso a paso mezcla y producción.</p>
       </div>
-
-      <div class="testi-card">
-        <a href="https://www.instagram.com/jwolflabestia?igsh=MWQ1ZW01cHoydHpoMQ%3D%3D&utm_source=qr" target="_blank">
-          <img src="/images/Jwolf.jpg" alt="Testimonio 2">
-        </a>
-        <h3>Artista Emergente</h3>
-        <p>
-          "Gracias a las mezclas y masters de Willie Inspired logré sonar con mayor calidad profesional y encontrar mi verdadera esencia artística.
-          Su guía me permitió llevar mis canciones al siguiente nivel y destacar con un sonido único."
-        </p>
-        <p>- J Wolf La Bestia</p>
-        <div class="social-icons">
-          <a href="https://www.instagram.com/jwolflabestia?igsh=MWQ1ZW01cHoydHpoMQ%3D%3D&utm_source=qr" target="_blank"><i class="bi bi-instagram"></i></a>
-          <a href="https://open.spotify.com/intl-es/artist/76eg3WFn2kPSMOOF25kovn" target="_blank"><i class="bi bi-spotify"></i></a>
-          <a href="https://www.tiktok.com/@j_wolf_la_bestia" target="_blank"><i class="bi bi-tiktok"></i></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq" id="faq">
-    <h2>❓ Preguntas Frecuentes (FAQ)</h2>
-
-    <div class="faq-category">
-      <h3>📀 Sobre los cursos</h3>
-
-      <div class="faq-item">
-        <p class="question">¿Qué ofrecen tus cursos?</p>
-        <p class="answer">
-          Mis cursos están diseñados para ayudarte a mejorar tus habilidades de producción musical, desde lo más básico hasta técnicas avanzadas.
-          Aprenderás mezcla, masterización, grabación de voces, uso de MIDI y efectos, siempre con un enfoque práctico en tus propios proyectos desde la primera clase.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <p class="question">¿Cómo funcionan las clases?</p>
-        <p class="answer">
-          Las clases son 100% en vivo por videollamada (Zoom, Meet o Teams). Cada sesión dura entre 40 y 60 minutos, incluye explicación paso a paso y práctica directa sobre tu canción o beat.
-          Además, recibirás la grabación de cada clase para repasar.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <p class="question">¿Necesito experiencia previa para tomar el curso?</p>
-        <p class="answer">
-          No. Puedes empezar sin conocimientos o con un nivel intermedio. Yo adapto cada clase a tu nivel y estilo musical de preferencia.
-        </p>
+      <div class="card-image">
+        <img src="https://m.media-amazon.com/images/I/91fsiSGgEWL._UF350,350_QL80_.jpg" alt="Cursos online">
       </div>
     </div>
 
-    <div class="faq-category">
-      <h3>🎚 Sobre presets y recursos</h3>
-
-      <div class="faq-item">
-        <p class="question">¿Qué incluyen los presets?</p>
-        <p class="answer">
-          Mis presets están optimizados para FL Studio y plugins de Waves, pero siempre indico compatibilidad en la descripción.
-          También incluyo presets nativos para que todos puedan usarlos sin problema.
-        </p>
+    <div class="card">
+      <div class="card-content">
+        <h3>Presets exclusivos</h3>
+        <p>Acelera tu workflow con cadenas listas.</p>
       </div>
-
-      <div class="faq-item">
-        <p class="question">¿Cómo recibo mis presets después de la compra?</p>
-        <p class="answer">
-          Una vez que completes el pago, recibirás un link de descarga inmediato y también lo tendrás guardado en tu cuenta en la página.
-        </p>
+      <div class="card-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHOQ93P_svWGAsBu045f6RTlvqZElYw5hu7AHeM8GiCVeue1iOg2gT0FrNFJ27OCJhmYE&usqp=CAU" alt="Presets">
       </div>
     </div>
 
-    <div class="faq-category">
-      <h3>💳 Pagos y soporte</h3>
-
-      <div class="faq-item">
-        <p class="question">¿Qué métodos de pago aceptas?</p>
-        <p class="answer">
-          Se acepta los siguientes métodos de pago: PayPal, tarjeta de crédito y Yape.
-        </p>
+    <div class="card">
+      <div class="card-content">
+        <h3>Comunidad privada</h3>
+        <p>Discord con feedback, eventos y concursos.</p>
       </div>
+      <div class="card-image">
+        <img src="https://observatorioblockchain.com/wp-content/uploads/2022/03/discord.jpg" alt="Comunidad">
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="faq-item">
-        <p class="question">¿Qué hago si tengo problemas/dudas con mi compra?</p>
-        <p class="answer">
-          Escríbeme directo a WhatsApp +51 993 525 005 o por Instagram @willieinspired y te respondo lo más rápido posible.
-        </p>
+<!-- TESTIMONIOS -->
+<section class="testimonials">
+  <h2>Testimonios</h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <a href="https://www.instagram.com/_nachoorh_?igsh=MWR4ODVmdm5kNGduaw==" target="_blank">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimonio 1">
+      </a>
+      <h3>Productor Independiente</h3>
+      <p>"Los presets de OFFSZN me ahorraron horas de trabajo. Suenan brutales."</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/_nachoorh_?igsh=MWR4ODVmdm5kNGduaw==" target="_blank"><i class="bi bi-instagram"></i></a>
       </div>
     </div>
 
-    <div class="faq-category">
-      <h3>🎶 Comunidad y novedades</h3>
-
-      <div class="faq-item">
-        <p class="question">¿Dónde puedo estar al día con lo nuevo?</p>
-        <p class="answer">
-          En mi servidor de Discord y en mi Instagram @willieinspired, donde comparto tips, presets gratis, lanzamientos y concursos.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <p class="question">¿Ofreces descuentos?</p>
-        <p class="answer">
-          Sí, en lanzamientos y promociones especiales anuncio descuentos limitados en mis redes.
-        </p>
+    <div class="testi-card">
+      <a href="https://www.instagram.com/jwolflabestia?igsh=MWQ1ZW01cHoydHpoMQ%3D%3D&utm_source=qr" target="_blank">
+        <img src="/images/Jwolf.jpg" alt="Testimonio 2">
+      </a>
+      <h3>Artista Emergente</h3>
+      <p>
+        "Gracias a las mezclas y masters de Willie Inspired logré sonar con mayor calidad profesional y encontrar mi verdadera esencia artística.
+        Su guía me permitió llevar mis canciones al siguiente nivel y destacar con un sonido único."
+      </p>
+      <p>- J Wolf La Bestia</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/jwolflabestia?igsh=MWQ1ZW01cHoydHpoMQ%3D%3D&utm_source=qr" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="https://open.spotify.com/intl-es/artist/76eg3WFn2kPSMOOF25kovn" target="_blank"><i class="bi bi-spotify"></i></a>
+        <a href="https://www.tiktok.com/@j_wolf_la_bestia" target="_blank"><i class="bi bi-tiktok"></i></a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <h2>❓ Preguntas Frecuentes (FAQ)</h2>
+
+  <div class="faq-category">
+    <h3>📀 Sobre los cursos</h3>
+
+    <div class="faq-item">
+      <p class="question">¿Qué ofrecen tus cursos?</p>
+      <p class="answer">
+        Mis cursos están diseñados para ayudarte a mejorar tus habilidades de producción musical, desde lo más básico hasta técnicas avanzadas.
+        Aprenderás mezcla, masterización, grabación de voces, uso de MIDI y efectos, siempre con un enfoque práctico en tus propios proyectos desde la primera clase.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <p class="question">¿Cómo funcionan las clases?</p>
+      <p class="answer">
+        Las clases son 100% en vivo por videollamada (Zoom, Meet o Teams). Cada sesión dura entre 40 y 60 minutos, incluye explicación paso a paso y práctica directa sobre tu canción o beat.
+        Además, recibirás la grabación de cada clase para repasar.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <p class="question">¿Necesito experiencia previa para tomar el curso?</p>
+      <p class="answer">
+        No. Puedes empezar sin conocimientos o con un nivel intermedio. Yo adapto cada clase a tu nivel y estilo musical de preferencia.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq-category">
+    <h3>🎚 Sobre presets y recursos</h3>
+
+    <div class="faq-item">
+      <p class="question">¿Qué incluyen los presets?</p>
+      <p class="answer">
+        Mis presets están optimizados para FL Studio y plugins de Waves, pero siempre indico compatibilidad en la descripción.
+        También incluyo presets nativos para que todos puedan usarlos sin problema.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <p class="question">¿Cómo recibo mis presets después de la compra?</p>
+      <p class="answer">
+        Una vez que completes el pago, recibirás un link de descarga inmediato y también lo tendrás guardado en tu cuenta en la página.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq-category">
+    <h3>💳 Pagos y soporte</h3>
+
+    <div class="faq-item">
+      <p class="question">¿Qué métodos de pago aceptas?</p>
+      <p class="answer">
+        Se acepta los siguientes métodos de pago: PayPal, tarjeta de crédito y Yape.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <p class="question">¿Qué hago si tengo problemas/dudas con mi compra?</p>
+      <p class="answer">
+        Escríbeme directo a WhatsApp +51 993 525 005 o por Instagram @willieinspired y te respondo lo más rápido posible.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq-category">
+    <h3>🎶 Comunidad y novedades</h3>
+
+    <div class="faq-item">
+      <p class="question">¿Dónde puedo estar al día con lo nuevo?</p>
+      <p class="answer">
+        En mi servidor de Discord y en mi Instagram @willieinspired, donde comparto tips, presets gratis, lanzamientos y concursos.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <p class="question">¿Ofreces descuentos?</p>
+      <p class="answer">
+        Sí, en lanzamientos y promociones especiales anuncio descuentos limitados en mis redes.
+      </p>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER UNA LÍNEA -->
 <footer class="footer">
@@ -279,16 +406,59 @@
   </div>
 </footer>
 
-  <!-- POPUP 1: Auto al entrar -->
-  <script async src="https://eomail5.com/form/6d6c94f4-936c-11f0-a6b1-2398b9a18ea0.js" data-form="6d6c94f4-936c-11f0-a6b1-2398b9a18ea0"></script>
+<!-- POPUP 1: Auto al entrar -->
+<script async src="https://eomail5.com/form/6d6c94f4-936c-11f0-a6b1-2398b9a18ea0.js" data-form="6d6c94f4-936c-11f0-a6b1-2398b9a18ea0"></script>
 
-  <!-- POPUP 2: Con el botón "Descarga Gratis Beta" -->
-  <script async src="https://eomail5.com/form/c6ea1c0a-a946-11f0-a963-2d3399b4bc98.js" data-form="c6ea1c0a-a946-11f0-a963-2d3399b4bc98"></script>
+<!-- POPUP 2: Con el botón "Descarga Gratis Beta" -->
+<script async src="https://eomail5.com/form/c6ea1c0a-a946-11f0-a963-2d3399b4bc98.js" data-form="c6ea1c0a-a946-11f0-a963-2d3399b4bc98"></script>
 
-  <!-- Scripts propios -->
-  <script src="/script/countdown.js"></script>
-  <script src="/script/popup.js"></script>
-  <script src="/script/faq.js"></script>
-  <script src="/script/menu.js"></script>
+<!-- Scripts propios -->
+<script src="/script/countdown.js"></script>
+<script src="/script/popup.js"></script>
+<script src="/script/faq.js"></script>
+<script src="/script/menu.js"></script>
+
+<!-- Script para menu móvil y countdown -->
+<script>
+  // Menú hamburguesa
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  const navLinks = document.querySelectorAll('#navbarLinks a');
+
+  menuToggle.addEventListener('click', function() {
+    navMenu.classList.toggle('active');
+  });
+
+  // Cerrar menú al hacer clic en un link
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      navMenu.classList.remove('active');
+    });
+  });
+
+  // Cerrar menú al hacer clic fuera
+  document.addEventListener('click', function(event) {
+    if (!event.target.closest('.navbar')) {
+      navMenu.classList.remove('active');
+    }
+  });
+
+  // Countdown - Cerrar y mover navbar hacia arriba
+  document.getElementById('countdownClose').addEventListener('click', function() {
+    const banner = document.getElementById('countdownBanner');
+    const navbar = document.getElementById('navbar');
+    
+    // Animar cierre
+    banner.style.opacity = '0';
+    banner.style.transform = 'translateY(-100%)';
+    
+    setTimeout(() => {
+      banner.style.display = 'none';
+      navbar.style.top = '0';
+      document.body.style.paddingTop = '0';
+    }, 300);
+  });
+</script>
+
 </body>
 </html>
