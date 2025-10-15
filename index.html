@@ -12,28 +12,68 @@
   
 </head>
 <body>
-  <!-- COUNTDOWN BANNER MORADO -->
-  <div class="countdown-banner">
-    <div class="countdown-content">
-      <span class="countdown-text">VOCAL PRESET EXCLUSIVO 25% OFF</span>
-<div class="countdown-timer">
-  <div class="time-block">
-    <span class="time-number" id="days">30</span>
-    <span class="time-label">Días</span>
-  </div>
-  <div class="time-block">
-    <span class="time-number" id="hours">00</span>
-    <span class="time-label">Horas</span>
-  </div>
-  <div class="time-block">
-    <span class="time-number" id="minutes">00</span>
-    <span class="time-label">Minutos</span>
-  </div>
-  <div class="time-block">
-    <span class="time-number" id="seconds">00</span>
-    <span class="time-label">Segundos</span>
-  </div>
-</div>
+ /* ===== COUNTDOWN TIMER ===== */
+.countdown-banner {
+  background: linear-gradient(90deg, #7209b7, #560bad);
+  padding: 10px 20px;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.countdown-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+}
+
+.countdown-text {
+  font-size: 16px;
+  margin-right: 15px;
+}
+
+.countdown-timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.time-block {
+  text-align: center;
+}
+
+.time-number {
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+}
+
+.time-label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.countdown-btn {
+  background: #00f0ff;
+  color: #000;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.countdown-btn:hover {
+  background: #0ff;
+  transform: scale(1.05);
+}
+
+
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="logo">
