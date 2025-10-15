@@ -4,19 +4,508 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OFFSZN</title>
-
-  <link rel="stylesheet" href="/css/style.css">
-
+  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: #fff;
+      background: linear-gradient(to bottom, #06070b 0%, #0a0a12 50%, #06070b 100%);
+      line-height: 1.6;
+      padding-top: 55px; /* Espacio para el banner más pequeño */
+    }
+
+    /* ===== COUNTDOWN BANNER MORADO ===== */
+    .countdown-banner {
+      background: linear-gradient(90deg, #1a0533 0%, #2d0a5e 50%, #1a0533 100%);
+      color: #fff;
+      padding: 8px 15px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      box-shadow: 0 3px 15px rgba(74, 14, 120, 0.5);
+      border-bottom: 1px solid rgba(138, 43, 226, 0.4);
+    }
+
+    .countdown-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      max-width: 1400px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .countdown-text {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #fff;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
+    }
+
+    .countdown-timer {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .time-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(74, 14, 120, 0.3);
+      padding: 5px 10px;
+      border-radius: 6px;
+      min-width: 50px;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(138, 43, 226, 0.4);
+    }
+
+    .time-number {
+      font-size: 18px;
+      font-weight: 700;
+      color: #9d4edd;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1;
+      text-shadow: 0 0 10px rgba(157, 78, 221, 0.6);
+    }
+
+    .time-label {
+      font-size: 8px;
+      color: #c9a7eb;
+      text-transform: uppercase;
+      margin-top: 2px;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .countdown-btn {
+      background: linear-gradient(90deg, #7209b7, #560bad);
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(114, 9, 183, 0.4);
+      border: 1px solid rgba(157, 78, 221, 0.3);
+    }
+
+    .countdown-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(114, 9, 183, 0.7);
+      background: linear-gradient(90deg, #560bad, #3c096c);
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      background: rgba(6, 7, 11, 0.98);
+      position: sticky;
+      top: 55px; /* Debajo del banner más pequeño */
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(114, 9, 183, 0.2);
+    }
+
+    .navbar .logo a {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s, border-bottom 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #9d4edd;
+    }
+
+    .navbar ul li a.active {
+      color: #9d4edd;
+      font-weight: bold;
+      border-bottom: 2px solid #9d4edd;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px 10% 80px;
+      position: relative;
+      background: radial-gradient(circle at top right, rgba(114, 9, 183, 0.08), transparent 60%);
+      min-height: 75vh;
+    }
+
+    .hero-content {
+      max-width: 650px;
+      z-index: 2;
+    }
+
+    /* TÍTULO MORADO MÁS INTENSO */
+    .hero-content h1 {
+      font-size: 70px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #c77dff;
+      text-shadow: 
+        0 0 30px rgba(199, 125, 255, 0.9),
+        0 0 60px rgba(157, 78, 221, 0.7),
+        0 0 90px rgba(114, 9, 183, 0.5);
+      margin: 0 0 20px;
+      line-height: 1.1;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .hero-content h1:hover {
+      text-shadow: 
+        0 0 40px rgba(199, 125, 255, 1),
+        0 0 80px rgba(157, 78, 221, 1),
+        0 0 120px rgba(114, 9, 183, 0.8);
+      color: #e0aaff;
+    }
+
+    .hero-content p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #d1d1d1;
+      margin-bottom: 30px;
+    }
+
+    /* BOTÓN MORADO OSCURO */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #7209b7, #560bad);
+      color: #fff;
+      font-weight: 600;
+      padding: 16px 45px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 16px;
+      letter-spacing: 0.6px;
+      box-shadow: 0 0 20px rgba(114, 9, 183, 0.5);
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border: none;
+      text-transform: uppercase;
+    }
+
+    .btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 40px rgba(114, 9, 183, 0.8);
+      background: linear-gradient(90deg, #560bad, #3c096c);
+    }
+
+    .btn:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: rgba(255,255,255,0.3);
+      transform: skewX(-20deg);
+      transition: 0.4s;
+    }
+
+    .btn:hover:after {
+      left: 130%;
+    }
+
+    .small-text {
+      font-size: 14px;
+      color: #aaa;
+      margin-top: 12px;
+      display: block;
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 400px;
+      min-height: 400px;
+    }
+
+    .image-placeholder {
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #1a0533 0%, #06070b 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-size: 16px;
+      box-shadow: 
+        0 0 60px rgba(114, 9, 183, 0.15),
+        0 0 100px rgba(114, 9, 183, 0.1);
+      border: 2px solid rgba(157, 78, 221, 0.2);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* ===== SECCIONES ===== */
+    section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .about {
+      background: #0a0a12;
+    }
+
+    .about h2 {
+      color: #9d4edd;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .about p {
+      max-width: 700px;
+      margin: 1rem auto;
+      color: #ddd;
+      font-size: 1.1rem;
+    }
+
+    .offer {
+      background: #06070b;
+      padding: 4rem 2rem;
+    }
+
+    .offer h2 {
+      color: #9d4edd;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: #1a0533;
+      border-radius: 15px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid rgba(157, 78, 221, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 30px rgba(114, 9, 183, 0.4);
+    }
+
+    .card h3 {
+      color: #9d4edd;
+      margin-bottom: 0.8rem;
+      font-size: 1.5rem;
+    }
+
+    .card p {
+      color: #ddd;
+      font-size: 0.95rem;
+    }
+
+    .card-image img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      object-fit: cover;
+      margin: 1rem auto 0;
+      border-radius: 12px;
+      border: 3px solid #9d4edd;
+      transition: transform 0.3s ease;
+    }
+
+    .card-image img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      body {
+        padding-top: 75px;
+      }
+
+      .navbar {
+        top: 75px;
+      }
+
+      .countdown-banner {
+        padding: 10px 12px;
+      }
+
+      .countdown-content {
+        gap: 10px;
+      }
+
+      .countdown-text {
+        font-size: 11px;
+        text-align: center;
+        width: 100%;
+      }
+
+      .time-block {
+        min-width: 45px;
+        padding: 4px 8px;
+      }
+
+      .time-number {
+        font-size: 16px;
+      }
+
+      .time-label {
+        font-size: 7px;
+      }
+
+      .countdown-btn {
+        font-size: 10px;
+        padding: 7px 18px;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 50px 5% 60px;
+      }
+
+      .hero-content h1 {
+        font-size: 45px;
+      }
+
+      .hero-image {
+        margin-top: 40px;
+        min-width: 100%;
+      }
+
+      .image-placeholder {
+        width: 280px;
+        height: 280px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .countdown-text {
+        font-size: 10px;
+        letter-spacing: 0.5px;
+      }
+
+      .time-block {
+        min-width: 40px;
+        padding: 3px 6px;
+      }
+
+      .time-number {
+        font-size: 14px;
+      }
+
+      .countdown-btn {
+        font-size: 9px;
+        padding: 6px 15px;
+      }
+
+      .hero-content h1 {
+        font-size: 34px;
+        letter-spacing: 1px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+        padding: 1rem 2rem;
+      }
+
+      .navbar nav {
+        width: 100%;
+        display: none;
+      }
+
+      .navbar nav ul {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .navbar nav ul li {
+        border-top: 1px solid #333;
+        padding: 0.8rem 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .navbar nav.active {
+        display: block;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-  <!-- COUNTDOWN BANNER MORADO -->
+  <!-- COUNTDOWN BANNER MORADO COMPACTO -->
   <div class="countdown-banner">
     <div class="countdown-content">
       <span class="countdown-text">VOCAL PRESET EXCLUSIVO 25% OFF</span>
@@ -24,6 +513,18 @@
         <div class="time-block">
           <span class="time-number" id="days">30</span>
           <span class="time-label">Días</span>
+        </div>
+        <div class="time-block">
+          <span class="time-number" id="hours">00</span>
+          <span class="time-label">Horas</span>
+        </div>
+        <div class="time-block">
+          <span class="time-number" id="minutes">00</span>
+          <span class="time-label">Minutos</span>
+        </div>
+        <div class="time-block">
+          <span class="time-number" id="seconds">00</span>
+          <span class="time-label">Segundos</span>
         </div>
       </div>
       <a href="/pages/Preset.html" class="countdown-btn">CONSEGUIRLO</a>
@@ -35,9 +536,11 @@
     <div class="logo">
       <a href="/index.html">OFFSZN</a>
     </div>
+  
     <button class="menu-toggle" aria-label="Abrir menú">
       <i class="bi bi-list"></i>
     </button>
+  
     <nav>
       <ul>
         <li><a href="/index.html" class="active">Inicio</a></li>
@@ -57,16 +560,13 @@
         Consigue todos los presets gratis que tenemos y mucho más en este pack exclusivo.<br>
         Listo para usar en FL Studio.
       </p>
+      
       <a href="#" class="btn" data-eo-form-toggle-id="c6ea1c0a-a946-11f0-a963-2d3399b4bc98">DESCARGA GRATIS BETA</a>
       <span class="small-text">Versión Beta — lanzamiento completo pronto</span>
     </div>
-
+    
     <div class="hero-image">
       <div class="image-placeholder">
-        <!-- 📸 AQUÍ VA TU IMAGEN -->
-        <!-- Cuando la tengas, reemplaza este div completo con:
-        <img src="/images/TU-IMAGEN.jpg" alt="OFFSZN" style="width: 450px; height: 450px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 80px rgba(0, 240, 255, 0.3);">
-        -->
         X imagen
       </div>
     </div>
@@ -118,136 +618,61 @@
   </section>
 
   <!-- TESTIMONIOS -->
-  <section class="testimonials">
-    <h2>Testimonios</h2>
-    <div class="testi-grid">
-      <div class="testi-card">
+  <section class="testimonials" style="background: #0a0a12; padding: 4rem 2rem;">
+    <h2 style="color: #9d4edd; font-size: 2.5rem; margin-bottom: 3rem;">Testimonios</h2>
+    <div class="testi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1000px; margin: auto;">
+      
+      <div class="testi-card" style="background: #1a0533; border-radius: 15px; padding: 2rem 1.5rem; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; border: 2px solid rgba(157, 78, 221, 0.3); display: flex; flex-direction: column; align-items: center; min-height: 320px;">
         <a href="https://www.instagram.com/_nachoorh_?igsh=MWR4ODVmdm5kNGduaw==" target="_blank">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimonio 1">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimonio 1" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 3px solid #9d4edd; margin-bottom: 1rem; transition: transform 0.3s ease;">
         </a>
-        <h3>Productor Independiente</h3>
-        <p>"Los presets de OFFSZN me ahorraron horas de trabajo. Suenan brutales."</p>
-        <div class="social-icons">
-          <a href="https://www.instagram.com/_nachoorh_?igsh=MWR4ODVmdm5kNGduaw==" target="_blank"><i class="bi bi-instagram"></i></a>
+        <h3 style="color: #9d4edd; margin-bottom: 0.8rem;">Productor Independiente</h3>
+        <p style="color: #ddd; font-style: italic; font-size: 0.95rem; margin-bottom: 1rem;">"Los presets de OFFSZN me ahorraron horas de trabajo. Suenan brutales."</p>
+        <div class="social-icons" style="display: flex; justify-content: center; gap: 1rem; margin-top: auto;">
+          <a href="https://www.instagram.com/_nachoorh_?igsh=MWR4ODVmdm5kNGduaw==" target="_blank" style="color: #fff; font-size: 1.5rem; transition: color 0.3s ease;"><i class="bi bi-instagram"></i></a>
         </div>
       </div>
 
-      <div class="testi-card">
+      <div class="testi-card" style="background: #1a0533; border-radius: 15px; padding: 2rem 1.5rem; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; border: 2px solid rgba(157, 78, 221, 0.3); display: flex; flex-direction: column; align-items: center; min-height: 320px;">
         <a href="https://www.instagram.com/jwolflabestia?igsh=MWQ1ZW01cHoydHpoMQ%3D%3D&utm_source=qr" target="_blank">
-          <img src="/images/Jwolf.jpg" alt="Testimonio 2">
+          <img src="/images/Jwolf.jpg" alt="Testimonio 2" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 3px solid #9d4edd; margin-bottom: 1rem; transition: transform 0.3s ease;">
         </a>
-        <h3>Artista Emergente</h3>
-        <p>
-          "Gracias a las mezclas y masters de Willie Inspired logré sonar con mayor calidad profesional y encontrar mi verdadera esencia artística.
-          Su guía me permitió llevar mis canciones al siguiente nivel y destacar con un sonido único."
-        </p>
-        <p>- J Wolf La Bestia</p>
-        <div class="social-icons">
-          <a href="https://www.instagram.com/jwolflabestia?igsh=MWQ1ZW01cHoydHpoMQ%3D%3D&utm_source=qr" target="_blank"><i class="bi bi-instagram"></i></a>
-          <a href="https://open.spotify.com/intl-es/artist/76eg3WFn2kPSMOOF25kovn" target="_blank"><i class="bi bi-spotify"></i></a>
-          <a href="https://www.tiktok.com/@j_wolf_la_bestia" target="_blank"><i class="bi bi-tiktok"></i></a>
+        <h3 style="color: #9d4edd; margin-bottom: 0.8rem;">Artista Emergente</h3>
+        <p style="color: #ddd; font-style: italic; font-size: 0.95rem; margin-bottom: 1rem;">"Gracias a las mezclas y masters de Willie Inspired logré sonar con mayor calidad profesional y encontrar mi verdadera esencia artística."</p>
+        <p style="color: #ddd; font-size: 0.85rem;">- J Wolf La Bestia</p>
+        <div class="social-icons" style="display: flex; justify-content: center; gap: 1rem; margin-top: auto;">
+          <a href="https://www.instagram.com/jwolflabestia?igsh=MWQ1ZW01cHoydHpoMQ%3D%3D&utm_source=qr" target="_blank" style="color: #fff; font-size: 1.5rem; transition: color 0.3s ease;"><i class="bi bi-instagram"></i></a>
+          <a href="https://open.spotify.com/intl-es/artist/76eg3WFn2kPSMOOF25kovn" target="_blank" style="color: #fff; font-size: 1.5rem; transition: color 0.3s ease;"><i class="bi bi-spotify"></i></a>
+          <a href="https://www.tiktok.com/@j_wolf_la_bestia" target="_blank" style="color: #fff; font-size: 1.5rem; transition: color 0.3s ease;"><i class="bi bi-tiktok"></i></a>
         </div>
       </div>
+
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="faq" id="faq">
-    <h2>❓ Preguntas Frecuentes (FAQ)</h2>
+  <section class="faq" id="faq" style="max-width: 900px; margin: 2rem auto; text-align: left; padding: 4rem 1rem; background: #06070b;">
+    <h2 style="color: #9d4edd; margin-bottom: 2rem; text-align: center; font-size: 2.5rem;">❓ Preguntas Frecuentes (FAQ)</h2>
 
-    <div class="faq-category">
-      <h3>📀 Sobre los cursos</h3>
-
-      <div class="faq-item">
-        <p class="question">¿Qué ofrecen tus cursos?</p>
-        <p class="answer">
-          Mis cursos están diseñados para ayudarte a mejorar tus habilidades de producción musical, desde lo más básico hasta técnicas avanzadas.
-          Aprenderás mezcla, masterización, grabación de voces, uso de MIDI y efectos, siempre con un enfoque práctico en tus propios proyectos desde la primera clase.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <p class="question">¿Cómo funcionan las clases?</p>
-        <p class="answer">
-          Las clases son 100% en vivo por videollamada (Zoom, Meet o Teams). Cada sesión dura entre 40 y 60 minutos, incluye explicación paso a paso y práctica directa sobre tu canción o beat.
-          Además, recibirás la grabación de cada clase para repasar.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <p class="question">¿Necesito experiencia previa para tomar el curso?</p>
-        <p class="answer">
-          No. Puedes empezar sin conocimientos o con un nivel intermedio. Yo adapto cada clase a tu nivel y estilo musical de preferencia.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-category">
-      <h3>🎚 Sobre presets y recursos</h3>
-
-      <div class="faq-item">
-        <p class="question">¿Qué incluyen los presets?</p>
-        <p class="answer">
-          Mis presets están optimizados para FL Studio y plugins de Waves, pero siempre indico compatibilidad en la descripción.
-          También incluyo presets nativos para que todos puedan usarlos sin problema.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <p class="question">¿Cómo recibo mis presets después de la compra?</p>
-        <p class="answer">
-          Una vez que completes el pago, recibirás un link de descarga inmediato y también lo tendrás guardado en tu cuenta en la página.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-category">
-      <h3>💳 Pagos y soporte</h3>
-
-      <div class="faq-item">
-        <p class="question">¿Qué métodos de pago aceptas?</p>
-        <p class="answer">
-          Se acepta los siguientes métodos de pago: PayPal, tarjeta de crédito y Yape.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <p class="question">¿Qué hago si tengo problemas/dudas con mi compra?</p>
-        <p class="answer">
-          Escríbeme directo a WhatsApp +51 993 525 005 o por Instagram @willieinspired y te respondo lo más rápido posible.
-        </p>
-      </div>
-    </div>
-
-    <div class="faq-category">
-      <h3>🎶 Comunidad y novedades</h3>
-
-      <div class="faq-item">
-        <p class="question">¿Dónde puedo estar al día con lo nuevo?</p>
-        <p class="answer">
-          En mi servidor de Discord y en mi Instagram @willieinspired, donde comparto tips, presets gratis, lanzamientos y concursos.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <p class="question">¿Ofreces descuentos?</p>
-        <p class="answer">
-          Sí, en lanzamientos y promociones especiales anuncio descuentos limitados en mis redes.
-        </p>
+    <div class="faq-category" style="margin-bottom: 2rem;">
+      <h3 style="color: #9d4edd; margin-bottom: 1rem; font-size: 1.5rem;">📀 Sobre los cursos</h3>
+      <div class="faq-item" style="background: #1a0533; border-radius: 12px; margin-bottom: 0.8rem; overflow: hidden; transition: all 0.3s ease; cursor: pointer; border: 1px solid rgba(157, 78, 221, 0.2);">
+        <p class="question" style="padding: 1rem 1.5rem; font-weight: 600; color: #fff; position: relative;">¿Qué ofrecen tus cursos?</p>
+        <p class="answer" style="max-height: 0; padding: 0 1.5rem; color: #ddd; overflow: hidden; transition: all 0.3s ease;">Mis cursos están diseñados para ayudarte a mejorar tus habilidades de producción musical, desde lo más básico hasta técnicas avanzadas. Aprenderás mezcla, masterización, grabación de voces, uso de MIDI y efectos, siempre con un enfoque práctico en tus propios proyectos desde la primera clase.</p>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer class="footer" style="background: #111; padding: 2rem; text-align: center;">
     <div class="footer-content">
-      <p>OFFSZN 2025 © – Todos los derechos reservados.</p>
-      <ul>
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#cursos">Cursos</a></li>
-        <li><a href="#presets">Presets</a></li>
-        <li><a href="#comunidad">Comunidad</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+      <p style="color: #ddd; margin-bottom: 1rem;">OFFSZN 2025 © – Todos los derechos reservados.</p>
+      <ul style="list-style: none; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <li><a href="#inicio" style="color: #fff; text-decoration: none; transition: color 0.3s;">Inicio</a></li>
+        <li><a href="/pages/cursos.html" style="color: #fff; text-decoration: none; transition: color 0.3s;">Cursos</a></li>
+        <li><a href="/pages/Preset.html" style="color: #fff; text-decoration: none; transition: color 0.3s;">Presets</a></li>
+        <li><a href="/pages/playlist.html" style="color: #fff; text-decoration: none; transition: color 0.3s;">Playlist</a></li>
+        <li><a href="/pages/contacto.html" style="color: #fff; text-decoration: none; transition: color 0.3s;">Contacto</a></li>
       </ul>
     </div>
   </footer>
@@ -258,10 +683,53 @@
   <!-- POPUP 2: Con el botón "Descarga Gratis Beta" -->
   <script async src="https://eomail5.com/form/c6ea1c0a-a946-11f0-a963-2d3399b4bc98.js" data-form="c6ea1c0a-a946-11f0-a963-2d3399b4bc98"></script>
 
-  <!-- Scripts propios -->
-  <script src="/script/countdown.js"></script>
-  <script src="/script/popup.js"></script>
-  <script src="/script/faq.js"></script>
-  <script src="/script/menu.js"></script>
+  <script>
+    // Countdown Timer - 30 Días con Horas, Minutos y Segundos
+    (function() {
+      'use strict';
+      
+      // Configurar fecha final: 30 días desde hoy
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() + 30);
+      
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = endDate - now;
+        
+        if (distance < 0) {
+          document.getElementById('days').textContent = '00';
+          document.getElementById('hours').textContent = '00';
+          document.getElementById('minutes').textContent = '00';
+          document.getElementById('seconds').textContent = '00';
+          return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      }
+      
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+
+    // Menu toggle
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('nav').classList.toggle('active');
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', function() {
+        this.classList.toggle('active');
+      });
+    });
+  </script>
 </body>
 </html>
