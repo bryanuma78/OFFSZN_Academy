@@ -757,31 +757,55 @@ section {
     height: 320px;
   }
 
-  /* Countdown móvil */
+  /* Countdown móvil - más compacto */
   .countdown-banner {
-    padding: 10px 15px;
+    padding: 8px 12px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .countdown-content {
-    gap: 10px;
+    gap: 8px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
   }
 
   .countdown-text {
-    font-size: 12px;
+    font-size: 10px;
+    flex: 0 0 100%;
+    text-align: center;
+  }
+
+  .countdown-timer {
+    gap: 4px;
   }
 
   .time-block {
-    min-width: 48px;
-    padding: 5px 8px;
+    min-width: 38px;
+    padding: 3px 6px;
+    border-radius: 4px;
   }
 
   .time-number {
-    font-size: 16px;
+    font-size: 13px;
+  }
+
+  .time-label {
+    font-size: 7px;
   }
 
   .countdown-btn {
-    font-size: 11px;
-    padding: 8px 18px;
+    font-size: 9px;
+    padding: 6px 14px;
+    border-radius: 12px;
+  }
+
+  .countdown-close {
+    font-size: 20px;
+    right: 8px;
   }
 }
 
