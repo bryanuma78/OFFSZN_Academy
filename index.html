@@ -16,66 +16,71 @@
   <style>
     /* SOLO RESPONSIVE PARA MÓVIL */
     @media (max-width: 768px) {
+      body.menu-open {
+        overflow: hidden;
+      }
+
       /* Countdown Banner Mobile */
       .countdown-banner {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 15px 10px;
-        gap: 10px;
+        padding: 12px 20px;
+        gap: 8px;
       }
 
       .countdown-content {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         width: 100%;
       }
 
       .countdown-text {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 600;
       }
 
       .countdown-timer {
         display: flex;
         justify-content: center;
-        gap: 6px;
-        flex-wrap: wrap;
+        gap: 4px;
+        flex-wrap: nowrap;
       }
 
       .time-block {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 5px 8px;
-        border-radius: 4px;
+        padding: 4px 6px;
+        border-radius: 3px;
         border: 1px solid rgba(255, 255, 255, 0.2);
       }
 
       .time-number {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 700;
+        line-height: 1;
       }
 
       .time-label {
-        font-size: 8px;
+        font-size: 7px;
         margin-top: 2px;
       }
 
       .countdown-btn {
-        padding: 8px 20px;
-        font-size: 12px;
-        max-width: 180px;
+        padding: 6px 14px;
+        font-size: 10px;
+        max-width: 150px;
       }
 
       .countdown-close {
         position: absolute;
-        right: 10px;
-        top: 12px;
-        font-size: 22px;
+        right: 8px;
+        top: 10px;
+        font-size: 18px;
       }
 
       /* Navbar Mobile */
@@ -83,6 +88,11 @@
         padding: 14px 12px;
         justify-content: space-between;
         position: relative;
+        transition: transform 0.3s ease;
+      }
+
+      body.menu-open .navbar {
+        transform: translateX(70%);
       }
 
       .logo {
@@ -104,6 +114,24 @@
         order: 3;
       }
 
+      /* Overlay */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+        display: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .nav-overlay.active {
+        display: block;
+        opacity: 1;
+      }
+
       #navMenu {
         position: fixed;
         top: 0;
@@ -112,19 +140,33 @@
         height: 100vh;
         background: #0a0e27;
         flex-direction: column;
-        z-index: 100;
+        z-index: 101;
         border-right: 1px solid rgba(102, 126, 234, 0.2);
         transform: translateX(-100%);
         transition: transform 0.3s ease;
         padding-top: 60px;
+        overflow-y: auto;
       }
 
-      #navMenu.active {
+      body.menu-open #navMenu {
         transform: translateX(0);
+      }
+
+      #navMenu .close-menu {
+        position: absolute;
+        top: 14px;
+        right: 16px;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 102;
       }
 
       #navbarLinks {
         flex-direction: column;
+        padding-top: 10px;
       }
 
       #navbarLinks a {
