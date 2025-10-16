@@ -82,7 +82,7 @@
 
   <div class="hero-image">
     <div class="image-placeholder">
-      X imagen
+      <img src="/images/IMAGEN 1.png" alt="OFFSZN Vocal Presets">
     </div>
   </div>
 </section>
@@ -462,68 +462,60 @@ document.addEventListener('click', function(e) {
 });
 </script>
 
-<!-- 🆕 Script AUTO-HIDE HEADER al hacer scroll (tipo Cymatics - MEJORADO) -->
+<!-- 🆕 Script AUTO-HIDE HEADER - ESTÁTICO (Solo aparece al llegar ARRIBA) -->
 <script>
 (function() {
   'use strict';
   
   let lastScrollTop = 0;
-  let scrolling = false;
+  let ticking = false;
   const countdownBanner = document.getElementById('countdownBanner');
   const navbar = document.getElementById('navbar');
-  const scrollThreshold = 150; // Umbral para activar
+  let isHeaderHidden = false;
   
-  function updateHeaderVisibility() {
+  function updateHeader() {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Si está en el top (primeros 10px), siempre mostrar
-    if (currentScroll < 10) {
-      if (countdownBanner && countdownBanner.style.display !== 'none') {
-        countdownBanner.style.transform = 'translateY(0)';
-      }
-      if (navbar) {
-        navbar.style.transform = 'translateY(0)';
-      }
-      lastScrollTop = currentScroll;
-      return;
-    }
-    
-    // Solo actuar después del threshold
-    if (currentScroll > scrollThreshold) {
-      if (currentScroll > lastScrollTop + 5) {
-        // Scroll DOWN → Ocultar
-        if (countdownBanner && countdownBanner.style.display !== 'none') {
-          countdownBanner.style.transform = 'translateY(-100%)';
-        }
-        if (navbar) {
-          navbar.style.transform = 'translateY(-100%)';
-        }
-      } else if (currentScroll < lastScrollTop - 5) {
-        // Scroll UP → Mostrar
+    // Si estás COMPLETAMENTE arriba (primeros 5px), mostrar header
+    if (currentScroll <= 5) {
+      if (isHeaderHidden) {
         if (countdownBanner && countdownBanner.style.display !== 'none') {
           countdownBanner.style.transform = 'translateY(0)';
         }
         if (navbar) {
           navbar.style.transform = 'translateY(0)';
         }
+        isHeaderHidden = false;
+      }
+    } 
+    // Si bajó más de 100px
+    else if (currentScroll > 100) {
+      // Bajando → Ocultar
+      if (currentScroll > lastScrollTop + 10) {
+        if (!isHeaderHidden) {
+          if (countdownBanner && countdownBanner.style.display !== 'none') {
+            countdownBanner.style.transform = 'translateY(-100%)';
+          }
+          if (navbar) {
+            navbar.style.transform = 'translateY(-100%)';
+          }
+          isHeaderHidden = true;
+        }
       }
     }
     
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    ticking = false;
   }
   
-  // Usar throttle para mejor performance
-  function throttle() {
-    if (scrolling) return;
-    
-    scrolling = true;
-    requestAnimationFrame(() => {
-      updateHeaderVisibility();
-      scrolling = false;
-    });
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
   }
   
-  window.addEventListener('scroll', throttle, { passive: true });
+  window.addEventListener('scroll', requestTick, { passive: true });
 })();
 </script>
 
