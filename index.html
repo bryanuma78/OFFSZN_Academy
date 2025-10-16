@@ -258,7 +258,6 @@
   <div class="footer-content">
     <p>© 2025 OFFSZN</p>
     <ul>
-      <li><a href="#inicio">Inicio</a></li>
       <li><a href="#">Política de Privacidad</a></li>
       <li><a href="#">Términos de Uso</a></li>
       <li><a href="#">Términos de Servicio</a></li>
@@ -463,46 +462,44 @@ document.addEventListener('click', function(e) {
 });
 </script>
 
-<!-- 🆕 Script AUTO-HIDE HEADER al hacer scroll (tipo Cymatics) -->
+<!-- 🆕 Script AUTO-HIDE HEADER al hacer scroll (tipo Cymatics - MEJORADO) -->
 <script>
 (function() {
   'use strict';
   
   let lastScrollTop = 0;
-  let isScrolling = false;
+  let scrolling = false;
   const countdownBanner = document.getElementById('countdownBanner');
   const navbar = document.getElementById('navbar');
-  const scrollThreshold = 100; // Pixeles antes de activar el hide
+  const scrollThreshold = 150; // Umbral para activar
   
-  function handleScroll() {
-    if (isScrolling) return;
+  function updateHeaderVisibility() {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
     
-    isScrolling = true;
+    // Si está en el top (primeros 10px), siempre mostrar
+    if (currentScroll < 10) {
+      if (countdownBanner && countdownBanner.style.display !== 'none') {
+        countdownBanner.style.transform = 'translateY(0)';
+      }
+      if (navbar) {
+        navbar.style.transform = 'translateY(0)';
+      }
+      lastScrollTop = currentScroll;
+      return;
+    }
     
-    requestAnimationFrame(() => {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-      
-      // Solo aplicar auto-hide si ya bajó más de 100px
-      if (currentScroll > scrollThreshold) {
-        if (currentScroll > lastScrollTop) {
-          // Scroll DOWN → Ocultar header
-          if (countdownBanner && countdownBanner.style.display !== 'none') {
-            countdownBanner.style.transform = 'translateY(-100%)';
-          }
-          if (navbar) {
-            navbar.style.transform = 'translateY(-100%)';
-          }
-        } else {
-          // Scroll UP → Mostrar header
-          if (countdownBanner && countdownBanner.style.display !== 'none') {
-            countdownBanner.style.transform = 'translateY(0)';
-          }
-          if (navbar) {
-            navbar.style.transform = 'translateY(0)';
-          }
+    // Solo actuar después del threshold
+    if (currentScroll > scrollThreshold) {
+      if (currentScroll > lastScrollTop + 5) {
+        // Scroll DOWN → Ocultar
+        if (countdownBanner && countdownBanner.style.display !== 'none') {
+          countdownBanner.style.transform = 'translateY(-100%)';
         }
-      } else {
-        // Si está arriba del todo, siempre mostrar
+        if (navbar) {
+          navbar.style.transform = 'translateY(-100%)';
+        }
+      } else if (currentScroll < lastScrollTop - 5) {
+        // Scroll UP → Mostrar
         if (countdownBanner && countdownBanner.style.display !== 'none') {
           countdownBanner.style.transform = 'translateY(0)';
         }
@@ -510,20 +507,23 @@ document.addEventListener('click', function(e) {
           navbar.style.transform = 'translateY(0)';
         }
       }
-      
-      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-      isScrolling = false;
+    }
+    
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  }
+  
+  // Usar throttle para mejor performance
+  function throttle() {
+    if (scrolling) return;
+    
+    scrolling = true;
+    requestAnimationFrame(() => {
+      updateHeaderVisibility();
+      scrolling = false;
     });
   }
   
-  // Throttle scroll events
-  let scrollTimeout;
-  window.addEventListener('scroll', function() {
-    if (scrollTimeout) {
-      window.cancelAnimationFrame(scrollTimeout);
-    }
-    scrollTimeout = window.requestAnimationFrame(handleScroll);
-  }, { passive: true });
+  window.addEventListener('scroll', throttle, { passive: true });
 })();
 </script>
 
