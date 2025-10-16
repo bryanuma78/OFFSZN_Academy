@@ -794,42 +794,30 @@
   }
 })();
 
-// Menú hamburguesa con overlay
+// Menú hamburguesa
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
-const navOverlay = document.getElementById('navOverlay');
-const closeMenu = document.getElementById('closeMenu');
 const navLinks = document.querySelectorAll('#navbarLinks a');
 
-function openMenu() {
-  document.body.classList.add('menu-open');
-  navMenu.classList.add('active');
-  navOverlay.classList.add('active');
-}
-
-function closeMenuFunc() {
-  document.body.classList.remove('menu-open');
-  navMenu.classList.remove('active');
-  navOverlay.classList.remove('active');
-}
-
 if (menuToggle) {
-  menuToggle.addEventListener('click', openMenu);
-}
-
-if (closeMenu) {
-  closeMenu.addEventListener('click', closeMenuFunc);
-}
-
-if (navOverlay) {
-  navOverlay.addEventListener('click', closeMenuFunc);
+  menuToggle.addEventListener('click', function() {
+    navMenu.classList.toggle('active');
+  });
 }
 
 if (navLinks) {
   navLinks.forEach(link => {
-    link.addEventListener('click', closeMenuFunc);
+    link.addEventListener('click', function() {
+      navMenu.classList.remove('active');
+    });
   });
 }
+
+document.addEventListener('click', function(event) {
+  if (!event.target.closest('.navbar')) {
+    if (navMenu) navMenu.classList.remove('active');
+  }
+});
 </script>
 
 <!-- Scripts externos -->
