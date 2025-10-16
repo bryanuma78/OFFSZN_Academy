@@ -429,6 +429,7 @@
   </button>
 
   <nav id="navMenu">
+    <button class="close-menu" id="closeMenu">×</button>
     <ul id="navbarLinks">
       <li><a href="/index.html" class="active">Inicio</a></li>
       <li><a href="/pages/cursos.html">Cursos</a></li>
@@ -437,6 +438,8 @@
       <li><a href="/pages/contacto.html">Contacto</a></li>
     </ul>
   </nav>
+  
+  <div class="nav-overlay" id="navOverlay"></div>
 
   <div class="cart-icon" title="Carrito">
     <i class="bi bi-cart3"></i>
@@ -791,30 +794,42 @@
   }
 })();
 
-// Menú hamburguesa
+// Menú hamburguesa con overlay
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
+const navOverlay = document.getElementById('navOverlay');
+const closeMenu = document.getElementById('closeMenu');
 const navLinks = document.querySelectorAll('#navbarLinks a');
 
+function openMenu() {
+  document.body.classList.add('menu-open');
+  navMenu.classList.add('active');
+  navOverlay.classList.add('active');
+}
+
+function closeMenuFunc() {
+  document.body.classList.remove('menu-open');
+  navMenu.classList.remove('active');
+  navOverlay.classList.remove('active');
+}
+
 if (menuToggle) {
-  menuToggle.addEventListener('click', function() {
-    navMenu.classList.toggle('active');
-  });
+  menuToggle.addEventListener('click', openMenu);
+}
+
+if (closeMenu) {
+  closeMenu.addEventListener('click', closeMenuFunc);
+}
+
+if (navOverlay) {
+  navOverlay.addEventListener('click', closeMenuFunc);
 }
 
 if (navLinks) {
   navLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      navMenu.classList.remove('active');
-    });
+    link.addEventListener('click', closeMenuFunc);
   });
 }
-
-document.addEventListener('click', function(event) {
-  if (!event.target.closest('.navbar')) {
-    if (navMenu) navMenu.classList.remove('active');
-  }
-});
 </script>
 
 <!-- Scripts externos -->
