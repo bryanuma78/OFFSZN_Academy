@@ -14,73 +14,83 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
   <style>
-    /* SOLO RESPONSIVE PARA MÓVIL */
+    /* RESPONSIVE SOLO PARA MÓVIL - NO TOCA PC */
     @media (max-width: 768px) {
+      body.menu-open {
+        overflow: hidden;
+      }
+
       /* Countdown Banner Mobile */
       .countdown-banner {
-        display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 15px 10px;
-        gap: 10px;
+        padding: 8px 12px;
+        gap: 4px;
       }
 
       .countdown-content {
-        display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 8px;
+        gap: 3px;
         width: 100%;
       }
 
       .countdown-text {
-        font-size: 13px;
+        font-size: 10px;
         font-weight: 600;
       }
 
       .countdown-timer {
         display: flex;
         justify-content: center;
-        gap: 6px;
-        flex-wrap: wrap;
+        gap: 2px;
+        flex-wrap: nowrap;
       }
 
       .time-block {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 5px 8px;
-        border-radius: 4px;
+        padding: 2px 3px;
+        border-radius: 3px;
         border: 1px solid rgba(255, 255, 255, 0.2);
       }
 
       .time-number {
-        font-size: 14px;
+        font-size: 9px;
         font-weight: 700;
+        line-height: 1;
       }
 
       .time-label {
-        font-size: 8px;
-        margin-top: 2px;
+        font-size: 5px;
+        margin-top: 1px;
+        opacity: 0.9;
       }
 
       .countdown-btn {
-        padding: 8px 20px;
-        font-size: 12px;
-        max-width: 180px;
+        padding: 4px 10px;
+        font-size: 8px;
+        max-width: 120px;
       }
 
       .countdown-close {
         position: absolute;
-        right: 10px;
-        top: 12px;
-        font-size: 22px;
+        right: 8px;
+        top: 6px;
+        font-size: 16px;
       }
 
       /* Navbar Mobile */
       .navbar {
-        padding: 14px 16px;
+        padding: 12px 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        flex: 1;
+        text-align: center;
       }
 
       .logo a {
@@ -89,32 +99,86 @@
 
       .menu-toggle {
         display: block;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 0;
       }
 
-      #navMenu {
-        position: absolute;
-        top: 100%;
+      .cart-icon {
+        font-size: 18px;
+      }
+
+      /* Overlay */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
         left: 0;
         right: 0;
-        background: #1a1f3a;
-        flex-direction: column;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+
+      .nav-overlay.active {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* Navigation Menu */
+      #navMenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 70%;
+        height: 100vh;
+        background: #0a0e27;
         z-index: 100;
+        border-right: 1px solid rgba(102, 126, 234, 0.2);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        padding-top: 60px;
+        display: flex;
+        flex-direction: column;
       }
 
       #navMenu.active {
-        max-height: 300px;
+        transform: translateX(0);
+      }
+
+      .close-menu {
+        position: fixed;
+        top: 14px;
+        right: 20px;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 28px;
+        cursor: pointer;
+        padding: 0;
+        z-index: 101;
       }
 
       #navbarLinks {
+        list-style: none;
+        display: flex;
         flex-direction: column;
+        gap: 0;
       }
 
       #navbarLinks a {
-        padding: 12px 18px;
-        font-size: 14px;
+        color: #fff;
+        text-decoration: none;
+        padding: 14px 20px;
+        font-size: 15px;
         border-bottom: 1px solid rgba(102, 126, 234, 0.1);
       }
 
@@ -122,210 +186,242 @@
       .hero {
         display: flex;
         flex-direction: column;
-        gap: 30px;
-        padding: 40px 18px;
+        gap: 25px;
+        padding: 35px 16px;
       }
 
       .hero-content h1 {
-        font-size: 28px;
-        line-height: 1.2;
+        font-size: 26px;
       }
 
       .hero-content p {
-        font-size: 14px;
+        font-size: 13px;
+        margin-bottom: 18px;
+      }
+
+      .btn {
+        font-size: 12px;
+        padding: 10px 24px;
+      }
+
+      .small-text {
+        font-size: 11px;
+        margin-top: 8px;
       }
 
       .image-placeholder {
-        min-height: 250px;
+        min-height: 220px;
       }
 
       /* About Mobile */
       .about {
-        padding: 40px 18px;
+        padding: 35px 16px;
       }
 
       .about h2 {
-        font-size: 26px;
-        margin-bottom: 18px;
+        font-size: 24px;
+        margin-bottom: 16px;
       }
 
       .about p {
-        font-size: 14px;
+        font-size: 13px;
       }
 
       /* Offer Mobile */
       .offer {
-        padding: 40px 18px;
+        padding: 35px 16px;
       }
 
       .offer h2 {
-        font-size: 26px;
-        margin-bottom: 30px;
+        font-size: 24px;
+        margin-bottom: 25px;
       }
 
       .cards {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px;
       }
 
       .card-content {
-        padding: 16px;
+        padding: 14px;
       }
 
       .card h3 {
-        font-size: 16px;
+        font-size: 15px;
       }
 
       .card p {
-        font-size: 13px;
+        font-size: 12px;
       }
 
       /* Testimonials Mobile */
       .testimonials {
-        padding: 40px 18px;
+        padding: 35px 16px;
       }
 
       .testimonials h2 {
-        font-size: 26px;
-        margin-bottom: 30px;
+        font-size: 24px;
+        margin-bottom: 25px;
       }
 
       .testi-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px;
       }
 
       .testi-card {
-        padding: 24px 16px;
+        padding: 20px 14px;
+      }
+
+      .testi-card img {
+        width: 70px;
+        height: 70px;
       }
 
       .testi-card h3 {
-        font-size: 15px;
+        font-size: 14px;
       }
 
       .testi-card p {
-        font-size: 13px;
+        font-size: 12px;
+      }
+
+      .social-icons {
+        gap: 12px;
       }
 
       /* FAQ Mobile */
       .faq {
-        padding: 40px 18px;
+        padding: 35px 16px;
       }
 
       .faq h2 {
-        font-size: 26px;
-        margin-bottom: 30px;
+        font-size: 24px;
+        margin-bottom: 25px;
       }
 
       .faq-category {
-        max-width: 100%;
-        margin-bottom: 30px;
+        margin-bottom: 24px;
       }
 
       .faq-category h3 {
-        font-size: 16px;
-        margin-bottom: 15px;
-      }
-
-      .faq-item {
-        padding: 16px 14px;
+        font-size: 15px;
         margin-bottom: 12px;
       }
 
+      .faq-item {
+        padding: 14px 12px;
+        margin-bottom: 10px;
+      }
+
       .faq-item .question {
-        font-size: 14px;
+        font-size: 13px;
+        margin-bottom: 8px;
       }
 
       .faq-item .answer {
-        font-size: 13px;
-        margin-top: 8px;
+        font-size: 12px;
+        margin-top: 6px;
       }
 
       /* Footer Mobile */
       .footer {
-        padding: 30px 18px;
+        padding: 28px 16px;
       }
 
       .footer-content {
-        gap: 20px;
+        gap: 16px;
       }
 
       .footer-content > p {
-        font-size: 12px;
+        font-size: 11px;
+        text-align: center;
       }
 
       .footer-content ul {
-        gap: 10px;
-        font-size: 12px;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0;
+        font-size: 10px;
+        justify-content: center;
+        list-style: none;
+      }
+
+      .footer-content ul li {
+        display: inline;
+        padding: 0 4px;
+      }
+
+      .footer-content ul li:not(:last-child)::after {
+        content: "•";
+        margin-left: 8px;
       }
 
       .footer-social {
-        gap: 18px;
+        gap: 20px;
+        justify-content: center;
       }
 
       .footer-social a {
-        font-size: 18px;
+        font-size: 16px;
       }
     }
 
     @media (max-width: 480px) {
       .countdown-text {
-        font-size: 12px;
+        font-size: 10px;
       }
 
       .time-number {
-        font-size: 13px;
+        font-size: 10px;
       }
 
       .countdown-btn {
-        padding: 7px 16px;
-        font-size: 11px;
-      }
-
-      .hero-content h1 {
-        font-size: 24px;
-      }
-
-      .about h2,
-      .offer h2,
-      .testimonials h2,
-      .faq h2 {
-        font-size: 22px;
+        padding: 4px 10px;
+        font-size: 8px;
       }
 
       .navbar {
-        padding: 12px 14px;
+        padding: 10px 12px;
       }
 
       .logo a {
         font-size: 16px;
       }
 
-      #navbarLinks a {
-        font-size: 13px;
-        padding: 10px 16px;
+      .menu-toggle {
+        font-size: 18px;
+      }
+
+      .cart-icon {
+        font-size: 16px;
+      }
+
+      .hero-content h1 {
+        font-size: 22px;
       }
 
       .hero {
-        padding: 30px 14px;
-        gap: 24px;
+        padding: 28px 12px;
+        gap: 20px;
       }
 
       .about,
       .offer,
       .testimonials,
       .faq {
-        padding: 30px 14px;
+        padding: 28px 12px;
       }
 
-      .faq-item {
-        padding: 14px 12px;
+      .about h2,
+      .offer h2,
+      .testimonials h2,
+      .faq h2 {
+        font-size: 20px;
       }
 
       .footer {
-        padding: 24px 14px;
+        padding: 24px 12px;
       }
     }
   </style>
@@ -362,28 +458,33 @@
   
 <!-- NAVBAR -->
 <header class="navbar" id="navbar">
-  <div class="logo">
-    <a href="/index.html">OFFSZN</a>
-  </div>
-  
   <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
     <i class="bi bi-list"></i>
   </button>
 
-  <nav id="navMenu">
-    <ul id="navbarLinks">
-      <li><a href="/index.html" class="active">Inicio</a></li>
-      <li><a href="/pages/cursos.html">Cursos</a></li>
-      <li><a href="/pages/Preset.html">Presets</a></li>
-      <li><a href="/pages/playlist.html">Playlist</a></li>
-      <li><a href="/pages/contacto.html">Contacto</a></li>
-    </ul>
-  </nav>
+  <div class="logo">
+    <a href="/index.html">OFFSZN</a>
+  </div>
 
   <div class="cart-icon" title="Carrito">
     <i class="bi bi-cart3"></i>
   </div>
 </header>
+
+<!-- NAVIGATION MENU -->
+<nav id="navMenu">
+  <button class="close-menu" id="closeMenu">×</button>
+  <ul id="navbarLinks">
+    <li><a href="/index.html" class="active">Inicio</a></li>
+    <li><a href="/pages/cursos.html">Cursos</a></li>
+    <li><a href="/pages/Preset.html">Presets</a></li>
+    <li><a href="/pages/playlist.html">Playlist</a></li>
+    <li><a href="/pages/contacto.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- OVERLAY -->
+<div class="nav-overlay" id="navOverlay"></div>
 
 <!-- HERO -->
 <section class="hero" id="inicio">
@@ -733,35 +834,46 @@
   }
 })();
 
-// Menú hamburguesa
-const menuToggle = document.getElementById('menuToggle');
-const navMenu = document.getElementById('navMenu');
-const navLinks = document.querySelectorAll('#navbarLinks a');
+// Menú hamburguesa SOLO MÓVIL
+if (window.innerWidth <= 768) {
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  const navOverlay = document.getElementById('navOverlay');
+  const closeMenu = document.getElementById('closeMenu');
+  const navLinks = document.querySelectorAll('#navbarLinks a');
 
-if (menuToggle) {
-  menuToggle.addEventListener('click', function() {
-    navMenu.classList.toggle('active');
-  });
-}
-
-if (navLinks) {
-  navLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      navMenu.classList.remove('active');
-    });
-  });
-}
-
-document.addEventListener('click', function(event) {
-  if (!event.target.closest('.navbar')) {
-    if (navMenu) navMenu.classList.remove('active');
+  function openMenu() {
+    document.body.classList.add('menu-open');
+    navMenu.classList.add('active');
+    navOverlay.classList.add('active');
   }
-});
+
+  function closeMenuFunc() {
+    document.body.classList.remove('menu-open');
+    navMenu.classList.remove('active');
+    navOverlay.classList.remove('active');
+  }
+
+  if (menuToggle) {
+    menuToggle.addEventListener('click', openMenu);
+  }
+
+  if (closeMenu) {
+    closeMenu.addEventListener('click', closeMenuFunc);
+  }
+
+  if (navOverlay) {
+    navOverlay.addEventListener('click', closeMenuFunc);
+  }
+
+  if (navLinks) {
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeMenuFunc);
+    });
+  }
+}
 </script>
 
 <!-- Scripts externos -->
 <script src="/script/popup.js"></script>
-<script src="/script/faq.js"></script>
-
-</body>
-</html>
+<script src="/
