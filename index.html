@@ -417,7 +417,7 @@
 })();
 </script>
 
-<!-- ✅ NUEVO: Script para menú móvil -->
+<!-- ✅ Script para menú móvil -->
 <script>
 // Menú hamburguesa - abrir/cerrar
 const menuToggle = document.getElementById('menuToggle');
@@ -461,6 +461,70 @@ document.addEventListener('click', function(e) {
     }
   }
 });
+</script>
+
+<!-- 🆕 Script AUTO-HIDE HEADER al hacer scroll (tipo Cymatics) -->
+<script>
+(function() {
+  'use strict';
+  
+  let lastScrollTop = 0;
+  let isScrolling = false;
+  const countdownBanner = document.getElementById('countdownBanner');
+  const navbar = document.getElementById('navbar');
+  const scrollThreshold = 100; // Pixeles antes de activar el hide
+  
+  function handleScroll() {
+    if (isScrolling) return;
+    
+    isScrolling = true;
+    
+    requestAnimationFrame(() => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Solo aplicar auto-hide si ya bajó más de 100px
+      if (currentScroll > scrollThreshold) {
+        if (currentScroll > lastScrollTop) {
+          // Scroll DOWN → Ocultar header
+          if (countdownBanner && countdownBanner.style.display !== 'none') {
+            countdownBanner.style.transform = 'translateY(-100%)';
+          }
+          if (navbar) {
+            navbar.style.transform = 'translateY(-100%)';
+          }
+        } else {
+          // Scroll UP → Mostrar header
+          if (countdownBanner && countdownBanner.style.display !== 'none') {
+            countdownBanner.style.transform = 'translateY(0)';
+          }
+          if (navbar) {
+            navbar.style.transform = 'translateY(0)';
+          }
+        }
+      } else {
+        // Si está arriba del todo, siempre mostrar
+        if (countdownBanner && countdownBanner.style.display !== 'none') {
+          countdownBanner.style.transform = 'translateY(0)';
+        }
+        if (navbar) {
+          navbar.style.transform = 'translateY(0)';
+        }
+      }
+      
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+      isScrolling = false;
+    });
+  }
+  
+  // Throttle scroll events
+  let scrollTimeout;
+  window.addEventListener('scroll', function() {
+    if (scrollTimeout) {
+      window.cancelAnimationFrame(scrollTimeout);
+    }
+    scrollTimeout = window.requestAnimationFrame(handleScroll);
+  }, { passive: true });
+})();
 </script>
 
 <!-- Scripts externos -->
