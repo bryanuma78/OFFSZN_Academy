@@ -14,137 +14,318 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
   <style>
-    /* SOLO MEJORAS PARA MÓVIL - SIN CONFLICTOS CON style.css */
+    /* SOLO RESPONSIVE PARA MÓVIL */
     @media (max-width: 768px) {
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      /* Navbar Mobile - Layout mejorado */
-      .navbar {
-        padding: 12px 14px !important;
+      /* Countdown Banner Mobile */
+      .countdown-banner {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        flex-wrap: nowrap;
+        padding: 15px 10px;
+        gap: 10px;
       }
 
-      .logo {
-        flex: 1;
-        text-align: center;
+      .countdown-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .countdown-text {
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .countdown-timer {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .time-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5px 8px;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .time-number {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .time-label {
+        font-size: 8px;
+        margin-top: 2px;
+      }
+
+      .countdown-btn {
+        padding: 8px 20px;
+        font-size: 12px;
+        max-width: 180px;
+      }
+
+      .countdown-close {
+        position: absolute;
+        right: 10px;
+        top: 12px;
+        font-size: 22px;
+      }
+
+      /* Navbar Mobile */
+      .navbar {
+        padding: 14px 16px;
       }
 
       .logo a {
         font-size: 18px;
       }
 
-      /* Hamburguesa a la izquierda */
       .menu-toggle {
-        display: block !important;
-        order: 1;
-        flex: 0 0 auto;
-      }
-
-      /* Logo en el centro */
-      .logo {
-        order: 2;
-        flex: 1;
-      }
-
-      /* Carrito a la derecha */
-      .cart-icon {
-        display: flex !important;
-        order: 3;
-        flex: 0 0 auto;
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
-      }
-
-      /* Overlay para menú */
-      .nav-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 99;
-        display: none;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-      }
-
-      .nav-overlay.active {
         display: block;
-        opacity: 1;
-        pointer-events: auto;
       }
 
-      /* Menú lateral tipo Cymatics */
       #navMenu {
-        position: fixed;
-        top: 0;
+        position: absolute;
+        top: 100%;
         left: 0;
-        width: 75%;
-        height: 100vh;
-        background: #0a0e27;
+        right: 0;
+        background: #1a1f3a;
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
         z-index: 100;
-        border-right: 1px solid rgba(114, 9, 183, 0.3);
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        overflow-y: auto;
-        padding-top: 20px;
-        flex-direction: column !important;
-        display: flex !important;
       }
 
       #navMenu.active {
-        transform: translateX(0);
+        max-height: 300px;
       }
 
       #navbarLinks {
-        flex-direction: column !important;
-        gap: 0;
-        padding: 0;
-        margin: 0;
-      }
-
-      #navbarLinks li {
-        border-bottom: 1px solid rgba(114, 9, 183, 0.15);
+        flex-direction: column;
       }
 
       #navbarLinks a {
-        display: block;
-        color: #fff;
-        padding: 16px 24px !important;
-        font-size: 15px;
-        border-bottom: none;
-        transition: all 0.3s;
+        padding: 12px 18px;
+        font-size: 14px;
+        border-bottom: 1px solid rgba(102, 126, 234, 0.1);
       }
 
-      #navbarLinks a:hover,
-      #navbarLinks a.active {
-        background: rgba(114, 9, 183, 0.15);
-        color: #c9a7eb;
-        border-left: 3px solid #7209b7;
-        padding-left: 21px !important;
+      /* Hero Mobile */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 40px 18px;
       }
 
-      /* Botón de cerrar */
-      .close-menu {
-        position: fixed;
-        top: 16px;
-        right: 18px;
-        background: transparent;
-        border: none;
-        color: #fff;
+      .hero-content h1 {
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .hero-content p {
+        font-size: 14px;
+      }
+
+      .image-placeholder {
+        min-height: 250px;
+      }
+
+      /* About Mobile */
+      .about {
+        padding: 40px 18px;
+      }
+
+      .about h2 {
         font-size: 26px;
-        cursor: pointer;
-        padding: 0;
-        z-index: 101;
-        display: block;
+        margin-bottom: 18px;
+      }
+
+      .about p {
+        font-size: 14px;
+      }
+
+      /* Offer Mobile */
+      .offer {
+        padding: 40px 18px;
+      }
+
+      .offer h2 {
+        font-size: 26px;
+        margin-bottom: 30px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .card-content {
+        padding: 16px;
+      }
+
+      .card h3 {
+        font-size: 16px;
+      }
+
+      .card p {
+        font-size: 13px;
+      }
+
+      /* Testimonials Mobile */
+      .testimonials {
+        padding: 40px 18px;
+      }
+
+      .testimonials h2 {
+        font-size: 26px;
+        margin-bottom: 30px;
+      }
+
+      .testi-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .testi-card {
+        padding: 24px 16px;
+      }
+
+      .testi-card h3 {
+        font-size: 15px;
+      }
+
+      .testi-card p {
+        font-size: 13px;
+      }
+
+      /* FAQ Mobile */
+      .faq {
+        padding: 40px 18px;
+      }
+
+      .faq h2 {
+        font-size: 26px;
+        margin-bottom: 30px;
+      }
+
+      .faq-category {
+        max-width: 100%;
+        margin-bottom: 30px;
+      }
+
+      .faq-category h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+      }
+
+      .faq-item {
+        padding: 16px 14px;
+        margin-bottom: 12px;
+      }
+
+      .faq-item .question {
+        font-size: 14px;
+      }
+
+      .faq-item .answer {
+        font-size: 13px;
+        margin-top: 8px;
+      }
+
+      /* Footer Mobile */
+      .footer {
+        padding: 30px 18px;
+      }
+
+      .footer-content {
+        gap: 20px;
+      }
+
+      .footer-content > p {
+        font-size: 12px;
+      }
+
+      .footer-content ul {
+        gap: 10px;
+        font-size: 12px;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-social {
+        gap: 18px;
+      }
+
+      .footer-social a {
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .countdown-text {
+        font-size: 12px;
+      }
+
+      .time-number {
+        font-size: 13px;
+      }
+
+      .countdown-btn {
+        padding: 7px 16px;
+        font-size: 11px;
+      }
+
+      .hero-content h1 {
+        font-size: 24px;
+      }
+
+      .about h2,
+      .offer h2,
+      .testimonials h2,
+      .faq h2 {
+        font-size: 22px;
+      }
+
+      .navbar {
+        padding: 12px 14px;
+      }
+
+      .logo a {
+        font-size: 16px;
+      }
+
+      #navbarLinks a {
+        font-size: 13px;
+        padding: 10px 16px;
+      }
+
+      .hero {
+        padding: 30px 14px;
+        gap: 24px;
+      }
+
+      .about,
+      .offer,
+      .testimonials,
+      .faq {
+        padding: 30px 14px;
+      }
+
+      .faq-item {
+        padding: 14px 12px;
+      }
+
+      .footer {
+        padding: 24px 14px;
       }
     }
   </style>
@@ -181,33 +362,28 @@
   
 <!-- NAVBAR -->
 <header class="navbar" id="navbar">
+  <div class="logo">
+    <a href="/index.html">OFFSZN</a>
+  </div>
+  
   <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
     <i class="bi bi-list"></i>
   </button>
 
-  <div class="logo">
-    <a href="/index.html">OFFSZN</a>
-  </div>
+  <nav id="navMenu">
+    <ul id="navbarLinks">
+      <li><a href="/index.html" class="active">Inicio</a></li>
+      <li><a href="/pages/cursos.html">Cursos</a></li>
+      <li><a href="/pages/Preset.html">Presets</a></li>
+      <li><a href="/pages/playlist.html">Playlist</a></li>
+      <li><a href="/pages/contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
 
   <div class="cart-icon" title="Carrito">
     <i class="bi bi-cart3"></i>
   </div>
 </header>
-
-<!-- OVERLAY -->
-<div class="nav-overlay" id="navOverlay"></div>
-
-<!-- NAVIGATION MENU -->
-<nav id="navMenu">
-  <button class="close-menu" id="closeMenu">×</button>
-  <ul id="navbarLinks">
-    <li><a href="/index.html" class="active">Inicio</a></li>
-    <li><a href="/pages/cursos.html">Cursos</a></li>
-    <li><a href="/pages/Preset.html">Presets</a></li>
-    <li><a href="/pages/playlist.html">Playlist</a></li>
-    <li><a href="/pages/contacto.html">Contacto</a></li>
-  </ul>
-</nav>
 
 <!-- HERO -->
 <section class="hero" id="inicio">
@@ -419,6 +595,7 @@
   </div>
 </footer>
 
+
 <!-- POPUP 1: Auto al entrar -->
 <script async src="https://eomail5.com/form/6d6c94f4-936c-11f0-a6b1-2398b9a18ea0.js" data-form="6d6c94f4-936c-11f0-a6b1-2398b9a18ea0"></script>
 
@@ -468,6 +645,7 @@
   
   function hideBanner() {
     const banner = document.getElementById('countdownBanner');
+    const navbar = document.getElementById('navbar');
     
     if (banner) {
       banner.style.opacity = '0';
@@ -477,6 +655,11 @@
         banner.style.display = 'none';
         localStorage.setItem(CLOSED_KEY, new Date().getTime().toString());
       }, 300);
+    }
+    
+    if (navbar) {
+      navbar.style.top = '0';
+      document.body.style.paddingTop = '0';
     }
   }
   
@@ -524,8 +707,11 @@
   function initCountdown() {
     if (isBannerClosed()) {
       const banner = document.getElementById('countdownBanner');
+      const navbar = document.getElementById('navbar');
       
       if (banner) banner.style.display = 'none';
+      if (navbar) navbar.style.top = '0';
+      document.body.style.paddingTop = '0';
       
       setInterval(updateCountdown, 1000);
       return;
@@ -547,49 +733,29 @@
   }
 })();
 
-// Menú hamburguesa MÓVIL
+// Menú hamburguesa
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
-const navOverlay = document.getElementById('navOverlay');
-const closeMenu = document.getElementById('closeMenu');
 const navLinks = document.querySelectorAll('#navbarLinks a');
 
-function openMenu() {
-  document.body.classList.add('menu-open');
-  navMenu.classList.add('active');
-  navOverlay.classList.add('active');
-}
-
-function closeMenuFunc() {
-  document.body.classList.remove('menu-open');
-  navMenu.classList.remove('active');
-  navOverlay.classList.remove('active');
-}
-
 if (menuToggle) {
-  menuToggle.addEventListener('click', openMenu);
-}
-
-if (closeMenu) {
-  closeMenu.addEventListener('click', closeMenuFunc);
-}
-
-if (navOverlay) {
-  navOverlay.addEventListener('click', closeMenuFunc);
+  menuToggle.addEventListener('click', function() {
+    navMenu.classList.toggle('active');
+  });
 }
 
 if (navLinks) {
   navLinks.forEach(link => {
-    link.addEventListener('click', closeMenuFunc);
+    link.addEventListener('click', function() {
+      navMenu.classList.remove('active');
+    });
   });
 }
 
-// FAQ Toggle
-const faqItems = document.querySelectorAll('.faq-item');
-faqItems.forEach(item => {
-  item.addEventListener('click', function() {
-    this.classList.toggle('active');
-  });
+document.addEventListener('click', function(event) {
+  if (!event.target.closest('.navbar')) {
+    if (navMenu) navMenu.classList.remove('active');
+  }
 });
 </script>
 
