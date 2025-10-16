@@ -626,11 +626,11 @@ section {
 /* Tablet y móvil grande */
 @media (max-width: 900px) {
   body {
-    padding-top: 60px;
+    padding-top: 55px;
   }
 
   .navbar {
-    top: 60px;
+    top: 55px;
     padding: 0.9rem 1.2rem;
   }
 
