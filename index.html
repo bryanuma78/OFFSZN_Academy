@@ -12,323 +12,6 @@
 
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
-  <style>
-    /* SOLO RESPONSIVE PARA MÓVIL */
-    @media (max-width: 768px) {
-      /* Countdown Banner Mobile */
-      .countdown-banner {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 15px 10px;
-        gap: 10px;
-      }
-
-      .countdown-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        width: 100%;
-      }
-
-      .countdown-text {
-        font-size: 13px;
-        font-weight: 600;
-      }
-
-      .countdown-timer {
-        display: flex;
-        justify-content: center;
-        gap: 6px;
-        flex-wrap: wrap;
-      }
-
-      .time-block {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 5px 8px;
-        border-radius: 4px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .time-number {
-        font-size: 14px;
-        font-weight: 700;
-      }
-
-      .time-label {
-        font-size: 8px;
-        margin-top: 2px;
-      }
-
-      .countdown-btn {
-        padding: 8px 20px;
-        font-size: 12px;
-        max-width: 180px;
-      }
-
-      .countdown-close {
-        position: absolute;
-        right: 10px;
-        top: 12px;
-        font-size: 22px;
-      }
-
-      /* Navbar Mobile */
-      .navbar {
-        padding: 14px 16px;
-      }
-
-      .logo a {
-        font-size: 18px;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      #navMenu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: #1a1f3a;
-        flex-direction: column;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        z-index: 100;
-      }
-
-      #navMenu.active {
-        max-height: 300px;
-      }
-
-      #navbarLinks {
-        flex-direction: column;
-      }
-
-      #navbarLinks a {
-        padding: 12px 18px;
-        font-size: 14px;
-        border-bottom: 1px solid rgba(102, 126, 234, 0.1);
-      }
-
-      /* Hero Mobile */
-      .hero {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        padding: 40px 18px;
-      }
-
-      .hero-content h1 {
-        font-size: 28px;
-        line-height: 1.2;
-      }
-
-      .hero-content p {
-        font-size: 14px;
-      }
-
-      .image-placeholder {
-        min-height: 250px;
-      }
-
-      /* About Mobile */
-      .about {
-        padding: 40px 18px;
-      }
-
-      .about h2 {
-        font-size: 26px;
-        margin-bottom: 18px;
-      }
-
-      .about p {
-        font-size: 14px;
-      }
-
-      /* Offer Mobile */
-      .offer {
-        padding: 40px 18px;
-      }
-
-      .offer h2 {
-        font-size: 26px;
-        margin-bottom: 30px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .card-content {
-        padding: 16px;
-      }
-
-      .card h3 {
-        font-size: 16px;
-      }
-
-      .card p {
-        font-size: 13px;
-      }
-
-      /* Testimonials Mobile */
-      .testimonials {
-        padding: 40px 18px;
-      }
-
-      .testimonials h2 {
-        font-size: 26px;
-        margin-bottom: 30px;
-      }
-
-      .testi-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .testi-card {
-        padding: 24px 16px;
-      }
-
-      .testi-card h3 {
-        font-size: 15px;
-      }
-
-      .testi-card p {
-        font-size: 13px;
-      }
-
-      /* FAQ Mobile */
-      .faq {
-        padding: 40px 18px;
-      }
-
-      .faq h2 {
-        font-size: 26px;
-        margin-bottom: 30px;
-      }
-
-      .faq-category {
-        max-width: 100%;
-        margin-bottom: 30px;
-      }
-
-      .faq-category h3 {
-        font-size: 16px;
-        margin-bottom: 15px;
-      }
-
-      .faq-item {
-        padding: 16px 14px;
-        margin-bottom: 12px;
-      }
-
-      .faq-item .question {
-        font-size: 14px;
-      }
-
-      .faq-item .answer {
-        font-size: 13px;
-        margin-top: 8px;
-      }
-
-      /* Footer Mobile */
-      .footer {
-        padding: 30px 18px;
-      }
-
-      .footer-content {
-        gap: 20px;
-      }
-
-      .footer-content > p {
-        font-size: 12px;
-      }
-
-      .footer-content ul {
-        gap: 10px;
-        font-size: 12px;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .footer-social {
-        gap: 18px;
-      }
-
-      .footer-social a {
-        font-size: 18px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .countdown-text {
-        font-size: 12px;
-      }
-
-      .time-number {
-        font-size: 13px;
-      }
-
-      .countdown-btn {
-        padding: 7px 16px;
-        font-size: 11px;
-      }
-
-      .hero-content h1 {
-        font-size: 24px;
-      }
-
-      .about h2,
-      .offer h2,
-      .testimonials h2,
-      .faq h2 {
-        font-size: 22px;
-      }
-
-      .navbar {
-        padding: 12px 14px;
-      }
-
-      .logo a {
-        font-size: 16px;
-      }
-
-      #navbarLinks a {
-        font-size: 13px;
-        padding: 10px 16px;
-      }
-
-      .hero {
-        padding: 30px 14px;
-        gap: 24px;
-      }
-
-      .about,
-      .offer,
-      .testimonials,
-      .faq {
-        padding: 30px 14px;
-      }
-
-      .faq-item {
-        padding: 14px 12px;
-      }
-
-      .footer {
-        padding: 24px 14px;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -732,18 +415,24 @@
     initCountdown();
   }
 })();
+</script>
 
-// Menú hamburguesa
+<!-- ✅ NUEVO: Script para menú móvil -->
+<script>
+// Menú hamburguesa - abrir/cerrar
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('#navbarLinks a');
 
+// Abrir menú al hacer clic en hamburguesa
 if (menuToggle) {
-  menuToggle.addEventListener('click', function() {
+  menuToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
     navMenu.classList.toggle('active');
   });
 }
 
+// Cerrar menú al hacer clic en un link
 if (navLinks) {
   navLinks.forEach(link => {
     link.addEventListener('click', function() {
@@ -752,9 +441,24 @@ if (navLinks) {
   });
 }
 
-document.addEventListener('click', function(event) {
-  if (!event.target.closest('.navbar')) {
-    if (navMenu) navMenu.classList.remove('active');
+// Cerrar menú al hacer clic fuera (en el overlay o en la X)
+document.addEventListener('click', function(e) {
+  if (!navMenu || !menuToggle) return;
+  
+  const isMenuOpen = navMenu.classList.contains('active');
+  
+  if (isMenuOpen) {
+    const menuRect = navMenu.getBoundingClientRect();
+    const clickX = e.clientX;
+    const clickY = e.clientY;
+    
+    // Si el clic está fuera del menú (en el overlay) o en la X
+    const isOutsideMenu = clickX > menuRect.right || clickX < menuRect.left;
+    const isCloseButton = clickX > menuRect.right - 60 && clickY < menuRect.top + 60;
+    
+    if (isOutsideMenu || isCloseButton) {
+      navMenu.classList.remove('active');
+    }
   }
 });
 </script>
