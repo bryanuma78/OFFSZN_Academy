@@ -1000,33 +1000,3 @@ section {
   }
 }
 
-
-/* 🔧 Corregir color del menú móvil */
-@media (max-width: 768px) {
-  nav ul li a {
-    color: #fff !important;        /* blanco fuerte */
-    opacity: 1 !important;         /* elimina apagado */
-  }
-
-  nav ul li a:hover {
-    color: #b26dff !important;     /* tono violeta al pasar */
-  }
-
-  /* asegúrate que el menú quede por encima de todo */
-  nav.active {
-    z-index: 9999 !important;
-    position: fixed !important;
-  }
-}
-
-/* 🔧 Asegurar que el menú sea clickeable en móvil */
-@media (max-width: 768px) {
-  nav.active {
-    pointer-events: all !important;
-  }
-
-  .menu-overlay {
-    pointer-events: none !important; /* si tienes un fondo detrás */
-  }
-}
-
