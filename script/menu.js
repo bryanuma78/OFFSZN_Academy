@@ -1,50 +1,54 @@
-// MENU MÓVIL - VERSIÓN SIMPLE Y FUNCIONAL
-(function() {
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navMenu = document.querySelector('nav#navMenu');
-  const menuCloseBtn = document.querySelector('.menu-close-btn');
+// MENÚ MÓVIL FUNCIONAL - VERSIÓN FINAL
+document.addEventListener('DOMContentLoaded', function() {
+  const toggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('nav#navMenu');
+  const close = document.querySelector('.menu-close-btn');
+  const links = document.querySelectorAll('nav#navMenu a');
   const body = document.body;
 
-  if (!menuToggle || !navMenu) return;
+  if (!toggle || !menu) return;
 
-  // Abrir menú
-  menuToggle.addEventListener('click', function(e) {
-    e.stopPropagation();
-    navMenu.classList.add('active');
+  function openMenu() {
+    menu.classList.add('active');
     body.classList.add('menu-open');
-    menuToggle.classList.add('active');
+    toggle.classList.add('active');
+  }
+
+  function closeMenu() {
+    menu.classList.remove('active');
+    body.classList.remove('menu-open');
+    toggle.classList.remove('active');
+  }
+
+  // Abrir/cerrar con hamburguesa
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.contains('active') ? closeMenu() : openMenu();
   });
 
   // Cerrar con X
-  if (menuCloseBtn) {
-    menuCloseBtn.addEventListener('click', function(e) {
+  if (close) {
+    close.addEventListener('click', (e) => {
       e.stopPropagation();
-      navMenu.classList.remove('active');
-      body.classList.remove('menu-open');
-      menuToggle.classList.remove('active');
+      closeMenu();
     });
   }
 
-  // Cerrar al clickear un link
-  const links = navMenu.querySelectorAll('a');
+  // Cerrar al clickear link
   links.forEach(link => {
-    link.addEventListener('click', function() {
-      navMenu.classList.remove('active');
-      body.classList.remove('menu-open');
-      menuToggle.classList.remove('active');
+    link.addEventListener('click', () => {
+      closeMenu();
     });
   });
 
   // Cerrar al clickear afuera
-  document.addEventListener('click', function(e) {
-    const isActive = navMenu.classList.contains('active');
-    const clickedOnMenu = navMenu.contains(e.target);
-    const clickedOnToggle = menuToggle.contains(e.target);
-
-    if (isActive && !clickedOnMenu && !clickedOnToggle) {
-      navMenu.classList.remove('active');
-      body.classList.remove('menu-open');
-      menuToggle.classList.remove('active');
+  document.addEventListener('click', (e) => {
+    if (menu.classList.contains('active') && 
+        !menu.contains(e.target) && 
+        !toggle.contains(e.target)) {
+      closeMenu();
     }
   });
-})();
+
+  // Bloquear scroll cuando menú está abierto (ya está en CSS con body.menu-open)
+});
