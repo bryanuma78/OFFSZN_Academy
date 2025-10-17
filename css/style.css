@@ -751,7 +751,13 @@ section {
     position: relative;
     z-index: 1;
   }
-
+  
+#navbarLinks a {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    opacity: 1 !important;
+}
+  
   #navbarLinks a:hover,
   #navbarLinks a.active {
     background: rgba(114, 9, 183, 0.3);
