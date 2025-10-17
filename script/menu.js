@@ -1,88 +1,50 @@
-// ✅ MENÚ MÓVIL CORREGIDO - SIN BUGS DE POINTER-EVENTS
+// MENU MÓVIL - VERSIÓN SIMPLE Y FUNCIONAL
+(function() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navMenu = document.querySelector('nav#navMenu');
+  const menuCloseBtn = document.querySelector('.menu-close-btn');
+  const body = document.body;
 
-document.addEventListener('DOMContentLoaded', function() {
-  'use strict';
+  if (!menuToggle || !navMenu) return;
 
-  const menuToggle = document.getElementById('menuToggle');
-  const navMenu = document.getElementById('navMenu');
-  const menuCloseBtn = document.getElementById('menuCloseBtn');
-  const navLinks = document.querySelectorAll('#navbarLinks a');
-
-  // Función para cerrar menú
-  function closeMenu() {
-    // Habilitar links INMEDIATAMENTE
-    navLinks.forEach(link => {
-      link.style.pointerEvents = 'auto';
-    });
-    
-    navMenu.classList.remove('active');
-    document.body.classList.remove('menu-open');
-    if (menuToggle) {
-      menuToggle.classList.remove('active');
-      menuToggle.querySelector('i').className = 'bi bi-list';
-    }
-  }
-
-  // Función para abrir menú
-  function openMenu() {
+  // Abrir menú
+  menuToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
     navMenu.classList.add('active');
-    document.body.classList.add('menu-open');
-    if (menuToggle) {
-      menuToggle.classList.add('active');
-      menuToggle.querySelector('i').className = 'bi bi-x-lg';
-    }
-  }
+    body.classList.add('menu-open');
+    menuToggle.classList.add('active');
+  });
 
-  // Toggle del menú (hamburguesa)
-  if (menuToggle) {
-    menuToggle.addEventListener('click', function(e) {
-      e.stopPropagation();
-      
-      if (navMenu.classList.contains('active')) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
-  }
-
-  // Cerrar con botón X
+  // Cerrar con X
   if (menuCloseBtn) {
     menuCloseBtn.addEventListener('click', function(e) {
       e.stopPropagation();
-      closeMenu();
+      navMenu.classList.remove('active');
+      body.classList.remove('menu-open');
+      menuToggle.classList.remove('active');
     });
   }
 
-  // Cerrar al hacer clic en un link Y NAVEGAR
-  navLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      closeMenu();
-      // Dejar que el navegador siga el link naturalmente
+  // Cerrar al clickear un link
+  const links = navMenu.querySelectorAll('a');
+  links.forEach(link => {
+    link.addEventListener('click', function() {
+      navMenu.classList.remove('active');
+      body.classList.remove('menu-open');
+      menuToggle.classList.remove('active');
     });
   });
 
-  // Cerrar al hacer clic fuera (en el overlay)
+  // Cerrar al clickear afuera
   document.addEventListener('click', function(e) {
-    if (!navMenu || !menuToggle) return;
-    
-    const isMenuOpen = navMenu.classList.contains('active');
-    
-    if (isMenuOpen) {
-      // Verificar si el clic está fuera del menú y del toggle
-      const isClickOnMenu = navMenu.contains(e.target);
-      const isClickOnToggle = menuToggle.contains(e.target);
-      
-      if (!isClickOnMenu && !isClickOnToggle) {
-        closeMenu();
-      }
+    const isActive = navMenu.classList.contains('active');
+    const clickedOnMenu = navMenu.contains(e.target);
+    const clickedOnToggle = menuToggle.contains(e.target);
+
+    if (isActive && !clickedOnMenu && !clickedOnToggle) {
+      navMenu.classList.remove('active');
+      body.classList.remove('menu-open');
+      menuToggle.classList.remove('active');
     }
   });
-
-  // Prevenir cierre al hacer clic dentro del menú
-  if (navMenu) {
-    navMenu.addEventListener('click', function(e) {
-      e.stopPropagation();
-    });
-  }
-});
+})();
