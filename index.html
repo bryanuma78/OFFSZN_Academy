@@ -49,13 +49,11 @@
     <a href="/index.html">OFFSZN</a>
   </div>
   
-  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+  <button class="menu-toggle" id="menuToggle" aria-label="Menú">
     <i class="bi bi-list"></i>
   </button>
 
   <nav id="navMenu">
-    <button class="menu-close-btn" id="menuCloseBtn" aria-label="Cerrar menú">×</button>
-    
     <ul id="navbarLinks">
       <li><a href="/index.html" class="active">Inicio</a></li>
       <li><a href="/pages/cursos.html">Cursos</a></li>
@@ -329,7 +327,6 @@
   
   function hideBanner() {
     const banner = document.getElementById('countdownBanner');
-    const navbar = document.getElementById('navbar');
     
     if (banner) {
       banner.style.opacity = '0';
@@ -339,11 +336,6 @@
         banner.style.display = 'none';
         localStorage.setItem(CLOSED_KEY, new Date().getTime().toString());
       }, 300);
-    }
-    
-    if (navbar) {
-      navbar.style.top = '0';
-      document.body.style.paddingTop = '0';
     }
   }
   
@@ -391,11 +383,7 @@
   function initCountdown() {
     if (isBannerClosed()) {
       const banner = document.getElementById('countdownBanner');
-      const navbar = document.getElementById('navbar');
-      
       if (banner) banner.style.display = 'none';
-      if (navbar) navbar.style.top = '0';
-      document.body.style.paddingTop = '0';
       
       setInterval(updateCountdown, 1000);
       return;
@@ -422,29 +410,27 @@
 <script>
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
-const menuCloseBtn = document.getElementById('menuCloseBtn');
 const navLinks = document.querySelectorAll('#navbarLinks a');
 
-// Abrir menú al hacer clic en hamburguesa
+// Abrir/cerrar menú con hamburguesa
 if (menuToggle) {
   menuToggle.addEventListener('click', function(e) {
     e.stopPropagation();
-    navMenu.classList.toggle('active');
+    const isOpen = navMenu.classList.contains('active');
     
-    // BLOQUEAR/DESBLOQUEAR SCROLL
-    if (navMenu.classList.contains('active')) {
-      document.body.classList.add('menu-open');
-    } else {
+    if (isOpen) {
+      // Cerrar
+      navMenu.classList.remove('active');
       document.body.classList.remove('menu-open');
+      menuToggle.classList.remove('active');
+      menuToggle.querySelector('i').className = 'bi bi-list';
+    } else {
+      // Abrir
+      navMenu.classList.add('active');
+      document.body.classList.add('menu-open');
+      menuToggle.classList.add('active');
+      menuToggle.querySelector('i').className = 'bi bi-x-lg';
     }
-  });
-}
-
-// Cerrar menú con botón X
-if (menuCloseBtn) {
-  menuCloseBtn.addEventListener('click', function() {
-    navMenu.classList.remove('active');
-    document.body.classList.remove('menu-open');
   });
 }
 
@@ -454,6 +440,8 @@ if (navLinks) {
     link.addEventListener('click', function() {
       navMenu.classList.remove('active');
       document.body.classList.remove('menu-open');
+      menuToggle.classList.remove('active');
+      menuToggle.querySelector('i').className = 'bi bi-list';
     });
   });
 }
@@ -474,66 +462,11 @@ document.addEventListener('click', function(e) {
     if (isOutsideMenu) {
       navMenu.classList.remove('active');
       document.body.classList.remove('menu-open');
+      menuToggle.classList.remove('active');
+      menuToggle.querySelector('i').className = 'bi bi-list';
     }
   }
 });
-</script>
-
-<!-- Script AUTO-HIDE HEADER -->
-<script>
-(function() {
-  'use strict';
-  
-  let lastScrollTop = 0;
-  let ticking = false;
-  const countdownBanner = document.getElementById('countdownBanner');
-  const navbar = document.getElementById('navbar');
-  let isHeaderHidden = false;
-  
-  function updateHeader() {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // Si estás COMPLETAMENTE arriba (primeros 5px), mostrar header
-    if (currentScroll <= 5) {
-      if (isHeaderHidden) {
-        if (countdownBanner && countdownBanner.style.display !== 'none') {
-          countdownBanner.style.transform = 'translateY(0)';
-        }
-        if (navbar) {
-          navbar.style.transform = 'translateY(0)';
-        }
-        isHeaderHidden = false;
-      }
-    } 
-    // Si bajó más de 100px
-    else if (currentScroll > 100) {
-      // Bajando → Ocultar
-      if (currentScroll > lastScrollTop + 10) {
-        if (!isHeaderHidden) {
-          if (countdownBanner && countdownBanner.style.display !== 'none') {
-            countdownBanner.style.transform = 'translateY(-100%)';
-          }
-          if (navbar) {
-            navbar.style.transform = 'translateY(-100%)';
-          }
-          isHeaderHidden = true;
-        }
-      }
-    }
-    
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-    ticking = false;
-  }
-  
-  function requestTick() {
-    if (!ticking) {
-      requestAnimationFrame(updateHeader);
-      ticking = true;
-    }
-  }
-  
-  window.addEventListener('scroll', requestTick, { passive: true });
-})();
 </script>
 
 <!-- Scripts externos -->
