@@ -622,10 +622,6 @@ section {
   transform: scale(1.1);
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE FIXES
-   ============================================ */
-
 /* Tablet y móvil grande */
 @media (max-width: 900px) {
   body {
@@ -658,11 +654,11 @@ section {
     order: 3;
   }
 
-  /* Menú lateral - OCUPAR TODO VERTICALMENTE */
+  /* Menú lateral - CORREGIDO */
   #navMenu {
     position: fixed;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 75%;
     height: 100vh;
     background: rgba(10, 1, 24, 0.98);
@@ -671,17 +667,18 @@ section {
     display: flex;
     flex-direction: column;
     padding: 80px 0 20px;
-    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1001;
     overflow-y: auto;
     overflow-x: hidden;
+    transform: translateX(-100%);
   }
 
   #navMenu.active {
-    left: 0;
+    transform: translateX(0);
   }
 
-  /* Overlay oscuro - SIN TRAZO NEGRO */
+  /* Overlay oscuro */
   #navMenu::before {
     content: '';
     position: fixed;
@@ -701,7 +698,7 @@ section {
     pointer-events: auto;
   }
 
-  /* X ALINEADA CORRECTAMENTE CON HAMBURGUESA */
+  /* X ALINEADA CORRECTAMENTE */
   #navMenu::after {
     content: '×';
     position: fixed;
@@ -761,7 +758,7 @@ section {
     min-height: unset;
   }
 
-  /* Imagen MÁS GRANDE tablet: 350px */
+  /* Imagen tablet: 350px */
   .image-placeholder {
     width: 350px;
     height: 350px;
@@ -823,7 +820,7 @@ section {
     right: 8px;
   }
 
-  /* Footer móvil - MÁS COMPACTO */
+  /* Footer móvil */
   .footer {
     padding: 1.5rem 1rem;
   }
@@ -892,7 +889,7 @@ section {
     font-size: 15px;
   }
 
-  /* Imagen MÁS GRANDE móvil: 300px */
+  /* Imagen móvil: 300px */
   .image-placeholder {
     width: 300px;
     height: 300px;
@@ -903,7 +900,7 @@ section {
     height: 100%;
   }
 
-  /* POPUPS REDIMENSIONADOS */
+  /* POPUPS */
   .eo-form-modal {
     max-width: 85% !important;
     width: 85% !important;
@@ -978,7 +975,7 @@ section {
     font-size: 28px;
   }
 
-  /* Imagen MÁS GRANDE móvil muy pequeño: 260px */
+  /* Imagen móvil muy pequeño: 260px */
   .image-placeholder {
     width: 260px;
     height: 260px;
@@ -992,7 +989,7 @@ section {
   /* Menú mobile pequeño */
   #navMenu {
     width: 85%;
-    left: -100%;
+    transform: translateX(-100%);
   }
 
   #navMenu::before {
