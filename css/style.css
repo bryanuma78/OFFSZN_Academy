@@ -687,20 +687,21 @@ section {
     transform: translateX(0);
   }
 
-  /* Overlay oscuro */
+  /* Overlay oscuro - COMPLETO */
   #navMenu::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 25%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  z-index: 999;
-}
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 999;
+  }
+
   #navMenu.active::before {
     opacity: 1;
     pointer-events: auto;
@@ -1009,6 +1010,6 @@ section {
   }
 
   #navMenu::before {
-    left: 85%;
+    left: 0;
   }
 }
