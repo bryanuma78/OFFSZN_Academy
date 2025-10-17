@@ -14,6 +14,10 @@ body {
   transition: padding-top 0.3s ease;
 }
 
+body.menu-open {
+  overflow: hidden;
+}
+
 /* ===== COUNTDOWN BANNER ===== */
 .countdown-banner {
   background: linear-gradient(90deg, #000 0%, #0a0118 50%, #000 100%);
@@ -310,7 +314,7 @@ body {
   display: block;
 }
 
-/* IMAGEN HERO - CAMBIO EN PC: 500px */
+/* IMAGEN HERO - MÁS GRANDE EN PC: 500px */
 .hero-image {
   flex: 1;
   display: flex;
@@ -621,7 +625,7 @@ section {
 }
 
 /* ============================================
-   RESPONSIVE - CAMBIOS MÓVILES CON FIXES
+   RESPONSIVE - MOBILE FIXES
    ============================================ */
 
 /* Tablet y móvil grande */
@@ -629,6 +633,10 @@ section {
   body {
     padding-top: 55px;
     overflow-x: hidden;
+  }
+
+  body.menu-open {
+    overflow: hidden;
   }
 
   .navbar {
@@ -652,7 +660,7 @@ section {
     order: 3;
   }
 
-  /* Menú lateral FIX: sin bugs de scroll */
+  /* Menú lateral - SIN BUGS */
   #navMenu {
     position: fixed;
     top: 0;
@@ -695,7 +703,7 @@ section {
     pointer-events: auto;
   }
 
-  /* Botón cerrar - ALINEADO CON HAMBURGUESA (mismo eje) */
+  /* X ALINEADA CON HAMBURGUESA - MISMO EJE */
   #navMenu::after {
     content: '×';
     position: fixed;
@@ -755,7 +763,7 @@ section {
     min-height: unset;
   }
 
-  /* Imagen redimensionada para tablet */
+  /* Imagen MÁS GRANDE tablet: 350px */
   .image-placeholder {
     width: 350px;
     height: 350px;
@@ -766,7 +774,7 @@ section {
     height: 100%;
   }
 
-  /* Countdown móvil - más compacto */
+  /* Countdown móvil */
   .countdown-banner {
     padding: 8px 12px;
     flex-direction: row;
@@ -817,7 +825,7 @@ section {
     right: 8px;
   }
 
-  /* Footer móvil - Vertical */
+  /* Footer móvil */
   .footer {
     padding: 2.5rem 1.5rem;
   }
@@ -884,7 +892,7 @@ section {
     font-size: 15px;
   }
 
-  /* Imagen redimensionada para móvil */
+  /* Imagen MÁS GRANDE móvil: 300px */
   .image-placeholder {
     width: 300px;
     height: 300px;
@@ -895,14 +903,19 @@ section {
     height: 100%;
   }
 
-  /* POPUPS MÁS PEQUEÑOS EN MOBILE - FIX */
+  /* POPUPS REDIMENSIONADOS */
   .eo-form-modal {
     max-width: 85% !important;
     width: 85% !important;
     max-height: 80vh !important;
   }
 
-  /* Countdown móvil pequeño - más compacto */
+  .eo-form-modal .eo-form-modal-body {
+    max-height: 70vh !important;
+    overflow-y: auto !important;
+  }
+
+  /* Countdown móvil pequeño */
   .countdown-banner {
     padding: 6px 10px;
   }
@@ -965,7 +978,7 @@ section {
     font-size: 28px;
   }
 
-  /* Imagen redimensionada para móvil pequeño */
+  /* Imagen MÁS GRANDE móvil muy pequeño: 260px */
   .image-placeholder {
     width: 260px;
     height: 260px;
@@ -976,13 +989,12 @@ section {
     height: 100%;
   }
 
-  /* Menú mobile pequeño - más ancho */
+  /* Menú mobile pequeño */
   #navMenu {
     width: 85%;
     left: -100%;
   }
 
-  /* Alineación de X con hamburguesa en mobile pequeño */
   #navMenu::before {
     left: 85%;
   }
