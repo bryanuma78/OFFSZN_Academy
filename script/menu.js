@@ -1,5 +1,4 @@
-
-// ✅ MENÚ MÓVIL CORREGIDO Y FUNCIONAL
+// ✅ MENÚ MÓVIL CORREGIDO - SIN BUGS DE POINTER-EVENTS
 
 document.addEventListener('DOMContentLoaded', function() {
   'use strict';
@@ -11,6 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Función para cerrar menú
   function closeMenu() {
+    // Habilitar links INMEDIATAMENTE
+    navLinks.forEach(link => {
+      link.style.pointerEvents = 'auto';
+    });
+    
     navMenu.classList.remove('active');
     document.body.classList.remove('menu-open');
     if (menuToggle) {
@@ -50,11 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Cerrar al hacer clic en un link
+  // Cerrar al hacer clic en un link Y NAVEGAR
   navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
-      // No prevenir por defecto, dejar navegar
       closeMenu();
+      // Dejar que el navegador siga el link naturalmente
     });
   });
 
