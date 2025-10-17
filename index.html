@@ -416,101 +416,76 @@
 })();
 </script>
 
-<!-- ✅ Script para menú móvil MEJORADO -->
+<!-- ✅ Script para menú móvil CON SCROLL BLOQUEADO -->
 <script>
-(function() {
-  'use strict';
-  
-  const menuToggle = document.getElementById('menuToggle');
-  const navMenu = document.getElementById('navMenu');
-  const navLinks = document.querySelectorAll('#navbarLinks a');
-  
-  function closeMenu() {
-    if (navMenu) {
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+const navLinks = document.querySelectorAll('#navbarLinks a');
+
+// Abrir menú al hacer clic en hamburguesa
+if (menuToggle) {
+  menuToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    navMenu.classList.toggle('active');
+    
+    // BLOQUEAR/DESBLOQUEAR SCROLL
+    if (navMenu.classList.contains('active')) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
+  });
+}
+
+// Cerrar menú al hacer clic en un link
+if (navLinks) {
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
       navMenu.classList.remove('active');
-    }
-    document.body.classList.remove('menu-open');
-  }
-  
-  function openMenu() {
-    if (navMenu) {
-      navMenu.classList.add('active');
-    }
-    document.body.classList.add('menu-open');
-  }
-  
-  // Toggle al hacer clic en hamburguesa
-  if (menuToggle) {
-    menuToggle.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      if (navMenu && navMenu.classList.contains('active')) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
+      document.body.classList.remove('menu-open');
     });
-  }
+  });
+}
+
+// Cerrar menú al hacer clic fuera (en el overlay o en la X)
+document.addEventListener('click', function(e) {
+  if (!navMenu || !menuToggle) return;
   
-  // Cerrar al hacer clic en un link
-  if (navLinks) {
-    navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        closeMenu();
-      });
-    });
-  }
+  const isMenuOpen = navMenu.classList.contains('active');
   
-  // Cerrar al hacer clic fuera del menú
-  if (navMenu) {
-    navMenu.addEventListener('click', function(e) {
-      const rect = this.getBoundingClientRect();
-      const clickX = e.clientX;
-      const clickY = e.clientY;
-      
-      // Área de la X (esquina superior izquierda)
-      const isCloseButton = clickX < rect.left + 60 && clickY < rect.top + 60;
-      
-      // Área del overlay (fuera del menú)
-      const isOverlay = clickX > rect.left + (rect.width * 0.75);
-      
-      if (isCloseButton || isOverlay) {
-        closeMenu();
-      }
-    });
-  }
-  
-  // Prevenir scroll en body cuando el menú está abierto
-  document.body.addEventListener('touchmove', function(e) {
-    if (document.body.classList.contains('menu-open') && !e.target.closest('#navMenu')) {
-      e.preventDefault();
+  if (isMenuOpen) {
+    const menuRect = navMenu.getBoundingClientRect();
+    const clickX = e.clientX;
+    const clickY = e.clientY;
+    
+    // Si el clic está fuera del menú (en el overlay) o en la X
+    const isOutsideMenu = clickX > menuRect.right || clickX < menuRect.left;
+    const isCloseButton = clickX > menuRect.right - 60 && clickY < menuRect.top + 60;
+    
+    if (isOutsideMenu || isCloseButton) {
+      navMenu.classList.remove('active');
+      document.body.classList.remove('menu-open');
     }
-  }, { passive: false });
-})();
+  }
+});
 </script>
 
-<!-- Script AUTO-HIDE HEADER SOLO EN DESKTOP -->
+<!-- Script AUTO-HIDE HEADER -->
 <script>
 (function() {
   'use strict';
-  
-  // Solo activar en desktop (mayor a 900px)
-  if (window.innerWidth <= 900) return;
   
   let lastScrollTop = 0;
   let ticking = false;
   const countdownBanner = document.getElementById('countdownBanner');
   const navbar = document.getElementById('navbar');
   let isHeaderHidden = false;
-  const scrollThreshold = 200;
-  const scrollDelta = 50;
   
   function updateHeader() {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Si estás arriba (primeros 10px), siempre mostrar
-    if (currentScroll <= 10) {
+    // Si estás COMPLETAMENTE arriba (primeros 5px), mostrar header
+    if (currentScroll <= 5) {
       if (isHeaderHidden) {
         if (countdownBanner && countdownBanner.style.display !== 'none') {
           countdownBanner.style.transform = 'translateY(0)';
@@ -520,37 +495,21 @@
         }
         isHeaderHidden = false;
       }
-      lastScrollTop = currentScroll;
-      ticking = false;
-      return;
-    }
-    
-    // Solo actuar si pasó el threshold
-    if (currentScroll < scrollThreshold) {
-      lastScrollTop = currentScroll;
-      ticking = false;
-      return;
-    }
-    
-    // Bajando (scroll hacia abajo) con delta significativo
-    if (currentScroll > lastScrollTop + scrollDelta && !isHeaderHidden) {
-      if (countdownBanner && countdownBanner.style.display !== 'none') {
-        countdownBanner.style.transform = 'translateY(-100%)';
+    } 
+    // Si bajó más de 100px
+    else if (currentScroll > 100) {
+      // Bajando → Ocultar
+      if (currentScroll > lastScrollTop + 10) {
+        if (!isHeaderHidden) {
+          if (countdownBanner && countdownBanner.style.display !== 'none') {
+            countdownBanner.style.transform = 'translateY(-100%)';
+          }
+          if (navbar) {
+            navbar.style.transform = 'translateY(-100%)';
+          }
+          isHeaderHidden = true;
+        }
       }
-      if (navbar) {
-        navbar.style.transform = 'translateY(-100%)';
-      }
-      isHeaderHidden = true;
-    }
-    // Subiendo (scroll hacia arriba) con delta significativo
-    else if (currentScroll < lastScrollTop - scrollDelta && isHeaderHidden) {
-      if (countdownBanner && countdownBanner.style.display !== 'none') {
-        countdownBanner.style.transform = 'translateY(0)';
-      }
-      if (navbar) {
-        navbar.style.transform = 'translateY(0)';
-      }
-      isHeaderHidden = false;
     }
     
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
@@ -565,15 +524,6 @@
   }
   
   window.addEventListener('scroll', requestTick, { passive: true });
-  
-  // Resetear en resize si se hace móvil
-  window.addEventListener('resize', function() {
-    if (window.innerWidth <= 900) {
-      if (countdownBanner) countdownBanner.style.transform = 'translateY(0)';
-      if (navbar) navbar.style.transform = 'translateY(0)';
-      isHeaderHidden = false;
-    }
-  });
 })();
 </script>
 
