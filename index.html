@@ -329,8 +329,11 @@
     const banner = document.getElementById('countdownBanner');
     
     if (banner) {
+      banner.style.transition = 'all 0.3s ease';
       banner.style.opacity = '0';
-      banner.style.transform = 'translateY(-100%)';
+      banner.style.maxHeight = '0';
+      banner.style.padding = '0';
+      banner.style.overflow = 'hidden';
       
       setTimeout(() => {
         banner.style.display = 'none';
