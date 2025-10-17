@@ -54,6 +54,8 @@
   </button>
 
   <nav id="navMenu">
+    <button class="menu-close-btn" id="menuCloseBtn" aria-label="Cerrar menú">×</button>
+    
     <ul id="navbarLinks">
       <li><a href="/index.html" class="active">Inicio</a></li>
       <li><a href="/pages/cursos.html">Cursos</a></li>
@@ -420,6 +422,7 @@
 <script>
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
+const menuCloseBtn = document.getElementById('menuCloseBtn');
 const navLinks = document.querySelectorAll('#navbarLinks a');
 
 // Abrir menú al hacer clic en hamburguesa
@@ -437,6 +440,14 @@ if (menuToggle) {
   });
 }
 
+// Cerrar menú con botón X
+if (menuCloseBtn) {
+  menuCloseBtn.addEventListener('click', function() {
+    navMenu.classList.remove('active');
+    document.body.classList.remove('menu-open');
+  });
+}
+
 // Cerrar menú al hacer clic en un link
 if (navLinks) {
   navLinks.forEach(link => {
@@ -447,7 +458,7 @@ if (navLinks) {
   });
 }
 
-// Cerrar menú al hacer clic fuera (en el overlay o en la X)
+// Cerrar menú al hacer clic fuera (en el overlay)
 document.addEventListener('click', function(e) {
   if (!navMenu || !menuToggle) return;
   
@@ -456,13 +467,11 @@ document.addEventListener('click', function(e) {
   if (isMenuOpen) {
     const menuRect = navMenu.getBoundingClientRect();
     const clickX = e.clientX;
-    const clickY = e.clientY;
     
-    // Si el clic está fuera del menú (en el overlay) o en la X
-    const isOutsideMenu = clickX > menuRect.right || clickX < menuRect.left;
-    const isCloseButton = clickX > menuRect.right - 60 && clickY < menuRect.top + 60;
+    // Si el clic está fuera del menú (en el overlay)
+    const isOutsideMenu = clickX > menuRect.right;
     
-    if (isOutsideMenu || isCloseButton) {
+    if (isOutsideMenu) {
       navMenu.classList.remove('active');
       document.body.classList.remove('menu-open');
     }
