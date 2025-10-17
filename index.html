@@ -416,9 +416,8 @@
 })();
 </script>
 
-<!-- ✅ Script para menú móvil -->
+<!-- ✅ Script para menú móvil CON SCROLL BLOQUEADO -->
 <script>
-// Menú hamburguesa - abrir/cerrar
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('#navbarLinks a');
@@ -428,6 +427,13 @@ if (menuToggle) {
   menuToggle.addEventListener('click', function(e) {
     e.stopPropagation();
     navMenu.classList.toggle('active');
+    
+    // BLOQUEAR/DESBLOQUEAR SCROLL
+    if (navMenu.classList.contains('active')) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
   });
 }
 
@@ -436,6 +442,7 @@ if (navLinks) {
   navLinks.forEach(link => {
     link.addEventListener('click', function() {
       navMenu.classList.remove('active');
+      document.body.classList.remove('menu-open');
     });
   });
 }
@@ -457,12 +464,13 @@ document.addEventListener('click', function(e) {
     
     if (isOutsideMenu || isCloseButton) {
       navMenu.classList.remove('active');
+      document.body.classList.remove('menu-open');
     }
   }
 });
 </script>
 
-<!-- 🆕 Script AUTO-HIDE HEADER - ESTÁTICO (Solo aparece al llegar ARRIBA) -->
+<!-- Script AUTO-HIDE HEADER -->
 <script>
 (function() {
   'use strict';
