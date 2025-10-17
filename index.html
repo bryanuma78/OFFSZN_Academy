@@ -284,30 +284,18 @@
 <!-- POPUP 2: Con el botón "Descarga Gratis Beta" -->
 <script async src="https://eomail5.com/form/c6ea1c0a-a946-11f0-a963-2d3399b4bc98.js" data-form="c6ea1c0a-a946-11f0-a963-2d3399b4bc98"></script>
 
-<!-- Script countdown INLINE -->
+<!-- Script countdown GLOBAL - Sincronizado para todos -->
 <script>
 (function() {
   'use strict';
   
-  const COUNTDOWN_KEY = 'offszn_countdown_end';
   const CLOSED_KEY = 'offszn_countdown_closed';
-  const CLOSE_DURATION = 4 * 60 * 60 * 1000;
+  const CLOSE_DURATION = 4 * 60 * 60 * 1000; // 4 horas en milisegundos
   
-  function getOrCreateEndDate() {
-    let stored = localStorage.getItem(COUNTDOWN_KEY);
-    
-    if (stored) {
-      const endDate = new Date(stored);
-      if (endDate > new Date()) {
-        return endDate;
-      }
-    }
-    
-    const newEndDate = new Date();
-    newEndDate.setDate(newEndDate.getDate() + 30);
-    localStorage.setItem(COUNTDOWN_KEY, newEndDate.toISOString());
-    return newEndDate;
-  }
+  // ✅ FECHA GLOBAL FIJA - Mismo para TODOS los usuarios
+  const PROMOTION_START = new Date('2025-10-17T00:00:00').getTime();
+  const PROMOTION_DAYS = 30;
+  const PROMOTION_END = new Date(PROMOTION_START + (PROMOTION_DAYS * 24 * 60 * 60 * 1000)).getTime();
   
   function isBannerClosed() {
     const closedTime = localStorage.getItem(CLOSED_KEY);
@@ -316,6 +304,7 @@
     const now = new Date().getTime();
     const closedTimestamp = parseInt(closedTime);
     
+    // Si han pasado 4 horas, eliminar el cierre
     if (now - closedTimestamp > CLOSE_DURATION) {
       localStorage.removeItem(CLOSED_KEY);
       return false;
@@ -326,18 +315,16 @@
   
   function hideBanner() {
     const banner = document.getElementById('countdownBanner');
+    const navbar = document.getElementById('navbar');
     
     if (banner) {
-      banner.style.transition = 'all 0.3s ease';
-      banner.style.opacity = '0';
-      banner.style.maxHeight = '0';
-      banner.style.padding = '0';
-      banner.style.overflow = 'hidden';
-      
-      setTimeout(() => {
-        banner.style.display = 'none';
-        localStorage.setItem(CLOSED_KEY, new Date().getTime().toString());
-      }, 300);
+      banner.style.display = 'none';
+      localStorage.setItem(CLOSED_KEY, new Date().getTime().toString());
+    }
+    
+    if (navbar) {
+      navbar.style.top = '0';
+      document.body.style.paddingTop = '0';
     }
   }
   
@@ -349,17 +336,19 @@
       <div class="countdown-content">
         <span class="countdown-text">✨ DISPONIBLE SOLO POR HOY ✨</span>
         <a href="/pages/Preset.html" class="countdown-btn">CONSEGUIRLO</a>
-        <button class="countdown-close" id="countdownCloseExpired">×</button>
       </div>
+      <button class="countdown-close" id="countdownCloseExpired">×</button>
     `;
     
     document.getElementById('countdownCloseExpired').addEventListener('click', hideBanner);
   }
   
   function updateCountdown() {
-    const endDate = getOrCreateEndDate();
+    const banner = document.getElementById('countdownBanner');
+    if (!banner) return;
+    
     const now = new Date().getTime();
-    const distance = endDate - now;
+    const distance = PROMOTION_END - now;
     
     if (distance <= 0) {
       showExpiredBanner();
@@ -383,23 +372,26 @@
   }
   
   function initCountdown() {
+    // Verificar si el banner está cerrado
     if (isBannerClosed()) {
-      const banner = document.getElementById('countdownBanner');
-      if (banner) banner.style.display = 'none';
-      
+      hideBanner();
+      // Seguir actualizando el countdown aunque esté oculto
       setInterval(updateCountdown, 1000);
       return;
     }
     
+    // Mostrar y actualizar el countdown
     updateCountdown();
     setInterval(updateCountdown, 1000);
     
+    // Botón de cerrar
     const closeBtn = document.getElementById('countdownClose');
     if (closeBtn) {
       closeBtn.addEventListener('click', hideBanner);
     }
   }
   
+  // Iniciar cuando el DOM esté listo
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initCountdown);
   } else {
