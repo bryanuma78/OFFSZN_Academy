@@ -278,22 +278,20 @@
   </div>
 </footer>
 
-
 <!-- POPUP 1: Auto al entrar -->
 <script async src="https://eomail5.com/form/6d6c94f4-936c-11f0-a6b1-2398b9a18ea0.js" data-form="6d6c94f4-936c-11f0-a6b1-2398b9a18ea0"></script>
 
 <!-- POPUP 2: Con el botón "Descarga Gratis Beta" -->
 <script async src="https://eomail5.com/form/c6ea1c0a-a946-11f0-a963-2d3399b4bc98.js" data-form="c6ea1c0a-a946-11f0-a963-2d3399b4bc98"></script>
 
-<!-- Script countdown INLINE para que funcione -->
+<!-- Script countdown INLINE -->
 <script>
-// Countdown con persistencia y cierre temporal (4 horas)
 (function() {
   'use strict';
   
   const COUNTDOWN_KEY = 'offszn_countdown_end';
   const CLOSED_KEY = 'offszn_countdown_closed';
-  const CLOSE_DURATION = 4 * 60 * 60 * 1000; // 4 horas
+  const CLOSE_DURATION = 4 * 60 * 60 * 1000;
   
   function getOrCreateEndDate() {
     let stored = localStorage.getItem(COUNTDOWN_KEY);
@@ -410,84 +408,10 @@
 })();
 </script>
 
-<!-- ✅ Script para menú móvil CON SCROLL BLOQUEADO -->
-<script>
-const menuToggle = document.getElementById('menuToggle');
-const navMenu = document.getElementById('navMenu');
-const menuCloseBtn = document.getElementById('menuCloseBtn');
-const navLinks = document.querySelectorAll('#navbarLinks a');
-
-// Abrir/cerrar menú con hamburguesa
-if (menuToggle) {
-  menuToggle.addEventListener('click', function(e) {
-    e.stopPropagation();
-    const isOpen = navMenu.classList.contains('active');
-    
-    if (isOpen) {
-      // Cerrar
-      navMenu.classList.remove('active');
-      document.body.classList.remove('menu-open');
-      menuToggle.classList.remove('active');
-      menuToggle.querySelector('i').className = 'bi bi-list';
-    } else {
-      // Abrir
-      navMenu.classList.add('active');
-      document.body.classList.add('menu-open');
-      menuToggle.classList.add('active');
-      menuToggle.querySelector('i').className = 'bi bi-x-lg';
-    }
-  });
-}
-
-// Cerrar con botón X
-if (menuCloseBtn) {
-  menuCloseBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    navMenu.classList.remove('active');
-    document.body.classList.remove('menu-open');
-    menuToggle.classList.remove('active');
-    menuToggle.querySelector('i').className = 'bi bi-list';
-  });
-}
-
-// Cerrar menú al hacer clic en un link
-if (navLinks) {
-  navLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      navMenu.classList.remove('active');
-      document.body.classList.remove('menu-open');
-      menuToggle.classList.remove('active');
-      menuToggle.querySelector('i').className = 'bi bi-list';
-    });
-  });
-}
-
-// Cerrar menú al hacer clic fuera (en el overlay)
-document.addEventListener('click', function(e) {
-  if (!navMenu || !menuToggle) return;
-  
-  const isMenuOpen = navMenu.classList.contains('active');
-  
-  if (isMenuOpen) {
-    const menuRect = navMenu.getBoundingClientRect();
-    const clickX = e.clientX;
-    
-    // Si el clic está fuera del menú (en el overlay)
-    const isOutsideMenu = clickX > menuRect.right;
-    
-    if (isOutsideMenu) {
-      navMenu.classList.remove('active');
-      document.body.classList.remove('menu-open');
-      menuToggle.classList.remove('active');
-      menuToggle.querySelector('i').className = 'bi bi-list';
-    }
-  }
-});
-</script>
-
 <!-- Scripts externos -->
 <script src="/script/popup.js"></script>
 <script src="/script/faq.js"></script>
+<script src="/script/menu.js"></script>
 
 </body>
 </html>
