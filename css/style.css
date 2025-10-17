@@ -706,9 +706,26 @@ section {
     pointer-events: auto;
   }
 
-  /* BOTÓN CERRAR MÓVIL - OCULTO */
+  /* BOTÓN CERRAR MÓVIL - AHORA VISIBLE */
   .menu-close-btn {
-    display: none;
+    display: block;
+    position: fixed;
+    top: 12px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 1003;
+    line-height: 1;
+    padding: 8px 12px;
+    transition: all 0.3s;
+  }
+
+  .menu-close-btn:hover {
+    color: #b26dff;
+    text-shadow: 0 0 10px rgba(178, 109, 255, 0.8);
   }
 
   #navbarLinks {
@@ -722,22 +739,26 @@ section {
     border-bottom: 1px solid rgba(114, 9, 183, 0.15);
   }
 
+  /* ⭐ LINKS - BLANCO Y CLICKEABLE */
   #navbarLinks a {
     display: block;
     padding: 18px 30px;
     font-size: 16px;
-    color: #fff;
+    color: #fff !important;
     font-weight: 600;
     transition: all 0.3s;
     text-shadow: 0 0 8px rgba(201, 167, 235, 0.4);
+    position: relative;
+    z-index: 1;
   }
 
+  /* ⭐ HOVER - VIOLETA BRILLANTE */
   #navbarLinks a:hover,
   #navbarLinks a.active {
     background: rgba(114, 9, 183, 0.3);
-    color: #fff;
+    color: #b26dff !important;
     padding-left: 40px;
-    text-shadow: 0 0 15px rgba(201, 167, 235, 0.9);
+    text-shadow: 0 0 15px rgba(178, 109, 255, 0.9);
   }
 
   /* Hero móvil */
@@ -999,4 +1020,3 @@ section {
     width: 100%;
   }
 }
-
