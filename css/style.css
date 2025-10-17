@@ -744,7 +744,7 @@ section {
     display: block;
     padding: 18px 30px;
     font-size: 16px;
-    color: #e9d5ff;
+    color: #fff;
     transition: all 0.3s;
   }
 
@@ -1011,5 +1011,6 @@ section {
 
   #navMenu::before {
     left: 0;
+    width: 100%;
   }
 }
