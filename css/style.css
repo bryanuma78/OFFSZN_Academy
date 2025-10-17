@@ -24,7 +24,7 @@ body.menu-open {
   padding: 10px 20px;
   position: relative;
   width: 100%;
-  z-index: 10000;
+  z-index: 100;
   box-shadow: 0 4px 20px rgba(114, 9, 183, 0.6);
   border-bottom: 2px solid rgba(114, 9, 183, 0.8);
   display: flex;
@@ -33,6 +33,7 @@ body.menu-open {
   gap: 20px;
   transition: all 0.3s ease;
   overflow: hidden;
+  pointer-events: auto;
 }
 
 .countdown-content {            
@@ -663,7 +664,7 @@ section {
   }
 
   /* Menú lateral */
-  #navMenu {
+#navMenu {
     position: fixed;
     top: 0;
     left: 0;
@@ -676,17 +677,17 @@ section {
     flex-direction: column;
     padding: 80px 0 20px;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1001;
+    z-index: 2000;
     overflow-y: auto;
     overflow-x: hidden;
     transform: translateX(-100%);
+    pointer-events: auto;
   }
 
   #navMenu.active {
     transform: translateX(0);
   }
 
-  /* Overlay oscuro */
   #navMenu::before {
     content: '';
     position: fixed;
@@ -698,7 +699,7 @@ section {
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
-    z-index: 999;
+    z-index: 1999;
   }
 
   #navMenu.active::before {
