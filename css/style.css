@@ -42,6 +42,8 @@ body.menu-open {
   gap: 15px;
   flex-wrap: nowrap;
   max-width: 1200px;
+  position: relative;
+  width: 100%;
 }
 
 .countdown-text {
@@ -117,10 +119,7 @@ body.menu-open {
   transition: all 0.2s;
   padding: 0 10px;
   line-height: 1;
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
   z-index: 10001;
   pointer-events: auto;
 }
@@ -839,8 +838,9 @@ section {
 
   .countdown-close {
     font-size: 20px;
-    right: 8px;
+    right: auto;
     z-index: 10001;
+    position: relative;
   }
 
   /* Footer móvil */
@@ -969,8 +969,9 @@ section {
 
   .countdown-close {
     font-size: 18px;
-    right: 6px;
+    right: auto;
     z-index: 10001;
+    position: relative;
   }
 
   .footer p {
