@@ -10,8 +10,7 @@ body {
   color: #e9d5ff;
   background-color: #000;
   line-height: 1.6;
-  padding-top: 60px;
-  transition: none;
+  padding-top: 0;
 }
 
 body.menu-open {
@@ -23,10 +22,8 @@ body.menu-open {
   background: linear-gradient(90deg, #000 0%, #0a0118 50%, #000 100%);
   color: #fff;
   padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
+  width: 100%;
   z-index: 10000;
   box-shadow: 0 4px 20px rgba(114, 9, 183, 0.6);
   border-bottom: 2px solid rgba(114, 9, 183, 0.8);
@@ -34,7 +31,6 @@ body.menu-open {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  transition: none;
 }
 
 .countdown-content {            
@@ -136,13 +132,11 @@ body.menu-open {
   align-items: center;
   padding: 1rem 3rem;
   background: rgba(0, 0, 0, 0.95);
-  position: sticky;
-  top: 60px;
+  position: relative;
   z-index: 1000;
   box-shadow: 0 2px 20px rgba(114, 9, 183, 0.3);
   border-bottom: 1px solid rgba(114, 9, 183, 0.3);
   backdrop-filter: blur(10px);
-  transition: none;
 }
 
 .navbar .logo a {
@@ -202,6 +196,10 @@ body.menu-open {
 .menu-toggle:hover {
   color: #e9d5ff;
   text-shadow: 0 0 10px rgba(114, 9, 183, 0.8);
+}
+
+.menu-toggle.active {
+  color: #fff;
 }
 
 /* BOTÓN CERRAR MENÚ MÓVIL - OCULTO EN PC */
@@ -319,19 +317,19 @@ body.menu-open {
   display: block;
 }
 
-/* IMAGEN HERO - MÁS GRANDE EN PC: 500px */
+/* IMAGEN HERO - MÁS GRANDE EN PC: 600px */
 .hero-image {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 400px;
-  min-height: 450px;
+  min-width: 450px;
+  min-height: 500px;
 }
 
 .image-placeholder {
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -634,7 +632,7 @@ section {
 /* Tablet y móvil grande */
 @media (max-width: 900px) {
   body {
-    padding-top: 55px;
+    padding-top: 0;
     overflow-x: hidden;
   }
 
@@ -643,7 +641,6 @@ section {
   }
 
   .navbar {
-    top: 55px;
     padding: 0.9rem 1.2rem;
   }
 
@@ -707,26 +704,9 @@ section {
     pointer-events: auto;
   }
 
-  /* BOTÓN CERRAR MÓVIL - VISIBLE EN MÓVIL */
+  /* BOTÓN CERRAR MÓVIL - OCULTO */
   .menu-close-btn {
-    display: block;
-    position: fixed;
-    top: 12px;
-    left: 12px;
-    background: none;
-    border: none;
-    color: #c9a7eb;
-    font-size: 40px;
-    cursor: pointer;
-    transition: all 0.3s;
-    z-index: 1005;
-    line-height: 1;
-    font-weight: 300;
-    padding: 0;
-  }
-
-  .menu-close-btn:hover {
-    color: #e9d5ff;
+    display: none;
   }
 
   #navbarLinks {
@@ -745,6 +725,7 @@ section {
     padding: 18px 30px;
     font-size: 16px;
     color: #fff;
+    font-weight: 500;
     transition: all 0.3s;
   }
 
@@ -753,6 +734,7 @@ section {
     background: rgba(114, 9, 183, 0.2);
     color: #fff;
     padding-left: 40px;
+    text-shadow: 0 0 10px rgba(201, 167, 235, 0.6);
   }
 
   /* Hero móvil */
