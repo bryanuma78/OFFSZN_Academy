@@ -2,26 +2,13 @@
 (function() {
   'use strict';
   
-  const COUNTDOWN_KEY = 'offszn_countdown_end';
   const CLOSED_KEY = 'offszn_countdown_closed';
   const CLOSE_DURATION = 4 * 60 * 60 * 1000; // 4 horas en milisegundos
   
-  function getOrCreateEndDate() {
-    let stored = localStorage.getItem(COUNTDOWN_KEY);
-    
-    if (stored) {
-      const endDate = new Date(stored);
-      if (endDate > new Date()) {
-        return endDate;
-      }
-    }
-    
-    // Crear nueva fecha: 30 días desde ahora
-    const newEndDate = new Date();
-    newEndDate.setDate(newEndDate.getDate() + 30);
-    localStorage.setItem(COUNTDOWN_KEY, newEndDate.toISOString());
-    return newEndDate;
-  }
+  // ✅ FECHA GLOBAL FIJA - Mismo para todos los usuarios
+  const PROMOTION_START = new Date('2025-10-17T00:00:00').getTime();
+  const PROMOTION_DAYS = 30;
+  const PROMOTION_END = new Date(PROMOTION_START + (PROMOTION_DAYS * 24 * 60 * 60 * 1000)).getTime();
   
   function isBannerClosed() {
     const closedTime = localStorage.getItem(CLOSED_KEY);
@@ -73,9 +60,8 @@
     const banner = document.getElementById('countdownBanner');
     if (!banner) return;
     
-    const endDate = getOrCreateEndDate();
     const now = new Date().getTime();
-    const distance = endDate - now;
+    const distance = PROMOTION_END - now;
     
     if (distance <= 0) {
       showExpiredBanner();
