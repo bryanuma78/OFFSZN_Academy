@@ -54,6 +54,7 @@
   </button>
 
   <nav id="navMenu">
+    <button class="menu-close-btn" id="menuCloseBtn">×</button>
     <ul id="navbarLinks">
       <li><a href="/index.html" class="active">Inicio</a></li>
       <li><a href="/pages/cursos.html">Cursos</a></li>
@@ -413,6 +414,7 @@
 <script>
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
+const menuCloseBtn = document.getElementById('menuCloseBtn');
 const navLinks = document.querySelectorAll('#navbarLinks a');
 
 // Abrir/cerrar menú con hamburguesa
@@ -434,6 +436,17 @@ if (menuToggle) {
       menuToggle.classList.add('active');
       menuToggle.querySelector('i').className = 'bi bi-x-lg';
     }
+  });
+}
+
+// Cerrar con botón X
+if (menuCloseBtn) {
+  menuCloseBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    navMenu.classList.remove('active');
+    document.body.classList.remove('menu-open');
+    menuToggle.classList.remove('active');
+    menuToggle.querySelector('i').className = 'bi bi-list';
   });
 }
 
