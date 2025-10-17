@@ -36,9 +36,10 @@
     }
     
     if (navbar) {
-      navbar.style.top = '0';
-      document.body.style.paddingTop = '0';
+      navbar.style.top = '0'; // Navbar sube cuando se cierra countdown
     }
+    
+    document.body.style.paddingTop = '70px'; // Solo navbar
   }
   
   function showExpiredBanner() {
