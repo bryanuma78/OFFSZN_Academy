@@ -702,13 +702,15 @@ section {
   #navMenu::after {
     content: '×';
     position: fixed;
-    top: 16px;
-    left: 16px;
-    font-size: 32px;
+    top: 12px;
+    left: 12px;
+    font-size: 40px;
     color: #c9a7eb;
     cursor: pointer;
     transition: all 0.3s;
     z-index: 1005;
+    line-height: 1;
+    font-weight: 300;
   }
 
   #navbarLinks {
@@ -989,14 +991,9 @@ section {
   /* Menú mobile pequeño */
   #navMenu {
     width: 85%;
-    transform: translateX(-100%);
   }
 
   #navMenu::before {
     left: 85%;
-  }
-
-  #navMenu::after {
-    left: 16px;
   }
 }
