@@ -204,6 +204,11 @@ body.menu-open {
   text-shadow: 0 0 10px rgba(114, 9, 183, 0.8);
 }
 
+/* BOTÓN CERRAR MENÚ MÓVIL - OCULTO EN PC */
+.menu-close-btn {
+  display: none;
+}
+
 .cart-icon {
   width: 40px;
   height: 40px;
@@ -622,6 +627,10 @@ section {
   transform: scale(1.1);
 }
 
+/* ============================================
+   RESPONSIVE - MOBILE FIXES
+   ============================================ */
+
 /* Tablet y móvil grande */
 @media (max-width: 900px) {
   body {
@@ -698,19 +707,26 @@ section {
     pointer-events: auto;
   }
 
-  /* X ALINEADA CORRECTAMENTE */
-  #navMenu::after {
-    content: '×';
+  /* BOTÓN CERRAR MÓVIL - VISIBLE EN MÓVIL */
+  .menu-close-btn {
+    display: block;
     position: fixed;
     top: 12px;
     left: 12px;
-    font-size: 40px;
+    background: none;
+    border: none;
     color: #c9a7eb;
+    font-size: 40px;
     cursor: pointer;
     transition: all 0.3s;
     z-index: 1005;
     line-height: 1;
     font-weight: 300;
+    padding: 0;
+  }
+
+  .menu-close-btn:hover {
+    color: #e9d5ff;
   }
 
   #navbarLinks {
