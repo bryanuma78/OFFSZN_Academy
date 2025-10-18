@@ -10,7 +10,7 @@ body {
   color: #e9d5ff;
   background-color: #000;
   line-height: 1.6;
-  padding-top: 0; /* ← CORREGIDO: Estático sin padding */
+  padding-top: 0;
 }
 
 body.menu-open {
@@ -22,7 +22,7 @@ body.menu-open {
   background: linear-gradient(90deg, #000 0%, #0a0118 50%, #000 100%);
   color: #fff;
   padding: 10px 20px;
-  position: relative; /* ← CORREGIDO: Estático */
+  position: relative;
   width: 100%;
   z-index: 100;
   box-shadow: 0 4px 20px rgba(114, 9, 183, 0.6);
@@ -36,7 +36,17 @@ body.menu-open {
   pointer-events: auto;
 }
 
-.countdown-content {            
+/* IMPORTANTE: Ocultar en todas las páginas excepto inicio */
+body:not(.homepage) .countdown-banner {
+  display: none !important;
+}
+
+/* Cuando tiene clase .hidden, siempre ocultado */
+.countdown-banner.hidden {
+  display: none !important;
+}
+
+.countdown-content {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,6 +115,7 @@ body.menu-open {
   transition: background 0.2s ease;
   border: 1px solid rgba(201, 167, 235, 0.3);
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .countdown-btn:hover {
@@ -136,7 +147,7 @@ body.menu-open {
   align-items: center;
   padding: 1rem 3rem;
   background: rgba(0, 0, 0, 0.95);
-  position: relative; /* ← CORREGIDO: Estático */
+  position: relative;
   width: 100%;
   z-index: 1000;
   box-shadow: 0 2px 20px rgba(114, 9, 183, 0.3);
@@ -636,7 +647,7 @@ section {
 
 @media (max-width: 900px) {
   body {
-    padding-top: 0; /* ← CORREGIDO: Sin padding en móvil */
+    padding-top: 0;
     overflow-x: hidden;
   }
 
