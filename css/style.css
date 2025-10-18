@@ -27,13 +27,17 @@ body.menu-open {
   z-index: 100;
   box-shadow: 0 4px 20px rgba(114, 9, 183, 0.6);
   border-bottom: 2px solid rgba(114, 9, 183, 0.8);
-  display: flex;
+  display: none; /* CAMBIAR AQUÍ DE flex A none */
   align-items: center;
   justify-content: center;
   gap: 20px;
   transition: all 0.3s ease;
   overflow: hidden;
   pointer-events: auto;
+}
+
+.countdown-banner.visible {
+  display: flex;
 }
 
 .countdown-content {            
