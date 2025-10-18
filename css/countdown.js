@@ -94,7 +94,7 @@
     }
     
     // Si estamos en homepage y NO fue cerrado, mostrar y actualizar
-    banner.style.display = 'flex';
+    banner.classList.add('visible');
     
     // Actualizar countdown cada segundo
     updateCountdown();
