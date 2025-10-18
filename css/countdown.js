@@ -5,7 +5,7 @@
   const CLOSED_KEY = 'offszn_countdown_closed';
   const CLOSE_DURATION = 4 * 60 * 60 * 1000; // 4 horas en milisegundos
   
-  // ✅ FECHA GLOBAL FIJA - Mismo para todos los usuarios
+  // ✅ FECHA GLOBAL FIJA - Mismo para TODOS los usuarios
   const PROMOTION_START = new Date('2025-10-17T00:00:00').getTime();
   const PROMOTION_DAYS = 30;
   const PROMOTION_END = new Date(PROMOTION_START + (PROMOTION_DAYS * 24 * 60 * 60 * 1000)).getTime();
@@ -28,18 +28,14 @@
   
   function hideBanner() {
     const banner = document.getElementById('countdownBanner');
-    const navbar = document.getElementById('navbar');
     
     if (banner) {
       banner.style.display = 'none';
       localStorage.setItem(CLOSED_KEY, new Date().getTime().toString());
     }
     
-    if (navbar) {
-      navbar.style.top = '0'; // Navbar sube cuando se cierra countdown
-    }
-    
-    document.body.style.paddingTop = '70px'; // Solo navbar
+    // ← ELIMINADO: Todo el código de navbar.style.top y body.style.paddingTop
+    //    Ya no es necesario porque ahora es estático
   }
   
   function showExpiredBanner() {
@@ -51,7 +47,7 @@
         <span class="countdown-text">✨ DISPONIBLE SOLO POR HOY ✨</span>
         <a href="/pages/Preset.html" class="countdown-btn">CONSEGUIRLO</a>
       </div>
-      <button class="countdown-close" id="countdownCloseExpired">×</button>
+      <button class="countdown-close" id="countdownCloseExpired" aria-label="Cerrar">×</button>
     `;
     
     document.getElementById('countdownCloseExpired').addEventListener('click', hideBanner);
