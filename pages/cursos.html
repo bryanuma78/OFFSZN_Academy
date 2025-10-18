@@ -13,7 +13,7 @@
 
 <body>
 
-<!-- COUNTDOWN BANNER - OCULTO EN CURSOS POR EL JS -->
+<!-- COUNTDOWN BANNER - OCULTO EN CURSOS POR EL JS 
 <div class="countdown-banner" id="countdownBanner">
   <div class="countdown-content">
     <span class="countdown-text">CURSO COMPLETO 25% OFF - OFERTA LIMITADA</span>
@@ -38,10 +38,10 @@
     <a href="#pricing" class="countdown-btn">APROVECHAR DESCUENTO</a>
     <button class="countdown-close" id="countdownClose" aria-label="Cerrar">×</button>
   </div>
-</div>
+</div> -->
 
-<!-- NAVBAR -->
-<header class="navbar">
+<!-- ==================== NAVBAR ==================== -->
+<header class="navbar" id="navbar">
   <div class="logo">
     <a href="/index.html">OFFSZN</a>
   </div>
@@ -51,8 +51,9 @@
   </button>
 
   <nav id="navMenu">
+    <button class="menu-close-btn" id="menuCloseBtn" aria-label="Cerrar menú">×</button>
     <ul id="navbarLinks">
-      <li><a href="/index.html">Inicio</a></li>
+      <li><a href="/index.html" >Inicio</a></li>
       <li><a href="/pages/cursos.html" class="active">Cursos</a></li>
       <li><a href="/pages/Preset.html">Presets</a></li>
       <li><a href="/pages/playlist.html">Playlist</a></li>
@@ -718,7 +719,7 @@
 </footer>
 
 <script src="/css/countdown.js"></script>
-
+<script src="/script/menu.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const moduleHeaders = document.querySelectorAll('.module-header');

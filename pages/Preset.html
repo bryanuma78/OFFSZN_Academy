@@ -90,29 +90,6 @@
     </div>
   </div>
 </footer>
-
-  <script>
-    // Toggle menú hamburguesa
-    const toggle = document.getElementById('menu-toggle');
-    const navLinks = document.getElementById('navbar-links');
-
-    toggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-
-    // Tooltip del embed
-    const wrapper = document.querySelector('.presets-iframe-wrapper');
-    const tooltip = document.getElementById('scroll-tooltip');
-
-    wrapper.addEventListener('mousemove', e => {
-      tooltip.style.opacity = '1';
-      tooltip.style.left = e.pageX + 15 + 'px';
-      tooltip.style.top = e.pageY + 15 + 'px';
-    });
-
-    wrapper.addEventListener('mouseleave', () => {
-      tooltip.style.opacity = '0';
-    });
-  </script>
+<script src="/script/menu.js"></script>
 </body>
 </html>
