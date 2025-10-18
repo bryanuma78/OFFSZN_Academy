@@ -107,7 +107,24 @@
     }
   }
   
-  // Ejecutar cuando el DOM esté listo
+  // Ocultar el banner inmediatamente si no es homepage o está cerrado
+  function hideImmediately() {
+    const banner = document.getElementById('countdownBanner');
+    if (!banner) return;
+    
+    // Si NO es homepage o está cerrado, ocultarlo de inmediato
+    if (!isHomePage() || isBannerClosed()) {
+      banner.style.display = 'none';
+      banner.style.visibility = 'hidden';
+      banner.style.position = 'absolute';
+      banner.style.top = '-9999px';
+    }
+  }
+  
+  // Ejecutar hideImmediately lo más pronto posible
+  hideImmediately();
+  
+  // Ejecutar init cuando el DOM esté listo
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
