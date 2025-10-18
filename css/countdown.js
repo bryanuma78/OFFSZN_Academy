@@ -15,9 +15,12 @@
   // Verificar si estamos en la página de inicio
   function isHomePage() {
     const pathname = window.location.pathname;
+    const filename = pathname.split('/').pop();
+    
+    // Solo mostrar en raíz o en index.html
     return pathname === '/' || 
-           pathname === '/index.html' ||
-           pathname.endsWith('/index.html');
+           filename === 'index.html' || 
+           filename === '';
   }
   
   // Verificar si el countdown fue cerrado recientemente
@@ -72,27 +75,22 @@
   // Inicializar
   function init() {
     const banner = document.getElementById('countdownBanner');
+    if (!banner) return;
     
-    // Si no estamos en homepage, ocultar el banner
+    // Si NO estamos en homepage, SIEMPRE ocultar
     if (!isHomePage()) {
-      if (banner) {
-        banner.style.display = 'none';
-      }
+      banner.style.display = 'none';
       return;
     }
     
     // Si estamos en homepage pero fue cerrado, mantenerlo cerrado
     if (isBannerClosed()) {
-      if (banner) {
-        banner.style.display = 'none';
-      }
+      banner.style.display = 'none';
       return;
     }
     
-    // Si estamos en homepage y no fue cerrado, mostrar y actualizar
-    if (banner) {
-      banner.style.display = 'flex';
-    }
+    // Si estamos en homepage y NO fue cerrado, mostrar y actualizar
+    banner.style.display = 'flex';
     
     // Actualizar countdown cada segundo
     updateCountdown();
