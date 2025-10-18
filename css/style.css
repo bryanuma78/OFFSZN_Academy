@@ -148,6 +148,7 @@ body.menu-open {
   backdrop-filter: blur(10px);
 }
 
+/* LOGO */
 .navbar .logo a {
   font-family: "Montserrat", sans-serif;
   font-size: 1.8rem;
@@ -164,10 +165,21 @@ body.menu-open {
   text-shadow: 0 0 15px rgba(114, 9, 183, 0.5);
 }
 
+/* MENÚ CENTRADO PERFECTO */
+.navbar nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .navbar ul {
   list-style: none;
   display: flex;
   gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar a {
@@ -188,6 +200,36 @@ body.menu-open {
   font-weight: bold;
   text-shadow: 0 0 15px rgba(114, 9, 183, 0.8);
   border-bottom: 2px solid #7209b7;
+}
+
+/* CARRITO A LA DERECHA */
+.cart-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(114, 9, 183, 0.3);
+  border: 2px solid rgba(114, 9, 183, 0.6);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c9a7eb;
+  font-size: 20px;
+  transition: all 0.3s;
+}
+
+/* Efecto hover carrito */
+.cart-icon:hover {
+  background: rgba(114, 9, 183, 0.5);
+  border-color: rgba(201, 167, 235, 0.8);
+}
+
+/* Mantiene el espacio si no hay carrito */
+.cart-icon:empty::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 40px;
 }
 
 /* BOTÓN MENÚ MÓVIL */
@@ -216,25 +258,56 @@ body.menu-open {
   display: none;
 }
 
-.cart-icon {
-  width: 40px;
-  height: 40px;
-  background: rgba(114, 9, 183, 0.3);
-  border: 2px solid rgba(114, 9, 183, 0.6);
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #c9a7eb;
-  font-size: 20px;
-  transition: all 0.3s;
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+
+  .navbar nav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+    background: rgba(10, 10, 10, 0.98);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.4s ease;
+    z-index: 999;
+  }
+
+  .navbar nav.active {
+    left: 0;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .menu-close-btn {
+    display: block;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2rem;
+    color: #c9a7eb;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cart-icon {
+    display: none;
+  }
 }
 
-.cart-icon:hover {
-  background: rgba(114, 9, 183, 0.5);
-  border-color: rgba(201, 167, 235, 0.8);
-}
 
 /* ===== HERO SECTION ===== */
 .hero {
@@ -1721,4 +1794,129 @@ section {
   }
 }
 
+
+
+
+/* ===== Playlist seccion css ===== */
+/* Playlist Section */
+.playlist {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.playlist h2 {
+  color: #f0483e;
+  margin-bottom: 2rem;
+}
+
+.playlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+/* Card */
+.track-card {
+  background: #d8b4fe; /* Morado */
+  color: #000;
+  border-radius: 15px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  gap: 1rem;
+}
+
+/* Portada */
+.track-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* Info */
+.track-info {
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Título */
+.track-info h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Texto */
+.track-info p {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Barra de audio elegante morada */
+.track-info audio {
+  width: 100%;
+  height: 40px;
+  border-radius: 12px;
+  background: #d8b4fe; /* color morado de la tarjeta */
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Webkit controls (Chrome, Edge, Safari) */
+.track-info audio::-webkit-media-controls-panel {
+  background: #d8b4fe; /* morado */
+  border-radius: 12px;
+}
+
+.track-info audio::-webkit-media-controls-play-button,
+.track-info audio::-webkit-media-controls-volume-slider {
+  filter: invert(100%) brightness(150%);
+}
+
+.track-info audio::-webkit-media-controls-timeline {
+  height: 6px;
+  border-radius: 3px;
+  background: #f0d0ff; /* barra de progreso más clara */
+}
+
+.track-info audio::-webkit-media-controls-current-time-display,
+.track-info audio::-webkit-media-controls-time-remaining-display {
+  color: #f0483e; /* color rojo para tiempos */
+  font-weight: 600;
+}
+
+ /* Responsive para móviles */
+ @media (max-width: 768px) {
+  .playlist-grid {
+      grid-template-columns: 1fr; /* 1 tarjeta por fila */
+  }
+
+  .track-card {
+      flex-direction: column; /* Imagen arriba, info debajo */
+      align-items: center;
+      text-align: center;
+      gap: 0.8rem;
+  }
+
+  .track-card img {
+      width: 80%;
+      max-width: 200px;
+      height: auto;
+  }
+
+  .track-info {
+      width: 100%;
+  }
+
+  .track-info audio {
+      width: 100%;
+  }
+}
 /* ===== FIN CSS BASE ===== */
