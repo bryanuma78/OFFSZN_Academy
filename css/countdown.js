@@ -15,12 +15,16 @@
   // Verificar si estamos en la página de inicio
   function isHomePage() {
     const pathname = window.location.pathname;
-    const filename = pathname.split('/').pop();
     
     // Solo mostrar en raíz o en index.html
+    // Bloquear si está en /pages/ (cursos, presets, etc)
+    if (pathname.includes('/pages/')) {
+      return false;
+    }
+    
     return pathname === '/' || 
-           filename === 'index.html' || 
-           filename === '';
+           pathname === '/index.html' ||
+           pathname.endsWith('index.html');
   }
   
   // Verificar si el countdown fue cerrado recientemente
