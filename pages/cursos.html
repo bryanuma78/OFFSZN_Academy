@@ -4,23 +4,920 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cursos - OFFSZN Academy | Mezcla Profesional desde Cero</title>
-  
-  <!-- SEO -->
   <meta name="description" content="Aprende mezcla y masterización profesional con Willie Inspired. Cursos prácticos, presets exclusivos y acceso a comunidad privada.">
   
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/style.css">
-  
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #e9d5ff;
+  background-color: #000;
+  line-height: 1.6;
+}
+
+/* ===== COUNTDOWN BANNER ===== */
+.countdown-banner {
+  background: linear-gradient(90deg, #000 0%, #0a0118 50%, #000 100%);
+  color: #fff;
+  padding: 12px 20px;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(114, 9, 183, 0.6);
+  border-bottom: 2px solid rgba(114, 9, 183, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.countdown-banner.hidden {
+  display: none !important;
+}
+
+.countdown-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.countdown-text {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  white-space: nowrap;
+}
+
+.countdown-timer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 6px 12px;
+  border-radius: 6px;
+  min-width: 55px;
+  border: 1px solid rgba(114, 9, 183, 0.6);
+}
+
+.time-number {
+  font-size: 20px;
+  font-weight: 700;
+  color: #c9a7eb;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(201, 167, 235, 0.6);
+}
+
+.time-label {
+  font-size: 8px;
+  color: #999;
+  text-transform: uppercase;
+  margin-top: 3px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.countdown-btn {
+  background: linear-gradient(90deg, #7209b7, #560bad);
+  color: #fff;
+  padding: 8px 24px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(201, 167, 235, 0.3);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.countdown-btn:hover {
+  background: linear-gradient(90deg, #560bad, #3c096c);
+}
+
+.countdown-close {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0 10px;
+  line-height: 1;
+  z-index: 10001;
+}
+
+.countdown-close:hover {
+  color: #fff;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background: rgba(0, 0, 0, 0.95);
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 20px rgba(114, 9, 183, 0.3);
+  border-bottom: 1px solid rgba(114, 9, 183, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.navbar .logo a {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  text-shadow: 0 0 10px rgba(114, 9, 183, 0.3);
+  transition: all 0.3s;
+}
+
+.navbar .logo a:hover {
+  color: #f5f5f5;
+  text-shadow: 0 0 15px rgba(114, 9, 183, 0.5);
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar a {
+  color: #e9d5ff;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: #c9a7eb;
+  text-shadow: 0 0 10px rgba(114, 9, 183, 0.8);
+}
+
+.navbar a.active {
+  border-bottom: 2px solid #7209b7;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #c9a7eb;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 1002;
+}
+
+.cart-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(114, 9, 183, 0.3);
+  border: 2px solid rgba(114, 9, 183, 0.6);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c9a7eb;
+  font-size: 20px;
+  transition: all 0.3s;
+}
+
+.cart-icon:hover {
+  background: rgba(114, 9, 183, 0.5);
+  border-color: rgba(201, 167, 235, 0.8);
+}
+
+/* ===== HERO SECTION ===== */
+.curso-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 10% 80px;
+  gap: 60px;
+  background: radial-gradient(circle at top right, rgba(114, 9, 183, 0.08), transparent 60%);
+}
+
+.curso-hero-content {
+  max-width: 600px;
+  flex: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(114, 9, 183, 0.2);
+  border: 1px solid rgba(114, 9, 183, 0.5);
+  padding: 10px 16px;
+  border-radius: 30px;
+  margin-bottom: 24px;
+  color: #c9a7eb;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.curso-hero-title {
+  font-size: 56px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 0 0 10px rgba(114, 9, 183, 0.3);
+}
+
+.highlight-gradient {
+  background: linear-gradient(90deg, #7209b7, #c9a7eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.curso-hero-subtitle {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #d1d1d1;
+  margin-bottom: 40px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #c9a7eb;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(90deg, #7209b7, #560bad);
+  color: #fff;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px rgba(114, 9, 183, 0.4);
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(114, 9, 183, 0.7);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid rgba(114, 9, 183, 0.6);
+  box-shadow: none;
+}
+
+.btn-secondary:hover {
+  background: rgba(114, 9, 183, 0.1);
+  border-color: rgba(201, 167, 235, 0.8);
+}
+
+.trust-avatars {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.trust-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #7209b7;
+  background: rgba(114, 9, 183, 0.3);
+}
+
+.trust-more {
+  font-weight: 600;
+  color: #c9a7eb;
+}
+
+.trust-text {
+  font-size: 13px;
+  color: #d1d1d1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.video-preview-container {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: rgba(26, 10, 46, 0.3);
+  border: 2px solid rgba(114, 9, 183, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.video-preview-container:hover {
+  border-color: rgba(201, 167, 235, 0.6);
+  box-shadow: 0 0 30px rgba(114, 9, 183, 0.3);
+}
+
+.video-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #c9a7eb;
+}
+
+.video-placeholder i {
+  font-size: 48px;
+}
+
+/* ===== TRANSFORMATION SECTION ===== */
+.curso-transformation {
+  padding: 80px 5%;
+  background: rgba(26, 10, 46, 0.1);
+}
+
+.section-header-center {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #b794f6;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.section-header-center h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 0 0 10px rgba(114, 9, 183, 0.3);
+}
+
+.section-header-center p {
+  font-size: 16px;
+  color: #d1d1d1;
+}
+
+.transformation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.transformation-card {
+  background: rgba(26, 10, 46, 0.4);
+  border: 1px solid rgba(114, 9, 183, 0.3);
+  border-radius: 12px;
+  padding: 30px 24px;
+  transition: all 0.3s ease;
+}
+
+.transformation-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(201, 167, 235, 0.6);
+  box-shadow: 0 8px 40px rgba(114, 9, 183, 0.2);
+}
+
+.transform-icon {
+  font-size: 40px;
+  color: #7209b7;
+  margin-bottom: 16px;
+}
+
+.transformation-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.transformation-card p {
+  font-size: 14px;
+  color: #d1d1d1;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.transform-list {
+  list-style: none;
+}
+
+.transform-list li {
+  font-size: 13px;
+  color: #c9a7eb;
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.transform-list li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #7209b7;
+  font-weight: bold;
+}
+
+/* ===== CURRICULUM SECTION ===== */
+.curso-curriculum {
+  padding: 80px 5%;
+}
+
+.curriculum-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.curriculum-module {
+  background: rgba(26, 10, 46, 0.3);
+  border: 1px solid rgba(114, 9, 183, 0.3);
+  border-radius: 10px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.curriculum-module.active {
+  border-color: rgba(201, 167, 235, 0.6);
+  box-shadow: 0 0 20px rgba(114, 9, 183, 0.2);
+}
+
+.module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: rgba(114, 9, 183, 0.1);
+}
+
+.module-header:hover {
+  background: rgba(114, 9, 183, 0.15);
+}
+
+.module-info {
+  flex: 1;
+}
+
+.module-number {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #b794f6;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.module-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.module-meta {
+  font-size: 12px;
+  color: #999;
+}
+
+.module-toggle {
+  font-size: 20px;
+  color: #7209b7;
+  transition: all 0.3s;
+}
+
+.curriculum-module.active .module-toggle {
+  transform: rotate(180deg);
+}
+
+.module-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.curriculum-module.active .module-content {
+  max-height: 2000px;
+}
+
+.lesson-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  border-top: 1px solid rgba(114, 9, 183, 0.15);
+  transition: all 0.3s;
+}
+
+.lesson-item:hover {
+  background: rgba(114, 9, 183, 0.1);
+}
+
+.lesson-item i {
+  color: #7209b7;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.lesson-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  gap: 20px;
+}
+
+.lesson-info h4 {
+  font-size: 14px;
+  color: #e9d5ff;
+  font-weight: 500;
+}
+
+.lesson-duration {
+  font-size: 12px;
+  color: #999;
+  white-space: nowrap;
+}
+
+/* ===== PRICING SECTION ===== */
+.curso-pricing {
+  padding: 80px 5%;
+  background: rgba(26, 10, 46, 0.1);
+}
+
+.pricing-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: rgba(26, 10, 46, 0.4);
+  border: 2px solid rgba(114, 9, 183, 0.4);
+  border-radius: 15px;
+  padding: 40px 30px;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.pricing-card:hover {
+  border-color: rgba(201, 167, 235, 0.6);
+  box-shadow: 0 0 40px rgba(114, 9, 183, 0.3);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: linear-gradient(90deg, #7209b7, #560bad);
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pricing-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pricing-price {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.price-currency {
+  font-size: 24px;
+  color: #c9a7eb;
+}
+
+.price-amount {
+  font-size: 56px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.price-original {
+  font-size: 18px;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+
+.pricing-subtitle {
+  text-align: center;
+  color: #d1d1d1;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.pricing-features {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  color: #d1d1d1;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(114, 9, 183, 0.1);
+}
+
+.pricing-features i {
+  color: #7209b7;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.btn-block {
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.pricing-guarantee {
+  text-align: center;
+  padding: 16px;
+  background: rgba(114, 9, 183, 0.1);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #d1d1d1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pricing-note {
+  text-align: center;
+  font-size: 13px;
+  color: #d1d1d1;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #000;
+  padding: 1.2rem 2rem;
+  border-top: 1px solid rgba(114, 9, 183, 0.3);
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer p {
+  color: #e9d5ff;
+  font-size: 13px;
+  margin: 0;
+}
+
+.footer ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.footer a {
+  color: #c9a7eb;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 13px;
+}
+
+.footer a:hover {
+  color: #e9d5ff;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.footer-social a {
+  color: #b794f6;
+  font-size: 18px;
+  transition: all 0.3s;
+}
+
+.footer-social a:hover {
+  color: #c9a7eb;
+  transform: scale(1.1);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0.9rem 1.2rem;
+  }
+
+  .navbar ul {
+    gap: 1rem;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .curso-hero {
+    flex-direction: column;
+    padding: 40px 5%;
+    gap: 40px;
+  }
+
+  .curso-hero-title {
+    font-size: 36px;
+  }
+
+  .video-preview-container {
+    min-height: 300px;
+  }
+
+  .hero-stats {
+    gap: 20px;
+  }
+
+  .countdown-banner {
+    padding: 8px 12px;
+    flex-wrap: wrap;
+  }
+
+  .countdown-content {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .countdown-text {
+    font-size: 10px;
+    flex: 0 0 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .countdown-banner {
+    padding: 6px 10px;
+  }
+
+  .countdown-timer {
+    gap: 4px;
+  }
+
+  .time-block {
+    min-width: 40px;
+    padding: 4px 8px;
+  }
+
+  .time-number {
+    font-size: 14px;
+  }
+
+  .curso-hero-title {
+    font-size: 28px;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-header-center h2 {
+    font-size: 28px;
+  }
+
+  .transformation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+  </style>
 </head>
 
 <body>
 
-<!-- ==================== COUNTDOWN BANNER ==================== -->
+<!-- COUNTDOWN BANNER - SOLO EN INICIO -->
 <div class="countdown-banner" id="countdownBanner">
   <div class="countdown-content">
     <span class="countdown-text">CURSO COMPLETO 25% OFF - OFERTA LIMITADA</span>
@@ -43,12 +940,12 @@
       </div>
     </div>
     <a href="#pricing" class="countdown-btn">APROVECHAR DESCUENTO</a>
-    <button class="countdown-close" id="countdownClose">×</button>
+    <button class="countdown-close" id="countdownClose" aria-label="Cerrar">×</button>
   </div>
 </div>
 
-<!-- ==================== NAVBAR ==================== -->
-<header class="navbar" id="navbar">
+<!-- NAVBAR -->
+<header class="navbar">
   <div class="logo">
     <a href="/index.html">OFFSZN</a>
   </div>
@@ -58,7 +955,6 @@
   </button>
 
   <nav id="navMenu">
-    <button class="menu-close-btn" id="menuCloseBtn">×</button>
     <ul id="navbarLinks">
       <li><a href="/index.html">Inicio</a></li>
       <li><a href="/pages/cursos.html" class="active">Cursos</a></li>
@@ -73,7 +969,7 @@
   </div>
 </header>
 
-<!-- ==================== HERO SECTION ==================== -->
+<!-- HERO SECTION -->
 <section class="curso-hero">
   <div class="curso-hero-content">
     <div class="hero-badge">
@@ -87,8 +983,7 @@
     </h1>
     
     <p class="curso-hero-subtitle">
-      El único curso donde aprendes TODO el proceso real de producción:<br>
-      desde grabar voces hasta la masterización final lista para plataformas.
+      El único curso donde aprendes TODO el proceso real de producción: desde grabar voces hasta la masterización final lista para plataformas.
     </p>
     
     <div class="hero-stats">
@@ -107,47 +1002,39 @@
     </div>
     
     <div class="hero-cta-group">
-      <a href="#pricing" class="btn btn-primary btn-large">
+      <a href="#pricing" class="btn">
         <i class="bi bi-play-circle-fill"></i>
         COMENZAR AHORA
       </a>
-      <a href="#temario" class="btn btn-secondary btn-large">
+      <a href="#temario" class="btn btn-secondary">
         <i class="bi bi-list-ul"></i>
         VER TEMARIO COMPLETO
       </a>
     </div>
     
-    <div class="hero-trust">
-      <div class="trust-avatars">
-        <img src="/images/avatar1.jpg" alt="Alumno" class="trust-avatar">
-        <img src="/images/avatar2.jpg" alt="Alumno" class="trust-avatar">
-        <img src="/images/avatar3.jpg" alt="Alumno" class="trust-avatar">
-        <span class="trust-more">+97</span>
-      </div>
-      <p class="trust-text">
-        <i class="bi bi-star-fill"></i>
-        <strong>4.9/5</strong> basado en 100+ reseñas
-      </p>
+    <div class="trust-avatars">
+      <img src="/images/avatar1.jpg" alt="Alumno" class="trust-avatar">
+      <img src="/images/avatar2.jpg" alt="Alumno" class="trust-avatar">
+      <img src="/images/avatar3.jpg" alt="Alumno" class="trust-avatar">
+      <span class="trust-more">+97</span>
     </div>
+    <p class="trust-text">
+      <i class="bi bi-star-fill"></i>
+      <strong>4.9/5</strong> basado en 100+ reseñas
+    </p>
   </div>
   
   <div class="curso-hero-visual">
     <div class="video-preview-container">
-      <!-- PLACEHOLDER: Aquí va tu video preview o imagen del curso -->
       <div class="video-placeholder">
         <i class="bi bi-play-circle"></i>
         <span>VER PREVIEW DEL CURSO</span>
       </div>
-      <!-- Cuando tengas el video:
-      <video poster="/images/curso-thumbnail.jpg" controls>
-        <source src="/videos/curso-preview.mp4" type="video/mp4">
-      </video>
-      -->
     </div>
   </div>
 </section>
 
-<!-- ==================== TRANSFORMACIÓN ==================== -->
+<!-- TRANSFORMATION SECTION -->
 <section class="curso-transformation">
   <div class="section-header-center">
     <span class="section-eyebrow">TU EVOLUCIÓN</span>
@@ -210,64 +1097,7 @@
   </div>
 </section>
 
-<!-- ==================== PREVIEW VISUAL GRANDE ==================== -->
-<section class="curso-showcase">
-  <div class="showcase-container">
-    <div class="showcase-image">
-      <!-- PLACEHOLDER: Imagen grande del curso, setup, o captura de FL Studio -->
-      <div class="showcase-placeholder">
-        <i class="bi bi-image"></i>
-        <p>IMAGEN: Tu setup / FL Studio / Resultado final</p>
-      </div>
-    </div>
-    
-    <div class="showcase-content">
-      <span class="section-eyebrow">MÉTODO PROBADO</span>
-      <h2>Aprende con el Sistema que Realmente Funciona</h2>
-      
-      <div class="showcase-features">
-        <div class="showcase-feature">
-          <i class="bi bi-check-circle-fill"></i>
-          <div>
-            <h4>100% Práctico</h4>
-            <p>Cada lección incluye ejercicio real con stems de canciones reales. Nada de teoría aburrida.</p>
-          </div>
-        </div>
-        
-        <div class="showcase-feature">
-          <i class="bi bi-check-circle-fill"></i>
-          <div>
-            <h4>Proyectos Reales</h4>
-            <p>Trabajas con stems de artistas profesionales. Aprende mezclando beats y voces de verdad.</p>
-          </div>
-        </div>
-        
-        <div class="showcase-feature">
-          <i class="bi bi-check-circle-fill"></i>
-          <div>
-            <h4>Feedback Personalizado</h4>
-            <p>Acceso directo a la comunidad Discord donde revisamos tus mezclas en vivo.</p>
-          </div>
-        </div>
-        
-        <div class="showcase-feature">
-          <i class="bi bi-check-circle-fill"></i>
-          <div>
-            <h4>Actualizaciones de por Vida</h4>
-            <p>El curso crece contigo. Cada mes agregamos nuevas lecciones y contenido exclusivo.</p>
-          </div>
-        </div>
-      </div>
-      
-      <a href="#pricing" class="btn btn-primary">
-        QUIERO ACCESO COMPLETO
-        <i class="bi bi-arrow-right"></i>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== TEMARIO ACORDEÓN ==================== -->
+<!-- CURRICULUM SECTION -->
 <section class="curso-curriculum" id="temario">
   <div class="section-header-center">
     <span class="section-eyebrow">CONTENIDO COMPLETO</span>
@@ -375,7 +1205,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- MÓDULO 3 -->
     <div class="curriculum-module">
       <div class="module-header">
@@ -425,7 +1255,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- MÓDULO 4 -->
     <div class="curriculum-module">
       <div class="module-header">
@@ -475,7 +1305,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- MÓDULO 5 -->
     <div class="curriculum-module">
       <div class="module-header">
@@ -525,7 +1355,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- MÓDULO 6 -->
     <div class="curriculum-module">
       <div class="module-header">
@@ -575,7 +1405,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- MÓDULO 7 -->
     <div class="curriculum-module">
       <div class="module-header">
@@ -625,9 +1455,9 @@
         </div>
       </div>
     </div>
-    
+
     <!-- MÓDULO BONUS -->
-    <div class="curriculum-module module-bonus">
+    <div class="curriculum-module">
       <div class="module-header">
         <div class="module-info">
           <span class="module-number">BONUS</span>
@@ -678,7 +1508,7 @@
   </div>
 </section>
 
-<!-- ==================== PRICING ==================== -->
+<!-- PRICING SECTION -->
 <section class="curso-pricing" id="pricing">
   <div class="section-header-center">
     <span class="section-eyebrow">INVERSIÓN</span>
@@ -687,8 +1517,7 @@
   </div>
   
   <div class="pricing-container">
-    <!-- PRICING CARD -->
-    <div class="pricing-card pricing-featured">
+    <div class="pricing-card">
       <div class="pricing-badge">
         <i class="bi bi-lightning-fill"></i>
         MÁS POPULAR
@@ -747,7 +1576,7 @@
         </li>
       </ul>
       
-      <button class="btn btn-primary btn-block btn-glow">
+      <button class="btn btn-block">
         <i class="bi bi-cart-check-fill"></i>
         COMPRAR AHORA - $149
       </button>
@@ -767,214 +1596,7 @@
   </div>
 </section>
 
-<!-- ==================== TESTIMONIOS ==================== -->
-<section class="curso-testimonials">
-  <div class="section-header-center">
-    <span class="section-eyebrow">RESULTADOS REALES</span>
-    <h2>Lo que Dicen Nuestros Alumnos</h2>
-    <p>Más de 100 productores y artistas ya están sonando profesional</p>
-  </div>
-  
-  <div class="testimonials-grid">
-    <!-- TESTIMONIO 1 -->
-    <div class="testimonial-card">
-      <div class="testimonial-rating">
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-      </div>
-      
-      <p class="testimonial-text">
-        "Antes mis voces sonaban planas y amateur. Después del curso de Willie, mis clientes ya no me piden cambios. 
-        El módulo de compresión cambió completamente mi forma de trabajar."
-      </p>
-      
-      <div class="testimonial-author">
-        <img src="/images/testimonial1.jpg" alt="Juan" class="testimonial-avatar">
-        <div>
-          <h4>Juan Pérez</h4>
-          <p>Productor · Lima, Perú</p>
-        </div>
-      </div>
-    </div>
-    
-    <!-- TESTIMONIO 2 -->
-    <div class="testimonial-card">
-      <div class="testimonial-rating">
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-      </div>
-      
-      <p class="testimonial-text">
-        "Llevaba 2 años intentando aprender por YouTube y no avanzaba. En 8 semanas con OFFSZN Academy ya estoy cobrando 
-        por mezclas. Los presets son ORO puro."
-      </p>
-      
-      <div class="testimonial-author">
-        <img src="/images/testimonial2.jpg" alt="María" class="testimonial-avatar">
-        <div>
-          <h4>María González</h4>
-          <p>Artista · México DF</p>
-        </div>
-      </div>
-    </div>
-    
-    <!-- TESTIMONIO 3 -->
-    <div class="testimonial-card">
-      <div class="testimonial-rating">
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-      </div>
-      
-      <p class="testimonial-text">
-        "La comunidad Discord vale más que el curso mismo. Subi una mezcla y Willie me dio feedback en vivo. 
-        Ahora mis tracks suenan como las de Spotify."
-      </p>
-      
-      <div class="testimonial-author">
-        <img src="/images/testimonial3.jpg" alt="Carlos" class="testimonial-avatar">
-        <div>
-          <h4>Carlos Ruiz</h4>
-          <p>Beatmaker · Argentina</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== FAQ ESPECÍFICO DEL CURSO ==================== -->
-<section class="curso-faq">
-  <div class="section-header-center">
-    <span class="section-eyebrow">PREGUNTAS FRECUENTES</span>
-    <h2>¿Tienes Dudas? Aquí las Respuestas</h2>
-  </div>
-  
-  <div class="faq-container">
-    <div class="faq-item">
-      <div class="faq-question">
-        <h4>¿Necesito experiencia previa?</h4>
-        <i class="bi bi-plus-lg"></i>
-      </div>
-      <div class="faq-answer">
-        <p>
-          No necesitas ninguna experiencia. El curso está diseñado para llevarte desde cero hasta nivel profesional. 
-          Empezamos con lo más básico y avanzamos paso a paso. Si ya sabes algo, puedes saltar las primeras lecciones.
-        </p>
-      </div>
-    </div>
-    
-    <div class="faq-item">
-      <div class="faq-question">
-        <h4>¿Funciona con cualquier DAW o solo FL Studio?</h4>
-        <i class="bi bi-plus-lg"></i>
-      </div>
-      <div class="faq-answer">
-        <p>
-          El curso está grabado en FL Studio, pero los conceptos aplican a cualquier DAW (Ableton, Logic, Pro Tools, etc.). 
-          Los principios de mezcla son universales. Solo algunos atajos de teclado cambiarían.
-        </p>
-      </div>
-    </div>
-    
-    <div class="faq-item">
-      <div class="faq-question">
-        <h4>¿Cuánto tiempo tengo acceso al curso?</h4>
-        <i class="bi bi-plus-lg"></i>
-      </div>
-      <div class="faq-answer">
-        <p>
-          Acceso DE POR VIDA. Una vez que compras, el curso es tuyo para siempre. Además, cuando agregamos contenido nuevo 
-          (lo hacemos cada mes), lo recibes gratis automáticamente.
-        </p>
-      </div>
-    </div>
-    
-    <div class="faq-item">
-      <div class="faq-question">
-        <h4>¿Qué pasa si no me gusta el curso?</h4>
-        <i class="bi bi-plus-lg"></i>
-      </div>
-      <div class="faq-answer">
-        <p>
-          Tienes 30 días de garantía total. Si sientes que el curso no es para ti, me escribes y te devuelvo el 100% 
-          de tu dinero sin preguntas. Cero riesgo para ti.
-        </p>
-      </div>
-    </div>
-    
-    <div class="faq-item">
-      <div class="faq-question">
-        <h4>¿Los presets funcionan con plugins gratuitos?</h4>
-        <i class="bi bi-plus-lg"></i>
-      </div>
-      <div class="faq-answer">
-        <p>
-          Sí. Incluimos presets tanto para Waves como para plugins nativos de FL Studio. Si no tienes Waves, 
-          puedes usar las versiones nativas que funcionan perfectamente.
-        </p>
-      </div>
-    </div>
-    
-    <div class="faq-item">
-      <div class="faq-question">
-        <h4>¿Puedo pagar en cuotas?</h4>
-        <i class="bi bi-plus-lg"></i>
-      </div>
-      <div class="faq-answer">
-        <p>
-          Actualmente solo aceptamos pago único. Pero por $149 obtienes acceso completo y de por vida, 
-          lo que equivale a menos de $2 por lección. Es la mejor inversión en tu carrera musical.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== CTA FINAL ==================== -->
-<section class="curso-cta-final">
-  <div class="cta-final-content">
-    <h2>No Dejes que Tus Canciones Suenen Amateur</h2>
-    <p>
-      Cada día que pasa sin aprender a mezclar correctamente es una oportunidad perdida. 
-      Mientras tú esperas, otros productores ya están cobrando por hacer lo que tú podrías hacer.
-    </p>
-    
-    <div class="cta-benefits-inline">
-      <div class="cta-benefit">
-        <i class="bi bi-check2-circle"></i>
-        <span>Acceso inmediato</span>
-      </div>
-      <div class="cta-benefit">
-        <i class="bi bi-check2-circle"></i>
-        <span>15+ horas de contenido</span>
-      </div>
-      <div class="cta-benefit">
-        <i class="bi bi-check2-circle"></i>
-        <span>Garantía 30 días</span>
-      </div>
-    </div>
-    
-    <a href="#pricing" class="btn btn-primary btn-massive">
-      <i class="bi bi-rocket-takeoff-fill"></i>
-      COMENZAR AHORA - $149
-    </a>
-    
-    <p class="cta-footer-note">
-      <i class="bi bi-lock-fill"></i>
-      Pago seguro con PayPal · Garantía 30 días
-    </p>
-  </div>
-</section>
-
-<!-- ==================== FOOTER ==================== -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-content">
     <p>© 2025 OFFSZN</p>
@@ -998,48 +1620,50 @@
   </div>
 </footer>
 
-<!-- ==================== SCRIPTS ==================== -->
-<!-- Countdown Script -->
 <script>
+// ========================================
+// COUNTDOWN - SOLO EN PÁGINA DE INICIO
+// ========================================
 (function() {
   'use strict';
   
-  const CLOSED_KEY = 'offszn_countdown_closed';
-  const CLOSE_DURATION = 4 * 60 * 60 * 1000;
+  // Solo mostrar countdown en página de inicio
+  const isHomePage = window.location.pathname === '/' || 
+                     window.location.pathname === '/index.html' ||
+                     window.location.pathname === '';
+  
+  if (!isHomePage) {
+    // Ocultar countdown en todas las demás páginas
+    const banner = document.getElementById('countdownBanner');
+    if (banner) {
+      banner.classList.add('hidden');
+    }
+    return; // Salir del script
+  }
+  
+  const CLOSED_KEY = 'offszn_countdown_closed_v2';
+  const CLOSE_DURATION = 4 * 60 * 60 * 1000; // 4 horas
   
   const PROMOTION_START = new Date('2025-10-17T00:00:00').getTime();
   const PROMOTION_DAYS = 30;
   const PROMOTION_END = new Date(PROMOTION_START + (PROMOTION_DAYS * 24 * 60 * 60 * 1000)).getTime();
   
   function isBannerClosed() {
-    const closedTime = localStorage.getItem(CLOSED_KEY);
+    const closedTime = sessionStorage.getItem(CLOSED_KEY);
     if (!closedTime) return false;
     
     const now = new Date().getTime();
     const closedTimestamp = parseInt(closedTime);
     
-    if (now - closedTimestamp > CLOSE_DURATION) {
-      localStorage.removeItem(CLOSED_KEY);
-      return false;
-    }
-    
-    return true;
+    return now - closedTimestamp < CLOSE_DURATION;
   }
   
   function hideBanner() {
     const banner = document.getElementById('countdownBanner');
-    const navbar = document.getElementById('navbar');
-    
     if (banner) {
-      banner.style.display = 'none';
-      localStorage.setItem(CLOSED_KEY, new Date().getTime().toString());
+      banner.classList.add('hidden');
+      sessionStorage.setItem(CLOSED_KEY, new Date().getTime().toString());
     }
-    
-    if (navbar) {
-      navbar.style.top = '0';
-    }
-    
-    document.body.style.paddingTop = '70px';
   }
   
   function showExpiredBanner() {
@@ -1051,7 +1675,7 @@
         <span class="countdown-text">✨ DISPONIBLE SOLO POR HOY ✨</span>
         <a href="#pricing" class="countdown-btn">CONSEGUIRLO</a>
       </div>
-      <button class="countdown-close" id="countdownCloseExpired">×</button>
+      <button class="countdown-close" id="countdownCloseExpired" aria-label="Cerrar">×</button>
     `;
     
     document.getElementById('countdownCloseExpired').addEventListener('click', hideBanner);
@@ -1059,7 +1683,7 @@
   
   function updateCountdown() {
     const banner = document.getElementById('countdownBanner');
-    if (!banner) return;
+    if (!banner || banner.classList.contains('hidden')) return;
     
     const now = new Date().getTime();
     const distance = PROMOTION_END - now;
@@ -1088,8 +1712,6 @@
   function initCountdown() {
     if (isBannerClosed()) {
       hideBanner();
-      setInterval(updateCountdown, 1000);
-      return;
     }
     
     updateCountdown();
@@ -1107,42 +1729,16 @@
     initCountdown();
   }
 })();
-</script>
 
-<!-- Menu Script -->
-<script src="/script/menu.js"></script>
-
-<!-- FAQ Accordion Script -->
-<script>
+// ========================================
+// CURRICULUM ACCORDION
+// ========================================
 document.addEventListener('DOMContentLoaded', function() {
-  // FAQ Accordion
-  const faqItems = document.querySelectorAll('.faq-item');
-  
-  faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    
-    question.addEventListener('click', () => {
-      const isActive = item.classList.contains('active');
-      
-      // Close all items
-      faqItems.forEach(i => i.classList.remove('active'));
-      
-      // Open clicked item if it wasn't active
-      if (!isActive) {
-        item.classList.add('active');
-      }
-    });
-  });
-  
-  // Curriculum Accordion
   const moduleHeaders = document.querySelectorAll('.module-header');
   
   moduleHeaders.forEach(header => {
     header.addEventListener('click', () => {
       const module = header.parentElement;
-      const isActive = module.classList.contains('active');
-      
-      // Toggle clicked module
       module.classList.toggle('active');
     });
   });
