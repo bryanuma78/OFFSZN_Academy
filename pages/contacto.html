@@ -5,31 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contacto – OFFSZN Academy</title>
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/contact.css">
+
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
+  <header class="navbar" id="navbar">
     <div class="logo">
-      <a href="/index.html">OFFSZN Academy</a>
+      <a href="/index.html">OFFSZN</a>
     </div>
-  
-    <button class="menu-toggle" aria-label="Abrir menú">
+    
+    <button class="menu-toggle" id="menuToggle" aria-label="Menú">
       <i class="bi bi-list"></i>
     </button>
   
-    <nav>
-      <ul>
+    <nav id="navMenu">
+      <button class="menu-close-btn" id="menuCloseBtn" aria-label="Cerrar menú">×</button>
+      <ul id="navbarLinks">
         <li><a href="/index.html">Inicio</a></li>
         <li><a href="/pages/cursos.html">Cursos</a></li>
-        <li><a href="/pages/Preset.html">Presets</a></li>
+        <li><a href="/pages/Preset.html" >Presets</a></li>
         <li><a href="/pages/playlist.html">Playlist</a></li>
         <li><a href="/pages/contacto.html" class="active">Contacto</a></li>
       </ul>
     </nav>
+     <!-- Iniciar Sesión -->
+  <a href="/pages/login.html" class="login-icon" title="Iniciar Sesión">
+    <i class="bi bi-person"></i>
+  </a>
   </header>
 
   <!-- CONTACTO -->
