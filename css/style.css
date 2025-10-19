@@ -2158,6 +2158,33 @@ section {
   object-fit: cover;
 }
 
+.product-card.purchased {
+  border-color: #0cbc87;
+}
+
+.purchased-badge {
+  background-color: #0cbc87;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.purchased-badge i {
+  font-size: 1.2em;
+}
+
+.product-card.purchased .btn-add-to-cart,
+.product-card.purchased .paypal-button-container {
+  display: none; 
+}
+
 .product-content {
   padding: 1.5rem;
   flex-grow: 1;
