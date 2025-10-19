@@ -231,6 +231,69 @@ body.menu-open {
   width: 40px;
   height: 40px;
 }
+/* ==========================
+   NAVBAR RESPONSIVO
+=========================== */
+
+/* Menu toggle invisible en escritorio */
+.menu-toggle {
+  display: none;
+}
+
+/* Menú y navbar responsivo para pantallas <= 768px */
+@media (max-width: 768px) {
+  /* Mostrar toggle */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Ocultar menú por defecto */
+  nav ul {
+    display: none;
+    position: absolute;
+    top: 70px; /* Debajo del navbar */
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.95);
+    gap: 0;
+    padding: 1rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(114, 9, 183, 0.3);
+  }
+
+  nav ul li {
+    margin: 0.5rem 0;
+  }
+
+  /* Cuando el toggle está activo */
+  nav ul.active {
+    display: flex;
+  }
+
+  /* Mantener iconos siempre a la derecha */
+  .right-icons {
+    margin-left: auto;
+    gap: 0.5rem;
+  }
+
+  .cart-icon,
+  .login-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-icon,
+  .login-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+}
+
 
 /* BOTÓN MENÚ MÓVIL */
 .menu-toggle {
