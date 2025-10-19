@@ -163,43 +163,79 @@ app.get('/api/products', async (req, res) => {
 
 app.post('/api/orders/create', authenticateToken, async (req, res) => {
   try {
-    const { totalPrice, description, firstProductId } = req.body; 
+    // --- ¡CAMBIO 1: Recibir cartItems! ---
+    const { totalPrice, description, cartItems } = req.body;
     const userId = req.user.userId;
 
+    // Validación
     if (!totalPrice || isNaN(parseFloat(totalPrice)) || parseFloat(totalPrice) <= 0) {
       return res.status(400).json({ error: 'Precio total inválido' });
     }
+    if (!cartItems || !Array.isArray(cartItems) || cartItems.length === 0) {
+      return res.status(400).json({ error: 'No hay items en el carrito' });
+    }
+    // --- FIN CAMBIO 1 ---
+
+    // 2. Crear petición PayPal (esto queda igual)
     const request = new paypal.orders.OrdersCreateRequest();
     request.prefer("return=representation");
     request.requestBody({
       intent: 'CAPTURE',
       purchase_units: [{
         description: description || 'Compra en OFFSZN Academy',
-        amount: {
-          currency_code: 'USD',
-          value: totalPrice
-        }
+        amount: { currency_code: 'USD', value: totalPrice }
       }]
     });
 
+    // 3. Crear orden en PayPal (esto queda igual)
     const order = await client().execute(request);
     const paypalOrderId = order.result.id;
 
-    const { error: orderError } = await supabase
+    // --- ¡CAMBIO 2: Guardar en 'orders' y 'order_items'! ---
+    // Idealmente, esto debería estar en una transacción de base de datos
+    
+    // 4. Guardar la orden principal en la tabla 'orders'
+    const { data: newOrderData, error: orderInsertError } = await supabase
       .from('orders')
       .insert({
         user_id: userId,
-        product_id: firstProductId || null, 
         paypal_order_id: paypalOrderId,
-        status: 'created',
+        status: 'created', // Estado inicial
         total_price: parseFloat(totalPrice)
-      });
+        // Ya no guardamos product_id aquí
+      })
+      .select('id') // ¡Necesitamos el ID de la orden que acabamos de crear!
+      .single(); // Esperamos solo una fila
 
-    if (orderError) {
-      console.error("Error al guardar orden en Supabase:", orderError);
-      throw orderError; 
+    if (orderInsertError || !newOrderData) {
+      console.error("Error al guardar orden principal:", orderInsertError);
+      // TODO: Intentar cancelar la orden de PayPal aquí sería ideal
+      throw new Error('Error al guardar la orden principal en la base de datos.');
     }
 
+    const newOrderId = newOrderData.id; // El ID de nuestra tabla 'orders'
+
+    // 5. Preparar los items para guardar en 'order_items'
+    const itemsToInsert = cartItems.map(item => ({
+      order_id: newOrderId, // El ID de la orden que acabamos de crear
+      product_id: item.productId,
+      quantity: item.quantity,
+      price_at_purchase: item.price // Guardamos el precio del momento
+    }));
+
+    // 6. Guardar todos los items en la tabla 'order_items'
+    const { error: itemsInsertError } = await supabase
+      .from('order_items')
+      .insert(itemsToInsert);
+
+    if (itemsInsertError) {
+      console.error("Error al guardar items de la orden:", itemsInsertError);
+      // TODO: Intentar cancelar la orden de PayPal Y borrar la orden principal
+      throw new Error('Error al guardar los detalles de la orden.');
+    }
+    // --- FIN CAMBIO 2 ---
+
+    // 7. Devolver el ID de PayPal al frontend (esto queda igual)
     res.status(201).json({ orderID: paypalOrderId });
 
   } catch (err) {
@@ -245,25 +281,37 @@ app.get('/api/my-products', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.userId;
 
-    const { data: orders, error: ordersError } = await supabase
-      .from('orders')
+    // 1. Buscamos los 'order_items' asociados a órdenes COMPLETADAS del usuario
+    const { data: items, error: itemsError } = await supabase
+      .from('order_items')
       .select(`
-        product_id, 
-        products (id, name, description, image_url, download_url) 
-      `)
-      .eq('user_id', userId)
-      .eq('status', 'completed');
+        *, 
+        orders!inner (user_id, status), 
+        products (id, name, description, image_url, download_url)
+      `) // Traemos info de orders y products
+      .eq('orders.user_id', userId) // Filtra por usuario en la tabla 'orders'
+      .eq('orders.status', 'completed'); // Solo órdenes completadas
 
-    if (ordersError) {
-      throw ordersError;
+    if (itemsError) {
+      throw itemsError;
     }
 
-    const purchasedProducts = orders.map(order => order.products);
-    
-    res.status(200).json(purchasedProducts);
+    // 2. Extraemos solo la información de los productos únicos
+    //    (Usamos un Set para evitar duplicados si compró el mismo producto varias veces)
+    const purchasedProductsMap = new Map();
+    items.forEach(item => {
+      if (item.products && !purchasedProductsMap.has(item.products.id)) {
+        purchasedProductsMap.set(item.products.id, item.products);
+      }
+    });
+    const uniquePurchasedProducts = Array.from(purchasedProductsMap.values());
+
+
+    // 3. ¡Éxito! Enviamos la lista de productos únicos comprados
+    res.status(200).json(uniquePurchasedProducts);
 
   } catch (err) {
-    console.error(err.message);
+    console.error("Error al obtener mis productos:", err.message);
     res.status(500).json({ error: 'Error al obtener los productos comprados' });
   }
 });

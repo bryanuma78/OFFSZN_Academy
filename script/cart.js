@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             totalPrice = totalPrice.toFixed(2);
-            const descriptionForPaypal = itemDescriptions.join(', '); 
+            const descriptionForPaypal = itemDescriptions.join(', ');
 
             checkoutButton.disabled = true;
             checkoutButton.textContent = 'Procesando...';
@@ -147,7 +147,10 @@ document.addEventListener('DOMContentLoaded', () => {
             paypal.Buttons({
                 createOrder: async () => {
                     try {
-                        const res = await fetch(`${API_URL}/orders/create`, { 
+                        const calculatedTotalPrice = cartTotalSpan.textContent.replace('$', '');
+                        const calculatedDescription = currentCartItems.map(i => i.product.name).join(', ');
+
+                        const res = await fetch(`${API_URL}/orders/create`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -156,7 +159,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             body: JSON.stringify({
                                 totalPrice: totalPrice,
                                 description: descriptionForPaypal,
-                                firstProductId: currentCartItems[0]?.product?.id
+                                cartItems: currentCartItems.map(item => ({
+                                    productId: item.product.id,
+                                    quantity: item.quantity,
+                                    price: item.product.price
+                                }))
                             })
                         });
 
@@ -164,11 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (!res.ok) throw new Error(data.error || 'Error al crear orden');
                         return data.orderID;
                     } catch (error) {
-                        console.error('Error al crear orden desde carrito:', error);
-                        alert(`Error al iniciar PayPal: ${error.message}`);
-                        checkoutButton.disabled = false;
-                        checkoutButton.textContent = 'Proceder al Pago (PayPal)';
-                        paypalContainer.remove();
+                    
                     }
                 },
                 onApprove: async (data, actions) => {
