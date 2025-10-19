@@ -5,6 +5,7 @@ const { createClient } = require('@supabase/supabase-js');
 const jwt = require('jsonwebtoken');
 const { client } = require('./paypalClient');
 const paypal = require('@paypal/checkout-server-sdk');
+const bcrypt = require('bcrypt');
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
@@ -66,6 +67,9 @@ app.post('/api/register', async (req, res) => {
       return res.status(400).json({ error: 'Nombre, apellido, email y contraseña son requeridos' });
     }
 
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     //insertación del nuevo usuario, pronto se debe hashear la contraseña
     const { data, error } = await supabase
       .from('users')
@@ -74,7 +78,7 @@ app.post('/api/register', async (req, res) => {
           first_name: firstName,
           last_name: lastName,
           email: email, 
-          password: password 
+          password: hashedPassword
         }
       ])
       .select();
@@ -115,7 +119,7 @@ app.post('/api/login', async (req, res) => {
     }
 
     //comprobación de contraseñas
-    const isPasswordValid = (password === user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Credenciales inválidas.' });
@@ -240,6 +244,33 @@ app.post('/api/orders/capture', authenticateToken, async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: 'Error al capturar el pago' });
+  }
+});
+
+app.get('/api/my-products', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const { data: orders, error: ordersError } = await supabase
+      .from('orders')
+      .select(`
+        product_id, 
+        products (id, name, description, image_url, download_url) 
+      `)
+      .eq('user_id', userId)
+      .eq('status', 'completed');
+
+    if (ordersError) {
+      throw ordersError;
+    }
+
+    const purchasedProducts = orders.map(order => order.products);
+    
+    res.status(200).json(purchasedProducts);
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: 'Error al obtener los productos comprados' });
   }
 });
 

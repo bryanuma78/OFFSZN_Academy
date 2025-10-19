@@ -17,7 +17,12 @@
 </head>
 
 <body>
-
+    <script>
+        if (localStorage.getItem('authToken')) {
+            //si hay token, redirige a "Mis Productos"
+            window.location.replace('/pages/my-products.html');
+        }
+    </script>
     <header class="navbar">
         <div class="logo">
             <a href="/index.html">OFFSZN Academy</a>
@@ -36,6 +41,20 @@
                 <li><a href="/pages/contacto.html">Contacto</a></li>
             </ul>
         </nav>
+
+        <div class="user-actions">
+            <a href="/pages/login.html" class="login-icon logged-out navbar-icon-button" title="Iniciar Sesión">
+                <i class="bi bi-person"></i>
+            </a>
+
+            <a href="/pages/my-products.html" class="account-icon logged-in navbar-icon-button" title="Mi Cuenta">
+                <i class="bi bi-person-check"></i>
+            </a>
+
+            <button id="global-logout-button" class="logout-button logged-in navbar-icon-button" title="Cerrar Sesión">
+                <i class="bi bi-box-arrow-right"></i>
+            </button>
+        </div>
     </header>
 
     <section class="auth-section">

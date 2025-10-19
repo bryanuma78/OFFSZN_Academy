@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Redirigir a la página de "Mis Productos"
             // (¡Deberíamos crear esta página pronto!)
-            window.location.href = '/pages/dashboard.html';
+            window.location.href = '/pages/my-products.html';
 
           } catch (error) {
             console.error('Error al capturar el pago:', error);
