@@ -38,18 +38,23 @@ app.get('/api/db-test', async (req, res) => {
 
 app.post('/api/register', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     //validación básica
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Email y contraseña son requeridos' });
+    if (!firstName || !lastName || !email || !password) { 
+      return res.status(400).json({ error: 'Nombre, apellido, email y contraseña son requeridos' });
     }
 
     //insertación del nuevo usuario, pronto se debe hashear la contraseña
     const { data, error } = await supabase
       .from('users')
       .insert([
-        { email: email, password: password } 
+        { 
+          first_name: firstName,
+          last_name: lastName,
+          email: email, 
+          password: password 
+        }
       ])
       .select();
 

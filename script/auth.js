@@ -1,7 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   //url del backend
-  const API_URL = 'https://offszn-academy.onrender.com/api';
+  let API_URL = '';
+
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {
+    //para desarrollo local
+    API_URL = 'http://localhost:3001/api';
+  } else {
+    //para producción
+    API_URL = 'https://offszn-academy.onrender.com/api';
+  }
 
   const registerForm = document.getElementById('register-form');
   const loginForm = document.getElementById('login-form');
@@ -12,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     registerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      const firstName = document.getElementById('reg-first-name').value;
+      const lastName = document.getElementById('reg-last-name').value;
       const email = document.getElementById('reg-email').value;
       const password = document.getElementById('reg-password').value;
 
@@ -22,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ firstName, lastName, email, password }),
         });
 
         const data = await response.json();
@@ -81,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function showMessage(element, message, isError = true) {
     element.textContent = message;
     element.className = 'form-message';
-    
+
     if (isError) {
       element.classList.add('error');
     } else {
