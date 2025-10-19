@@ -253,6 +253,35 @@ body.menu-open {
   color: #fff;
 }
 
+/* Contenedor de iconos a la derecha */
+.right-icons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* LOGIN ICON igual que el carrito */
+.login-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(114, 9, 183, 0.3);
+  border: 2px solid rgba(114, 9, 183, 0.6);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c9a7eb;
+  font-size: 20px;
+  transition: all 0.3s;
+}
+
+.login-icon:hover {
+  background: rgba(114, 9, 183, 0.5);
+  border-color: rgba(201, 167, 235, 0.8);
+}
+
+
 /* BOTÓN CERRAR MENÚ MÓVIL */
 .menu-close-btn {
   display: none;
@@ -1919,4 +1948,7 @@ section {
       width: 100%;
   }
 }
+
+
+
 /* ===== FIN CSS BASE ===== */
