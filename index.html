@@ -62,7 +62,7 @@
     <ul id="navbarLinks">
       <li><a href="/index.html" class="active">Inicio</a></li>
       <li><a href="/pages/cursos.html">Cursos</a></li>
-      <li><a href="/pages/Preset.html">Presets</a></li>
+      <li><a href="/pages/presets-v2.html">Presets</a></li>
       <li><a href="/pages/playlist.html">Playlist</a></li>
       <li><a href="/pages/contacto.html">Contacto</a></li>
     </ul>
@@ -70,14 +70,24 @@
 
 <!-- ICONOS DERECHA -->
 <div class="right-icons">
-  <a href="carrito.html" class="cart-icon" title="Carrito">
+  <a href="cart.html" class="cart-icon navbar-icon-button" title="Carrito">
     <i class="bi bi-cart3"></i>
   </a>
-  <a href="/pages/login.html" class="login-icon" title="Iniciar Sesión">
+  <div class="user-actions">
+  <a href="/pages/login.html" class="login-icon logged-out navbar-icon-button" title="Iniciar Sesión">
     <i class="bi bi-person"></i>
   </a>
+  
+  <a href="/pages/my-products.html" class="account-icon logged-in navbar-icon-button" title="Mi Cuenta">
+    <i class="bi bi-person-check"></i> 
+  </a>
+  
+  <button id="global-logout-button" class="logout-button logged-in navbar-icon-button" title="Cerrar Sesión">
+    <i class="bi bi-box-arrow-right"></i>
+  </button>
 </div>
 </div>
+<!-- </div> -->
 
   
 </header>

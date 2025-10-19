@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem('authToken', data.token);
 
           //se redirige a la página protegida
-          window.location.href = '/pages/dashboard.html';
+          window.location.href = '/pages/my-products.html';
         } else {
           showMessage(messageDiv, data.error, true);
         }
