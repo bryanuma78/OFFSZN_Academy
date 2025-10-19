@@ -2210,21 +2210,21 @@ section {
 }
 
 /*lógica de visibilidad */
-.logged-in {
-  display: none; 
+body .logged-out.navbar-icon-button { /* Añadimos body y .navbar-icon-button */
+  display: flex; /* O inline-flex */
 }
-.logged-out {
-  /* display: flex; */
-}
-
-body.user-logged-in .logged-in {
-  /* display: flex; */
-}
-body.user-logged-in .logged-out {
+body .logged-in.navbar-icon-button { /* Añadimos body y .navbar-icon-button */
   display: none;
 }
 
-.logout-button {
+/* Cuando SÍ está logueado (cuando body SÍ tiene .user-logged-in):
+   - Oculta .logged-out
+   - Muestra .logged-in */
+body.user-logged-in .logged-out.navbar-icon-button {
+  display: none;
+}
+body.user-logged-in .logged-in.navbar-icon-button {
+  display: flex; /* O inline-flex */
 }
 
 /*ajuste responsive (para los del frontend, ajustar aquí)*/
@@ -2254,7 +2254,7 @@ body.user-logged-in .logged-out {
   border: 2px solid rgba(114, 9, 183, 0.6);
   border-radius: 8px;
   cursor: pointer;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   color: #c9a7eb;
@@ -2269,6 +2269,41 @@ body.user-logged-in .logged-out {
   border-color: rgba(201, 167, 235, 0.8);
   color: #e9d5ff;
   text-shadow: 0 0 10px rgba(114, 9, 183, 0.8);
+}
+
+/* ============================
+   BOTÓN AÑADIR AL CARRITO
+   ============================ */
+.btn-add-to-cart {
+  background: rgba(114, 9, 183, 0.2);
+  border: 1px solid rgba(114, 9, 183, 0.5);
+  color: #c9a7eb;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.btn-add-to-cart:hover {
+  background: rgba(114, 9, 183, 0.4);
+  border-color: rgba(201, 167, 235, 0.8);
+  color: #fff;
+}
+
+.btn-add-to-cart:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-add-to-cart i {
+  font-size: 1.1em;
 }
 
 /* ===== FIN CSS BASE ===== */

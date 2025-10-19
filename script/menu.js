@@ -1,19 +1,16 @@
-// Código corregido y seguro
-document.addEventListener('DOMContentLoaded', () => { // Asegúrate que todo esté dentro de aquí
+document.addEventListener('DOMContentLoaded', () => {
 
   const menuToggle = document.getElementById('menuToggle');
   const menuCloseBtn = document.getElementById('menuCloseBtn');
   const navMenu = document.getElementById('navMenu');
 
-  // Verifica si el botón toggle existe antes de añadirle el listener
   if (menuToggle && navMenu) { 
     menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('show'); // O la clase que uses para mostrar/ocultar
+      navMenu.classList.toggle('show'); 
       document.body.classList.toggle('menu-open'); 
     });
   }
 
-  // Verifica si el botón close existe antes de añadirle el listener
   if (menuCloseBtn && navMenu) {
     menuCloseBtn.addEventListener('click', () => {
       navMenu.classList.remove('show');
@@ -21,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => { // Asegúrate que todo est
     });
   }
 
-  // --- AQUÍ VA LA LÓGICA DE LOGIN QUE YA TENÍAS ---
   const authToken = localStorage.getItem('authToken');
   const body = document.body;
   const globalLogoutButton = document.getElementById('global-logout-button');
@@ -39,6 +35,5 @@ document.addEventListener('DOMContentLoaded', () => { // Asegúrate que todo est
       window.location.replace('/index.html');
     });
   }
-  // --- FIN LÓGICA LOGIN ---
 
-}); // Cierre del DOMContentLoaded
+});

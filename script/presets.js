@@ -1,9 +1,6 @@
-// Espera a que el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- 1. CONFIGURACIÓN ---
-  
-  // Lógica para detectar si estamos en local o producción
+  //configuracion
   let API_URL = '';
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {
     API_URL = 'http://localhost:3001/api';
@@ -11,17 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     API_URL = 'https://offszn-academy.onrender.com/api';
   }
 
-  // Obtenemos el token de login. ¡El usuario DEBE estar logueado para comprar!
   const authToken = localStorage.getItem('authToken');
   const productGrid = document.getElementById('product-grid');
-
-  // --- 2. FUNCIÓN PARA CARGAR PRODUCTOS ---
   
   async function loadProducts() {
-    if (!productGrid) return; // Si no estamos en la página de presets, no hagas nada
+    if (!productGrid) return;
     
     try {
-      // Pedimos los productos a nuestro backend
       const response = await fetch(`${API_URL}/products`);
       if (!response.ok) {
         throw new Error('No se pudieron cargar los productos.');
@@ -29,13 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const products = await response.json();
       
-      // Si no hay productos, muestra un mensaje
       if (products.length === 0) {
         productGrid.innerHTML = '<p>No hay productos disponibles en este momento.</p>';
         return;
       }
       
-      // Generamos el HTML para cada producto
       let productHTML = '';
       products.forEach(product => {
         productHTML += `
@@ -46,17 +37,21 @@ document.addEventListener('DOMContentLoaded', () => {
               <p>${product.description}</p>
               <div class="product-price">$${product.price}</div>
               
+              <button class="btn btn-add-to-cart" data-product-id="${product.id}">
+                <i class="bi bi-cart-plus"></i> Añadir al Carrito
+              </button>
+              
               <div class="paypal-button-container" data-product-id="${product.id}"></div>
             </div>
           </div>
         `;
       });
       
-      // Inyectamos el HTML en la cuadrícula
       productGrid.innerHTML = productHTML;
       
-      // ¡Ahora que los botones existen, los inicializamos!
       initializePayPalButtons();
+
+      addCartButtonListeners();
       
     } catch (error) {
       console.error('Error al cargar productos:', error);
@@ -64,23 +59,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- 3. FUNCIÓN PARA INICIALIZAR PAYPAL ---
-  // (Este es el código que ya teníamos, pero ahora dentro de una función)
+  function addCartButtonListeners() {
+    document.querySelectorAll('.btn-add-to-cart').forEach(button => {
+      button.addEventListener('click', async (event) => {
+        if (!authToken) {
+          alert('Debes iniciar sesión para añadir al carrito.');
+          window.location.href = '/pages/login.html';
+          return;
+        }
+
+        const productId = event.target.dataset.productId;
+        button.disabled = true;
+        button.innerHTML = '<i class="bi bi-hourglass-split"></i> Añadiendo...'; //feedback
+
+        try {
+          const res = await fetch(`${API_URL}/cart`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${authToken}`
+            },
+            body: JSON.stringify({ productId: productId })
+          });
+
+          const data = await res.json();
+
+          if (res.ok) {
+            alert('¡Producto añadido al carrito!');
+            button.innerHTML = '<i class="bi bi-check-lg"></i> Añadido';
+          } else if (res.status === 409) {
+             alert('Este producto ya está en tu carrito.');
+             button.innerHTML = '<i class="bi bi-cart-check"></i> Ya en Carrito';
+             button.disabled = false;
+          } else {
+            throw new Error(data.error || 'Error desconocido');
+          }
+
+        } catch (error) {
+          console.error('Error al añadir al carrito:', error);
+          alert(`Error: ${error.message}`);
+          button.innerHTML = '<i class="bi bi-cart-plus"></i> Añadir al Carrito';
+          button.disabled = false;
+        }
+      });
+    });
+  }
+
   
   function initializePayPalButtons() {
-    // Buscamos TODOS los contenedores de botones que acabamos de crear
     document.querySelectorAll('.paypal-button-container').forEach(buttonContainer => {
       
       const productId = buttonContainer.dataset.productId;
 
-      // Renderizamos un botón de PayPal para CADA producto
       paypal.Buttons({
 
-        // 1. Llamar a nuestro backend para CREAR la orden
         createOrder: async () => {
           if (!authToken) {
             alert('Debes iniciar sesión para poder comprar.');
-            window.location.href = '/pages/login.html'; // Redirige al login
+            window.location.href = '/pages/login.html';
             return;
           }
 
@@ -96,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = await res.json();
             if (!res.ok) throw new Error(data.error);
-            return data.orderID; // Devuelve el ID de la orden a PayPal
+            return data.orderID;
 
           } catch (error) {
             console.error('Error al crear la orden:', error);
@@ -104,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         },
 
-        // 2. Llamar a nuestro backend para CAPTURAR el pago
         onApprove: async (data, actions) => {
           try {
             const res = await fetch(`${API_URL}/orders/capture`, {
@@ -122,8 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Pago capturado:', captureData);
             alert('¡Gracias por tu compra!');
             
-            // Redirigir a la página de "Mis Productos"
-            // (¡Deberíamos crear esta página pronto!)
             window.location.href = '/pages/my-products.html';
 
           } catch (error) {
@@ -137,11 +170,10 @@ document.addEventListener('DOMContentLoaded', () => {
           alert('Ha ocurrido un error con PayPal.');
         }
 
-      }).render(buttonContainer); // Dibuja el botón
+      }).render(buttonContainer);
     });
   }
 
-  // --- 4. EJECUTAR TODO ---
   loadProducts();
 
 });

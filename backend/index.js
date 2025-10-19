@@ -163,28 +163,21 @@ app.get('/api/products', async (req, res) => {
 
 app.post('/api/orders/create', authenticateToken, async (req, res) => {
   try {
-    const { productId } = req.body;
+    const { totalPrice, description, firstProductId } = req.body; 
     const userId = req.user.userId;
 
-    const { data: product, error: productError } = await supabase
-      .from('products')
-      .select('name, price')
-      .eq('id', productId)
-      .single();
-
-    if (productError || !product) {
-      return res.status(404).json({ error: 'Producto no encontrado' });
+    if (!totalPrice || isNaN(parseFloat(totalPrice)) || parseFloat(totalPrice) <= 0) {
+      return res.status(400).json({ error: 'Precio total inválido' });
     }
-
     const request = new paypal.orders.OrdersCreateRequest();
     request.prefer("return=representation");
     request.requestBody({
       intent: 'CAPTURE',
       purchase_units: [{
-        description: product.name,
+        description: description || 'Compra en OFFSZN Academy',
         amount: {
           currency_code: 'USD',
-          value: product.price.toString()
+          value: totalPrice
         }
       }]
     });
@@ -196,20 +189,21 @@ app.post('/api/orders/create', authenticateToken, async (req, res) => {
       .from('orders')
       .insert({
         user_id: userId,
-        product_id: productId,
+        product_id: firstProductId || null, 
         paypal_order_id: paypalOrderId,
         status: 'created',
-        total_price: product.price
+        total_price: parseFloat(totalPrice)
       });
 
     if (orderError) {
-      throw orderError;
+      console.error("Error al guardar orden en Supabase:", orderError);
+      throw orderError; 
     }
 
     res.status(201).json({ orderID: paypalOrderId });
 
   } catch (err) {
-    console.error(err.message);
+    console.error("Error al crear la orden:", err.message);
     res.status(500).json({ error: 'Error al crear la orden' });
   }
 });
@@ -272,6 +266,92 @@ app.get('/api/my-products', authenticateToken, async (req, res) => {
     console.error(err.message);
     res.status(500).json({ error: 'Error al obtener los productos comprados' });
   }
+});
+
+app.post('/api/cart', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const { productId, quantity = 1 } = req.body;
+
+    if (!productId) {
+      return res.status(400).json({ error: 'Product ID is required' });
+    }
+
+    const { data, error } = await supabase
+      .from('cart_items')
+      .insert({
+        user_id: userId,
+        product_id: productId,
+        quantity: quantity
+      })
+      .select();
+
+    if (error && error.code === '23505') {
+       return res.status(409).json({ error: 'Item already in cart' });
+    } else if (error) {
+       throw error;
+    }
+    
+    res.status(201).json({ message: 'Item added to cart', item: data[0] });
+
+  } catch (err) {
+    console.error("Error adding to cart:", err.message);
+    res.status(500).json({ error: 'Error adding item to cart' });
+  }
+});
+
+app.get('/api/cart', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const { data: cartItems, error } = await supabase
+      .from('cart_items')
+      .select(`
+        id, 
+        quantity,
+        products (id, name, price, image_url) 
+      `)
+      .eq('user_id', userId);
+
+    if (error) {
+      throw error;
+    }
+
+    const formattedCart = cartItems.map(item => ({
+       cartItemId: item.id,
+       quantity: item.quantity,
+       product: item.products 
+    }));
+
+    res.status(200).json(formattedCart);
+
+  } catch (err) {
+    console.error("Error getting cart:", err.message);
+    res.status(500).json({ error: 'Error fetching cart contents' });
+  }
+});
+
+app.delete('/api/cart/:cartItemId', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        const { cartItemId } = req.params;
+
+        const { error } = await supabase
+            .from('cart_items')
+            .delete()
+            .eq('user_id', userId)
+            .eq('id', cartItemId);
+
+        if (error) {
+            throw error;
+        }
+
+        res.status(200).json({ message: 'Item removed from cart' });
+
+    } catch (err) {
+        console.error("Error removing from cart:", err.message);
+        res.status(500).json({ error: 'Error removing item from cart' });
+    }
 });
 
 //init
