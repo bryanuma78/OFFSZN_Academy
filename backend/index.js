@@ -6,10 +6,11 @@ const jwt = require('jsonwebtoken');
 const { client } = require('./paypalClient');
 const paypal = require('@paypal/checkout-server-sdk');
 const bcrypt = require('bcrypt');
+const isAdmin = require('./middleware/isAdminMiddleware');
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; 
+  const token = authHeader && authHeader.split(' ')[1];
 
   if (token == null) {
     return res.sendStatus(401)
@@ -63,7 +64,7 @@ app.post('/api/register', async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
     //validación básica
-    if (!firstName || !lastName || !email || !password) { 
+    if (!firstName || !lastName || !email || !password) {
       return res.status(400).json({ error: 'Nombre, apellido, email y contraseña son requeridos' });
     }
 
@@ -74,10 +75,10 @@ app.post('/api/register', async (req, res) => {
     const { data, error } = await supabase
       .from('users')
       .insert([
-        { 
+        {
           first_name: firstName,
           last_name: lastName,
-          email: email, 
+          email: email,
           password: hashedPassword
         }
       ])
@@ -93,7 +94,7 @@ app.post('/api/register', async (req, res) => {
     console.error(err.message);
     //comprobación de duplicados
     if (err.code === '23505') {
-        return res.status(400).json({ error: 'Este email ya está registrado' });
+      return res.status(400).json({ error: 'Este email ya está registrado' });
     }
     res.status(500).json({ error: 'Error al registrar el usuario' });
   }
@@ -107,39 +108,49 @@ app.post('/api/login', async (req, res) => {
       return res.status(400).json({ error: 'Email y contraseña son requeridos' });
     }
 
-    //busqueda del usuario por email
     const { data: user, error } = await supabase
       .from('users')
-      .select('*')
+      .select('*, is_admin')
       .eq('email', email)
       .single();
 
     if (error || !user) {
-      return res.status(401).json({ error: 'Credenciales inválidas.' });
+      console.log("Error buscando usuario o no encontrado:", error); // Log para depurar
+      return res.status(401).json({ error: 'Credenciales inválidas' });
     }
 
-    //comprobación de contraseñas
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      return res.status(401).json({ error: 'Credenciales inválidas.' });
+      return res.status(401).json({ error: 'Credenciales inválidas' });
     }
 
     const token = jwt.sign(
-      { userId: user.id, email: user.email },
+      {
+        userId: user.id,
+        email: user.email,
+        isAdmin: user.is_admin || false
+      },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
-    res.status(200).json({ 
-        message: 'Inicio de sesión exitoso',
-        token: token,
-        user: { id: user.id, email: user.email, created_at: user.created_at }
+    res.status(200).json({
+      message: '¡Inicio de sesión exitoso!',
+      token: token,
+      user: {
+        id: user.id,
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        created_at: user.created_at,
+        isAdmin: user.is_admin || false
+      }
     });
 
   } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ error: 'Error en el servidor.' });
+    console.error("Error en /api/login:", err.message);
+    res.status(500).json({ error: 'Error en el servidor durante el login' });
   }
 });
 
@@ -193,7 +204,7 @@ app.post('/api/orders/create', authenticateToken, async (req, res) => {
 
     // --- ¡CAMBIO 2: Guardar en 'orders' y 'order_items'! ---
     // Idealmente, esto debería estar en una transacción de base de datos
-    
+
     // 4. Guardar la orden principal en la tabla 'orders'
     const { data: newOrderData, error: orderInsertError } = await supabase
       .from('orders')
@@ -335,11 +346,11 @@ app.post('/api/cart', authenticateToken, async (req, res) => {
       .select();
 
     if (error && error.code === '23505') {
-       return res.status(409).json({ error: 'Item already in cart' });
+      return res.status(409).json({ error: 'Item already in cart' });
     } else if (error) {
-       throw error;
+      throw error;
     }
-    
+
     res.status(201).json({ message: 'Item added to cart', item: data[0] });
 
   } catch (err) {
@@ -366,9 +377,9 @@ app.get('/api/cart', authenticateToken, async (req, res) => {
     }
 
     const formattedCart = cartItems.map(item => ({
-       cartItemId: item.id,
-       quantity: item.quantity,
-       product: item.products 
+      cartItemId: item.id,
+      quantity: item.quantity,
+      product: item.products
     }));
 
     res.status(200).json(formattedCart);
@@ -380,26 +391,73 @@ app.get('/api/cart', authenticateToken, async (req, res) => {
 });
 
 app.delete('/api/cart/:cartItemId', authenticateToken, async (req, res) => {
-    try {
-        const userId = req.user.userId;
-        const { cartItemId } = req.params;
+  try {
+    const userId = req.user.userId;
+    const { cartItemId } = req.params;
 
-        const { error } = await supabase
-            .from('cart_items')
-            .delete()
-            .eq('user_id', userId)
-            .eq('id', cartItemId);
+    const { error } = await supabase
+      .from('cart_items')
+      .delete()
+      .eq('user_id', userId)
+      .eq('id', cartItemId);
 
-        if (error) {
-            throw error;
-        }
-
-        res.status(200).json({ message: 'Item removed from cart' });
-
-    } catch (err) {
-        console.error("Error removing from cart:", err.message);
-        res.status(500).json({ error: 'Error removing item from cart' });
+    if (error) {
+      throw error;
     }
+
+    res.status(200).json({ message: 'Item removed from cart' });
+
+  } catch (err) {
+    console.error("Error removing from cart:", err.message);
+    res.status(500).json({ error: 'Error removing item from cart' });
+  }
+});
+
+app.get('/api/admin/products', isAdmin, async (req, res) => {
+  try {
+    const { data, error } = await supabase.from('products').select('*');
+    if (error) throw error;
+    res.status(200).json(data);
+  } catch (err) {
+    console.error("Error admin get products:", err.message);
+    res.status(500).json({ error: 'Error al obtener productos' });
+  }
+});
+
+app.get('/api/admin/orders', isAdmin, async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('orders')
+      .select(`
+        id,
+        created_at,
+        paypal_order_id,
+        status,
+        total_price,
+        users ( email ), 
+        order_items ( quantity, price_at_purchase, products ( name ) )
+      `)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    res.status(200).json(data);
+  } catch (err) {
+    console.error("Error admin get orders:", err.message);
+    res.status(500).json({ error: 'Error al obtener pedidos' });
+  }
+});
+
+app.get('/api/admin/users', isAdmin, async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('users')
+      .select('id, created_at, email, first_name, last_name, is_admin');
+    if (error) throw error;
+    res.status(200).json(data);
+  } catch (err) {
+    console.error("Error admin get users:", err.message);
+    res.status(500).json({ error: 'Error al obtener usuarios' });
+  }
 });
 
 //init
