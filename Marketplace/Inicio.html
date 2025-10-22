@@ -73,6 +73,7 @@
             -webkit-text-fill-color: transparent;
             animation: glow 3s ease-in-out infinite;
             text-transform: uppercase;
+            cursor: pointer;
         }
 
         @keyframes glow {
@@ -122,6 +123,83 @@
             max-width: 700px;
             margin: 0 auto 50px;
             line-height: 1.6;
+        }
+
+        /* Buscador Interactivo */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto 60px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 20px 25px;
+            font-size: 1.1rem;
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .search-input::placeholder {
+            color: #7a7a9e;
+            font-weight: 400;
+        }
+
+        .search-input:focus {
+            border-color: #9D4EDD;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 10;
+            display: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-suggestion {
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-suggestion:hover {
+            background: rgba(157, 78, 221, 0.2);
+            color: #fff;
+        }
+
+        .search-suggestion-icon {
+            font-size: 1.2rem;
+        }
+
+        .search-suggestion-title {
+            font-weight: 600;
+        }
+
+        .search-suggestion-desc {
+            font-size: 0.85rem;
+            color: #B8B8D8;
+            margin-top: 2px;
         }
 
         /* Features Grid */
@@ -362,6 +440,18 @@
             background: linear-gradient(135deg, #FF006E 0%, #9D4EDD 100%);
         }
 
+        /* Animaciones adicionales */
+        .section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 40px 15px;
@@ -395,7 +485,7 @@
         <div class="logo">OFFSZN</div>
 
         <!-- Hero -->
-        <div class="hero">
+        <div class="hero section">
             <div class="badge">🚀 Lanzamiento Inminente</div>
             <h1>Tu sonido<br/>no debería estar en pausa</h1>
             <p class="subtitle">
@@ -403,8 +493,21 @@
             </p>
         </div>
 
+        <!-- Buscador Interactivo -->
+        <div class="search-container section">
+            <input 
+                type="text" 
+                class="search-input" 
+                placeholder="¿Qué buscas? (ej: preset de trap, stem de vocal, beat de house...)" 
+                id="searchInput"
+            />
+            <div class="search-suggestions" id="searchSuggestions">
+                <!-- Las sugerencias se generan dinámicamente -->
+            </div>
+        </div>
+
         <!-- Features -->
-        <div class="features">
+        <div class="features section">
             <div class="feature-card">
                 <div class="feature-icon">🎛️</div>
                 <h3 class="feature-title">Presets que rompen moldes</h3>
@@ -431,7 +534,7 @@
         </div>
 
         <!-- CTA -->
-        <div class="cta-section">
+        <div class="cta-section section">
             <p class="cta-text">
                 Sé parte del lanzamiento. Te avisaremos cuando estemos listos.
             </p>
@@ -471,7 +574,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="footer">
+        <div class="footer section">
             <p>Donde los productores hablan el mismo idioma</p>
             <div class="social-links">
                 <a href="#" class="social-link">📱</a>
@@ -536,6 +639,15 @@
                 delay: 0.3
             });
 
+            // Animación del buscador
+            gsap.from('.search-container', {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power3.out",
+                delay: 0.5
+            });
+
             // Animación de las tarjetas de features
             gsap.from('.feature-card', {
                 opacity: 0,
@@ -543,7 +655,7 @@
                 duration: 0.8,
                 ease: "power3.out",
                 stagger: 0.2,
-                delay: 0.6
+                delay: 0.7
             });
 
             // Animación del CTA
@@ -552,7 +664,7 @@
                 y: 50,
                 duration: 1,
                 ease: "power3.out",
-                delay: 0.8
+                delay: 0.9
             });
 
             // Animación del countdown
@@ -561,7 +673,16 @@
                 y: 50,
                 duration: 1,
                 ease: "power3.out",
-                delay: 1
+                delay: 1.1
+            });
+
+            // Animación del footer
+            gsap.from('.footer', {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power3.out",
+                delay: 1.3
             });
         });
 
@@ -619,20 +740,6 @@
             }, 1500);
         });
 
-        // Parallax effect en mouse move
-        document.addEventListener('mousemove', (e) => {
-            const particles = document.querySelectorAll('.particle');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            particles.forEach((particle, i) => {
-                const speed = (i % 3 + 1) * 20;
-                const xMove = (x - 0.5) * speed;
-                const yMove = (y - 0.5) * speed;
-                particle.style.transform = `translate(${xMove}px, ${yMove}px)`;
-            });
-        });
-
         // Efecto de hover en las tarjetas con GSAP
         document.querySelectorAll('.feature-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
@@ -669,6 +776,121 @@
                     duration: 0.6,
                     ease: "back.out"
                 });
+            });
+        });
+
+        // Buscador interactivo
+        const searchInput = document.getElementById('searchInput');
+        const searchSuggestions = document.getElementById('searchSuggestions');
+        
+        // Datos de sugerencias (en un proyecto real, esto vendría de una API)
+        const suggestions = [
+            { title: "Preset de Trap", desc: "Crea beats de trap con estos presets exclusivos", icon: "🥁" },
+            { title: "Stem de Vocal", desc: "Vocales limpias y profesionales para tus producciones", icon: "🎤" },
+            { title: "Beat de House", desc: "Beats de house listos para usar en tus tracks", icon: "🎧" },
+            { title: "Plugin de Sintetizador", desc: "Sintetizadores únicos para crear sonidos inéditos", icon: "🎛️" },
+            { title: "Servicio de Mastering", desc: "Mastering profesional para tus pistas", icon: "🔊" },
+            { title: "Collaboration Pack", desc: "Paquetes de colaboración con otros productores", icon: "🤝" }
+        ];
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.trim().toLowerCase();
+            
+            if (query.length === 0) {
+                searchSuggestions.style.display = 'none';
+                return;
+            }
+            
+            const filteredSuggestions = suggestions.filter(suggestion => 
+                suggestion.title.toLowerCase().includes(query) || 
+                suggestion.desc.toLowerCase().includes(query)
+            );
+            
+            if (filteredSuggestions.length === 0) {
+                searchSuggestions.style.display = 'none';
+                return;
+            }
+            
+            searchSuggestions.innerHTML = '';
+            filteredSuggestions.forEach(suggestion => {
+                const suggestionElement = document.createElement('div');
+                suggestionElement.className = 'search-suggestion';
+                suggestionElement.innerHTML = `
+                    <span class="search-suggestion-icon">${suggestion.icon}</span>
+                    <div>
+                        <div class="search-suggestion-title">${suggestion.title}</div>
+                        <div class="search-suggestion-desc">${suggestion.desc}</div>
+                    </div>
+                `;
+                
+                suggestionElement.addEventListener('click', () => {
+                    searchInput.value = suggestion.title;
+                    searchSuggestions.style.display = 'none';
+                });
+                
+                searchSuggestions.appendChild(suggestionElement);
+            });
+            
+            searchSuggestions.style.display = 'block';
+        });
+
+        // Cerrar sugerencias al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchSuggestions.style.display = 'none';
+            }
+        });
+
+        // Parallax effect en mouse move
+        document.addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.particle');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            particles.forEach((particle, i) => {
+                const speed = (i % 3 + 1) * 20;
+                const xMove = (x - 0.5) * speed;
+                const yMove = (y - 0.5) * speed;
+                particle.style.transform = `translate(${xMove}px, ${yMove}px)`;
+            });
+        });
+
+        // Animaciones de aparición al hacer scroll
+        const sections = document.querySelectorAll('.section');
+
+        function checkSections() {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const sectionBottom = section.getBoundingClientRect().bottom;
+                
+                if (sectionTop < window.innerHeight * 0.8 && sectionBottom > 0) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkSections);
+        window.addEventListener('resize', checkSections);
+
+        // Iniciar la verificación de secciones
+        checkSections();
+
+        // Efecto de parallax en el logo
+        document.querySelector('.logo').addEventListener('mouseenter', () => {
+            gsap.to('.logo', {
+                scale: 1.1,
+                rotation: 5,
+                duration: 0.3,
+                ease: "back.out"
+            });
+        });
+
+        document.querySelector('.logo').addEventListener('mouseleave', () => {
+            gsap.to('.logo', {
+                scale: 1,
+                rotation: 0,
+                duration: 0.3,
+                ease: "back.out"
             });
         });
     </script>
