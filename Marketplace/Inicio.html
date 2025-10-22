@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OFFSZN Marketplace - Próximamente</title>
+    <title>OFFSZN Marketplace - Tu Sonido, Tu Mercado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -18,6 +19,7 @@
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
+            cursor: default;
         }
 
         /* Partículas de fondo */
@@ -52,7 +54,7 @@
             z-index: 1;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 80px 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -62,7 +64,7 @@
 
         /* Logo */
         .logo {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 900;
             letter-spacing: 2px;
             margin-bottom: 60px;
@@ -70,6 +72,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: glow 3s ease-in-out infinite;
+            text-transform: uppercase;
         }
 
         @keyframes glow {
@@ -81,18 +84,7 @@
         .hero {
             text-align: center;
             margin-bottom: 60px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            max-width: 800px;
         }
 
         .badge {
@@ -122,7 +114,6 @@
             background: linear-gradient(135deg, #FFFFFF 0%, #9D4EDD 50%, #FF006E 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: fadeInUp 1s ease-out 0.2s backwards;
         }
 
         .subtitle {
@@ -131,7 +122,6 @@
             max-width: 700px;
             margin: 0 auto 50px;
             line-height: 1.6;
-            animation: fadeInUp 1s ease-out 0.4s backwards;
         }
 
         /* Features Grid */
@@ -152,14 +142,9 @@
             padding: 40px 30px;
             text-align: center;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: fadeInUp 1s ease-out backwards;
             position: relative;
             overflow: hidden;
         }
-
-        .feature-card:nth-child(1) { animation-delay: 0.6s; }
-        .feature-card:nth-child(2) { animation-delay: 0.7s; }
-        .feature-card:nth-child(3) { animation-delay: 0.8s; }
 
         .feature-card::before {
             content: '';
@@ -187,22 +172,6 @@
             font-size: 3rem;
             margin-bottom: 20px;
             display: inline-block;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .feature-card:hover .feature-icon {
-            animation: spin 0.6s ease-in-out;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.2); }
-            100% { transform: rotate(360deg) scale(1); }
         }
 
         .feature-title {
@@ -221,7 +190,7 @@
         /* CTA Section */
         .cta-section {
             text-align: center;
-            animation: fadeInUp 1s ease-out 0.9s backwards;
+            max-width: 600px;
         }
 
         .cta-text {
@@ -375,9 +344,27 @@
             box-shadow: 0 10px 30px rgba(157, 78, 221, 0.4);
         }
 
+        /* Scrollbar custom */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #9D4EDD 0%, #FF006E 100%);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #FF006E 0%, #9D4EDD 100%);
+        }
+
         @media (max-width: 768px) {
             .container {
-                padding: 20px 15px;
+                padding: 40px 15px;
             }
 
             .features {
@@ -409,36 +396,36 @@
 
         <!-- Hero -->
         <div class="hero">
-            <div class="badge">🔥 Próximamente</div>
-            <h1>El Marketplace<br/>que estabas esperando</h1>
+            <div class="badge">🚀 Lanzamiento Inminente</div>
+            <h1>Tu sonido<br/>no debería estar en pausa</h1>
             <p class="subtitle">
-                Compra, vende y colabora con productores de todo el mundo. Presets, stems, beats y servicios profesionales en un solo lugar.
+                El marketplace donde los productores intercambian presets, stems y servicios sin intermediarios. No es otro sitio... es tu nuevo ecosistema.
             </p>
         </div>
 
         <!-- Features -->
         <div class="features">
             <div class="feature-card">
-                <div class="feature-icon">🎹</div>
-                <h3 class="feature-title">Presets Únicos</h3>
+                <div class="feature-icon">🎛️</div>
+                <h3 class="feature-title">Presets que rompen moldes</h3>
                 <p class="feature-desc">
-                    Accede a miles de presets profesionales creados por productores verificados. Vocales, drums, sintetizadores y más.
+                    Accede a bibliotecas exclusivas de presets creados por productores que están en las listas de éxitos. No más sonidos genéricos, solo lo que realmente funciona.
                 </p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">🤝</div>
-                <h3 class="feature-title">Colabora sin límites</h3>
+                <div class="feature-icon">🔗</div>
+                <h3 class="feature-title">Conecta, no compites</h3>
                 <p class="feature-desc">
-                    Encuentra stems de calidad para remixear, comparte tus archivos y conecta con productores que elevan tu sonido.
+                    Encuentra stems de calidad para remixear, colaborar o inspirarte. Aquí no hay competencia, solo sinergia entre productores que entienden el juego.
                 </p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">💎</div>
-                <h3 class="feature-title">Monetiza tu talento</h3>
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">Tu talento tiene precio</h3>
                 <p class="feature-desc">
-                    Vende tus presets, beats y servicios. Construye tu reputación y genera ingresos haciendo lo que amas.
+                    Monetiza tus presets, beats y servicios. Construye tu marca, gana dinero y crea una comunidad alrededor de tu sonido. Tu estudio es tu negocio.
                 </p>
             </div>
         </div>
@@ -446,7 +433,7 @@
         <!-- CTA -->
         <div class="cta-section">
             <p class="cta-text">
-                Sé de los primeros en entrar cuando lancemos
+                Sé parte del lanzamiento. Te avisaremos cuando estemos listos.
             </p>
             
             <form class="email-form" id="emailForm">
@@ -458,7 +445,7 @@
                     id="emailInput"
                 />
                 <button type="submit" class="cta-button">
-                    <span>Unirme ahora</span>
+                    <span>Reserva tu lugar</span>
                 </button>
             </form>
 
@@ -485,7 +472,7 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p>Únete a la comunidad de productores más activa</p>
+            <p>Donde los productores hablan el mismo idioma</p>
             <div class="social-links">
                 <a href="#" class="social-link">📱</a>
                 <a href="#" class="social-link">🎵</a>
@@ -494,7 +481,31 @@
         </div>
     </div>
 
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.40/dist/lenis.min.js"></script>
+
     <script>
+        // Inicializar Lenis para scroll suave
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
         // Generar partículas
         const particlesContainer = document.getElementById('particles');
         for (let i = 0; i < 30; i++) {
@@ -506,6 +517,54 @@
             particlesContainer.appendChild(particle);
         }
 
+        // Animaciones con GSAP
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animación del logo
+            gsap.from('.logo', {
+                opacity: 0,
+                y: -50,
+                duration: 1.5,
+                ease: "power3.out"
+            });
+
+            // Animación del hero
+            gsap.from('.hero', {
+                opacity: 0,
+                y: 50,
+                duration: 1.2,
+                ease: "power3.out",
+                delay: 0.3
+            });
+
+            // Animación de las tarjetas de features
+            gsap.from('.feature-card', {
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power3.out",
+                stagger: 0.2,
+                delay: 0.6
+            });
+
+            // Animación del CTA
+            gsap.from('.cta-section', {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power3.out",
+                delay: 0.8
+            });
+
+            // Animación del countdown
+            gsap.from('.countdown', {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power3.out",
+                delay: 1
+            });
+        });
+
         // Countdown (ejemplo: 30 días desde hoy)
         const launchDate = new Date();
         launchDate.setDate(launchDate.getDate() + 30);
@@ -513,6 +572,11 @@
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = launchDate - now;
+
+            if (distance < 0) {
+                document.querySelector('.countdown').innerHTML = '<p style="font-size: 2rem; color: #9D4EDD; text-align: center;">🎉 ¡Ya disponible!</p>';
+                return;
+            }
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -523,10 +587,6 @@
             document.getElementById('hours').textContent = String(hours).padStart(2, '0');
             document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
             document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-
-            if (distance < 0) {
-                document.querySelector('.countdown').innerHTML = '<p style="font-size: 2rem; color: #9D4EDD;">🎉 ¡Ya disponible!</p>';
-            }
         }
 
         updateCountdown();
@@ -537,11 +597,26 @@
             e.preventDefault();
             const email = document.getElementById('emailInput').value;
             
-            // Aquí conectarías con tu backend
-            alert('¡Gracias! Te avisaremos cuando lancemos 🚀\nEmail: ' + email);
+            // Mostrar mensaje de éxito con GSAP
+            const button = this.querySelector('.cta-button');
+            button.innerHTML = '<span>✓ Enviado</span>';
             
-            // Reset form
-            this.reset();
+            gsap.to(button, {
+                backgroundColor: "#4CAF50",
+                duration: 0.5,
+                ease: "power2.out"
+            });
+
+            setTimeout(() => {
+                alert('¡Gracias por unirte! Te enviaremos una notificación cuando lancemos.\nEmail: ' + email);
+                button.innerHTML = '<span>Reserva tu lugar</span>';
+                gsap.to(button, {
+                    backgroundColor: "linear-gradient(135deg, #9D4EDD 0%, #FF006E 100%)",
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+                this.reset();
+            }, 1500);
         });
 
         // Parallax effect en mouse move
@@ -555,6 +630,45 @@
                 const xMove = (x - 0.5) * speed;
                 const yMove = (y - 0.5) * speed;
                 particle.style.transform = `translate(${xMove}px, ${yMove}px)`;
+            });
+        });
+
+        // Efecto de hover en las tarjetas con GSAP
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    y: -10,
+                    borderColor: "#9D4EDD",
+                    boxShadow: "0 20px 60px rgba(157, 78, 221, 0.3)",
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+                
+                const icon = card.querySelector('.feature-icon');
+                gsap.to(icon, {
+                    rotation: 360,
+                    scale: 1.2,
+                    duration: 0.6,
+                    ease: "back.out"
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    y: 0,
+                    borderColor: "rgba(157, 78, 221, 0.2)",
+                    boxShadow: "none",
+                    duration: 0.4,
+                    ease: "power2.in"
+                });
+                
+                const icon = card.querySelector('.feature-icon');
+                gsap.to(icon, {
+                    rotation: 0,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: "back.out"
+                });
             });
         });
     </script>
