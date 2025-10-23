@@ -74,9 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.ok) {
           //se guarda el token en el navegador
           localStorage.setItem('authToken', data.token);
-
-          //se redirige a la página protegida
-          window.location.href = '/pages/my-products.html';
+          if (data.user && data.user.isAdmin === true) {
+            console.log("Usuario es Admin, redirigiendo a /admin-frontend/admin_dashboard.html");
+            window.location.href = '/admin-frontend/admin_dashboard.html'; 
+          } else {
+            console.log("Usuario normal, redirigiendo a /pages/my-products.html");
+            window.location.href = '/pages/my-products.html'; 
+          }
         } else {
           showMessage(messageDiv, data.error, true);
         }
