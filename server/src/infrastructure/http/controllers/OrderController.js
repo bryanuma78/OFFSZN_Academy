@@ -84,6 +84,22 @@ export const captureOrder = async (req, res) => {
 
             if (updateError) {
                 console.error("ALERTA: Error al actualizar la orden en Supabase después del pago:", updateError);
+            } else {
+                try {
+                    console.log(`Pago completado para orden ${orderID}. Vaciando carrito para usuario ${userId}...`);
+                    const { error: deleteCartError } = await supabase
+                        .from('cart_items')
+                        .delete()
+                        .eq('user_id', userId);
+
+                    if (deleteCartError) {
+                        console.error(`ALERTA: Error al vaciar el carrito para user ${userId} después de orden ${orderID}:`, deleteCartError.message);
+                    } else {
+                        console.log(`Carrito vaciado exitosamente para user ${userId}.`);
+                    }
+                } catch (cartClearErr) {
+                     console.error(`ALERTA: Excepción al vaciar carrito para user ${userId}:`, cartClearErr.message);
+                }
             }
 
             res.status(200).json({ status: 'COMPLETED', capture: capture.result });
