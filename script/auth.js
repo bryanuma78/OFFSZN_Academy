@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {
     //para desarrollo local
-    API_URL = 'http://localhost:3001/api';
+    API_URL = 'http://localhost:3000/api';
   } else {
     //para producción
     API_URL = 'https://offszn-academy.onrender.com/api';
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       //se envían los datos al backend (al api/register)
       try {
-        const response = await fetch(`${API_URL}/register`, {
+        const response = await fetch(`${API_URL}/auth/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       //se envían los datos al backend (al api/login)
       try {
-        const response = await fetch(`${API_URL}/login`, {
+        const response = await fetch(`${API_URL}/auth/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

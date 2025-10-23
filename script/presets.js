@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //configuracion
   let API_URL = '';
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {
-    API_URL = 'http://localhost:3001/api';
+    API_URL = 'http://localhost:3000/api';
   } else {
     API_URL = 'https://offszn-academy.onrender.com/api';
   }
