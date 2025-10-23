@@ -65,6 +65,8 @@ export const createOrder = async (req, res) => {
 export const captureOrder = async (req, res) => {
     try {
         const { orderID } = req.body;
+
+        const userId = req.user.userId;
         
         if (!orderID) {
              return res.status(400).json({ error: 'PayPal Order ID es requerido.' });
