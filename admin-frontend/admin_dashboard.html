@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,10 +14,10 @@
             try {
                 const base64Url = token.split('.')[1];
                 const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
                     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
                 }).join(''));
-                
+
                 const payload = JSON.parse(jsonPayload);
                 isAdmin = payload.isAdmin === true;
 
@@ -29,10 +30,11 @@
 
         if (!isAdmin) {
             console.log("Acceso denegado al admin dashboard, redirigiendo al login.");
-            window.location.replace('/pages/login.html'); 
+            window.location.replace('/pages/login.html');
         }
     </script>
 </head>
+
 <body>
     <div class="dashboard-container">
         <aside class="sidebar">
@@ -50,7 +52,9 @@
         <main class="content" id="main-content">
             <h1>Bienvenido al Dashboard</h1>
             <p>Selecciona una opción del menú lateral.</p>
-            </main>
+        </main>
     </div>
-    <script src="admin_dashboard.js"></script> </body>
+    <script src="admin_dashboard.js"></script>
+</body>
+
 </html>

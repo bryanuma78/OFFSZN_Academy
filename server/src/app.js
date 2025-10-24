@@ -7,6 +7,7 @@ import productRoutes from './infrastructure/http/routes/product.routes.js';
 import cartRoutes from './infrastructure/http/routes/cart.routes.js';
 import orderRoutes from './infrastructure/http/routes/order.routes.js';
 import userRoutes from './infrastructure/http/routes/user.routes.js';
+import adminRoutes from './infrastructure/http/routes/admin.routes.js';
 
 const app = express()
 app.use(cors())
@@ -17,6 +18,7 @@ app.use('/api', productRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', orderRoutes);
 app.use('/api', userRoutes);
+app.use('/api/admin', adminRoutes);
 
 checkConnection()
 
