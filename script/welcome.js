@@ -141,9 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const instagram = document.getElementById('social-instagram').value.trim();
             const tiktok = document.getElementById('social-tiktok').value.trim();
             const youtube = document.getElementById('social-youtube').value.trim();
+            const spotify = document.getElementById('social-spotify').value.trim();
             if (instagram) onboardingData.socials.instagram = instagram;
             if (tiktok) onboardingData.socials.tiktok = tiktok;
             if (youtube) onboardingData.socials.youtube = youtube;
+            if (spotify) onboardingData.socials.spotify = spotify;
 
             try {
                 const response = await fetch(`${API_URL}/me/onboarding`, {
