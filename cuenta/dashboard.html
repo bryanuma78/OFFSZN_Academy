@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - OFFSZN Productor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 3rem;
+            background: rgba(0, 0, 0, 0.98);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+        }
+
+        .navbar .logo a {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-center {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .navbar-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .navbar-links li {
+            position: relative;
+        }
+
+        .navbar-links a {
+            color: #999;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .navbar-links a:hover {
+            color: #fff;
+        }
+
+        .navbar-links a i {
+            font-size: 0.7rem;
+            transition: transform 0.2s;
+        }
+
+        /* Dropdowns */
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 0;
+            background: rgba(20, 20, 20, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+        }
+
+        .navbar-links li:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .navbar-links li:hover a i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+        }
+
+        .dropdown-item i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 8px 0;
+        }
+
+        /* Search Bar */
+        .navbar-search {
+            position: relative;
+            width: 380px;
+        }
+
+        .navbar-search input {
+            width: 100%;
+            padding: 0.6rem 2.5rem 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .navbar-search input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .navbar-search input::placeholder {
+            color: #666;
+        }
+
+        .navbar-search i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .navbar-right {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .navbar-icon-button {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 16px;
+            transition: all 0.2s;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .navbar-icon-button:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .navbar-icon-button .badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 5px;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* User Dropdown */
+        .user-dropdown {
+            position: relative;
+        }
+
+        .user-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            background: rgba(20, 20, 20, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            min-width: 260px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+        }
+
+        .user-dropdown.active .user-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .user-dropdown-header {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-dropdown-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .user-dropdown-info {
+            flex: 1;
+        }
+
+        .user-dropdown-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .user-dropdown-email {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .user-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .user-dropdown-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+        }
+
+        .user-dropdown-item.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .user-dropdown-item i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .user-dropdown-item .soon-badge {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.08);
+            color: #666;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .user-dropdown-item.logout {
+            color: #ef4444;
+            margin-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 12px;
+        }
+
+        .user-dropdown-item.logout:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* ===== DASHBOARD LAYOUT ===== */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: calc(100vh - 57px);
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            background: rgba(15, 15, 15, 0.6);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 57px;
+            height: calc(100vh - 57px);
+            overflow-y: auto;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .profile-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Wallet */
+        .wallet-section {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .wallet-label {
+            font-size: 0.7rem;
+            color: #999;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .wallet-amount {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Upload Button */
+        .upload-btn {
+            margin: 20px 20px 0;
+            padding: 14px 18px;
+            background: #8b5cf6;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            width: calc(100% - 40px);
+        }
+
+        .upload-btn:hover {
+            background: #7c3aed;
+            transform: translateY(-1px);
+        }
+
+        /* Sidebar Search */
+        .sidebar-search {
+            margin: 16px 20px;
+            position: relative;
+        }
+
+        .sidebar-search input {
+            width: 100%;
+            padding: 10px 36px 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .sidebar-search input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .sidebar-search input::placeholder {
+            color: #666;
+            font-size: 0.82rem;
+        }
+
+        .sidebar-search i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        /* Sidebar Menu */
+        .sidebar-menu {
+            padding: 12px 0;
+        }
+
+        .menu-section-title {
+            padding: 16px 20px 8px;
+            font-size: 0.65rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 20px;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+            position: relative;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        .menu-item.active {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+            border-left: 2px solid #8b5cf6;
+        }
+
+        .menu-item.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .menu-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .menu-item .badge {
+            margin-left: auto;
+            background: #8b5cf6;
+            color: #fff;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+
+        .menu-item .soon-badge {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.08);
+            color: #666;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .menu-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 12px 20px;
+        }
+
+        /* Logout */
+        .logout-btn {
+            margin: 20px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            padding: 11px 18px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            padding: 36px 48px;
+            background: #0a0a0a;
+        }
+
+        .dashboard-header {
+            margin-bottom: 32px;
+        }
+
+        .welcome-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .welcome-subtitle {
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        /* Streak Bar */
+        .streak-bar {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .streak-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.2s;
+        }
+
+        .streak-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .streak-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .streak-info {
+            flex: 1;
+        }
+
+        .streak-label {
+            font-size: 0.7rem;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .streak-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.2s;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 8px;
+        }
+
+        .stat-trend.up {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .stat-trend.down {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Section */
+        .section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.3px;
+        }
+
+        .section-link {
+            color: #8b5cf6;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .section-link:hover {
+            color: #a78bfa;
+        }
+
+        /* Payment Grid */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .payment-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .payment-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .payment-card.connected {
+            border-color: rgba(34, 197, 94, 0.3);
+            background: rgba(34, 197, 94, 0.05);
+        }
+
+        .payment-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+
+        .payment-card.connected .payment-icon {
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .payment-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .payment-status {
+            font-size: 0.75rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .payment-status.connected {
+            color: #22c55e;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-image i {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #8b5cf6;
+            margin-bottom: 12px;
+        }
+
+        .product-stats {
+            display: flex;
+            gap: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(20, 20, 20, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 44px;
+            max-width: 460px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .modal-icon {
+            font-size: 3.5rem;
+            margin-bottom: 18px;
+            color: #8b5cf6;
+        }
+
+        .modal-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .modal-text {
+            color: #999;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+                height: auto;
+            }
+
+            .navbar-search {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.75rem 1.5rem;
+            }
+
+            .navbar-center {
+                display: none;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .streak-bar,
+            .stats-grid,
+            .payment-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">OFFSZN</a>
+        </div>
+
+        <div class="navbar-center">
+            <ul class="navbar-links">
+                <li><a href="index.html">INICIO</a></li>
+                <li>
+                    <a>RECURSOS <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="beats.html" class="dropdown-item">
+                            <i class="fas fa-music"></i>
+                            <span>Beats & Instrumentales</span>
+                        </a>
+                        <a href="drum-kits.html" class="dropdown-item">
+                            <i class="fas fa-drum"></i>
+                            <span>Drum Kits</span>
+                        </a>
+                        <a href="presets.html" class="dropdown-item">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Presets & Plugins</span>
+                        </a>
+                        <a href="samples.html" class="dropdown-item">
+                            <i class="fas fa-wave-square"></i>
+                            <span>Samples & Loops</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="free-resources.html" class="dropdown-item">
+                            <i class="fas fa-gift"></i>
+                            <span>Recursos Gratis</span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a>COMUNIDAD <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="feed.html" class="dropdown-item">
+                            <i class="fas fa-home"></i>
+                            <span>Feed</span>
+                        </a>
+                        <a href="productores.html" class="dropdown-item">
+                            <i class="fas fa-users"></i>
+                            <span>Productores</span>
+                        </a>
+                        <a href="colaboraciones.html" class="dropdown-item">
+                            <i class="fas fa-handshake"></i>
+                            <span>Colaboraciones</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="foros.html" class="dropdown-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Foros</span>
+                        </a>
+                        <a href="eventos.html" class="dropdown-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>Eventos</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="navbar-search">
+                <input type="text" placeholder="Buscar beats, kits, productores...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <div class="navbar-right">
+            <a href="notifications.html" class="navbar-icon-button">
+                <i class="fas fa-bell"></i>
+                <span class="badge">5</span>
+            </a>
+            <a href="cart.html" class="navbar-icon-button">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+            <div class="user-dropdown">
+                <div class="navbar-icon-button" onclick="toggleUserDropdown()">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-dropdown-menu">
+                    <div class="user-dropdown-header">
+                        <div class="user-dropdown-avatar">W</div>
+                        <div class="user-dropdown-info">
+                            <div class="user-dropdown-name">Willie Inspired</div>
+                            <div class="user-dropdown-email">willie@offszn.com</div>
+                        </div>
+                    </div>
+                    <a href="profile.html" class="user-dropdown-item">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Mi Perfil</span>
+                    </a>
+                    <a href="dashboard.html" class="user-dropdown-item">
+                        <i class="fas fa-th-large"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="wallet.html" class="user-dropdown-item">
+                        <i class="fas fa-wallet"></i>
+                        <span>Billetera</span>
+                    </a>
+                    <a href="#" class="user-dropdown-item disabled" onclick="showModal('Mis Compras'); return false;">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Mis Compras</span>
+                        <span class="soon-badge">Pronto</span>
+                    </a>
+                    <a href="#" class="user-dropdown-item disabled" onclick="showModal('Analíticas'); return false;">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analíticas</span>
+                        <span class="soon-badge">Pronto</span>
+                    </a>
+                    <a href="account-settings.html" class="user-dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Configuración</span>
+                    </a>
+                    <a href="help.html" class="user-dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Ayuda</span>
+                    </a>
+                    <a href="logout.html" class="user-dropdown-item logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Cerrar Sesión</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Profile -->
+            <div class="profile-header">
+                <div class="profile-info">
+                    <div class="profile-avatar">W</div>
+                    <div>
+                        <div class="profile-name">Willie Inspired</div>
+                    </div>
+                </div>
+                <div class="profile-badge">
+                    <i class="fas fa-award"></i>
+                    Top Seller
+                </div>
+            </div>
+
+            <!-- Wallet -->
+            <div class="wallet-section">
+                <div class="wallet-label">Saldo Disponible</div>
+                <div class="wallet-amount">$0.00</div>
+            </div>
+
+            <!-- Upload Button -->
+            <button class="upload-btn" onclick="showModal('Subir Kit')">
+                <i class="fas fa-cloud-upload-alt"></i>
+                Subir Kit
+            </button>
+
+            <!-- Sidebar Search -->
+            <div class="sidebar-search">
+                <input type="text" placeholder="Buscar mis productos...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <!-- Menu -->
+            <div class="sidebar-menu">
+                <div class="menu-section-title">Principal</div>
+                
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#" class="menu-item disabled" onclick="showModal('Mis Kits'); return false;">
+                    <i class="fas fa-music"></i>
+                    <span>Mis Kits</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <a href="#" class="menu-item disabled" onclick="showModal('Analíticas'); return false;">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analíticas</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <a href="#" class="menu-item disabled" onclick="showModal('Favoritos'); return false;">
+                    <i class="fas fa-heart"></i>
+                    <span>Favoritos</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <a href="#" class="menu-item disabled" onclick="showModal('Historial de Escucha'); return false;">
+                    <i class="fas fa-history"></i>
+                    <span>Historial</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <div class="menu-divider"></div>
+
+                <div class="menu-section-title">Colaboración</div>
+
+                <a href="#" class="menu-item disabled" onclick="showModal('Colaboraciones'); return false;">
+                    <i class="fas fa-users"></i>
+                    <span>Colaboraciones</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <div class="menu-divider"></div>
+
+                <div class="menu-section-title">Compras</div>
+
+                <a href="#" class="menu-item disabled" onclick="showModal('Mis Compras'); return false;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Mis Compras</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <a href="gift-cards.html" class="menu-item">
+                    <i class="fas fa-gift"></i>
+                    <span>Gift Cards</span>
+                </a>
+
+                <a href="messages.html" class="menu-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Mensajes</span>
+                    <span class="badge">3</span>
+                </a>
+
+                <div class="menu-divider"></div>
+
+                <div class="menu-section-title">Configuración</div>
+
+                <a href="account-settings.html" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Configuración</span>
+                </a>
+
+                <a href="blog.html" class="menu-item">
+                    <i class="fas fa-book-open"></i>
+                    <span>Blog</span>
+                </a>
+            </div>
+
+            <!-- Logout -->
+            <a href="logout.html" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+            </a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <h1 class="welcome-text">Bienvenido, Willie</h1>
+                <p class="welcome-subtitle">Gestiona tu negocio musical desde aquí</p>
+            </div>
+
+            <!-- Streak Bar -->
+            <div class="streak-bar">
+                <div class="streak-card">
+                    <div class="streak-icon">
+                        <i class="fas fa-fire" style="color: #ef4444;"></i>
+                    </div>
+                    <div class="streak-info">
+                        <div class="streak-label">Racha de Ventas</div>
+                        <div class="streak-value">47 días</div>
+                    </div>
+                </div>
+
+                <div class="streak-card">
+                    <div class="streak-icon">
+                        <i class="fas fa-trophy" style="color: #f59e0b;"></i>
+                    </div>
+                    <div class="streak-info">
+                        <div class="streak-label">Ranking Nacional</div>
+                        <div class="streak-value">#12</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign" style="color: #22c55e;"></i>
+                        </div>
+                        <div class="stat-trend up">
+                            <i class="fas fa-arrow-up"></i>
+                            +18%
+                        </div>
+                    </div>
+                    <div class="stat-value">$2,340</div>
+                    <div class="stat-label">Ingresos este mes</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-bag" style="color: #8b5cf6;"></i>
+                        </div>
+                        <div class="stat-trend up">
+                            <i class="fas fa-arrow-up"></i>
+                            +12
+                        </div>
+                    </div>
+                    <div class="stat-value">89</div>
+                    <div class="stat-label">Ventas totales</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-eye" style="color: #6366f1;"></i>
+                        </div>
+                        <div class="stat-trend down">
+                            <i class="fas fa-arrow-down"></i>
+                            -5%
+                        </div>
+                    </div>
+                    <div class="stat-value">1.2K</div>
+                    <div class="stat-label">Vistas perfil</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-star" style="color: #f59e0b;"></i>
+                        </div>
+                        <div class="stat-trend up">
+                            <i class="fas fa-arrow-up"></i>
+                            +23
+                        </div>
+                    </div>
+                    <div class="stat-value">4.8</div>
+                    <div class="stat-label">Rating promedio</div>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Métodos de Pago</h2>
+                    <a href="#" class="section-link" onclick="showModal('Configurar Pagos'); return false;">Configurar →</a>
+                </div>
+
+                <div class="payment-grid">
+                    <!-- PayPal - CONECTADO -->
+                    <div class="payment-card connected">
+                        <div class="payment-icon">
+                            <i class="fab fa-paypal" style="color: #22c55e;"></i>
+                        </div>
+                        <div class="payment-name">PayPal</div>
+                        <div class="payment-status connected">
+                            <i class="fas fa-check-circle"></i> Conectado
+                        </div>
+                    </div>
+
+                    <!-- Yape -->
+                    <div class="payment-card">
+                        <div class="payment-icon">
+                            <i class="fas fa-mobile-alt" style="color: #8b5cf6;"></i>
+                        </div>
+                        <div class="payment-name">Yape</div>
+                        <div class="payment-status">
+                            <i class="fas fa-times-circle"></i> No conectado
+                        </div>
+                    </div>
+
+                    <!-- Cuenta Bancaria -->
+                    <div class="payment-card">
+                        <div class="payment-icon">
+                            <i class="fas fa-university" style="color: #8b5cf6;"></i>
+                        </div>
+                        <div class="payment-name">Cuenta Bancaria</div>
+                        <div class="payment-status">
+                            <i class="fas fa-clock"></i> Próximamente
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mis Productos Top -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Mis Productos Top</h2>
+                    <a href="#" class="section-link" onclick="showModal('Administrar Productos'); return false;">Ver todos →</a>
+                </div>
+
+                <div class="products-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <i class="fas fa-microphone"></i>
+                            <span class="product-badge">Bestseller</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">Vocal Preset Pack Pro</div>
+                            <div class="product-meta">
+                                <span><i class="fas fa-music"></i> FL Studio</span>
+                                <span><i class="fas fa-star"></i> 4.9 (43)</span>
+                            </div>
+                            <div class="product-price">$29.99</div>
+                            <div class="product-stats">
+                                <div><i class="fas fa-shopping-bag"></i> 234</div>
+                                <div><i class="fas fa-eye"></i> 1.2K</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-image" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                            <i class="fas fa-drum"></i>
+                            <span class="product-badge">Nuevo</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">Trap Drum Kit 2024</div>
+                            <div class="product-meta">
+                                <span><i class="fas fa-music"></i> Universal</span>
+                                <span><i class="fas fa-star"></i> 5.0 (12)</span>
+                            </div>
+                            <div class="product-price">$19.99</div>
+                            <div class="product-stats">
+                                <div><i class="fas fa-shopping-bag"></i> 45</div>
+                                <div><i class="fas fa-eye"></i> 320</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="product-image" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">
+                            <i class="fas fa-wave-square"></i>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">808 Bass Bundle</div>
+                            <div class="product-meta">
+                                <span><i class="fas fa-music"></i> Serum</span>
+                                <span><i class="fas fa-star"></i> 4.7 (28)</span>
+                            </div>
+                            <div class="product-price">$24.99</div>
+                            <div class="product-stats">
+                                <div><i class="fas fa-shopping-bag"></i> 89</div>
+                                <div><i class="fas fa-eye"></i> 580</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personalización -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Personaliza Tu Tienda</h2>
+                    <a href="#" class="section-link" onclick="showModal('Editor de Tienda'); return false;">Personalizar →</a>
+                </div>
+
+                <div style="background: rgba(139, 92, 246, 0.05); border: 1px dashed rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 44px; text-align: center;">
+                    <div style="font-size: 3.5rem; margin-bottom: 18px; opacity: 0.5;">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.2rem; font-weight: 600;">Diseña Tu Tienda Única</h3>
+                    <p style="color: #666; margin-bottom: 24px; line-height: 1.6; font-size: 0.95rem;">
+                        Customiza colores, logo, banner y más para que tu tienda<br/>refleje tu identidad como productor.
+                    </p>
+                    <button style="display: inline-flex; align-items: center; gap: 8px; background: #8b5cf6; color: #fff; padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; transition: all 0.2s;" onclick="showModal('Editor de Tienda')" onmouseover="this.style.background='#7c3aed'" onmouseout="this.style.background='#8b5cf6'">
+                        <i class="fas fa-paint-brush"></i>
+                        Editar Mi Tienda
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <h2 class="modal-title">Próximamente</h2>
+            <p class="modal-text">
+                Estamos trabajando en <strong id="featureName">esta función</strong>.<br/>
+                Será lanzada pronto.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(feature) {
+            document.getElementById('featureName').textContent = feature;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        function toggleUserDropdown() {
+            const dropdown = document.querySelector('.user-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // Close modals on outside click
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close user dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const userDropdown = document.querySelector('.user-dropdown');
+            const userButton = document.querySelector('.user-dropdown .navbar-icon-button');
+            
+            if (!userDropdown.contains(e.target)) {
+                userDropdown.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
