@@ -15,43 +15,50 @@ document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('login-form');
   const messageDiv = document.getElementById('form-message');
 
-  // --- LÓGICA DE REGISTRO ---
   if (registerForm) {
     registerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      const firstName = document.getElementById('reg-first-name').value;
-      const lastName = document.getElementById('reg-last-name').value;
       const email = document.getElementById('reg-email').value;
       const password = document.getElementById('reg-password').value;
+      const messageDiv = document.getElementById('form-message');
+      const submitButton = registerForm.querySelector('button[type="submit"]');
 
-      //se envían los datos al backend (al api/register)
+      showMessage(messageDiv, '', false);
+      submitButton.disabled = true;
+      submitButton.textContent = 'Creando cuenta...';
+
       try {
         const response = await fetch(`${API_URL}/auth/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ firstName, lastName, email, password }),
+          body: JSON.stringify({ email, password }),
         });
 
         const data = await response.json();
 
         if (response.ok) {
-          // ¡Éxito!
-          showMessage(messageDiv, '¡Registro exitoso! Ya puedes iniciar sesión.', false);
-          registerForm.reset();
+          if (data.token) {
+            localStorage.setItem('authToken', data.token);
+            console.log("Registro exitoso, token guardado.");
+            window.location.href = '/pages/welcome.html';
+          } else {
+            throw new Error('Registro exitoso pero no se recibió token.');
+          }
+
         } else {
-          showMessage(messageDiv, data.error, true);
+          throw new Error(data.error || `Error ${response.status}`);
         }
       } catch (error) {
-        console.error('Error de red:', error);
-        showMessage(messageDiv, 'Error de conexión. Inténtalo más tarde.', true);
+        console.error('Error de registro:', error);
+        showMessage(messageDiv, error.message, true);
+        submitButton.disabled = false;
+        submitButton.textContent = 'Crear Cuenta';
       }
     });
   }
 
-  // --- LÓGICA DE LOGIN ---
   if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -59,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('log-email').value;
       const password = document.getElementById('log-password').value;
 
-      //se envían los datos al backend (al api/login)
       try {
         const response = await fetch(`${API_URL}/auth/login`, {
           method: 'POST',
@@ -72,14 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await response.json();
 
         if (response.ok) {
-          //se guarda el token en el navegador
           localStorage.setItem('authToken', data.token);
           if (data.user && data.user.isAdmin === true) {
             console.log("Usuario es Admin, redirigiendo a /admin-frontend/admin_dashboard.html");
-            window.location.href = '/admin-frontend/admin_dashboard.html'; 
+            window.location.href = '/admin-frontend/admin_dashboard.html';
           } else {
             console.log("Usuario normal, redirigiendo a /pages/my-products.html");
-            window.location.href = '/pages/my-products.html'; 
+            window.location.href = '/pages/my-products.html';
           }
         } else {
           showMessage(messageDiv, data.error, true);
@@ -91,15 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  //función para mostrar mensajes de éxito o error
   function showMessage(element, message, isError = true) {
+    if (!element) return;
     element.textContent = message;
-    element.className = 'form-message';
-
-    if (isError) {
-      element.classList.add('error');
-    } else {
-      element.classList.add('success');
+    element.className = 'message';
+    if (message) {
+      element.classList.add(isError ? 'error' : 'success');
     }
   }
 });
