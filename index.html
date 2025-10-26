@@ -63,49 +63,53 @@
   <div class="navbar-center">
     <ul class="navbar-links">
       <li><a href="/index.html" class="active">INICIO</a></li>
-      <li>
+      <li class="dropdown-parent">
         <a>RECURSOS <i class="bi bi-chevron-down"></i></a>
         <div class="dropdown-menu">
-          <a href="/pages/cursos.html" class="dropdown-item">
-            <i class="bi bi-book"></i>
-            <span>Cursos</span>
+          <a href="/pages/recursos/beats-instrumentales.html" class="dropdown-item">
+            <i class="bi bi-music-note-beamed"></i>
+            <span>Beats & Instrumentales</span>
+          </a>
+          <a href="/pages/recursos/drum-kits.html" class="dropdown-item">
+            <i class="bi bi-disc"></i>
+            <span>Drum Kits</span>
           </a>
           <a href="/pages/presets-v2.html" class="dropdown-item">
             <i class="bi bi-sliders"></i>
-            <span>Presets</span>
+            <span>Presets & Plugins</span>
           </a>
-          <a href="/pages/playlist.html" class="dropdown-item">
-            <i class="bi bi-music-note-list"></i>
-            <span>Playlist</span>
+          <a href="/pages/recursos/samples-loops.html" class="dropdown-item">
+            <i class="bi bi-soundwave"></i>
+            <span>Samples & Loops</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="/pages/recursos/recursos-gratis.html" class="dropdown-item">
             <i class="bi bi-gift"></i>
             <span>Recursos Gratis</span>
           </a>
         </div>
       </li>
-      <li>
+      <li class="dropdown-parent">
         <a>COMUNIDAD <i class="bi bi-chevron-down"></i></a>
         <div class="dropdown-menu">
-          <a href="#" class="dropdown-item">
+          <a href="/pages/comunidad/feed.html" class="dropdown-item">
             <i class="bi bi-house"></i>
             <span>Feed</span>
           </a>
-          <a href="#" class="dropdown-item">
+          <a href="/pages/comunidad/productores.html" class="dropdown-item">
             <i class="bi bi-people"></i>
             <span>Productores</span>
           </a>
-          <a href="#" class="dropdown-item">
+          <a href="/pages/comunidad/colaboraciones.html" class="dropdown-item">
             <i class="bi bi-hand-index-thumb"></i>
             <span>Colaboraciones</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="/pages/comunidad/foros.html" class="dropdown-item">
             <i class="bi bi-chat-dots"></i>
             <span>Foros</span>
           </a>
-          <a href="#" class="dropdown-item">
+          <a href="/pages/comunidad/eventos.html" class="dropdown-item">
             <i class="bi bi-calendar-event"></i>
             <span>Eventos</span>
           </a>
@@ -129,7 +133,7 @@
         <i class="bi bi-person"></i>
       </a>
       
-      <button class="navbar-icon-button logged-in" onclick="toggleUserDropdown()" title="Mi Cuenta" style="display: none;">
+      <button class="navbar-icon-button logged-in" onclick="toggleUserDropdown(event)" title="Mi Cuenta" style="display: none;">
         <i class="bi bi-person-check"></i>
       </button>
       
@@ -157,7 +161,7 @@
           <i class="bi bi-gear"></i>
           <span>Configuración</span>
         </a>
-        <a href="#" class="user-dropdown-item logout" onclick="handleLogout()">
+        <a href="#" class="user-dropdown-item logout" onclick="handleLogout(event)">
           <i class="bi bi-box-arrow-right"></i>
           <span>Cerrar Sesión</span>
         </a>
