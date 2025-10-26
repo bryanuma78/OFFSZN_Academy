@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContent.innerHTML = `
                 <h2>Editar Producto (ID: ${productId})</h2>
                 <form id="edit-product-form">
-                    <input type="hidden" name="id" value="${product.id}"> {/* Campo oculto con el ID */}
+                    <input type="hidden" name="id" value="${product.id}"> 
 
                     <label for="name">Nombre:</label>
                     <input type="text" id="name" name="name" value="${product.name}" required><br>

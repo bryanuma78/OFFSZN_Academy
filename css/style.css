@@ -139,9 +139,10 @@ body.menu-open {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 3rem;
+  padding: 0.75rem 3rem;
   background: rgba(0, 0, 0, 0.95);
-  position: relative;
+  position: sticky;
+  top: 0;
   width: 100%;
   z-index: 1000;
   box-shadow: 0 2px 20px rgba(114, 9, 183, 0.3);
@@ -2182,7 +2183,7 @@ section {
 
 .product-card.purchased .btn-add-to-cart,
 .product-card.purchased .paypal-button-container {
-  display: none; 
+  display: none;
 }
 
 .product-content {
@@ -2237,10 +2238,14 @@ section {
 }
 
 /*lógica de visibilidad */
-body .logged-out.navbar-icon-button { /* Añadimos body y .navbar-icon-button */
-  display: flex; /* O inline-flex */
+body .logged-out.navbar-icon-button {
+  /* Añadimos body y .navbar-icon-button */
+  display: flex;
+  /* O inline-flex */
 }
-body .logged-in.navbar-icon-button { /* Añadimos body y .navbar-icon-button */
+
+body .logged-in.navbar-icon-button {
+  /* Añadimos body y .navbar-icon-button */
   display: none;
 }
 
@@ -2250,23 +2255,24 @@ body .logged-in.navbar-icon-button { /* Añadimos body y .navbar-icon-button */
 body.user-logged-in .logged-out.navbar-icon-button {
   display: none;
 }
+
 body.user-logged-in .logged-in.navbar-icon-button {
-  display: flex; /* O inline-flex */
+  display: flex;
+  /* O inline-flex */
 }
 
 /*ajuste responsive (para los del frontend, ajustar aquí)*/
 @media (max-width: 900px) {
-  nav#navMenu.show .user-actions {
-     
-  }
+  nav#navMenu.show .user-actions {}
+
   .navbar .user-actions {
-     order: 3;
+    order: 3;
   }
 
   .navbar-icon-button {
-     width: 36px;
-     height: 36px;
-     font-size: 18px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
   }
 }
 
@@ -2370,9 +2376,9 @@ body.user-logged-in .logged-in.navbar-icon-button {
   display: flex;
   align-items: center;
   gap: 2.5rem;
-  position: absolute;
+  /* position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
 }
 
 .navbar-links {
@@ -2518,11 +2524,8 @@ body.user-logged-in .logged-in.navbar-icon-button {
 /* Navbar Right */
 .navbar-right {
   display: flex;
-  gap: 0.75rem;
   align-items: center;
-  margin-left: auto;
-  position: relative;
-  z-index: 10;
+  gap: 0.75rem;
 }
 
 /* User Dropdown - Con delay también */
@@ -2533,7 +2536,7 @@ body.user-logged-in .logged-in.navbar-icon-button {
 .user-dropdown-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 10px);
   right: 0;
   background: rgba(20, 20, 20, 0.98);
   border: 1px solid rgba(114, 9, 183, 0.3);
@@ -2542,11 +2545,19 @@ body.user-logged-in .logged-in.navbar-icon-button {
   min-width: 260px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(20px);
-  z-index: 1001;
+  z-index: 1010;
 }
 
 .user-dropdown.active .user-dropdown-menu {
   display: block;
+}
+
+.user-dropdown-menu .admin-only {
+    display: none;
+}
+
+body.user-is-admin .user-dropdown-menu .admin-only {
+     display: flex;
 }
 
 /* Área invisible para mantener el user dropdown abierto */
@@ -2663,7 +2674,7 @@ body.user-logged-in .logged-in.navbar-icon-button {
   .navbar-search {
     width: 320px;
   }
-  
+
   .navbar-center {
     gap: 1.5rem;
   }
@@ -2677,7 +2688,7 @@ body.user-logged-in .logged-in.navbar-icon-button {
   .navbar-center {
     display: none;
   }
-  
+
   .menu-toggle {
     display: block;
     order: 1;
@@ -2712,5 +2723,54 @@ body.user-logged-in .logged-in.navbar-icon-button {
     font-size: 18px;
   }
 }
+
+.logged-out-actions,
+.logged-in-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.navbar-login-link {
+    color: #c9a7eb;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.navbar-login-link:hover {
+    color: #fff;
+    background-color: rgba(114, 9, 183, 0.2);
+}
+
+.btn-join {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(90deg, #6a0dad, #8a2be2);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+}
+.btn-join:hover {
+    background: linear-gradient(90deg, #560bad, #7209b7);
+    box-shadow: 0 0 25px rgba(138, 43, 226, 0.6);
+    transform: scale(1.05);
+}
+.btn-join i { font-size: 1em; }
+
+.user-dropdown > button.navbar-icon-button {
+    
+}
+
+body .logged-out-actions { display: flex; }
+body .logged-in-actions { display: none; }
+
+body.user-logged-in .logged-out-actions { display: none; }
+body.user-logged-in .logged-in-actions { display: flex; } 
 
 /* ===== FIN NAVBAR MEJORADO ===== */
