@@ -85,28 +85,53 @@
           </a>
         </div>
       </li>
-      <li><a href="/pages/contacto.html">CONTACTO</a></li>
+      <li>
+        <a>COMUNIDAD <i class="bi bi-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item">
+            <i class="bi bi-house"></i>
+            <span>Feed</span>
+          </a>
+          <a href="#" class="dropdown-item">
+            <i class="bi bi-people"></i>
+            <span>Productores</span>
+          </a>
+          <a href="#" class="dropdown-item">
+            <i class="bi bi-hand-index-thumb"></i>
+            <span>Colaboraciones</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="bi bi-chat-dots"></i>
+            <span>Foros</span>
+          </a>
+          <a href="#" class="dropdown-item">
+            <i class="bi bi-calendar-event"></i>
+            <span>Eventos</span>
+          </a>
+        </div>
+      </li>
     </ul>
 
     <div class="navbar-search">
-      <input type="text" placeholder="Buscar presets, cursos...">
+      <input type="text" placeholder="Buscar beats, kits, productores...">
       <i class="bi bi-search"></i>
     </div>
   </div>
 
   <div class="navbar-right">
-    <a href="cart.html" class="navbar-icon-button" title="Carrito">
+    <a href="/pages/cart.html" class="navbar-icon-button" title="Carrito">
       <i class="bi bi-cart3"></i>
     </a>
     
     <div class="user-dropdown">
-      <div class="navbar-icon-button logged-out" onclick="window.location.href='/pages/login.html'" title="Iniciar Sesión">
+      <a href="/pages/login.html" class="navbar-icon-button logged-out" title="Iniciar Sesión">
         <i class="bi bi-person"></i>
-      </div>
+      </a>
       
-      <div class="navbar-icon-button logged-in" onclick="toggleUserDropdown()" title="Mi Cuenta" style="display: none;">
+      <button class="navbar-icon-button logged-in" onclick="toggleUserDropdown()" title="Mi Cuenta" style="display: none;">
         <i class="bi bi-person-check"></i>
-      </div>
+      </button>
       
       <div class="user-dropdown-menu">
         <div class="user-dropdown-header">
@@ -132,7 +157,7 @@
           <i class="bi bi-gear"></i>
           <span>Configuración</span>
         </a>
-        <a href="#" class="user-dropdown-item logout" id="global-logout-button">
+        <a href="#" class="user-dropdown-item logout" onclick="handleLogout()">
           <i class="bi bi-box-arrow-right"></i>
           <span>Cerrar Sesión</span>
         </a>
@@ -140,7 +165,6 @@
     </div>
   </div>
 </header>
-
 <!-- ==================== HERO ==================== -->
 <section class="hero" id="inicio">
   <div class="hero-content">
