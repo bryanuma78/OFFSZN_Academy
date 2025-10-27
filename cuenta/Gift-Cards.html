@@ -2084,6 +2084,12 @@
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Girando...';
 
+            // Premios en orden EXACTO de la ruleta (sentido horario desde arriba)
+            // La flecha apunta ARRIBA (0°), los segmentos son:
+            // 0-90°: $1 USD (índice 0)
+            // 90-180°: 10% OFF (índice 1)
+            // 180-270°: 15% OFF (índice 2)
+            // 270-360°: 20% OFF (índice 3)
             const prizes = [
                 { 
                     text: '$1 USD',
@@ -2091,7 +2097,9 @@
                     type: 'money',
                     isDiscount: false,
                     description: 'Premio de la ruleta mensual.',
-                    label: `Ruleta ${monthNames[currentMonth]} ${currentYear}`
+                    label: `Ruleta ${monthNames[currentMonth]} ${currentYear}`,
+                    segmentStart: 0,
+                    segmentEnd: 90
                 },
                 { 
                     text: '10% OFF',
@@ -2099,7 +2107,9 @@
                     type: 'discount',
                     isDiscount: true,
                     description: 'Aplica a 1 producto. No acumulable.',
-                    label: 'Descuento 10%'
+                    label: 'Descuento 10%',
+                    segmentStart: 90,
+                    segmentEnd: 180
                 },
                 { 
                     text: '15% OFF',
@@ -2107,7 +2117,9 @@
                     type: 'discount',
                     isDiscount: true,
                     description: 'Aplica a 1 producto. No acumulable.',
-                    label: 'Descuento 15%'
+                    label: 'Descuento 15%',
+                    segmentStart: 180,
+                    segmentEnd: 270
                 },
                 { 
                     text: '20% OFF',
@@ -2115,17 +2127,29 @@
                     type: 'discount',
                     isDiscount: true,
                     description: 'Aplica a 1 producto. No acumulable.',
-                    label: 'Descuento 20%'
+                    label: 'Descuento 20%',
+                    segmentStart: 270,
+                    segmentEnd: 360
                 }
             ];
 
+            // Seleccionar premio aleatorio
             const randomIndex = Math.floor(Math.random() * 4);
             const selectedPrize = prizes[randomIndex];
             
-            const baseRotation = 3600;
-            const randomExtraDegrees = Math.random() * 60 + 15;
-            const segmentRotation = randomIndex * 90 + randomExtraDegrees;
-            const finalRotation = baseRotation + segmentRotation;
+            // Calcular rotación para que la flecha apunte al centro del segmento seleccionado
+            const baseRotation = 3600; // 10 vueltas completas
+            const segmentCenter = (selectedPrize.segmentStart + selectedPrize.segmentEnd) / 2;
+            const randomOffset = (Math.random() * 40) - 20; // Variación de ±20° dentro del segmento
+            
+            // La flecha está arriba (0°), necesitamos rotar la ruleta para que el premio quede arriba
+            // Por eso restamos: queremos que el segmento suba hasta la flecha
+            const targetRotation = 360 - segmentCenter + randomOffset;
+            const finalRotation = baseRotation + targetRotation;
+
+            console.log(`🎯 Premio seleccionado: ${selectedPrize.text} (índice ${randomIndex})`);
+            console.log(`📐 Segmento: ${selectedPrize.segmentStart}° - ${selectedPrize.segmentEnd}°`);
+            console.log(`🎲 Rotación final: ${finalRotation}° (target: ${targetRotation}°)`);
 
             wheel.style.transform = `rotate(${finalRotation}deg)`;
 
@@ -2151,6 +2175,7 @@
                 const spinInfo = document.getElementById('spin-info');
                 spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
 
+                console.log(`✅ Premio otorgado correctamente: ${selectedPrize.text}`);
                 saveState();
             }, 5000);
         }
