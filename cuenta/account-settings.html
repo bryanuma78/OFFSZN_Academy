@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - OFFSZN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reusing all styles from gift-cards.html */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+
+        /* Navbar styles from gift-cards.html - keeping exactly the same */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 3rem;
+            background: rgba(0, 0, 0, 0.98);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+        }
+
+        .navbar .logo a {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-center {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .navbar-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            color: #999;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .navbar-links a:hover {
+            color: #fff;
+        }
+
+        .navbar-search {
+            position: relative;
+            width: 380px;
+        }
+
+        .navbar-search input {
+            width: 100%;
+            padding: 0.6rem 2.5rem 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .navbar-search i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .navbar-right {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .navbar-icon-button {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 16px;
+            transition: all 0.2s;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .navbar-icon-button:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        /* Dashboard Layout */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: calc(100vh - 57px);
+        }
+
+        /* Sidebar styles from gift-cards.html */
+        .sidebar {
+            background: rgba(15, 15, 15, 0.6);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 57px;
+            height: calc(100vh - 57px);
+            overflow-y: auto;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .profile-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .profile-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .wallet-section {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .wallet-label {
+            font-size: 0.7rem;
+            color: #999;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .wallet-amount {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .upload-btn {
+            margin: 20px 20px 0;
+            padding: 14px 18px;
+            background: #8b5cf6;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            width: calc(100% - 40px);
+        }
+
+        .upload-btn:hover {
+            background: #7c3aed;
+        }
+
+        .sidebar-search {
+            margin: 16px 20px;
+            position: relative;
+        }
+
+        .sidebar-search input {
+            width: 100%;
+            padding: 10px 36px 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .sidebar-menu {
+            padding: 12px 0;
+        }
+
+        .menu-section-title {
+            padding: 16px 20px 8px;
+            font-size: 0.65rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 20px;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        .menu-item.active {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+            border-left: 2px solid #8b5cf6;
+        }
+
+        .menu-item.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .menu-item i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .menu-item .badge {
+            margin-left: auto;
+            background: #8b5cf6;
+            color: #fff;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+
+        .menu-item .soon-badge {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.08);
+            color: #666;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .menu-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 12px 20px;
+        }
+
+        .logout-btn {
+            margin: 20px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            padding: 11px 18px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 36px 48px;
+            background: #0a0a0a;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .breadcrumb .active {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Settings Sections */
+        .settings-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            color: #e5e5e5;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .form-input::placeholder {
+            color: #666;
+        }
+
+        textarea.form-input {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .social-input-group {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+        }
+
+        .verify-btn {
+            padding: 12px 24px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 10px;
+            color: #8b5cf6;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .verify-btn:hover {
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        .verify-btn.verified {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+            cursor: default;
+        }
+
+        .form-helper {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        .save-btn {
+            padding: 14px 32px;
+            background: #8b5cf6;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .save-btn:hover {
+            background: #7c3aed;
+            transform: translateY(-1px);
+        }
+
+        .success-message {
+            display: none;
+            padding: 12px 20px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 10px;
+            color: #22c55e;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .success-message.show {
+            display: flex;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: .4s;
+            border-radius: 34px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 3px;
+            background-color: #666;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: rgba(139, 92, 246, 0.3);
+            border-color: #8b5cf6;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+            background-color: #8b5cf6;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info h4 {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .setting-info p {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .danger-zone {
+            background: rgba(239, 68, 68, 0.05);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .danger-btn {
+            padding: 12px 28px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 10px;
+            color: #ef4444;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .danger-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+            }
+
+            .social-input-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">OFFSZN</a>
+        </div>
+
+        <div class="navbar-center">
+            <ul class="navbar-links">
+                <li><a href="index.html">INICIO</a></li>
+                <li><a href="recursos.html">RECURSOS</a></li>
+                <li><a href="comunidad.html">COMUNIDAD</a></li>
+            </ul>
+
+            <div class="navbar-search">
+                <input type="text" placeholder="Buscar beats, kits, productores...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <div class="navbar-right">
+            <a href="notifications.html" class="navbar-icon-button">
+                <i class="fas fa-bell"></i>
+            </a>
+            <a href="cart.html" class="navbar-icon-button">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+            <a href="dashboard.html" class="navbar-icon-button">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="profile-header">
+                <div class="profile-info">
+                    <div class="profile-avatar">W</div>
+                    <div>
+                        <div class="profile-name" id="sidebar-name">Willie Inspired</div>
+                    </div>
+                </div>
+                <div class="profile-badge">
+                    <i class="fas fa-award"></i>
+                    Top Seller
+                </div>
+            </div>
+
+            <div class="wallet-section">
+                <div class="wallet-label">Saldo Disponible</div>
+                <div class="wallet-amount">$0.00</div>
+            </div>
+
+            <button class="upload-btn" onclick="alert('Función disponible pronto')">
+                <i class="fas fa-cloud-upload-alt"></i>
+                Subir Kit
+            </button>
+
+            <div class="sidebar-search">
+                <input type="text" placeholder="Buscar mis productos...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="sidebar-menu">
+                <div class="menu-section-title">Principal</div>
+                
+                <a href="dashboard.html" class="menu-item">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#" class="menu-item disabled">
+                    <i class="fas fa-music"></i>
+                    <span>Mis Kits</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <a href="#" class="menu-item disabled">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analíticas</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <a href="#" class="menu-item disabled">
+                    <i class="fas fa-heart"></i>
+                    <span>Favoritos</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <a href="#" class="menu-item disabled">
+                    <i class="fas fa-history"></i>
+                    <span>Historial</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <div class="menu-divider"></div>
+
+                <div class="menu-section-title">Colaboración</div>
+
+                <a href="#" class="menu-item disabled">
+                    <i class="fas fa-users"></i>
+                    <span>Colaboraciones</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <div class="menu-divider"></div>
+
+                <div class="menu-section-title">Compras</div>
+
+                <a href="#" class="menu-item disabled">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Mis Compras</span>
+                    <span class="soon-badge">Pronto</span>
+                </a>
+
+                <a href="gift-cards.html" class="menu-item">
+                    <i class="fas fa-gift"></i>
+                    <span>Gift Cards</span>
+                </a>
+
+                <a href="messages.html" class="menu-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Mensajes</span>
+                    <span class="badge">3</span>
+                </a>
+
+                <div class="menu-divider"></div>
+
+                <div class="menu-section-title">Configuración</div>
+
+                <a href="account-settings.html" class="menu-item active">
+                    <i class="fas fa-cog"></i>
+                    <span>Configuración</span>
+                </a>
+
+                <a href="blog.html" class="menu-item">
+                    <i class="fas fa-book-open"></i>
+                    <span>Blog</span>
+                </a>
+            </div>
+
+            <a href="logout.html" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+            </a>
+        </aside>
+
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <span><i class="fas fa-chevron-right"></i></span>
+                <span class="active">Configuración</span>
+            </div>
+
+            <div class="page-header">
+                <h1 class="page-title">⚙️ Configuración de Cuenta</h1>
+                <p class="page-subtitle">Administra tu información personal, redes sociales y preferencias.</p>
+            </div>
+
+            <div id="success-message" class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <span>Cambios guardados exitosamente</span>
+            </div>
+
+            <!-- Información Personal -->
+            <div class="settings-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user"></i>
+                    Información Personal
+                </h2>
+
+                <div class="form-group">
+                    <label class="form-label">Nombre Completo</label>
+                    <input type="text" class="form-input" id="fullName" placeholder="Tu nombre completo">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nombre de Usuario</label>
+                    <input type="text" class="form-input" id="username" placeholder="@tu_usuario">
+                    <p class="form-helper">Este será tu identificador único en OFFSZN</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="email" placeholder="tu@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Bio / Descripción</label>
+                    <textarea class="form-input" id="bio" placeholder="Cuéntanos sobre ti y tu música..."></textarea>
+                    <p class="form-helper">Máximo 200 caracteres</p>
+                </div>
+
+                <button class="save-btn" onclick="savePersonalInfo()">
+                    <i class="fas fa-save"></i>
+                    Guardar Cambios
+                </button>
+            </div>
+
+            <!-- Redes Sociales -->
+            <div class="settings-section">
+                <h2 class="section-title">
+                    <i class="fas fa-share-alt"></i>
+                    Redes Sociales
+                </h2>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fab fa-youtube" style="color: #ff0000;"></i> YouTube
+                    </label>
+                    <div class="social-input-group">
+                        <input type="text" class="form-input" id="youtube" placeholder="https://youtube.com/@usuario o @usuario">
+                        <button class="verify-btn" id="youtube-verify" onclick="verifySocial('youtube')">
+                            <i class="fas fa-check"></i> Verificar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fab fa-instagram" style="color: #e4405f;"></i> Instagram
+                    </label>
+                    <div class="social-input-group">
+                        <input type="text" class="form-input" id="instagram" placeholder="https://instagram.com/usuario o @usuario">
+                        <button class="verify-btn" id="instagram-verify" onclick="verifySocial('instagram')">
+                            <i class="fas fa-check"></i> Verificar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fab fa-tiktok" style="color: #000;"></i> TikTok
+                    </label>
+                    <div class="social-input-group">
+                        <input type="text" class="form-input" id="tiktok" placeholder="https://tiktok.com/@usuario o @usuario">
+                        <button class="verify-btn" id="tiktok-verify" onclick="verifySocial('tiktok')">
+                            <i class="fas fa-check"></i> Verificar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fab fa-spotify" style="color: #1db954;"></i> Spotify
+                    </label>
+                    <div class="social-input-group">
+                        <input type="text" class="form-input" id="spotify" placeholder="https://open.spotify.com/artist/...">
+                        <button class="verify-btn" id="spotify-verify" onclick="verifySocial('spotify')">
+                            <i class="fas fa-check"></i> Verificar
+                        </button>
+                    </div>
+                </div>
+
+                <button class="save-btn" onclick="saveSocialMedia()">
+                    <i class="fas fa-save"></i>
+                    Guardar Redes Sociales
+                </button>
+            </div>
+
+            <!-- Seguridad -->
+            <div class="settings-section">
+                <h2 class="section-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Seguridad
+                </h2>
+
+                <div class="form-group">
+                    <label class="form-label">Contraseña Actual</label>
+                    <input type="password" class="form-input" id="currentPassword" placeholder="••••••••">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nueva Contraseña</label>
+                    <input type="password" class="form-input" id="newPassword" placeholder="••••••••">
+                    <p class="form-helper">Mínimo 8 caracteres, incluye mayúsculas, minúsculas y números</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Confirmar Nueva Contraseña</label>
+                    <input type="password" class="form-input" id="confirmPassword" placeholder="••••••••">
+                </div>
+
+                <button class="save-btn" onclick="changePassword()">
+                    <i class="fas fa-key"></i>
+                    Cambiar Contraseña
+                </button>
+
+                <div class="menu-divider" style="margin: 32px 0;"></div>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Autenticación de Dos Factores (2FA)</h4>
+                        <p>Agrega una capa extra de seguridad a tu cuenta</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="twoFactor" onchange="toggle2FA()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Notificaciones -->
+            <div class="settings-section">
+                <h2 class="section-title">
+                    <i class="fas fa-bell"></i>
+                    Notificaciones
+                </h2>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Notificaciones por Email</h4>
+                        <p>Recibe actualizaciones y ofertas por correo</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="emailNotif" checked onchange="saveNotifications()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Nuevas Ventas</h4>
+                        <p>Notificarme cuando alguien compre mis productos</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="salesNotif" checked onchange="saveNotifications()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Nuevos Mensajes</h4>
+                        <p>Alertas cuando recibas mensajes nuevos</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="messagesNotif" checked onchange="saveNotifications()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Colaboraciones</h4>
+                        <p>Notificarme sobre nuevas oportunidades de colaboración</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="collabNotif" checked onchange="saveNotifications()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Noticias y Actualizaciones</h4>
+                        <p>Mantenerme informado sobre nuevas funciones de OFFSZN</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="newsNotif" onchange="saveNotifications()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Privacidad -->
+            <div class="settings-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user-secret"></i>
+                    Privacidad
+                </h2>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Perfil Público</h4>
+                        <p>Permitir que otros usuarios vean tu perfil</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="publicProfile" checked onchange="savePrivacy()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Mostrar Email</h4>
+                        <p>Hacer visible tu email en tu perfil público</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="showEmail" onchange="savePrivacy()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Mostrar Estadísticas de Ventas</h4>
+                        <p>Permitir que otros vean tus estadísticas de ventas</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="showStats" checked onchange="savePrivacy()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Mensajes de Desconocidos</h4>
+                        <p>Permitir que cualquier usuario te envíe mensajes</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="allowMessages" checked onchange="savePrivacy()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Zona Peligrosa -->
+            <div class="settings-section danger-zone">
+                <h2 class="section-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Zona de Peligro
+                </h2>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Desactivar Cuenta</h4>
+                        <p>Tu cuenta será ocultada pero podrás reactivarla después</p>
+                    </div>
+                    <button class="danger-btn" onclick="deactivateAccount()">
+                        Desactivar
+                    </button>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-info">
+                        <h4>Eliminar Cuenta</h4>
+                        <p>Eliminar permanentemente tu cuenta y todos tus datos</p>
+                    </div>
+                    <button class="danger-btn" onclick="deleteAccount()">
+                        Eliminar Cuenta
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ===== STORAGE KEY =====
+        const STORAGE_KEY = 'offszn_account_settings';
+
+        // ===== STATE =====
+        let accountSettings = {
+            personalInfo: {
+                fullName: 'Willie Inspired',
+                username: '@willie_inspired',
+                email: 'willie@offszn.com',
+                bio: 'Productor musical especializado en trap y reggaeton. Creando beats únicos desde 2020.'
+            },
+            socialMedia: {
+                youtube: '',
+                instagram: '',
+                tiktok: '',
+                spotify: '',
+                verified: {
+                    youtube: false,
+                    instagram: false,
+                    tiktok: false,
+                    spotify: false
+                }
+            },
+            security: {
+                twoFactor: false
+            },
+            notifications: {
+                email: true,
+                sales: true,
+                messages: true,
+                collab: true,
+                news: false
+            },
+            privacy: {
+                publicProfile: true,
+                showEmail: false,
+                showStats: true,
+                allowMessages: true
+            }
+        };
+
+        // ===== LOAD & SAVE =====
+        function loadSettings() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    accountSettings = { ...accountSettings, ...JSON.parse(saved) };
+                    console.log('✅ Configuración cargada:', accountSettings);
+                }
+            } catch (error) {
+                console.error('❌ Error al cargar configuración:', error);
+            }
+        }
+
+        function saveSettings() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(accountSettings));
+                console.log('✅ Configuración guardada:', accountSettings);
+                showSuccessMessage();
+            } catch (error) {
+                console.error('❌ Error al guardar configuración:', error);
+                alert('Error al guardar. Intenta de nuevo.');
+            }
+        }
+
+        function showSuccessMessage() {
+            const msg = document.getElementById('success-message');
+            msg.classList.add('show');
+            setTimeout(() => {
+                msg.classList.remove('show');
+            }, 3000);
+        }
+
+        // ===== POPULATE FORM =====
+        function populateForm() {
+            // Personal Info
+            document.getElementById('fullName').value = accountSettings.personalInfo.fullName;
+            document.getElementById('username').value = accountSettings.personalInfo.username;
+            document.getElementById('email').value = accountSettings.personalInfo.email;
+            document.getElementById('bio').value = accountSettings.personalInfo.bio;
+
+            // Social Media
+            document.getElementById('youtube').value = accountSettings.socialMedia.youtube;
+            document.getElementById('instagram').value = accountSettings.socialMedia.instagram;
+            document.getElementById('tiktok').value = accountSettings.socialMedia.tiktok;
+            document.getElementById('spotify').value = accountSettings.socialMedia.spotify;
+
+            // Update verify buttons
+            Object.keys(accountSettings.socialMedia.verified).forEach(platform => {
+                const btn = document.getElementById(`${platform}-verify`);
+                if (accountSettings.socialMedia.verified[platform]) {
+                    btn.classList.add('verified');
+                    btn.innerHTML = '<i class="fas fa-check-circle"></i> Verificado';
+                }
+            });
+
+            // Security
+            document.getElementById('twoFactor').checked = accountSettings.security.twoFactor;
+
+            // Notifications
+            document.getElementById('emailNotif').checked = accountSettings.notifications.email;
+            document.getElementById('salesNotif').checked = accountSettings.notifications.sales;
+            document.getElementById('messagesNotif').checked = accountSettings.notifications.messages;
+            document.getElementById('collabNotif').checked = accountSettings.notifications.collab;
+            document.getElementById('newsNotif').checked = accountSettings.notifications.news;
+
+            // Privacy
+            document.getElementById('publicProfile').checked = accountSettings.privacy.publicProfile;
+            document.getElementById('showEmail').checked = accountSettings.privacy.showEmail;
+            document.getElementById('showStats').checked = accountSettings.privacy.showStats;
+            document.getElementById('allowMessages').checked = accountSettings.privacy.allowMessages;
+
+            // Update sidebar name
+            const sidebarName = document.getElementById('sidebar-name');
+            if (sidebarName) {
+                sidebarName.textContent = accountSettings.personalInfo.fullName;
+            }
+        }
+
+        // ===== SAVE FUNCTIONS =====
+        function savePersonalInfo() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const bio = document.getElementById('bio').value.trim();
+
+            if (!fullName || !username || !email) {
+                alert('❌ Por favor completa todos los campos obligatorios');
+                return;
+            }
+
+            if (bio.length > 200) {
+                alert('❌ La bio no puede exceder 200 caracteres');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                alert('❌ Email inválido');
+                return;
+            }
+
+            accountSettings.personalInfo = {
+                fullName,
+                username,
+                email,
+                bio
+            };
+
+            saveSettings();
+
+            // Update sidebar
+            const sidebarName = document.getElementById('sidebar-name');
+            if (sidebarName) {
+                sidebarName.textContent = fullName;
+            }
+        }
+
+        function saveSocialMedia() {
+            accountSettings.socialMedia.youtube = document.getElementById('youtube').value.trim();
+            accountSettings.socialMedia.instagram = document.getElementById('instagram').value.trim();
+            accountSettings.socialMedia.tiktok = document.getElementById('tiktok').value.trim();
+            accountSettings.socialMedia.spotify = document.getElementById('spotify').value.trim();
+
+            saveSettings();
+        }
+
+        function verifySocial(platform) {
+            const input = document.getElementById(platform).value.trim();
+            
+            if (!input) {
+                alert(`❌ Por favor ingresa tu ${platform} primero`);
+                return;
+            }
+
+            // Simple validation
+            let isValid = false;
+            switch(platform) {
+                case 'youtube':
+                    isValid = input.includes('youtube.com') || input.startsWith('@');
+                    break;
+                case 'instagram':
+                    isValid = input.includes('instagram.com') || input.startsWith('@');
+                    break;
+                case 'tiktok':
+                    isValid = input.includes('tiktok.com') || input.startsWith('@');
+                    break;
+                case 'spotify':
+                    isValid = input.includes('spotify.com');
+                    break;
+            }
+
+            if (!isValid) {
+                alert(`❌ Link o usuario de ${platform} inválido`);
+                return;
+            }
+
+            // Mark as verified
+            accountSettings.socialMedia.verified[platform] = true;
+            const btn = document.getElementById(`${platform}-verify`);
+            btn.classList.add('verified');
+            btn.innerHTML = '<i class="fas fa-check-circle"></i> Verificado';
+
+            saveSettings();
+        }
+
+        function changePassword() {
+            const current = document.getElementById('currentPassword').value;
+            const newPass = document.getElementById('newPassword').value;
+            const confirm = document.getElementById('confirmPassword').value;
+
+            if (!current || !newPass || !confirm) {
+                alert('❌ Por favor completa todos los campos');
+                return;
+            }
+
+            if (newPass !== confirm) {
+                alert('❌ Las contraseñas no coinciden');
+                return;
+            }
+
+            if (newPass.length < 8) {
+                alert('❌ La contraseña debe tener al menos 8 caracteres');
+                return;
+            }
+
+            // In real app, validate with backend
+            alert('✅ Contraseña cambiada exitosamente');
+            
+            // Clear fields
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        function toggle2FA() {
+            accountSettings.security.twoFactor = document.getElementById('twoFactor').checked;
+            
+            if (accountSettings.security.twoFactor) {
+                alert('✅ Autenticación de dos factores activada. Recibirás un código por email al iniciar sesión.');
+            } else {
+                alert('⚠️ Autenticación de dos factores desactivada');
+            }
+            
+            saveSettings();
+        }
+
+        function saveNotifications() {
+            accountSettings.notifications = {
+                email: document.getElementById('emailNotif').checked,
+                sales: document.getElementById('salesNotif').checked,
+                messages: document.getElementById('messagesNotif').checked,
+                collab: document.getElementById('collabNotif').checked,
+                news: document.getElementById('newsNotif').checked
+            };
+            saveSettings();
+        }
+
+        function savePrivacy() {
+            accountSettings.privacy = {
+                publicProfile: document.getElementById('publicProfile').checked,
+                showEmail: document.getElementById('showEmail').checked,
+                showStats: document.getElementById('showStats').checked,
+                allowMessages: document.getElementById('allowMessages').checked
+            };
+            saveSettings();
+        }
+
+        function deactivateAccount() {
+            const confirm = prompt('⚠️ ¿Estás seguro? Escribe "DESACTIVAR" para confirmar:');
+            if (confirm === 'DESACTIVAR') {
+                alert('✅ Tu cuenta ha sido desactivada. Puedes reactivarla iniciando sesión de nuevo.');
+                // In real app: redirect to logout
+            }
+        }
+
+        function deleteAccount() {
+            const confirm = prompt('🚨 PELIGRO: Esta acción es irreversible. Escribe "ELIMINAR CUENTA" para confirmar:');
+            if (confirm === 'ELIMINAR CUENTA') {
+                const doubleConfirm = confirm('¿Realmente deseas eliminar tu cuenta y todos tus datos permanentemente?');
+                if (doubleConfirm) {
+                    alert('❌ Tu cuenta ha sido eliminada permanentemente.');
+                    localStorage.removeItem(STORAGE_KEY);
+                    // In real app: API call + redirect to homepage
+                }
+            }
+        }
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSettings();
+            populateForm();
+
+            // Auto-save every 30 seconds
+            setInterval(() => {
+                console.log('🔄 Auto-guardado de configuración');
+            }, 30000);
+        });
+
+        // Save before leaving
+        window.addEventListener('beforeunload', function() {
+            // Settings are already saved on each action
+        });
+    </script>
+</body>
+  </html>
