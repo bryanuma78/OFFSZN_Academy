@@ -1878,24 +1878,55 @@
     <script>
         // ===== CONFIGURACIÓN =====
         const EXCHANGE_RATE = 3.8;
+        const STORAGE_KEY = 'offszn_giftcards_state';
 
         // ===== ESTADO DE LA APLICACIÓN =====
         let appState = {
             currentCurrency: 'USD',
             hasClaimedWelcome: false,
-            hasSpunThisMonth: false,
+            lastSpinMonth: null,
             totalBalance: 0,
             giftCards: []
         };
+
+        // ===== FUNCIONES DE ALMACENAMIENTO =====
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+                console.log('Estado guardado exitosamente');
+            } catch (error) {
+                console.error('Error al guardar estado:', error);
+            }
+        }
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    appState = { ...appState, ...parsed };
+                    console.log('Estado cargado:', appState);
+                    return true;
+                }
+            } catch (error) {
+                console.error('Error al cargar estado:', error);
+            }
+            return false;
+        }
 
         // ===== FECHA Y MES =====
         const today = new Date();
         const currentMonth = today.getMonth();
         const currentYear = today.getFullYear();
+        const currentMonthKey = `${currentYear}-${currentMonth}`;
         const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
         const nextMonthYear = currentMonth === 11 ? currentYear + 1 : currentYear;
         const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
                             'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+        function hasSpunThisMonth() {
+            return appState.lastSpinMonth === currentMonthKey;
+        }
 
         // ===== FUNCIONES DE MONEDA =====
         function changeCurrency(currency) {
@@ -1905,6 +1936,7 @@
             document.getElementById('pen-btn').classList.toggle('active', currency === 'PEN');
 
             updateAllAmounts();
+            saveState();
         }
 
         function formatAmount(usd) {
@@ -1957,6 +1989,7 @@
                 appState.totalBalance += value;
             }
 
+            saveState();
             updateAllAmounts();
         }
 
@@ -1997,7 +2030,10 @@
 
         // ===== FUNCIONES DE REGALO DE BIENVENIDA =====
         function claimWelcomeGift() {
-            if (appState.hasClaimedWelcome) return;
+            if (appState.hasClaimedWelcome) {
+                alert('Ya has reclamado tu regalo de bienvenida.');
+                return;
+            }
 
             appState.hasClaimedWelcome = true;
             
@@ -2012,6 +2048,8 @@
             const welcomePrize = document.getElementById('welcome-prize');
             welcomePrize.textContent = formatAmount(5);
             document.getElementById('welcome-modal').classList.add('active');
+
+            saveState();
         }
 
         // ===== FUNCIONES DE RULETA =====
@@ -2019,13 +2057,19 @@
             const spinBtn = document.getElementById('spin-btn');
             const spinInfo = document.getElementById('spin-info');
             
-            spinBtn.disabled = false;
-            spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Disponible ahora - ¡Gira y gana!`;
+            if (hasSpunThisMonth()) {
+                spinBtn.disabled = true;
+                spinBtn.innerHTML = '<i class="fas fa-check"></i> Ya Giraste Este Mes';
+                spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
+            } else {
+                spinBtn.disabled = false;
+                spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Disponible ahora - ¡Gira y gana!`;
+            }
         }
 
         function spinWheel() {
-            if (appState.hasSpunThisMonth) {
-                alert('Ya has girado la ruleta este mes. ¡Vuelve el próximo mes!');
+            if (hasSpunThisMonth()) {
+                alert(`Ya has girado la ruleta este mes. Podrás girar nuevamente el 1 de ${monthNames[nextMonth]} ${nextMonthYear}.`);
                 return;
             }
 
@@ -2086,7 +2130,7 @@
             wheel.style.transform = `rotate(${finalRotation}deg)`;
 
             setTimeout(() => {
-                appState.hasSpunThisMonth = true;
+                appState.lastSpinMonth = currentMonthKey;
                 
                 addGiftCard(
                     selectedPrize.label, 
@@ -2105,7 +2149,9 @@
                 btn.innerHTML = '<i class="fas fa-check"></i> Ya Giraste Este Mes';
                 
                 const spinInfo = document.getElementById('spin-info');
-                spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta disponible: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
+                spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
+
+                saveState();
             }, 5000);
         }
 
@@ -2134,9 +2180,33 @@
             }
         }
 
+        // ===== INICIALIZACIÓN =====
+        function initApp() {
+            loadState();
+
+            if (appState.currentCurrency === 'PEN') {
+                document.getElementById('usd-btn').classList.remove('active');
+                document.getElementById('pen-btn').classList.add('active');
+            }
+
+            if (appState.hasClaimedWelcome) {
+                const btn = document.getElementById('claim-welcome');
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-check"></i> Regalo Reclamado';
+                enableWheel();
+            } else {
+                const spinBtn = document.getElementById('spin-btn');
+                spinBtn.disabled = true;
+                const spinInfo = document.getElementById('spin-info');
+                spinInfo.innerHTML = `<i class="fas fa-lock"></i> Reclama tu regalo de bienvenida primero`;
+            }
+
+            updateAllAmounts();
+        }
+
         // ===== EVENT LISTENERS =====
         document.addEventListener('DOMContentLoaded', function() {
-            updateAllAmounts();
+            initApp();
 
             document.getElementById('usd-btn').addEventListener('click', () => changeCurrency('USD'));
             document.getElementById('pen-btn').addEventListener('click', () => changeCurrency('PEN'));
@@ -2157,17 +2227,14 @@
                     userDropdown.classList.remove('active');
                 }
             });
-
-            const spinBtn = document.getElementById('spin-btn');
-            if (spinBtn) {
-                spinBtn.disabled = true;
-            }
-
-            const spinInfo = document.getElementById('spin-info');
-            if (spinInfo) {
-                spinInfo.innerHTML = `<i class="fas fa-lock"></i> Reclama tu regalo de bienvenida primero`;
-            }
         });
+
+        // ===== PREVENIR PÉRDIDA DE DATOS =====
+        window.addEventListener('beforeunload', function(e) {
+            saveState();
+        });
+
+        setInterval(saveState, 30000);
     </script>
 </body>
 </html>
