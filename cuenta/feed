@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed - OFFSZN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 3rem;
+            background: rgba(0, 0, 0, 0.98);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+        }
+
+        .navbar .logo a {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-center {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .navbar-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .navbar-links li {
+            position: relative;
+        }
+
+        .navbar-links a {
+            color: #999;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .navbar-links a:hover {
+            color: #fff;
+        }
+
+        .navbar-links a.active {
+            color: #8b5cf6;
+        }
+
+        .navbar-links a i.fa-chevron-down {
+            font-size: 0.7rem;
+            transition: transform 0.2s;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 0;
+            background: rgba(20, 20, 20, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+        }
+
+        .navbar-links li:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+        }
+
+        .dropdown-item.active {
+            background: rgba(139, 92, 246, 0.15);
+            color: #8b5cf6;
+        }
+
+        .dropdown-item i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .navbar-search {
+            position: relative;
+            width: 380px;
+        }
+
+        .navbar-search input {
+            width: 100%;
+            padding: 0.6rem 2.5rem 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .navbar-search input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .navbar-search i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .navbar-right {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .navbar-icon-button {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 16px;
+            transition: all 0.2s;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .navbar-icon-button:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .navbar-icon-button .badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 5px;
+            border-radius: 10px;
+            min-width: 18px;
+        }
+
+        /* ===== FEED CONTAINER ===== */
+        .feed-container {
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            gap: 24px;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px;
+            min-height: calc(100vh - 57px);
+        }
+
+        /* ===== LEFT SIDEBAR ===== */
+        .feed-sidebar-left {
+            position: sticky;
+            top: 81px;
+            height: fit-content;
+        }
+
+        .filter-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .filter-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-option {
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .filter-option:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+            color: #fff;
+        }
+
+        .filter-option.active {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: #8b5cf6;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .filter-option i {
+            width: 16px;
+            text-align: center;
+        }
+
+        /* ===== MAIN FEED ===== */
+        .feed-main {
+            max-width: 700px;
+        }
+
+        .create-post-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .create-post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .create-post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .create-post-input {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.9rem;
+            resize: none;
+            outline: none;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .create-post-input::placeholder {
+            color: #666;
+        }
+
+        .create-post-input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .create-post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .post-action-btn {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: #999;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .post-action-btn:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+            color: #fff;
+        }
+
+        .post-submit-btn {
+            padding: 10px 24px;
+            background: #8b5cf6;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .post-submit-btn:hover {
+            background: #7c3aed;
+        }
+
+        .post-submit-btn:disabled {
+            background: rgba(139, 92, 246, 0.3);
+            cursor: not-allowed;
+        }
+
+        /* ===== FEED POSTS ===== */
+        .feed-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .post {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+        }
+
+        .post:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .post-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .post-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .post-user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-user-name {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .post-user-name:hover {
+            color: #8b5cf6;
+        }
+
+        .verified-badge {
+            color: #3b82f6;
+            font-size: 0.85rem;
+        }
+
+        .post-time {
+            color: #666;
+            font-size: 0.75rem;
+        }
+
+        .follow-btn {
+            padding: 6px 16px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid #8b5cf6;
+            border-radius: 6px;
+            color: #8b5cf6;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .follow-btn:hover {
+            background: #8b5cf6;
+            color: #fff;
+        }
+
+        .follow-btn.following {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #999;
+        }
+
+        .post-content {
+            margin-bottom: 16px;
+        }
+
+        .post-text {
+            color: #e5e5e5;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .post-tag {
+            padding: 4px 10px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 6px;
+            color: #8b5cf6;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .post-tag:hover {
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        /* ===== AUDIO PLAYER ===== */
+        .post-audio {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .audio-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .audio-cover {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .audio-info {
+            flex: 1;
+        }
+
+        .audio-title {
+            font-weight: 700;
+            color: #fff;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .audio-genre {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .audio-price {
+            font-weight: 700;
+            color: #22c55e;
+            font-size: 1.1rem;
+        }
+
+        .audio-waveform {
+            height: 60px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            padding: 0 12px;
+            overflow: hidden;
+        }
+
+        .waveform-bar {
+            width: 3px;
+            background: #8b5cf6;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .play-btn {
+            width: 36px;
+            height: 36px;
+            background: #8b5cf6;
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .play-btn:hover {
+            background: #7c3aed;
+            transform: scale(1.05);
+        }
+
+        .audio-timeline {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .audio-progress {
+            height: 100%;
+            background: #8b5cf6;
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        .audio-duration {
+            color: #666;
+            font-size: 0.75rem;
+            min-width: 45px;
+            text-align: right;
+        }
+
+        /* ===== POST ACTIONS ===== */
+        .post-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .action-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .action-btn.liked {
+            color: #ef4444;
+        }
+
+        .action-btn i {
+            font-size: 1.1rem;
+        }
+
+        .cart-btn {
+            margin-left: auto;
+            padding: 8px 16px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid #22c55e;
+            border-radius: 6px;
+            color: #22c55e;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .cart-btn:hover {
+            background: #22c55e;
+            color: #000;
+        }
+
+        /* ===== RIGHT SIDEBAR ===== */
+        .feed-sidebar-right {
+            position: sticky;
+            top: 81px;
+            height: fit-content;
+        }
+
+        .sidebar-widget {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .widget-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .suggested-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .suggested-user:last-child {
+            border-bottom: none;
+        }
+
+        .suggested-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .suggested-info {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .suggested-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.85rem;
+            margin-bottom: 2px;
+            transition: color 0.2s;
+        }
+
+        .suggested-info:hover .suggested-name {
+            color: #8b5cf6;
+        }
+
+        .suggested-genre {
+            color: #666;
+            font-size: 0.75rem;
+        }
+
+        .suggested-follow-btn {
+            padding: 5px 12px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid #8b5cf6;
+            border-radius: 6px;
+            color: #8b5cf6;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .suggested-follow-btn:hover {
+            background: #8b5cf6;
+            color: #fff;
+        }
+
+        .trending-tag {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .trending-tag:hover {
+            color: #8b5cf6;
+        }
+
+        .trending-tag:last-child {
+            border-bottom: none;
+        }
+
+        .tag-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.85rem;
+        }
+
+        .tag-count {
+            color: #666;
+            font-size: 0.75rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            color: #999;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .post {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 20%; }
+            50% { height: 80%; }
+        }
+
+        .waveform-bar.playing {
+            animation: wave 0.8s ease-in-out infinite;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1400px) {
+            .feed-container {
+                grid-template-columns: 1fr 320px;
+            }
+            .feed-sidebar-left {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .feed-container {
+                grid-template-columns: 1fr;
+            }
+            .feed-sidebar-right {
+                display: none;
+            }
+            .navbar-center {
+                display: none;
+            }
+            .navbar {
+                padding: 0.75rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">OFFSZN</a>
+        </div>
+
+        <div class="navbar-center">
+            <ul class="navbar-links">
+                <li><a href="index.html">INICIO</a></li>
+                <li>
+                    <a>RECURSOS <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="beats.html" class="dropdown-item">
+                            <i class="fas fa-music"></i>
+                            <span>Beats & Instrumentales</span>
+                        </a>
+                        <a href="drum-kits.html" class="dropdown-item">
+                            <i class="fas fa-drum"></i>
+                            <span>Drum Kits</span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a class="active">COMUNIDAD <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="feed.html" class="dropdown-item active">
+                            <i class="fas fa-home"></i>
+                            <span>Feed</span>
+                        </a>
+                        <a href="productores.html" class="dropdown-item">
+                            <i class="fas fa-users"></i>
+                            <span>Productores</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="navbar-search">
+                <input type="text" placeholder="Buscar beats, kits, productores...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <div class="navbar-right">
+            <a href="notifications.html" class="navbar-icon-button">
+                <i class="fas fa-bell"></i>
+                <span class="badge">5</span>
+            </a>
+            <a href="cart.html" class="navbar-icon-button">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+            <a href="dashboard.html" class="navbar-icon-button">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+    </nav>
+
+    <div class="feed-container">
+        <aside class="feed-sidebar-left">
+            <div class="filter-section">
+                <div class="filter-title">Tipo de Contenido</div>
+                <div class="filter-option active" data-type="all">
+                    <i class="fas fa-th"></i>
+                    <span>Todo</span>
+                </div>
+                <div class="filter-option" data-type="beats">
+                    <i class="fas fa-music"></i>
+                    <span>Beats</span>
+                </div>
+                <div class="filter-option" data-type="kits">
+                    <i class="fas fa-drum"></i>
+                    <span>Drum Kits</span>
+                </div>
+                <div class="filter-option" data-type="presets">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>Presets</span>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Género</div>
+                <div class="filter-option active" data-genre="all">
+                    <i class="fas fa-globe"></i>
+                    <span>Todos</span>
+                </div>
+                <div class="filter-option" data-genre="trap">
+                    <i class="fas fa-fire"></i>
+                    <span>Trap</span>
+                </div>
+                <div class="filter-option" data-genre="drill">
+                    <i class="fas fa-bolt"></i>
+                    <span>Drill</span>
+                </div>
+                <div class="filter-option" data-genre="reggaeton">
+                    <i class="fas fa-drum"></i>
+                    <span>Reggaeton</span>
+                </div>
+                <div class="filter-option" data-genre="rnb">
+                    <i class="fas fa-heart"></i>
+                    <span>R&B</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="feed-main">
+            <div class="create-post-box">
+                <div class="create-post-header">
+                    <div class="create-post-avatar">W</div>
+                    <textarea 
+                        class="create-post-input" 
+                        placeholder="¿Qué estás creando hoy?"
+                        rows="1"
+                        id="postTextarea"
+                    ></textarea>
+                </div>
+                <div class="create-post-actions">
+                    <div class="post-action-buttons">
+                        <button class="post-action-btn">
+                            <i class="fas fa-music"></i>
+                            Beat
+                        </button>
+                        <button class="post-action-btn
