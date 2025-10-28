@@ -1959,14 +1959,15 @@
                 totalBalance.textContent = formatAmount(appState.totalBalance);
             }
 
-            const sidebarWallet = document.getElementById('sidebar-wallet');
-            if (sidebarWallet) {
-                if (appState.currentCurrency === 'USD') {
-                    sidebarWallet.textContent = `${appState.totalBalance.toFixed(2)}`;
-                } else {
-                    sidebarWallet.textContent = `S/${(appState.totalBalance * EXCHANGE_RATE).toFixed(2)}`;
-                }
-            }
+           const sidebarWallet = document.getElementById('sidebar-wallet');
+if (sidebarWallet) {
+    if (appState.currentCurrency === 'USD') {
+        sidebarWallet.textContent = `$${appState.totalBalance.toFixed(2)}`;
+    } else {
+        sidebarWallet.textContent = `S/${(appState.totalBalance * EXCHANGE_RATE).toFixed(2)}`;
+    }
+}
+
 
             renderGiftCards();
         }
