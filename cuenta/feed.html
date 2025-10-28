@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feed - OFFSZN | Primera Plataforma Peruana de Producción Musical</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Feed - OFFSZN</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
         * {
             margin: 0;
             padding: 0;
@@ -15,10 +12,11 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: #0a0a0a;
             color: #e5e5e5;
             overflow-x: hidden;
+            line-height: 1.5;
         }
 
         /* ===== NAVBAR ===== */
@@ -26,14 +24,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem 3rem;
+            padding: 0.75rem 1.5rem;
             background: rgba(0, 0, 0, 0.98);
             position: sticky;
             top: 0;
             width: 100%;
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
         }
 
         .navbar .logo a {
@@ -47,18 +44,14 @@
         .navbar-center {
             display: flex;
             align-items: center;
-            gap: 2.5rem;
+            gap: 1.5rem;
         }
 
         .navbar-links {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
-        }
-
-        .navbar-links li {
-            position: relative;
         }
 
         .navbar-links a {
@@ -67,9 +60,6 @@
             transition: all 0.2s;
             font-weight: 500;
             font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
             cursor: pointer;
         }
 
@@ -81,90 +71,25 @@
             color: #8b5cf6;
         }
 
-        .navbar-links a i.fa-chevron-down {
-            font-size: 0.7rem;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: calc(100% + 12px);
-            left: 0;
-            background: rgba(20, 20, 20, 0.98);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 8px;
-            min-width: 220px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(20px);
-        }
-
-        .navbar-links li:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            color: #999;
-            text-decoration: none;
-            font-size: 0.85rem;
-            border-radius: 8px;
-            transition: all 0.2s;
-            font-weight: 500;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(139, 92, 246, 0.1);
-            color: #fff;
-        }
-
-        .dropdown-item.active {
-            background: rgba(139, 92, 246, 0.15);
-            color: #8b5cf6;
-        }
-
-        .dropdown-item i {
-            width: 18px;
-            text-align: center;
-        }
-
         .navbar-search {
             position: relative;
-            width: 380px;
+            width: 280px;
         }
 
         .navbar-search input {
             width: 100%;
-            padding: 0.6rem 2.5rem 0.6rem 1rem;
+            padding: 0.6rem 2rem 0.6rem 1rem;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             color: #fff;
             font-size: 0.85rem;
             outline: none;
-            transition: all 0.2s;
         }
 
         .navbar-search input:focus {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(139, 92, 246, 0.5);
-        }
-
-        .navbar-search i {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            font-size: 0.9rem;
         }
 
         .navbar-right {
@@ -185,7 +110,6 @@
             justify-content: center;
             color: #999;
             font-size: 16px;
-            transition: all 0.2s;
             text-decoration: none;
         }
 
@@ -196,22 +120,29 @@
 
         /* ===== FEED CONTAINER ===== */
         .feed-container {
-            display: grid;
-            grid-template-columns: 280px 1fr 320px;
+            display: flex;
             gap: 24px;
             max-width: 1600px;
             margin: 0 auto;
             padding: 24px;
             min-height: calc(100vh - 57px);
+            flex-wrap: wrap;
+        }
+
+        .feed-sidebar-left {
+            flex: 0 0 250px;
+        }
+
+        .feed-main {
+            flex: 1;
+            max-width: 700px;
+        }
+
+        .feed-sidebar-right {
+            flex: 0 0 280px;
         }
 
         /* ===== LEFT SIDEBAR ===== */
-        .feed-sidebar-left {
-            position: sticky;
-            top: 81px;
-            height: fit-content;
-        }
-
         .filter-section {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -237,19 +168,11 @@
             margin-bottom: 8px;
             cursor: pointer;
             transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
             font-size: 0.85rem;
             color: #999;
         }
 
-        .filter-option:hover {
-            background: rgba(139, 92, 246, 0.1);
-            border-color: rgba(139, 92, 246, 0.3);
-            color: #fff;
-        }
-
+        .filter-option:hover,
         .filter-option.active {
             background: rgba(139, 92, 246, 0.15);
             border-color: #8b5cf6;
@@ -257,199 +180,12 @@
             font-weight: 600;
         }
 
-        .filter-option i {
-            width: 16px;
-            text-align: center;
-        }
-
         /* ===== MAIN FEED ===== */
-        .feed-main {
-            max-width: 700px;
-        }
-
-        /* Pre-Access Banner */
-        .pre-access-banner {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15));
-            border: 2px solid #10b981;
-            border-radius: 16px;
-            padding: 24px 28px;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-            animation: pulseGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.5); }
-        }
-
-        .pre-access-banner::before {
-            content: '⚡';
-            position: absolute;
-            font-size: 120px;
-            right: -10px;
-            top: -20px;
-            opacity: 0.08;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .pre-access-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .pre-access-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .pre-access-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            background: rgba(16, 185, 129, 0.25);
-            border: 1px solid #10b981;
-            border-radius: 20px;
-            color: #10b981;
-            font-weight: 700;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .live-indicator {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            animation: blink 1.5s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .pre-access-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 8px;
-            line-height: 1.3;
-        }
-
-        .pre-access-text {
-            font-size: 0.9rem;
-            color: #d1d5db;
-            line-height: 1.5;
-        }
-
-        /* Welcome Banner */
-        .welcome-banner {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.15));
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 24px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .welcome-banner::before {
-            content: '🇵🇪';
-            position: absolute;
-            font-size: 120px;
-            right: -20px;
-            bottom: -30px;
-            opacity: 0.1;
-        }
-
-        .welcome-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            background: rgba(139, 92, 246, 0.2);
-            border: 1px solid #8b5cf6;
-            border-radius: 20px;
-            color: #8b5cf6;
-            font-weight: 700;
-            font-size: 0.75rem;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .welcome-title {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 12px;
-            line-height: 1.2;
-        }
-
-        .welcome-text {
-            font-size: 0.95rem;
-            color: #ccc;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .welcome-cta {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .welcome-btn {
-            padding: 10px 20px;
-            background: #8b5cf6;
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .welcome-btn:hover {
-            background: #7c3aed;
-            transform: translateY(-2px);
-        }
-
-        .welcome-btn.secondary {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .welcome-btn.secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Section Headers */
         .section-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
+            margin: 24px 0 16px;
             padding: 0 4px;
         }
 
@@ -474,7 +210,6 @@
             color: #a78bfa;
         }
 
-        /* Empty State Cards */
         .empty-section {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -507,6 +242,7 @@
             align-items: center;
             justify-content: center;
             font-size: 2rem;
+            color: #8b5cf6;
         }
 
         .empty-title {
@@ -524,29 +260,6 @@
             margin: 0 auto 20px;
         }
 
-        .empty-action {
-            padding: 10px 24px;
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid #8b5cf6;
-            border-radius: 8px;
-            color: #8b5cf6;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .empty-action:hover {
-            background: #8b5cf6;
-            color: #fff;
-            transform: translateY(-2px);
-        }
-
-        /* Grid Layouts for Empty Cards */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -574,6 +287,7 @@
             font-size: 2.5rem;
             margin-bottom: 12px;
             opacity: 0.4;
+            color: #8b5cf6;
         }
 
         .empty-card-text {
@@ -616,6 +330,7 @@
             justify-content: center;
             font-size: 1.5rem;
             opacity: 0.5;
+            color: transparent;
         }
 
         .empty-producer-info {
@@ -634,12 +349,6 @@
         }
 
         /* ===== RIGHT SIDEBAR ===== */
-        .feed-sidebar-right {
-            position: sticky;
-            top: 81px;
-            height: fit-content;
-        }
-
         .sidebar-widget {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -658,109 +367,6 @@
             gap: 8px;
         }
 
-        /* Phase Info Widget */
-        .phase-widget {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
-        }
-
-        .phase-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .phase-indicator {
-            font-size: 1.5rem;
-        }
-
-        .phase-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .phase-timeline {
-            margin-bottom: 20px;
-        }
-
-        .phase-item {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-            position: relative;
-        }
-
-        .phase-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 11px;
-            top: 28px;
-            width: 2px;
-            height: calc(100% - 8px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .phase-number {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 700;
-            flex-shrink: 0;
-            border: 2px solid;
-        }
-
-        .phase-item.active .phase-number {
-            background: #8b5cf6;
-            border-color: #8b5cf6;
-            color: #fff;
-            box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
-        }
-
-        .phase-item:not(.active) .phase-number {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: #666;
-        }
-
-        .phase-content {
-            flex: 1;
-            padding-top: 2px;
-        }
-
-        .phase-name {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .phase-item.active .phase-name {
-            color: #8b5cf6;
-        }
-
-        .phase-item:not(.active) .phase-name {
-            color: #999;
-        }
-
-        .phase-description {
-            font-size: 0.75rem;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .phase-item.active .phase-description {
-            color: #999;
-        }
-
-        /* Stats Widget */
         .stats-list {
             display: flex;
             flex-direction: column;
@@ -784,7 +390,6 @@
             color: #8b5cf6;
         }
 
-        /* CTA Widget */
         .cta-widget {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
             border: 1px solid rgba(139, 92, 246, 0.3);
@@ -796,6 +401,7 @@
         .cta-icon {
             font-size: 2.5rem;
             margin-bottom: 12px;
+            color: #8b5cf6;
         }
 
         .cta-title {
@@ -812,80 +418,27 @@
             line-height: 1.5;
         }
 
-        .cta-button {
-            width: 100%;
-            padding: 10px 16px;
-            background: #8b5cf6;
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: block;
-        }
-
-        .cta-button:hover {
-            background: #7c3aed;
-            transform: translateY(-2px);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .empty-section, .empty-card, .empty-producer {
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        .empty-card:nth-child(1) { animation-delay: 0.1s; }
-        .empty-card:nth-child(2) { animation-delay: 0.2s; }
-        .empty-producer:nth-child(1) { animation-delay: 0.1s; }
-        .empty-producer:nth-child(2) { animation-delay: 0.2s; }
-        .empty-producer:nth-child(3) { animation-delay: 0.3s; }
-
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 1400px) {
-            .feed-container {
-                grid-template-columns: 1fr 320px;
-            }
-            .feed-sidebar-left {
-                display: none;
-            }
-        }
-
         @media (max-width: 900px) {
             .feed-container {
-                grid-template-columns: 1fr;
+                flex-direction: column;
                 padding: 16px;
             }
+            .feed-sidebar-left,
             .feed-sidebar-right {
-                display: none;
+                order: 2;
             }
-            .navbar-center {
-                display: none;
-            }
-            .navbar {
-                padding: 0.75rem 1rem;
+            .feed-main {
+                order: 1;
             }
             .products-grid {
                 grid-template-columns: 1fr;
             }
-            .welcome-banner {
-                padding: 24px;
+            .navbar-center {
+                display: none;
             }
-            .welcome-title {
-                font-size: 1.5rem;
-            }
-            .pre-access-banner {
-                padding: 20px;
-            }
-            .pre-access-title {
-                font-size: 1.1rem;
+            .navbar-search {
+                width: 180px;
             }
         }
     </style>
@@ -893,76 +446,118 @@
 <body>
     <nav class="navbar">
         <div class="logo">
-            <a href="index.html">OFFSZN</a>
+            <a href="#">OFFSZN</a>
         </div>
 
         <div class="navbar-center">
             <ul class="navbar-links">
-                <li><a href="index.html">INICIO</a></li>
-                <li>
-                    <a>RECURSOS <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-menu">
-                        <a href="beats.html" class="dropdown-item">
-                            <i class="fas fa-music"></i>
-                            <span>Beats & Instrumentales</span>
-                        </a>
-                        <a href="drum-kits.html" class="dropdown-item">
-                            <i class="fas fa-drum"></i>
-                            <span>Drum Kits</span>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <a class="active">COMUNIDAD <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-menu">
-                        <a href="feed.html" class="dropdown-item active">
-                            <i class="fas fa-home"></i>
-                            <span>Feed</span>
-                        </a>
-                        <a href="productores.html" class="dropdown-item">
-                            <i class="fas fa-users"></i>
-                            <span>Productores</span>
-                        </a>
-                    </div>
-                </li>
+                <li><a href="#">INICIO</a></li>
+                <li><a>RECURSOS ▼</a></li>
+                <li><a class="active">COMUNIDAD ▼</a></li>
             </ul>
 
             <div class="navbar-search">
-                <input type="text" placeholder="Buscar beats, kits, productores...">
-                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar...">
             </div>
         </div>
 
         <div class="navbar-right">
-            <a href="notifications.html" class="navbar-icon-button">
-                <i class="fas fa-bell"></i>
-            </a>
-            <a href="cart.html" class="navbar-icon-button">
-                <i class="fas fa-shopping-cart"></i>
-            </a>
-            <a href="dashboard.html" class="navbar-icon-button">
-                <i class="fas fa-user"></i>
-            </a>
+            <a href="#" class="navbar-icon-button">🔔</a>
+            <a href="#" class="navbar-icon-button">🛒</a>
+            <a href="#" class="navbar-icon-button">👤</a>
         </div>
     </nav>
 
     <div class="feed-container">
+        <!-- LEFT SIDEBAR -->
         <aside class="feed-sidebar-left">
             <div class="filter-section">
-                <div class="filter-title">Tipo de Contenido</div>
-                <div class="filter-option active">
-                    <i class="fas fa-th"></i>
-                    <span>Todo</span>
+                <div class="filter-title">Recomendado para ti</div>
+                <div class="filter-option active">Todo</div>
+                <div class="filter-option">Beats</div>
+                <div class="filter-option">Drum Kits</div>
+                <div class="filter-option">Presets</div>
+                <div class="filter-option">Colaboraciones</div>
+            </div>
+        </aside>
+
+        <!-- MAIN FEED -->
+        <main class="feed-main">
+            <div class="section-header">
+                <h2 class="section-title">🔥 Para ti</h2>
+                <a href="#" class="section-link">Ver más</a>
+            </div>
+            <div class="empty-section">
+                <div class="empty-icon">✨</div>
+                <h3 class="empty-title">Pronto verás contenido personalizado</h3>
+                <p class="empty-description">Basado en tus gustos, seguidos y actividad, aquí aparecerá música y creadores que te interesen.</p>
+            </div>
+
+            <div class="section-header">
+                <h2 class="section-title">🎧 Beats Populares</h2>
+                <a href="#" class="section-link">Explorar</a>
+            </div>
+            <div class="products-grid">
+                <div class="empty-card">
+                    <div class="empty-card-icon">🎚️</div>
+                    <div class="empty-card-text">Próximamente</div>
                 </div>
-                <div class="filter-option">
-                    <i class="fas fa-music"></i>
-                    <span>Beats</span>
+                <div class="empty-card">
+                    <div class="empty-card-icon">🥁</div>
+                    <div class="empty-card-text">Próximamente</div>
                 </div>
-                <div class="filter-option">
-                    <i class="fas fa-drum"></i>
-                    <span>Drum Kits</span>
+            </div>
+
+            <div class="section-header">
+                <h2 class="section-title">👥 Productores en Tendencia</h2>
+                <a href="#" class="section-link">Ver todos</a>
+            </div>
+            <div class="producers-list">
+                <div class="empty-producer">
+                    <div class="empty-avatar"></div>
+                    <div class="empty-producer-info">
+                        <div class="empty-producer-name">Próximamente</div>
+                        <div class="empty-producer-genre">Creadores destacados aparecerán aquí</div>
+                    </div>
                 </div>
-                <div class="filter-option">
-                    <i class="fas fa-sliders-h"></i>
-                    <span>Presets</span>
+                <div class="empty-producer">
+                    <div class="empty-avatar"></div>
+                    <div class="empty-producer-info">
+                        <div class="empty-producer-name">Próximamente</div>
+                        <div class="empty-producer-genre">Basado en tu región y estilo</div>
+                    </div>
                 </div>
+            </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="feed-sidebar-right">
+            <div class="sidebar-widget">
+                <h3 class="widget-title">🎯 Tu Perfil Musical</h3>
+                <div class="stats-list">
+                    <div class="stat-item">
+                        <span class="stat-label">Géneros</span>
+                        <span class="stat-value">—</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">BPM preferido</span>
+                        <span class="stat-value">—</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Instrumentos</span>
+                        <span class="stat-value">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-widget">
+                <div class="cta-icon">💡</div>
+                <h3 class="cta-title">Mejora tus recomendaciones</h3>
+                <p class="cta-text">Sigue productores, marca beats favoritos y completa tu perfil para una experiencia más personalizada.</p>
+                <a href="#" class="cta-button" style="display:block;width:100%;padding:10px 16px;background:#8b5cf6;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:0.85rem;text-align:center;">Editar Perfil</a>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
+
