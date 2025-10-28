@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subida Segura con VirusTotal - Sistema Profesional</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Subida Segura de Archivos</h1>
+        
+        <div class="categories-info">
+            <div class="category-badge">🎵 Beats: MP3, WAV</div>
+            <div class="category-badge">🎚️ Stems: WAV, AIFF</div>
+            <div class="category-badge">📦 Kits: RAR, ZIP</div>
+            <div class="category-badge">🖼️ Portadas: JPG, PNG</div>
+        </div>
+        
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📁</div>
+            <div class="upload-text">
+                Arrastra tu archivo aquí o haz clic para seleccionar
+            </div>
+            <div class="upload-subtext">
+                Formatos soportados: Audio, Imágenes, Comprimidos, Documentos
+            </div>
+        </div>
+        
+        <input type="file" id="fileInput" 
+               accept=".mp3,.wav,.m4a,.flac,.aac,.ogg,.stem,.aiff,.mid,.midi,
+                       .jpg,.jpeg,.png,.gif,.webp,.bmp,
+                       .pdf,.txt,.doc,.docx,
+                       .zip,.rar,.7z,.tar,
+                       .apk" 
+               hidden>
+        
+        <div class="file-info" id="fileInfo"></div>
+        
+        <div class="dimensions-info" id="dimensionsInfo">
+            <h3>Dimensiones recomendadas para portadas:</h3>
+            <div class="dimension-grid">
+                <div class="dimension-card">
+                    <div class="dimension-icon">📱</div>
+                    <div class="dimension-title">Celular (9:16)</div>
+                    <div class="dimension-size">1080 x 1920 px</div>
+                </div>
+                <div class="dimension-card">
+                    <div class="dimension-icon">🖥️</div>
+                    <div class="dimension-title">Desktop (16:9)</div>
+                    <div class="dimension-size">1920 x 1080 px</div>
+                </div>
+                <div class="dimension-card">
+                    <div class="dimension-icon">⬜</div>
+                    <div class="dimension-title">Cuadrado (1:1)</div>
+                    <div class="dimension-size">1080 x 1080 px</div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn" id="uploadBtn" disabled>
+            <span class="btn-icon">🚀</span>
+            <span class="btn-text">Subir y Escanear</span>
+        </button>
+        
+        <div class="loader" id="loader">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Escaneando con VirusTotal...</div>
+        </div>
+        
+        <div class="result" id="result"></div>
+        
+        <div class="security-badges">
+            <div class="badge">
+                <span class="badge-icon">🛡️</span>
+                <span class="badge-text">Protegido con VirusTotal</span>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">🔒</span>
+                <span class="badge-text">Conexión Segura SSL</span>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">✓</span>
+                <span class="badge-text">Escaneo Automático</span>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Sistema de subida segura con detección de malware en tiempo real</p>
+        <p class="footer-small">Powered by VirusTotal API</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

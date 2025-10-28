@@ -1,0 +1,307 @@
+
+{
+  "app": {
+    "name": "Sistema de Subida Segura Willie Inspired",
+    "version": "1.0.0",
+    "description": "Sistema profesional de subida de archivos con detección de malware",
+    "maxFileSize": 33554432,
+    "maxFileSizeMB": 32
+  },
+  "virusTotal": {
+    "apiKey": "7425cef7f32b3d1f519ffeab3f2200bbad842f5a81247eb04f4484121897328e",
+    "baseUrl": "https://www.virustotal.com/api/v3/",
+    "scanDelay": 15000,
+    "maxRetries": 3,
+    "timeout": 30000
+  },
+  "fileCategories": {
+    "beats": {
+      "name": "Beats/Audio",
+      "icon": "🎵",
+      "extensions": ["mp3", "wav", "m4a", "flac", "aac", "ogg"],
+      "description": "Archivos de audio para producción musical"
+    },
+    "stems": {
+      "name": "Stems",
+      "icon": "🎚️",
+      "extensions": ["wav", "stem", "aiff", "flac"],
+      "description": "Pistas individuales de audio"
+    },
+    "kits": {
+      "name": "Kits",
+      "icon": "📦",
+      "extensions": ["rar", "zip", "7z", "tar"],
+      "description": "Paquetes de samples y loops comprimidos"
+    },
+    "portadas": {
+      "name": "Portadas",
+      "icon": "🖼️",
+      "extensions": ["jpg", "jpeg", "png", "webp", "bmp", "gif"],
+      "description": "Imágenes para artwork y portadas"
+    },
+    "general": {
+      "name": "General",
+      "icon": "📄",
+      "extensions": ["pdf", "txt", "doc", "docx", "apk"],
+      "description": "Documentos y otros archivos"
+    }
+  },
+  "allowedExtensions": {
+    "mp3": {
+      "mimeType": "audio/mpeg",
+      "category": "beats",
+      "maxSize": 52428800,
+      "icon": "🎵"
+    },
+    "wav": {
+      "mimeType": "audio/wav",
+      "category": "beats",
+      "maxSize": 104857600,
+      "icon": "🎵"
+    },
+    "m4a": {
+      "mimeType": "audio/mp4",
+      "category": "beats",
+      "maxSize": 52428800,
+      "icon": "🎵"
+    },
+    "flac": {
+      "mimeType": "audio/flac",
+      "category": "beats",
+      "maxSize": 104857600,
+      "icon": "🎵"
+    },
+    "aac": {
+      "mimeType": "audio/aac",
+      "category": "beats",
+      "maxSize": 52428800,
+      "icon": "🎵"
+    },
+    "ogg": {
+      "mimeType": "audio/ogg",
+      "category": "beats",
+      "maxSize": 52428800,
+      "icon": "🎵"
+    },
+    "stem": {
+      "mimeType": "audio/wav",
+      "category": "stems",
+      "maxSize": 104857600,
+      "icon": "🎚️"
+    },
+    "aiff": {
+      "mimeType": "audio/aiff",
+      "category": "stems",
+      "maxSize": 104857600,
+      "icon": "🎚️"
+    },
+    "mid": {
+      "mimeType": "audio/midi",
+      "category": "beats",
+      "maxSize": 5242880,
+      "icon": "🎹"
+    },
+    "midi": {
+      "mimeType": "audio/midi",
+      "category": "beats",
+      "maxSize": 5242880,
+      "icon": "🎹"
+    },
+    "jpg": {
+      "mimeType": "image/jpeg",
+      "category": "portadas",
+      "maxSize": 10485760,
+      "icon": "🖼️"
+    },
+    "jpeg": {
+      "mimeType": "image/jpeg",
+      "category": "portadas",
+      "maxSize": 10485760,
+      "icon": "🖼️"
+    },
+    "png": {
+      "mimeType": "image/png",
+      "category": "portadas",
+      "maxSize": 10485760,
+      "icon": "🖼️"
+    },
+    "gif": {
+      "mimeType": "image/gif",
+      "category": "portadas",
+      "maxSize": 10485760,
+      "icon": "🖼️"
+    },
+    "webp": {
+      "mimeType": "image/webp",
+      "category": "portadas",
+      "maxSize": 10485760,
+      "icon": "🖼️"
+    },
+    "bmp": {
+      "mimeType": "image/bmp",
+      "category": "portadas",
+      "maxSize": 10485760,
+      "icon": "🖼️"
+    },
+    "pdf": {
+      "mimeType": "application/pdf",
+      "category": "general",
+      "maxSize": 20971520,
+      "icon": "📄"
+    },
+    "txt": {
+      "mimeType": "text/plain",
+      "category": "general",
+      "maxSize": 5242880,
+      "icon": "📝"
+    },
+    "doc": {
+      "mimeType": "application/msword",
+      "category": "general",
+      "maxSize": 20971520,
+      "icon": "📄"
+    },
+    "docx": {
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "category": "general",
+      "maxSize": 20971520,
+      "icon": "📄"
+    },
+    "zip": {
+      "mimeType": "application/zip",
+      "category": "kits",
+      "maxSize": 104857600,
+      "icon": "📦"
+    },
+    "rar": {
+      "mimeType": "application/x-rar-compressed",
+      "category": "kits",
+      "maxSize": 104857600,
+      "icon": "📦"
+    },
+    "7z": {
+      "mimeType": "application/x-7z-compressed",
+      "category": "kits",
+      "maxSize": 104857600,
+      "icon": "📦"
+    },
+    "tar": {
+      "mimeType": "application/x-tar",
+      "category": "kits",
+      "maxSize": 104857600,
+      "icon": "📦"
+    },
+    "apk": {
+      "mimeType": "application/vnd.android.package-archive",
+      "category": "general",
+      "maxSize": 104857600,
+      "icon": "📱"
+    }
+  },
+  "coverDimensions": {
+    "mobile": {
+      "name": "Celular vertical",
+      "ratio": "9:16",
+      "width": 1080,
+      "height": 1920,
+      "icon": "📱",
+      "description": "Formato vertical para historias y reels"
+    },
+    "desktop": {
+      "name": "Horizontal/Desktop",
+      "ratio": "16:9",
+      "width": 1920,
+      "height": 1080,
+      "icon": "🖥️",
+      "description": "Formato panorámico para YouTube y web"
+    },
+    "square": {
+      "name": "Cuadrado/Instagram",
+      "ratio": "1:1",
+      "width": 1080,
+      "height": 1080,
+      "icon": "⬜",
+      "description": "Formato cuadrado para feed de Instagram"
+    }
+  },
+  "messages": {
+    "success": {
+      "upload": "Archivo subido correctamente",
+      "scan": "Archivo escaneado y verificado con VirusTotal",
+      "safe": "Archivo seguro, sin amenazas detectadas",
+      "cached": "Archivo verificado desde caché de VirusTotal"
+    },
+    "error": {
+      "noFile": "No se seleccionó ningún archivo",
+      "invalidType": "Tipo de archivo no permitido",
+      "tooLarge": "Archivo demasiado grande",
+      "uploadFailed": "Error al subir el archivo",
+      "scanFailed": "Error al escanear con VirusTotal",
+      "malicious": "Archivo detectado como malicioso",
+      "invalidDimensions": "Dimensiones de imagen no válidas"
+    },
+    "warning": {
+      "suspicious": "Archivo marcado como sospechoso",
+      "dimensionMismatch": "Las dimensiones no coinciden con los formatos recomendados",
+      "largeDimensions": "Imagen demasiado grande",
+      "smallDimensions": "Imagen demasiado pequeña"
+    },
+    "info": {
+      "scanning": "Escaneando con VirusTotal",
+      "uploading": "Subiendo archivo",
+      "processing": "Procesando archivo",
+      "checkingHash": "Verificando en base de datos"
+    }
+  },
+  "ui": {
+    "uploadAreaText": "Arrastra tu archivo aquí o haz clic para seleccionar",
+    "uploadSubtext": "Formatos soportados: Audio, Imágenes, Comprimidos, Documentos",
+    "buttonText": "Subir y Escanear",
+    "loaderText": "Escaneando con VirusTotal...",
+    "theme": {
+      "primary": "#667eea",
+      "secondary": "#764ba2",
+      "success": "#28a745",
+      "error": "#dc3545",
+      "warning": "#ffc107",
+      "info": "#17a2b8"
+    }
+  },
+  "security": {
+    "enableVirusScan": true,
+    "blockMalicious": true,
+    "allowSuspicious": false,
+    "maxDetectionsAllowed": 0,
+    "requireHashCheck": true,
+    "logUploads": true,
+    "sanitizeFilenames": true
+  },
+  "storage": {
+    "uploadPath": "uploads/",
+    "tempPath": "temp/",
+    "createSubfolders": true,
+    "foldersByCategory": {
+      "beats": "uploads/beats/",
+      "stems": "uploads/stems/",
+      "kits": "uploads/kits/",
+      "portadas": "uploads/portadas/",
+      "general": "uploads/general/"
+    },
+    "filenameFormat": "hash_original",
+    "preserveExtension": true
+  },
+  "validation": {
+    "checkMimeType": true,
+    "checkExtension": true,
+    "checkFileSize": true,
+    "checkImageDimensions": true,
+    "allowedRatioTolerance": 0.1
+  },
+  "performance": {
+    "enableCompression": false,
+    "enableCaching": true,
+    "cacheExpiry": 86400,
+    "maxConcurrentUploads": 3,
+    "chunkSize": 1048576
+  }
+}
