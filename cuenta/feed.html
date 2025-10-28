@@ -6,7 +6,7 @@
     <title>Feed - OFFSZN</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         * {
             margin: 0;
@@ -83,7 +83,6 @@
 
         .navbar-links a i.fa-chevron-down {
             font-size: 0.7rem;
-            transition: transform 0.2s;
         }
 
         .dropdown-menu {
@@ -188,25 +187,11 @@
             font-size: 16px;
             transition: all 0.2s;
             text-decoration: none;
-            position: relative;
         }
 
         .navbar-icon-button:hover {
             background: rgba(255, 255, 255, 0.08);
             color: #fff;
-        }
-
-        .navbar-icon-button .badge {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            background: #ef4444;
-            color: #fff;
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 2px 5px;
-            border-radius: 10px;
-            min-width: 18px;
         }
 
         /* ===== FEED CONTAINER ===== */
@@ -282,410 +267,278 @@
             max-width: 700px;
         }
 
-        .create-post-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 20px;
+        /* Banner de Bienvenida */
+        .welcome-banner {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.15));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '🇵🇪';
+            position: absolute;
+            font-size: 120px;
+            right: -20px;
+            bottom: -30px;
+            opacity: 0.1;
+        }
+
+        .welcome-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid #8b5cf6;
+            border-radius: 20px;
+            color: #8b5cf6;
+            font-weight: 700;
+            font-size: 0.75rem;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .welcome-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .welcome-text {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.6;
             margin-bottom: 20px;
         }
 
-        .create-post-header {
+        .welcome-cta {
             display: flex;
-            align-items: center;
             gap: 12px;
-            margin-bottom: 16px;
+            flex-wrap: wrap;
         }
 
-        .create-post-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #8b5cf6, #6366f1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .create-post-input {
-            flex: 1;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 0.9rem;
-            resize: none;
-            outline: none;
-            transition: all 0.2s;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .create-post-input::placeholder {
-            color: #666;
-        }
-
-        .create-post-input:focus {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(139, 92, 246, 0.5);
-        }
-
-        .create-post-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .post-action-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .post-action-btn {
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            color: #999;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .post-action-btn:hover {
-            background: rgba(139, 92, 246, 0.1);
-            border-color: rgba(139, 92, 246, 0.3);
-            color: #fff;
-        }
-
-        .post-submit-btn {
-            padding: 10px 24px;
+        .welcome-btn {
+            padding: 10px 20px;
             background: #8b5cf6;
             border: none;
             border-radius: 8px;
             color: #fff;
             font-weight: 600;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.9rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .post-submit-btn:hover {
+        .welcome-btn:hover {
             background: #7c3aed;
+            transform: translateY(-2px);
         }
 
-        .post-submit-btn:disabled {
-            background: rgba(139, 92, 246, 0.3);
-            cursor: not-allowed;
+        .welcome-btn.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* ===== FEED POSTS ===== */
-        .feed-posts {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+        .welcome-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        .post {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.2s;
-        }
-
-        .post:hover {
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-
-        .post-header {
+        /* Section Headers */
+        .section-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            padding: 0 4px;
         }
 
-        .post-user {
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .post-avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
+        .section-link {
+            color: #8b5cf6;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .section-link:hover {
+            color: #a78bfa;
+        }
+
+        /* Empty State Cards */
+        .empty-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 40px 24px;
+            text-align: center;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .empty-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+            opacity: 0.5;
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 2rem;
+        }
+
+        .empty-title {
+            font-size: 1.2rem;
             font-weight: 700;
             color: #fff;
-            font-size: 1rem;
-            cursor: pointer;
+            margin-bottom: 8px;
         }
 
-        .post-user-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .post-user-name {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 600;
-            color: #fff;
+        .empty-description {
             font-size: 0.9rem;
-            cursor: pointer;
+            color: #999;
+            line-height: 1.5;
+            max-width: 400px;
+            margin: 0 auto 20px;
         }
 
-        .post-user-name:hover {
-            color: #8b5cf6;
-        }
-
-        .verified-badge {
-            color: #3b82f6;
-            font-size: 0.85rem;
-        }
-
-        .post-time {
-            color: #666;
-            font-size: 0.75rem;
-        }
-
-        .follow-btn {
-            padding: 6px 16px;
+        .empty-action {
+            padding: 10px 24px;
             background: rgba(139, 92, 246, 0.1);
             border: 1px solid #8b5cf6;
-            border-radius: 6px;
+            border-radius: 8px;
             color: #8b5cf6;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .follow-btn:hover {
+        .empty-action:hover {
             background: #8b5cf6;
             color: #fff;
+            transform: translateY(-2px);
         }
 
-        .follow-btn.following {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: #999;
+        /* Grid Layouts for Empty Cards */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
         }
 
-        .post-content {
-            margin-bottom: 16px;
-        }
-
-        .post-text {
-            color: #e5e5e5;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .post-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .post-tag {
-            padding: 4px 10px;
-            background: rgba(139, 92, 246, 0.1);
-            border-radius: 6px;
-            color: #8b5cf6;
-            font-size: 0.75rem;
-            font-weight: 600;
+        .empty-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 32px 20px;
+            text-align: center;
+            transition: all 0.3s;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .post-tag:hover {
-            background: rgba(139, 92, 246, 0.2);
+        .empty-card:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            background: rgba(139, 92, 246, 0.05);
+            transform: translateY(-4px);
         }
 
-        /* ===== AUDIO PLAYER ===== */
-        .post-audio {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            padding: 16px;
-            margin-bottom: 16px;
+        .empty-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            opacity: 0.4;
         }
 
-        .audio-header {
+        .empty-card-text {
+            font-size: 0.85rem;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .producers-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .empty-producer {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 16px;
+            transition: all 0.3s;
+            cursor: pointer;
         }
 
-        .audio-cover {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+        .empty-producer:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .empty-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.3));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
+            opacity: 0.5;
         }
 
-        .audio-info {
+        .empty-producer-info {
             flex: 1;
         }
 
-        .audio-title {
-            font-weight: 700;
-            color: #fff;
-            font-size: 0.95rem;
+        .empty-producer-name {
+            font-weight: 600;
+            color: #999;
             margin-bottom: 4px;
         }
 
-        .audio-genre {
-            color: #666;
+        .empty-producer-genre {
             font-size: 0.8rem;
-        }
-
-        .audio-price {
-            font-weight: 700;
-            color: #22c55e;
-            font-size: 1.1rem;
-        }
-
-        .audio-waveform {
-            height: 60px;
-            background: rgba(139, 92, 246, 0.1);
-            border-radius: 8px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2px;
-            padding: 0 12px;
-            overflow: hidden;
-        }
-
-        .waveform-bar {
-            width: 3px;
-            background: #8b5cf6;
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-
-        .audio-controls {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .play-btn {
-            width: 36px;
-            height: 36px;
-            background: #8b5cf6;
-            border: none;
-            border-radius: 50%;
-            color: #fff;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .play-btn:hover {
-            background: #7c3aed;
-            transform: scale(1.05);
-        }
-
-        .audio-timeline {
-            flex: 1;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .audio-progress {
-            height: 100%;
-            background: #8b5cf6;
-            border-radius: 2px;
-            width: 0%;
-            transition: width 0.1s;
-        }
-
-        .audio-duration {
             color: #666;
-            font-size: 0.75rem;
-            min-width: 45px;
-            text-align: right;
-        }
-
-        /* ===== POST ACTIONS ===== */
-        .post-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .action-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: none;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: all 0.2s;
-            padding: 6px 12px;
-            border-radius: 6px;
-        }
-
-        .action-btn:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .action-btn.liked {
-            color: #ef4444;
-        }
-
-        .action-btn i {
-            font-size: 1.1rem;
-        }
-
-        .cart-btn {
-            margin-left: auto;
-            padding: 8px 16px;
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid #22c55e;
-            border-radius: 6px;
-            color: #22c55e;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .cart-btn:hover {
-            background: #22c55e;
-            color: #000;
         }
 
         /* ===== RIGHT SIDEBAR ===== */
@@ -713,135 +566,84 @@
             gap: 8px;
         }
 
-        .suggested-user {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        .widget-empty {
+            text-align: center;
+            padding: 20px 10px;
         }
 
-        .suggested-user:last-child {
-            border-bottom: none;
+        .widget-empty-icon {
+            font-size: 2rem;
+            opacity: 0.3;
+            margin-bottom: 12px;
         }
 
-        .suggested-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: #fff;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        .suggested-info {
-            flex: 1;
-            cursor: pointer;
-        }
-
-        .suggested-name {
-            font-weight: 600;
-            color: #fff;
+        .widget-empty-text {
             font-size: 0.85rem;
-            margin-bottom: 2px;
-            transition: color 0.2s;
-        }
-
-        .suggested-info:hover .suggested-name {
-            color: #8b5cf6;
-        }
-
-        .suggested-genre {
             color: #666;
-            font-size: 0.75rem;
+            line-height: 1.5;
         }
 
-        .suggested-follow-btn {
-            padding: 5px 12px;
+        .widget-cta {
+            margin-top: 12px;
+            padding: 8px 16px;
             background: rgba(139, 92, 246, 0.1);
             border: 1px solid #8b5cf6;
             border-radius: 6px;
             color: #8b5cf6;
             font-weight: 600;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .suggested-follow-btn:hover {
+        .widget-cta:hover {
             background: #8b5cf6;
             color: #fff;
         }
 
-        .trending-tag {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .trending-tag:hover {
-            color: #8b5cf6;
-        }
-
-        .trending-tag:last-child {
-            border-bottom: none;
-        }
-
-        .tag-name {
-            font-weight: 600;
-            color: #fff;
-            font-size: 0.85rem;
-        }
-
-        .tag-count {
-            color: #666;
-            font-size: 0.75rem;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #666;
-        }
-
-        .empty-state i {
-            font-size: 3rem;
+        /* Phase Info */
+        .phase-info {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 16px;
             margin-bottom: 16px;
-            opacity: 0.5;
         }
 
-        .empty-state h3 {
-            color: #999;
+        .phase-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(34, 197, 94, 0.2);
+            border-radius: 12px;
+            color: #22c55e;
+            font-weight: 700;
+            font-size: 0.75rem;
             margin-bottom: 8px;
-            font-size: 1.1rem;
         }
 
-        /* ===== ANIMATIONS ===== */
+        .phase-text {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .post {
-            animation: fadeIn 0.3s ease;
+        .empty-section, .empty-card, .empty-producer {
+            animation: fadeIn 0.5s ease forwards;
         }
 
-        @keyframes wave {
-            0%, 100% { height: 20%; }
-            50% { height: 80%; }
-        }
-
-        .waveform-bar.playing {
-            animation: wave 0.8s ease-in-out infinite;
-        }
+        .empty-card:nth-child(1) { animation-delay: 0.1s; }
+        .empty-card:nth-child(2) { animation-delay: 0.2s; }
+        .empty-producer:nth-child(1) { animation-delay: 0.1s; }
+        .empty-producer:nth-child(2) { animation-delay: 0.2s; }
+        .empty-producer:nth-child(3) { animation-delay: 0.3s; }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1400px) {
@@ -856,6 +658,7 @@
         @media (max-width: 900px) {
             .feed-container {
                 grid-template-columns: 1fr;
+                padding: 16px;
             }
             .feed-sidebar-right {
                 display: none;
@@ -865,6 +668,15 @@
             }
             .navbar {
                 padding: 0.75rem 1rem;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .welcome-banner {
+                padding: 24px;
+            }
+            .welcome-title {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -915,7 +727,6 @@
         <div class="navbar-right">
             <a href="notifications.html" class="navbar-icon-button">
                 <i class="fas fa-bell"></i>
-                <span class="badge">5</span>
             </a>
             <a href="cart.html" class="navbar-icon-button">
                 <i class="fas fa-shopping-cart"></i>
@@ -930,19 +741,19 @@
         <aside class="feed-sidebar-left">
             <div class="filter-section">
                 <div class="filter-title">Tipo de Contenido</div>
-                <div class="filter-option active" data-type="all">
+                <div class="filter-option active">
                     <i class="fas fa-th"></i>
                     <span>Todo</span>
                 </div>
-                <div class="filter-option" data-type="beats">
+                <div class="filter-option">
                     <i class="fas fa-music"></i>
                     <span>Beats</span>
                 </div>
-                <div class="filter-option" data-type="kits">
+                <div class="filter-option">
                     <i class="fas fa-drum"></i>
                     <span>Drum Kits</span>
                 </div>
-                <div class="filter-option" data-type="presets">
+                <div class="filter-option">
                     <i class="fas fa-sliders-h"></i>
                     <span>Presets</span>
                 </div>
@@ -950,23 +761,23 @@
 
             <div class="filter-section">
                 <div class="filter-title">Género</div>
-                <div class="filter-option active" data-genre="all">
+                <div class="filter-option active">
                     <i class="fas fa-globe"></i>
                     <span>Todos</span>
                 </div>
-                <div class="filter-option" data-genre="trap">
+                <div class="filter-option">
                     <i class="fas fa-fire"></i>
                     <span>Trap</span>
                 </div>
-                <div class="filter-option" data-genre="drill">
+                <div class="filter-option">
                     <i class="fas fa-bolt"></i>
                     <span>Drill</span>
                 </div>
-                <div class="filter-option" data-genre="reggaeton">
+                <div class="filter-option">
                     <i class="fas fa-drum"></i>
                     <span>Reggaeton</span>
                 </div>
-                <div class="filter-option" data-genre="rnb">
+                <div class="filter-option">
                     <i class="fas fa-heart"></i>
                     <span>R&B</span>
                 </div>
@@ -974,20 +785,110 @@
         </aside>
 
         <main class="feed-main">
-            <div class="create-post-box">
-                <div class="create-post-header">
-                    <div class="create-post-avatar">W</div>
-                    <textarea 
-                        class="create-post-input" 
-                        placeholder="¿Qué estás creando hoy?"
-                        rows="1"
-                        id="postTextarea"
-                    ></textarea>
+            <!-- Banner de Bienvenida -->
+            <div class="welcome-banner">
+                <span class="welcome-badge">🇵🇪 Primera comunidad peruana</span>
+                <h1 class="welcome-title">Bienvenido a OFFSZN</h1>
+                <p class="welcome-text">
+                    Estás en el primer marketplace de producción musical creado desde Perú para toda Latinoamérica. Conecta con productores, comparte tu trabajo y encuentra los mejores recursos para tu música.
+                </p>
+                <div class="welcome-cta">
+                    <a href="productores.html" class="welcome-btn">
+                        <i class="fas fa-users"></i>
+                        Explorar productores
+                    </a>
+                    <a href="beats.html" class="welcome-btn secondary">
+                        <i class="fas fa-compass"></i>
+                        Ver marketplace
+                    </a>
                 </div>
-                <div class="create-post-actions">
-                    <div class="post-action-buttons">
-                        <button class="post-action-btn">
-                            <i class="fas fa-music"></i>
-                            Beat
-                        </button>
-                        <button class="post-action-btn
+            </div>
+
+            <!-- Productos Semanales -->
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-fire"></i>
+                    Productos destacados esta semana
+                </h2>
+                <a href="beats.html" class="section-link">Ver todos →</a>
+            </div>
+
+            <div class="products-grid">
+                <div class="empty-card">
+                    <div class="empty-card-icon">🎵</div>
+                    <div class="empty-card-text">Pronto: Beats exclusivos</div>
+                </div>
+                <div class="empty-card">
+                    <div class="empty-card-icon">🥁</div>
+                    <div class="empty-card-text">Pronto: Drum Kits premium</div>
+                </div>
+            </div>
+
+            <!-- Productores Destacados -->
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    Productores destacados
+                </h2>
+                <a href="productores.html" class="section-link">Ver todos →</a>
+            </div>
+
+            <div class="producers-list">
+                <div class="empty-producer">
+                    <div class="empty-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="empty-producer-info">
+                        <div class="empty-producer-name">Los productores empezarán a aparecer aquí</div>
+                        <div class="empty-producer-genre">Cuando suban su primer contenido</div>
+                    </div>
+                </div>
+                <div class="empty-producer">
+                    <div class="empty-avatar">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="empty-producer-info">
+                        <div class="empty-producer-name">Conecta con creadores talentosos</div>
+                        <div class="empty-producer-genre">Sé de los primeros en unirte</div>
+                    </div>
+                </div>
+                <div class="empty-producer">
+                    <div class="empty-avatar">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="empty-producer-info">
+                        <div class="empty-producer-name">Crea tu red de colaboradores</div>
+                        <div class="empty-producer-genre">La comunidad está creciendo</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recomendados para ti -->
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-magic"></i>
+                    Recomendados para ti
+                </h2>
+            </div>
+
+            <div class="empty-section">
+                <div class="empty-icon">
+                    <i class="fas fa-sparkles"></i>
+                </div>
+                <h3 class="empty-title">Tu feed personalizado llegará pronto</h3>
+                <p class="empty-description">
+                    Basado en tus gustos, géneros favoritos y productores que sigas, crearemos recomendaciones únicas para ti. Mientras tanto, explora la plataforma.
+                </p>
+                <a href="beats.html" class="empty-action">
+                    <i class="fas fa-compass"></i>
+                    Explorar ahora
+                </a>
+            </div>
+        </main>
+
+        <aside class="feed-sidebar-right">
+            <!-- Phase Info -->
+            <div class="phase-info">
+                <span class="phase-badge">⚡ FASE 1 - BETA</span>
+                <p class="phase-text">
+                    Estamos construyen
