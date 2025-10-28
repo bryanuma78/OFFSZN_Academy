@@ -1391,5 +1391,96 @@
             // Settings are already saved on each action
         });
     </script>
+    <script>
+(function () {
+  const STORAGE_KEY = 'offszn_giftcards_state';
+
+  // Estado local por defecto
+  let appState = {
+    totalBalance: 0,
+    giftCards: []
+  };
+
+  // Guardar estado (útil para pruebas)
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      console.log('[wallet] Estado guardado:', appState);
+    } catch (err) {
+      console.error('[wallet] No se pudo guardar en localStorage:', err);
+    }
+  }
+
+  // Actualizar el texto en el DOM (protecciones incluidas)
+  function updateWalletAmount() {
+    try {
+      const walletElement = document.querySelector('.wallet-amount');
+      if (!walletElement) {
+        console.warn('[wallet] .wallet-amount no existe en esta página');
+        return;
+      }
+      // Asegurar que totalBalance sea número
+      const amt = Number(appState.totalBalance) || 0;
+      // Mostrar con dos decimales
+      walletElement.textContent = `$${amt.toFixed(2)}`;
+      console.log('[wallet] Wallet actualizado a', walletElement.textContent);
+    } catch (err) {
+      console.error('[wallet] Error actualizando wallet:', err);
+    }
+  }
+
+  // Cargar estado desde localStorage y actualizar
+  function loadState() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) {
+        console.log('[wallet] No hay estado guardado en localStorage');
+        appState = { totalBalance: 0, giftCards: [] };
+        updateWalletAmount();
+        return;
+      }
+      try {
+        appState = JSON.parse(saved);
+      } catch (parseErr) {
+        console.error('[wallet] JSON inválido en localStorage -> se reestablece:', parseErr);
+        appState = { totalBalance: 0, giftCards: [] };
+        // opcional: limpiar localStorage si está corrupto
+        // localStorage.removeItem(STORAGE_KEY);
+      }
+      console.log('[wallet] Estado cargado:', appState);
+      updateWalletAmount();
+    } catch (err) {
+      console.error('[wallet] Error al cargar estado:', err);
+    }
+  }
+
+  // Manejar evento storage (cambios en otras pestañas)
+  window.addEventListener('storage', (event) => {
+    try {
+      if (!event) return;
+      if (event.key === STORAGE_KEY) {
+        console.log('[wallet] Evento storage detectado — recargando estado');
+        loadState();
+      }
+    } catch (err) {
+      console.error('[wallet] Error en listener storage:', err);
+    }
+  });
+
+  // Inicializar en DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('[wallet] DOM listo — intentando cargar estado');
+    loadState();
+    // Exponer funciones para pruebas desde la consola (opcional)
+    window._wallet = {
+      loadState,
+      saveState,
+      updateWalletAmount,
+      getState: () => JSON.parse(JSON.stringify(appState))
+    };
+  });
+})();
+</script>
+
 </body>
   </html>
