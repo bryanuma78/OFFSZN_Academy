@@ -1567,6 +1567,35 @@
                 userDropdown.classList.remove('active');
             }
         });
+        // ===== CORRECCIÓN: Cargar estado y actualizar saldo =====
+        const STORAGE_KEY = 'offszn_giftcards_state';
+
+        let appState = {
+            totalBalance: 0,
+            giftCards: []
+        };
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    appState = JSON.parse(saved);
+                    updateWalletAmount();
+                }
+            } catch (error) {
+                console.error('Error al cargar estado:', error);
+            }
+        }
+
+        function updateWalletAmount() {
+            const walletElement = document.querySelector('.wallet-amount');
+            if (walletElement) {
+                walletElement.textContent = `$${appState.totalBalance.toFixed(2)}`;
+            }
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', loadState);
     </script>
 </body>
 </html>
