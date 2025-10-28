@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feed - OFFSZN</title>
+    <title>Feed - OFFSZN | Primera Plataforma Peruana de Producción Musical</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -267,7 +267,99 @@
             max-width: 700px;
         }
 
-        /* Banner de Bienvenida */
+        /* Pre-Access Banner */
+        .pre-access-banner {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15));
+            border: 2px solid #10b981;
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.5); }
+        }
+
+        .pre-access-banner::before {
+            content: '⚡';
+            position: absolute;
+            font-size: 120px;
+            right: -10px;
+            top: -20px;
+            opacity: 0.08;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .pre-access-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .pre-access-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .pre-access-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(16, 185, 129, 0.25);
+            border: 1px solid #10b981;
+            border-radius: 20px;
+            color: #10b981;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .live-indicator {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .pre-access-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .pre-access-text {
+            font-size: 0.9rem;
+            color: #d1d5db;
+            line-height: 1.5;
+        }
+
+        /* Welcome Banner */
         .welcome-banner {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.15));
             border: 1px solid rgba(139, 92, 246, 0.3);
@@ -566,67 +658,178 @@
             gap: 8px;
         }
 
-        .widget-empty {
-            text-align: center;
-            padding: 20px 10px;
-        }
-
-        .widget-empty-icon {
-            font-size: 2rem;
-            opacity: 0.3;
-            margin-bottom: 12px;
-        }
-
-        .widget-empty-text {
-            font-size: 0.85rem;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .widget-cta {
-            margin-top: 12px;
-            padding: 8px 16px;
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid #8b5cf6;
-            border-radius: 6px;
-            color: #8b5cf6;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .widget-cta:hover {
-            background: #8b5cf6;
-            color: #fff;
-        }
-
-        /* Phase Info */
-        .phase-info {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
-            border: 1px solid rgba(34, 197, 94, 0.3);
+        /* Phase Info Widget */
+        .phase-widget {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            border: 1px solid rgba(139, 92, 246, 0.3);
             border-radius: 12px;
-            padding: 16px;
+            padding: 20px;
             margin-bottom: 16px;
         }
 
-        .phase-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            background: rgba(34, 197, 94, 0.2);
-            border-radius: 12px;
-            color: #22c55e;
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .phase-indicator {
+            font-size: 1.5rem;
+        }
+
+        .phase-title {
+            font-size: 0.95rem;
             font-weight: 700;
+            color: #fff;
+        }
+
+        .phase-timeline {
+            margin-bottom: 20px;
+        }
+
+        .phase-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .phase-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 28px;
+            width: 2px;
+            height: calc(100% - 8px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .phase-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            border: 2px solid;
+        }
+
+        .phase-item.active .phase-number {
+            background: #8b5cf6;
+            border-color: #8b5cf6;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
+        }
+
+        .phase-item:not(.active) .phase-number {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #666;
+        }
+
+        .phase-content {
+            flex: 1;
+            padding-top: 2px;
+        }
+
+        .phase-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .phase-item.active .phase-name {
+            color: #8b5cf6;
+        }
+
+        .phase-item:not(.active) .phase-name {
+            color: #999;
+        }
+
+        .phase-description {
+            font-size: 0.75rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .phase-item.active .phase-description {
+            color: #999;
+        }
+
+        /* Stats Widget */
+        .stats-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .stat-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #8b5cf6;
+        }
+
+        /* CTA Widget */
+        .cta-widget {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+            padding: 24px 20px;
+            text-align: center;
+        }
+
+        .cta-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .cta-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
             margin-bottom: 8px;
         }
 
-        .phase-text {
+        .cta-text {
             font-size: 0.85rem;
-            color: #ccc;
+            color: #999;
+            margin-bottom: 16px;
             line-height: 1.5;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 10px 16px;
+            background: #8b5cf6;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .cta-button:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
         }
 
         /* Animations */
@@ -677,6 +880,12 @@
             }
             .welcome-title {
                 font-size: 1.5rem;
+            }
+            .pre-access-banner {
+                padding: 20px;
+            }
+            .pre-access-title {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -757,138 +966,3 @@
                     <i class="fas fa-sliders-h"></i>
                     <span>Presets</span>
                 </div>
-            </div>
-
-            <div class="filter-section">
-                <div class="filter-title">Género</div>
-                <div class="filter-option active">
-                    <i class="fas fa-globe"></i>
-                    <span>Todos</span>
-                </div>
-                <div class="filter-option">
-                    <i class="fas fa-fire"></i>
-                    <span>Trap</span>
-                </div>
-                <div class="filter-option">
-                    <i class="fas fa-bolt"></i>
-                    <span>Drill</span>
-                </div>
-                <div class="filter-option">
-                    <i class="fas fa-drum"></i>
-                    <span>Reggaeton</span>
-                </div>
-                <div class="filter-option">
-                    <i class="fas fa-heart"></i>
-                    <span>R&B</span>
-                </div>
-            </div>
-        </aside>
-
-        <main class="feed-main">
-            <!-- Banner de Bienvenida -->
-            <div class="welcome-banner">
-                <span class="welcome-badge">🇵🇪 Primera comunidad peruana</span>
-                <h1 class="welcome-title">Bienvenido a OFFSZN</h1>
-                <p class="welcome-text">
-                    Estás en el primer marketplace de producción musical creado desde Perú para toda Latinoamérica. Conecta con productores, comparte tu trabajo y encuentra los mejores recursos para tu música.
-                </p>
-                <div class="welcome-cta">
-                    <a href="productores.html" class="welcome-btn">
-                        <i class="fas fa-users"></i>
-                        Explorar productores
-                    </a>
-                    <a href="beats.html" class="welcome-btn secondary">
-                        <i class="fas fa-compass"></i>
-                        Ver marketplace
-                    </a>
-                </div>
-            </div>
-
-            <!-- Productos Semanales -->
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="fas fa-fire"></i>
-                    Productos destacados esta semana
-                </h2>
-                <a href="beats.html" class="section-link">Ver todos →</a>
-            </div>
-
-            <div class="products-grid">
-                <div class="empty-card">
-                    <div class="empty-card-icon">🎵</div>
-                    <div class="empty-card-text">Pronto: Beats exclusivos</div>
-                </div>
-                <div class="empty-card">
-                    <div class="empty-card-icon">🥁</div>
-                    <div class="empty-card-text">Pronto: Drum Kits premium</div>
-                </div>
-            </div>
-
-            <!-- Productores Destacados -->
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="fas fa-star"></i>
-                    Productores destacados
-                </h2>
-                <a href="productores.html" class="section-link">Ver todos →</a>
-            </div>
-
-            <div class="producers-list">
-                <div class="empty-producer">
-                    <div class="empty-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="empty-producer-info">
-                        <div class="empty-producer-name">Los productores empezarán a aparecer aquí</div>
-                        <div class="empty-producer-genre">Cuando suban su primer contenido</div>
-                    </div>
-                </div>
-                <div class="empty-producer">
-                    <div class="empty-avatar">
-                        <i class="fas fa-music"></i>
-                    </div>
-                    <div class="empty-producer-info">
-                        <div class="empty-producer-name">Conecta con creadores talentosos</div>
-                        <div class="empty-producer-genre">Sé de los primeros en unirte</div>
-                    </div>
-                </div>
-                <div class="empty-producer">
-                    <div class="empty-avatar">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <div class="empty-producer-info">
-                        <div class="empty-producer-name">Crea tu red de colaboradores</div>
-                        <div class="empty-producer-genre">La comunidad está creciendo</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Recomendados para ti -->
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="fas fa-magic"></i>
-                    Recomendados para ti
-                </h2>
-            </div>
-
-            <div class="empty-section">
-                <div class="empty-icon">
-                    <i class="fas fa-sparkles"></i>
-                </div>
-                <h3 class="empty-title">Tu feed personalizado llegará pronto</h3>
-                <p class="empty-description">
-                    Basado en tus gustos, géneros favoritos y productores que sigas, crearemos recomendaciones únicas para ti. Mientras tanto, explora la plataforma.
-                </p>
-                <a href="beats.html" class="empty-action">
-                    <i class="fas fa-compass"></i>
-                    Explorar ahora
-                </a>
-            </div>
-        </main>
-
-        <aside class="feed-sidebar-right">
-            <!-- Phase Info -->
-            <div class="phase-info">
-                <span class="phase-badge">⚡ FASE 1 - BETA</span>
-                <p class="phase-text">
-                    Estamos construyen
