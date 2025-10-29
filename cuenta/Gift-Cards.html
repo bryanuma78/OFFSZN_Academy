@@ -1860,379 +1860,389 @@
     </div>
 
     <script>
-        // ===== CONFIGURACIÓN =====
-        const EXCHANGE_RATE = 3.8;
-        const STORAGE_KEY = 'offszn_giftcards_state';
+      // ===== CONFIGURACIÓN =====
+const EXCHANGE_RATE = 3.8;
+const STORAGE_KEY = 'offszn_giftcards_state';
 
-        // ===== ESTADO DE LA APLICACIÓN =====
-        let appState = {
-            currentCurrency: 'USD',
-            hasClaimedWelcome: false,
-            lastSpinMonth: null,
-            totalBalance: 0,
-            giftCards: []
-        };
+// ===== ESTADO DE LA APLICACIÓN =====
+let appState = {
+    currentCurrency: 'USD',
+    hasClaimedWelcome: false,
+    lastSpinMonth: null,
+    totalBalance: 0,
+    giftCards: []
+};
 
-        // ===== FUNCIONES DE ALMACENAMIENTO =====
-        function saveState() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-                console.log('Estado guardado exitosamente');
-            } catch (error) {
-                console.error('Error al guardar estado:', error);
-            }
+// ===== FUNCIONES DE ALMACENAMIENTO =====
+function saveState() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+        console.log('Estado guardado exitosamente');
+    } catch (error) {
+        console.error('Error al guardar estado:', error);
+    }
+}
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            appState = { ...appState, ...parsed };
+            console.log('Estado cargado:', appState);
+            return true;
         }
+    } catch (error) {
+        console.error('Error al cargar estado:', error);
+    }
+    return false;
+}
 
-        function loadState() {
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) {
-                    const parsed = JSON.parse(saved);
-                    appState = { ...appState, ...parsed };
-                    console.log('Estado cargado:', appState);
-                    return true;
-                }
-            } catch (error) {
-                console.error('Error al cargar estado:', error);
-            }
-            return false;
+// ===== FECHA Y MES =====
+const today = new Date();
+const currentMonth = today.getMonth();
+const currentYear = today.getFullYear();
+const currentMonthKey = `${currentYear}-${currentMonth}`;
+const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+const nextMonthYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+function hasSpunThisMonth() {
+    return appState.lastSpinMonth === currentMonthKey;
+}
+
+// ===== FUNCIONES DE MONEDA =====
+function changeCurrency(currency) {
+    appState.currentCurrency = currency;
+    
+    document.getElementById('usd-btn').classList.toggle('active', currency === 'USD');
+    document.getElementById('pen-btn').classList.toggle('active', currency === 'PEN');
+
+    updateAllAmounts();
+    saveState();
+}
+
+function formatAmount(usd) {
+    if (appState.currentCurrency === 'USD') {
+        return `$${usd.toFixed(2)} USD`;
+    } else {
+        const penAmount = (usd * EXCHANGE_RATE).toFixed(2);
+        return `S/${penAmount} PEN`;
+    }
+}
+
+function updateAllAmounts() {
+    const welcomeAmount = document.getElementById('welcome-amount');
+    if (welcomeAmount) {
+        welcomeAmount.textContent = formatAmount(5);
+    }
+
+    const totalBalance = document.getElementById('total-balance');
+    if (totalBalance) {
+        totalBalance.textContent = formatAmount(appState.totalBalance);
+    }
+
+    const sidebarWallet = document.getElementById('sidebar-wallet');
+    if (sidebarWallet) {
+        if (appState.currentCurrency === 'USD') {
+            sidebarWallet.textContent = `$${appState.totalBalance.toFixed(2)}`;
+        } else {
+            sidebarWallet.textContent = `S/${(appState.totalBalance * EXCHANGE_RATE).toFixed(2)}`;
         }
+    }
 
-        // ===== FECHA Y MES =====
-        const today = new Date();
-        const currentMonth = today.getMonth();
-        const currentYear = today.getFullYear();
-        const currentMonthKey = `${currentYear}-${currentMonth}`;
-        const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
-        const nextMonthYear = currentMonth === 11 ? currentYear + 1 : currentYear;
-        const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
-                            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    renderGiftCards();
+}
 
-        function hasSpunThisMonth() {
-            return appState.lastSpinMonth === currentMonthKey;
+// ===== FUNCIONES DE GIFT CARDS =====
+function addGiftCard(type, value, description, isDiscount = false) {
+    const giftCard = {
+        id: Date.now(),
+        type: type,
+        value: value,
+        description: description,
+        isDiscount: isDiscount,
+        active: true,
+        claimedDate: new Date().toLocaleDateString('es-ES')
+    };
+
+    appState.giftCards.push(giftCard);
+    
+    if (!isDiscount) {
+        appState.totalBalance += value;
+    }
+
+    saveState();
+    updateAllAmounts();
+}
+
+function renderGiftCards() {
+    const container = document.getElementById('gift-cards-container');
+    
+    if (appState.giftCards.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-gift"></i>
+                <h3>No tienes gift cards activas aún</h3>
+                <p>Reclama tu regalo de bienvenida o gira la ruleta mensual para obtener tus primeras recompensas.</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = appState.giftCards.map(card => {
+        const cardClass = card.isDiscount ? 'gift-card-item discount-card' : 'gift-card-item';
+        const valueDisplay = card.isDiscount ? `${card.value}% OFF` : formatAmount(card.value);
+        const iconClass = card.isDiscount ? 'percent' : 'gift';
+        const statusText = card.isDiscount ? 'Disponible' : 'Activa';
+        
+        return `
+            <div class="${cardClass}">
+                <div class="gift-card-type">
+                    <i class="fas fa-${iconClass}"></i> ${card.type}
+                </div>
+                <div class="gift-card-value">${valueDisplay}</div>
+                <div class="gift-card-desc">${card.description}</div>
+                <div class="gift-card-status">
+                    <i class="fas fa-check-circle"></i> ${statusText}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// ===== FUNCIONES DE REGALO DE BIENVENIDA =====
+function claimWelcomeGift() {
+    if (appState.hasClaimedWelcome) {
+        alert('Ya has reclamado tu regalo de bienvenida.');
+        return;
+    }
+
+    appState.hasClaimedWelcome = true;
+    
+    addGiftCard('Bienvenida', 5, 'Gift card de bienvenida. Válida para cualquier producto.', false);
+
+    const btn = document.getElementById('claim-welcome');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-check"></i> Regalo Reclamado';
+
+    enableWheel();
+
+    const welcomePrize = document.getElementById('welcome-prize');
+    welcomePrize.textContent = formatAmount(5);
+    document.getElementById('welcome-modal').classList.add('active');
+
+    saveState();
+}
+
+// ===== FUNCIONES DE RULETA =====
+function enableWheel() {
+    const spinBtn = document.getElementById('spin-btn');
+    const spinInfo = document.getElementById('spin-info');
+    
+    if (hasSpunThisMonth()) {
+        spinBtn.disabled = true;
+        spinBtn.innerHTML = '<i class="fas fa-check"></i> Ya Giraste Este Mes';
+        spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
+    } else {
+        spinBtn.disabled = false;
+        spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Disponible ahora - ¡Gira y gana!`;
+    }
+}
+
+function spinWheel() {
+    if (hasSpunThisMonth()) {
+        alert(`Ya has girado la ruleta este mes. Podrás girar nuevamente el 1 de ${monthNames[nextMonth]} ${nextMonthYear}.`);
+        return;
+    }
+
+    if (!appState.hasClaimedWelcome) {
+        alert('Primero debes reclamar tu regalo de bienvenida.');
+        return;
+    }
+
+    const wheel = document.getElementById('wheel');
+    const btn = document.getElementById('spin-btn');
+    
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Girando...';
+
+    const prizes = [
+        { 
+            text: '$1 USD',
+            value: 1,
+            type: 'money',
+            isDiscount: false,
+            description: 'Premio de la ruleta mensual.',
+            label: `Ruleta ${monthNames[currentMonth]} ${currentYear}`,
+            segmentStart: 0,
+            segmentEnd: 90
+        },
+        { 
+            text: '10% OFF',
+            value: 10,
+            type: 'discount',
+            isDiscount: true,
+            description: 'Aplica a 1 producto. No acumulable.',
+            label: 'Descuento 10%',
+            segmentStart: 90,
+            segmentEnd: 180
+        },
+        { 
+            text: '15% OFF',
+            value: 15,
+            type: 'discount',
+            isDiscount: true,
+            description: 'Aplica a 1 producto. No acumulable.',
+            label: 'Descuento 15%',
+            segmentStart: 180,
+            segmentEnd: 270
+        },
+        { 
+            text: '20% OFF',
+            value: 20,
+            type: 'discount',
+            isDiscount: true,
+            description: 'Aplica a 1 producto. No acumulable.',
+            label: 'Descuento 20%',
+            segmentStart: 270,
+            segmentEnd: 360
         }
+    ];
 
-        // ===== FUNCIONES DE MONEDA =====
-        function changeCurrency(currency) {
-            appState.currentCurrency = currency;
-            
-            document.getElementById('usd-btn').classList.toggle('active', currency === 'USD');
-            document.getElementById('pen-btn').classList.toggle('active', currency === 'PEN');
+    const randomIndex = Math.floor(Math.random() * 4);
+    const selectedPrize = prizes[randomIndex];
+    
+    const baseRotation = 3600;
+    const segmentCenter = (selectedPrize.segmentStart + selectedPrize.segmentEnd) / 2;
+    const randomOffset = (Math.random() * 40) - 20;
+    const targetRotation = 360 - segmentCenter + randomOffset;
+    const finalRotation = baseRotation + targetRotation;
 
-            updateAllAmounts();
-            saveState();
-        }
+    wheel.style.transform = `rotate(${finalRotation}deg)`;
 
-        function formatAmount(usd) {
-            if (appState.currentCurrency === 'USD') {
-                return `${usd.toFixed(2)} USD`;
-            } else {
-                const penAmount = (usd * EXCHANGE_RATE).toFixed(2);
-                return `S/${penAmount} PEN`;
-            }
-        }
+    setTimeout(() => {
+        appState.lastSpinMonth = currentMonthKey;
+        
+        addGiftCard(
+            selectedPrize.label, 
+            selectedPrize.value, 
+            selectedPrize.description, 
+            selectedPrize.isDiscount
+        );
 
-        function updateAllAmounts() {
-            const welcomeAmount = document.getElementById('welcome-amount');
-            if (welcomeAmount) {
-                welcomeAmount.textContent = formatAmount(5);
-            }
+        const prizeText = document.getElementById('prize-text');
+        prizeText.textContent = selectedPrize.isDiscount 
+            ? `${selectedPrize.value}% OFF` 
+            : formatAmount(selectedPrize.value);
+        
+        document.getElementById('prize-modal').classList.add('active');
 
-            const totalBalance = document.getElementById('total-balance');
-            if (totalBalance) {
-                totalBalance.textContent = formatAmount(appState.totalBalance);
-            }
+        btn.innerHTML = '<i class="fas fa-check"></i> Ya Giraste Este Mes';
+        
+        const spinInfo = document.getElementById('spin-info');
+        spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
 
-            const sidebarWallet = document.getElementById('sidebar-wallet');
-            if (sidebarWallet) {
-                if (appState.currentCurrency === 'USD') {
-                    sidebarWallet.textContent = `$${appState.totalBalance.toFixed(2)}`;
-                } else {
-                    sidebarWallet.textContent = `S/${(appState.totalBalance * EXCHANGE_RATE).toFixed(2)}`;
-                }
-            }
+        saveState();
+    }, 5000);
+}
 
-            renderGiftCards();
-        }
+// ===== FUNCIONES DE MODAL =====
+function closeModal() {
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.classList.remove('active');
+    });
+}
 
-        // ===== FUNCIONES DE GIFT CARDS =====
-        function addGiftCard(type, value, description, isDiscount = false) {
-            const giftCard = {
-                id: Date.now(),
-                type: type,
-                value: value,
-                description: description,
-                isDiscount: isDiscount,
-                active: true,
-                claimedDate: new Date().toLocaleDateString('es-ES')
-            };
+function showModal(feature) {
+    const featureName = document.getElementById('featureName');
+    if (featureName) {
+        featureName.textContent = feature;
+    }
+    const modal = document.getElementById('modal');
+    if (modal) {
+        modal.classList.add('active');
+    }
+}
 
-            appState.giftCards.push(giftCard);
-            
-            if (!isDiscount) {
-                appState.totalBalance += value;
-            }
+function toggleUserDropdown() {
+    const dropdown = document.querySelector('.user-dropdown');
+    if (dropdown) {
+        dropdown.classList.toggle('active');
+    }
+}
 
-            saveState();
-            updateAllAmounts();
-        }
+// ===== INICIALIZACIÓN =====
+function initApp() {
+    loadState();
 
-        function renderGiftCards() {
-            const container = document.getElementById('gift-cards-container');
-            
-            if (appState.giftCards.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-gift"></i>
-                        <h3>No tienes gift cards activas aún</h3>
-                        <p>Reclama tu regalo de bienvenida o gira la ruleta mensual para obtener tus primeras recompensas.</p>
-                    </div>
-                `;
-                return;
-            }
+    const usdBtn = document.getElementById('usd-btn');
+    const penBtn = document.getElementById('pen-btn');
+    if (usdBtn && penBtn) {
+        usdBtn.classList.toggle('active', appState.currentCurrency === 'USD');
+        penBtn.classList.toggle('active', appState.currentCurrency === 'PEN');
+    }
 
-            container.innerHTML = appState.giftCards.map(card => {
-                const cardClass = card.isDiscount ? 'gift-card-item discount-card' : 'gift-card-item';
-                const valueDisplay = card.isDiscount ? `${card.value}% OFF` : formatAmount(card.value);
-                const iconClass = card.isDiscount ? 'percent' : 'gift';
-                const statusText = card.isDiscount ? 'Disponible' : 'Activa';
-                
-                return `
-                    <div class="${cardClass}">
-                        <div class="gift-card-type">
-                            <i class="fas fa-${iconClass}"></i> ${card.type}
-                        </div>
-                        <div class="gift-card-value">${valueDisplay}</div>
-                        <div class="gift-card-desc">${card.description}</div>
-                        <div class="gift-card-status">
-                            <i class="fas fa-check-circle"></i> ${statusText}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // ===== FUNCIONES DE REGALO DE BIENVENIDA =====
-        function claimWelcomeGift() {
-            if (appState.hasClaimedWelcome) {
-                alert('Ya has reclamado tu regalo de bienvenida.');
-                return;
-            }
-
-            appState.hasClaimedWelcome = true;
-            
-            addGiftCard('Bienvenida', 5, 'Gift card de bienvenida. Válida para cualquier producto.', false);
-
-            const btn = document.getElementById('claim-welcome');
+    if (appState.hasClaimedWelcome) {
+        const btn = document.getElementById('claim-welcome');
+        if (btn) {
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-check"></i> Regalo Reclamado';
-
-            enableWheel();
-
-            const welcomePrize = document.getElementById('welcome-prize');
-            welcomePrize.textContent = formatAmount(5);
-            document.getElementById('welcome-modal').classList.add('active');
-
-            saveState();
         }
-
-        // ===== FUNCIONES DE RULETA =====
-        function enableWheel() {
-            const spinBtn = document.getElementById('spin-btn');
-            const spinInfo = document.getElementById('spin-info');
-            
-            if (hasSpunThisMonth()) {
-                spinBtn.disabled = true;
-                spinBtn.innerHTML = '<i class="fas fa-check"></i> Ya Giraste Este Mes';
-                spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
-            } else {
-                spinBtn.disabled = false;
-                spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Disponible ahora - ¡Gira y gana!`;
-            }
+        enableWheel();
+    } else {
+        const spinBtn = document.getElementById('spin-btn');
+        if (spinBtn) {
+            spinBtn.disabled = true;
         }
-
-        function spinWheel() {
-            if (hasSpunThisMonth()) {
-                alert(`Ya has girado la ruleta este mes. Podrás girar nuevamente el 1 de ${monthNames[nextMonth]} ${nextMonthYear}.`);
-                return;
-            }
-
-            if (!appState.hasClaimedWelcome) {
-                alert('Primero debes reclamar tu regalo de bienvenida.');
-                return;
-            }
-
-            const wheel = document.getElementById('wheel');
-            const btn = document.getElementById('spin-btn');
-            
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Girando...';
-
-            const prizes = [
-                { 
-                    text: '$1 USD',
-                    value: 1,
-                    type: 'money',
-                    isDiscount: false,
-                    description: 'Premio de la ruleta mensual.',
-                    label: `Ruleta ${monthNames[currentMonth]} ${currentYear}`,
-                    segmentStart: 0,
-                    segmentEnd: 90
-                },
-                { 
-                    text: '10% OFF',
-                    value: 10,
-                    type: 'discount',
-                    isDiscount: true,
-                    description: 'Aplica a 1 producto. No acumulable.',
-                    label: 'Descuento 10%',
-                    segmentStart: 90,
-                    segmentEnd: 180
-                },
-                { 
-                    text: '15% OFF',
-                    value: 15,
-                    type: 'discount',
-                    isDiscount: true,
-                    description: 'Aplica a 1 producto. No acumulable.',
-                    label: 'Descuento 15%',
-                    segmentStart: 180,
-                    segmentEnd: 270
-                },
-                { 
-                    text: '20% OFF',
-                    value: 20,
-                    type: 'discount',
-                    isDiscount: true,
-                    description: 'Aplica a 1 producto. No acumulable.',
-                    label: 'Descuento 20%',
-                    segmentStart: 270,
-                    segmentEnd: 360
-                }
-            ];
-
-            const randomIndex = Math.floor(Math.random() * 4);
-            const selectedPrize = prizes[randomIndex];
-            
-            const baseRotation = 3600;
-            const segmentCenter = (selectedPrize.segmentStart + selectedPrize.segmentEnd) / 2;
-            const randomOffset = (Math.random() * 40) - 20;
-            const targetRotation = 360 - segmentCenter + randomOffset;
-            const finalRotation = baseRotation + targetRotation;
-
-            console.log(`Premio seleccionado: ${selectedPrize.text} (índice ${randomIndex})`);
-            console.log(`Segmento: ${selectedPrize.segmentStart}° - ${selectedPrize.segmentEnd}°`);
-            console.log(`Rotación final: ${finalRotation}° (target: ${targetRotation}°)`);
-
-            wheel.style.transform = `rotate(${finalRotation}deg)`;
-
-            setTimeout(() => {
-                appState.lastSpinMonth = currentMonthKey;
-                
-                addGiftCard(
-                    selectedPrize.label, 
-                    selectedPrize.value, 
-                    selectedPrize.description, 
-                    selectedPrize.isDiscount
-                );
-
-                const prizeText = document.getElementById('prize-text');
-                prizeText.textContent = selectedPrize.isDiscount 
-                    ? `${selectedPrize.value}% OFF` 
-                    : formatAmount(selectedPrize.value);
-                
-                document.getElementById('prize-modal').classList.add('active');
-
-                btn.innerHTML = '<i class="fas fa-check"></i> Ya Giraste Este Mes';
-                
-                const spinInfo = document.getElementById('spin-info');
-                spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
-
-                console.log(`Premio otorgado correctamente: ${selectedPrize.text}`);
-                saveState();
-            }, 5000);
+        const spinInfo = document.getElementById('spin-info');
+        if (spinInfo) {
+            spinInfo.innerHTML = `<i class="fas fa-lock"></i> Reclama tu regalo de bienvenida primero`;
         }
+    }
 
-        // ===== FUNCIONES DE MODAL =====
-        function closeModal() {
-            document.querySelectorAll('.modal').forEach(modal => {
-                modal.classList.remove('active');
-            });
-        }
+    updateAllAmounts();
+    renderGiftCards();
+}
 
-        function showModal(feature) {
-            const featureName = document.getElementById('featureName');
-            if (featureName) {
-                featureName.textContent = feature;
+// ===== EVENT LISTENERS =====
+document.addEventListener('DOMContentLoaded', function() {
+    initApp();
+
+    const usdBtn = document.getElementById('usd-btn');
+    const penBtn = document.getElementById('pen-btn');
+    if (usdBtn) usdBtn.addEventListener('click', () => changeCurrency('USD'));
+    if (penBtn) penBtn.addEventListener('click', () => changeCurrency('PEN'));
+
+    const claimBtn = document.getElementById('claim-welcome');
+    if (claimBtn) claimBtn.addEventListener('click', claimWelcomeGift);
+
+    const spinBtn = document.getElementById('spin-btn');
+    if (spinBtn) spinBtn.addEventListener('click', spinWheel);
+
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
             }
-            const modal = document.getElementById('modal');
-            if (modal) {
-                modal.classList.add('active');
-            }
-        }
-
-        function toggleUserDropdown() {
-            const dropdown = document.querySelector('.user-dropdown');
-            if (dropdown) {
-                dropdown.classList.toggle('active');
-            }
-        }
-
-        // ===== INICIALIZACIÓN =====
-        function initApp() {
-            loadState();
-
-            if (appState.currentCurrency === 'PEN') {
-                document.getElementById('usd-btn').classList.remove('active');
-                document.getElementById('pen-btn').classList.add('active');
-            }
-
-            if (appState.hasClaimedWelcome) {
-                const btn = document.getElementById('claim-welcome');
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fas fa-check"></i> Regalo Reclamado';
-                enableWheel();
-            } else {
-                const spinBtn = document.getElementById('spin-btn');
-                spinBtn.disabled = true;
-                const spinInfo = document.getElementById('spin-info');
-                spinInfo.innerHTML = `<i class="fas fa-lock"></i> Reclama tu regalo de bienvenida primero`;
-            }
-
-            updateAllAmounts();
-        }
-
-        // ===== EVENT LISTENERS =====
-        document.addEventListener('DOMContentLoaded', function() {
-            initApp();
-
-            document.getElementById('usd-btn').addEventListener('click', () => changeCurrency('USD'));
-            document.getElementById('pen-btn').addEventListener('click', () => changeCurrency('PEN'));
-            document.getElementById('claim-welcome').addEventListener('click', claimWelcomeGift);
-            document.getElementById('spin-btn').addEventListener('click', spinWheel);
-
-            document.querySelectorAll('.modal').forEach(modal => {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        closeModal();
-                    }
-                });
-            });
-
-            document.addEventListener('click', function(e) {
-                const userDropdown = document.querySelector('.user-dropdown');
-                if (userDropdown && !userDropdown.contains(e.target)) {
-                    userDropdown.classList.remove('active');
-                }
-            });
         });
+    });
 
-        // ===== PREVENIR PÉRDIDA DE DATOS =====
-        window.addEventListener('beforeunload', function(e) {
-            saveState();
-        });
+    document.addEventListener('click', function(e) {
+        const userDropdown = document.querySelector('.user-dropdown');
+        if (userDropdown && !userDropdown.contains(e.target)) {
+            userDropdown.classList.remove('active');
+        }
+    });
+});
 
-        setInterval(saveState, 30000);
+// ===== PREVENIR PÉRDIDA DE DATOS =====
+window.addEventListener('beforeunload', function(e) {
+    saveState();
+});
+
+setInterval(saveState, 30000);
     </script>
 </body>
 </html>
