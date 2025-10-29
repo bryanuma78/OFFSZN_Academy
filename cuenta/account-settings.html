@@ -294,28 +294,89 @@
             <a href="login.html" style="display:inline-block;margin-top:16px;padding:10px 24px;background:#8b5cf6;color:#fff;border-radius:10px;text-decoration:none;font-weight:600;">Iniciar Sesión</a>
         </div>
     </div>
+<script>
+    // === MODAL DE INICIO DE SESIÓN ===
+    function showLoginRequired() {
+        document.getElementById('modal').classList.add('active');
+    }
 
-    <script>
-        function showLoginRequired() {
-            document.getElementById('modal').classList.add('active');
-        }
-        function closeModal() {
-            document.getElementById('modal').classList.remove('active');
-        }
+    function closeModal() {
+        document.getElementById('modal').classList.remove('active');
+    }
 
-        // Wallet Sync
-        (function() {
-            const KEY = 'offszn_giftcards_state';
-            function update() {
-                const el = document.querySelector('.wallet-amount');
-                if (!el) return;
-                const saved = localStorage.getItem(KEY);
-                const balance = saved ? JSON.parse(saved).totalBalance || 0 : 0;
-                el.textContent = `$${Number(balance).toFixed(2)}`;
+    // Cerrar modal al hacer clic fuera
+    document.getElementById('modal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('modal')) closeModal();
+    });
+
+    // === SINCRONIZACIÓN DE BILLETERA + CONVERSIÓN DE MONEDA ===
+    (function() {
+        const STORAGE_KEY = 'offszn_giftcards_state';
+        const EXCHANGE_RATE = 3.8; // 1 USD = 3.8 PEN
+
+        // Cargar estado de forma segura
+        function getWalletState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (!saved) return { balance: 0, currency: 'USD' };
+
+                const data = JSON.parse(saved);
+                const balance = typeof data.totalBalance === 'number' ? data.totalBalance : 0;
+                const currency = data.currentCurrency === 'PEN' ? 'PEN' : 'USD';
+
+                return { balance, currency };
+            } catch (e) {
+                console.warn('Error cargando billetera:', e);
+                return { balance: 0, currency: 'USD' };
             }
-            document.addEventListener('DOMContentLoaded', update);
-            window.addEventListener('storage', e => { if (e.key === KEY) update(); });
-        })();
-    </script>
+        }
+
+        // Formatear saldo con conversión
+        function formatBalance(balance, currency) {
+            if (currency === 'PEN') {
+                return `S/${(balance * EXCHANGE_RATE).toFixed(2)}`;
+            }
+            return `$${balance.toFixed(2)}`;
+        }
+
+        // Actualizar saldo en el sidebar
+        function updateWalletDisplay() {
+            const walletEl = document.querySelector('.wallet-amount');
+            if (!walletEl) return;
+
+            const { balance, currency } = getWalletState();
+            const formatted = formatBalance(balance, currency);
+
+            if (walletEl.textContent !== formatted) {
+                walletEl.textContent = formatted;
+                // Animación verde al actualizar
+                walletEl.style.transition = 'color 0.3s';
+                walletEl.style.color = '#10b981';
+                setTimeout(() => walletEl.style.color = '', 500);
+            }
+        }
+
+        // Inicialización segura
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(updateWalletDisplay, 100);
+            setInterval(updateWalletDisplay, 2000); // Refrescar cada 2 seg
+        });
+
+        // Escuchar cambios desde otras pestañas
+        window.addEventListener('storage', (e) => {
+            if (e.key === STORAGE_KEY) {
+                setTimeout(updateWalletDisplay, 50);
+            }
+        });
+
+        // === FUNCIÓN DE EMERGENCIA (F12) ===
+        window.resetWallet = () => {
+            localStorage.removeItem(STORAGE_KEY);
+            updateWalletDisplay();
+            alert('Billetera reiniciada');
+        };
+    })();
+</script>
+    
 </body>
 </html>
