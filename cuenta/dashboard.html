@@ -12,7 +12,7 @@
         body {font-family:'Inter',sans-serif;background:#0a0a0a;color:#e5e5e5;overflow-x:hidden;}
 
         /* ---------- NAVBAR ---------- */
-        .navbar {display;flex;justify-content:space-between;align-items:center;padding:0.75rem 3rem;background:rgba(0,0,0,.98);position:sticky;top:0;width:100%;z-index:1000;border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(20px);}
+        .navbar {display:flex;justify-content:space-between;align-items:center;padding:0.75rem 3rem;background:rgba(0,0,0,.98);position:sticky;top:0;width:100%;z-index:1000;border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(20px);}
         .navbar .logo a {font-size:1.5rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.5px;}
         .navbar-center {display:flex;align-items:center;gap:2.5rem;}
         .navbar-links {list-style:none;display:flex;gap:2rem;align-items:center;}
@@ -200,8 +200,8 @@
                     <a href="profile.html" class="user-dropdown-item"><i class="fas fa-user-circle"></i><span>Mi Perfil</span></a>
                     <a href="dashboard.html" class="user-dropdown-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
                     <a href="wallet.html" class="user-dropdown-item"><i class="fas fa-wallet"></i><span>Billetera</span></a>
-                    <a href="#" class="user-dropdown-item disabled" onclick="showModal('Mis Compras'); return false;"><i class="fas fa-shopping-bag"></i><span>Mis Compras</span><span class="soon-badge">Pronto</span></a>
-                    <a href="#" class="user-dropdown-item disabled" onclick="showModal('Analíticas'); return false;"><i class="fas fa-chart-line"></i><span>Analíticas</span><span class="soon-badge">Pronto</span></a>
+                    <a href="mis-compras.html" class="user-dropdown-item"><i class="fas fa-shopping-bag"></i><span>Mis Compras</span></a>
+                    <a href="analiticas.html" class="user-dropdown-item"><i class="fas fa-chart-line"></i><span>Analíticas</span></a>
                     <a href="account-settings.html" class="user-dropdown-item"><i class="fas fa-cog"></i><span>Configuración</span></a>
                     <a href="help.html" class="user-dropdown-item"><i class="fas fa-question-circle"></i><span>Ayuda</span></a>
                     <a href="logout.html" class="user-dropdown-item logout"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
@@ -227,7 +227,7 @@
                 <div class="wallet-amount">$0.00</div>
             </div>
 
-            <button class="upload-btn" onclick="showModal('Subir Kit')">
+            <button class="upload-btn" onclick="window.location.href='subir-kit.html'">
                 <i class="fas fa-cloud-upload-alt"></i> Subir Kit
             </button>
 
@@ -238,21 +238,21 @@
 
             <div class="sidebar-menu">
                 <div class="menu-section-title">Principal</div>
-                <a href="#" class="menu-item active"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
-                <a href="#" class="menu-item disabled" onclick="showModal('Mis Kits'); return false;"><i class="fas fa-music"></i><span>Mis Kits</span><span class="soon-badge">Pronto</span></a>
-                <a href="#" class="menu-item disabled" onclick="showModal('Analíticas'); return false;"><i class="fas fa-chart-line"></i><span>Analíticas</span><span class="soon-badge">Pronto</span></a>
-                <a href="#" class="menu-item disabled" onclick="showModal('Favoritos'); return false;"><i class="fas fa-heart"></i><span>Favoritos</span><span class="soon-badge">Pronto</span></a>
-                <a href="#" class="menu-item disabled" onclick="showModal('Historial de Escucha'); return false;"><i class="fas fa-history"></i><span>Historial</span><span class="soon-badge">Pronto</span></a>
+                <a href="dashboard.html" class="menu-item active"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+                <a href="mis-kits.html" class="menu-item"><i class="fas fa-music"></i><span>Mis Kits</span></a>
+                <a href="analiticas.html" class="menu-item"><i class="fas fa-chart-line"></i><span>Analíticas</span></a>
+                <a href="favoritos.html" class="menu-item"><i class="fas fa-heart"></i><span>Favoritos</span></a>
+                <a href="#" class="menu-item"><i class="fas fa-history"></i><span>Historial</span></a>
 
                 <div class="menu-divider"></div>
 
                 <div class="menu-section-title">Colaboración</div>
-                <a href="#" class="menu-item disabled" onclick="showModal('Colaboraciones'); return false;"><i class="fas fa-users"></i><span>Colaboraciones</span><span class="soon-badge">Pronto</span></a>
+                <a href="colaboraciones.html" class="menu-item"><i class="fas fa-users"></i><span>Colaboraciones</span></a>
 
                 <div class="menu-divider"></div>
 
                 <div class="menu-section-title">Compras</div>
-                <a href="#" class="menu-item disabled" onclick="showModal('Mis Compras'); return false;"><i class="fas fa-shopping-bag"></i><span>Mis Compras</span><span class="soon-badge">Pronto</span></a>
+                <a href="mis-compras.html" class="menu-item"><i class="fas fa-shopping-bag"></i><span>Mis Compras</span></a>
                 <a href="gift-cards.html" class="menu-item"><i class="fas fa-gift"></i><span>Gift Cards</span></a>
                 <a href="messages.html" class="menu-item"><i class="fas fa-envelope"></i><span>Mensajes</span></a>
 
@@ -308,7 +308,7 @@
             <div class="section">
                 <div class="section-header">
                     <h2 class="section-title">Mis Productos Top</h2>
-                    <a href="#" class="section-link" onclick="showModal('Administrar Productos'); return false;">Ver todos →</a>
+                    <a href="mis-kits.html" class="section-link">Ver todos →</a>
                 </div>
 
                 <!-- Estado vacío -->
@@ -321,7 +321,7 @@
                         Comienza a vender tus beats, kits o presets. Haz click en <strong>“Subir Kit”</strong> en el menú lateral y lanza tu primer producto.
                     </p>
                     <button
-                        onclick="document.querySelector('.upload-btn').click()"
+                        onclick="window.location.href='subir-kit.html'"
                         style="display:inline-flex;align-items:center;gap:8px;background:#8b5cf6;color:#fff;padding:12px 28px;border-radius:10px;font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:all .2s;"
                         onmouseover="this.style.background='#7c3aed'"
                         onmouseout="this.style.background='#8b5cf6'">
@@ -415,10 +415,7 @@
         function checkProducts() {
             const grid = document.getElementById('products-grid');
             const empty = document.getElementById('empty-products-state');
-
-            // Si la grilla tiene hijos → hay productos, sino → estado vacío
             const hasProducts = grid.children.length > 0;
-
             grid.style.display = hasProducts ? 'grid' : 'none';
             empty.style.display = hasProducts ? 'none' : 'block';
         }
