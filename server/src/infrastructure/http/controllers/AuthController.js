@@ -114,7 +114,8 @@ export const loginUser = async (req, res) => {
             userId: user.id,
             email: user.email,
             isAdmin: user.is_admin || false,
-            nickname: user.nickname
+            nickname: user.nickname,
+            is_producer: user.is_producer || false
         };
 
         const token = generateToken(tokenPayload);
@@ -127,6 +128,7 @@ export const loginUser = async (req, res) => {
             created_at: user.created_at,
             isAdmin: user.is_admin || false,
             nickname: user.nickname,
+            is_producer: user.is_producer || false
         };
 
         res.status(200).json({

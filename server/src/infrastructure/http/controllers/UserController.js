@@ -67,7 +67,7 @@ export const completeOnboarding = async (req, res) => {
             .from('users')
             .update(updateData)
             .eq('id', userId)
-            .select('id, email, nickname, role, first_name, last_name, created_at, is_admin, socials');
+            .select('id, email, nickname, role, first_name, last_name, created_at, is_admin, socials, is_producer');
 
         if (updateError) throw updateError;
         if (!updatedUser || updatedUser.length === 0) {
@@ -89,7 +89,7 @@ export const getCurrentUser = async (req, res) => {
 
         const { data: user, error } = await supabase
             .from('users')
-            .select('id, email, nickname, role, first_name, last_name, created_at, is_admin')
+            .select('id, email, nickname, role, first_name, last_name, created_at, is_admin, is_producer')
             .eq('id', userId)
             .single();
 
@@ -102,4 +102,24 @@ export const getCurrentUser = async (req, res) => {
         console.error("Error en getCurrentUser:", err.message);
         res.status(500).json({ error: err.message || 'Error al obtener datos del usuario.' });
     }
+};
+
+export const getMyProducts = async (req, res) => {
+     try {
+         const userId = req.user.userId;
+
+         const { data, error } = await supabase
+             .from('products')
+             .select('*')
+             .eq('producer_id', userId)
+             .order('created_at', { ascending: false });
+
+         if (error) throw error;
+
+         res.status(200).json(data || []);
+
+     } catch (err) {
+         console.error("Error en getMyProducts:", err.message);
+         res.status(500).json({ error: err.message || 'Error al obtener mis productos' });
+     }
 };
