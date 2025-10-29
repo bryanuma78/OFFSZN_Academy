@@ -63,6 +63,14 @@ export const completeOnboarding = async (req, res) => {
              updateData.socials = socials; 
         }
 
+        const producerRoles = ['Productor', 'Artista', 'Compositor', 'Ingeniero', 'Musico'];
+
+        if (role && producerRoles.includes(role)) {
+            updateData.is_producer = true;
+        } else {
+            updateData.is_producer = false;
+        }
+
         const { data: updatedUser, error: updateError } = await supabase
             .from('users')
             .update(updateData)

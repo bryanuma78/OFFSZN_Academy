@@ -1348,6 +1348,59 @@
         });
     </script>
     <script src="dashboard.js"></script>
+
+    <div class="modal" id="upload-modal">
+    <div class="modal-content" style="text-align: left; max-width: 600px;">
+        <button class="modal-close" onclick="closeModal('upload-modal')"><i class="fas fa-times"></i></button>
+        <h2 class="modal-title">Subir Nuevo Producto</h2>
+        <form id="upload-product-form" enctype="multipart/form-data">
+            
+            <label for="product-name">Nombre del Producto:*</label>
+            <input type="text" id="product-name" name="name" required>
+
+            <label for="product-type">Tipo:*</label>
+            <select id="product-type" name="product_type" required>
+                <option value="">-- Selecciona --</option>
+                <option value="beat">Beat / Instrumental</option>
+                <option value="drumkit">Drum Kit</option>
+                <option value="preset">Preset / Plugin</option>
+                <option value="sample">Sample / Loop</option>
+                <option value="otro">Otro</option>
+            </select>
+
+            <label for="product-price-usd">Precio (USD):*</label>
+            <input type="number" id="product-price-usd" name="price_usd" step="0.01" required>
+
+            <label for="product-price-pen">Precio (Soles PEN):</label>
+            <input type="number" id="product-price-pen" name="price_pen" step="0.01">
+
+            <label for="product-description">Descripción:</label>
+            <textarea id="product-description" name="description"></textarea>
+
+            <label for="product-bpm">BPM (si aplica):</label>
+            <input type="number" id="product-bpm" name="bpm">
+
+            <label for="product-key">Key / Tonalidad (si aplica):</label>
+            <input type="text" id="product-key" name="key">
+
+            <label for="product-tags">Tags (separados por coma):</label>
+            <input type="text" id="product-tags" name="tags" placeholder="Ej: trap, dark, 808">
+
+            <label for="product-image">URL de Imagen de Portada:</label>
+            <input type="url" id="product-image" name="image_url" placeholder="https://...">
+
+            <label for="product-file">Archivo del Producto (.zip, .wav, .mp3 - Máx 50MB):*</label>
+            <input type="file" id="product-file" name="productFile" required accept=".zip,.wav,.mp3">
+
+            <div class="upload-progress" style="margin-top: 10px; display:none;">
+                 Subiendo: <progress id="upload-progress-bar" value="0" max="100"></progress> <span id="upload-progress-text">0%</span>
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%; margin-top: 1.5rem;">Subir Producto</button>
+            <div id="upload-message" class="message" role="alert"></div>
+        </form>
+    </div>
+</div>
 </body>
 
 </html>
