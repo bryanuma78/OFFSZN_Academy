@@ -394,6 +394,108 @@
             if (e.target === document.getElementById('modal')) closeModal();
         });
     </script>
+    <script>
+    // === SINCRONIZACIÓN DE BILLETERA + CONVERSIÓN DE MONEDA ===
+    const STORAGE_KEY = 'offszn_giftcards_state';
+    const EXCHANGE_RATE = 3.8; // 1 USD = 3.8 PEN
+
+    // Cargar estado desde localStorage
+    function getWalletState() {
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return { balance: 0, currency: 'USD' };
+
+            const data = JSON.parse(saved);
+            const balance = typeof data.totalBalance === 'number' ? data.totalBalance : 0;
+            const currency = data.currentCurrency === 'PEN' ? 'PEN' : 'USD';
+
+            return { balance, currency };
+        } catch (e) {
+            console.warn('Error cargando billetera:', e);
+            return { balance: 0, currency: 'USD' };
+        }
+    }
+
+    // Formatear saldo
+    function formatBalance(balance, currency) {
+        if (currency === 'PEN') {
+            return `S/${(balance * EXCHANGE_RATE).toFixed(2)}`;
+        }
+        return `$${balance.toFixed(2)}`;
+    }
+
+    // Actualizar el saldo en el sidebar
+    function updateWalletDisplay() {
+        const walletEl = document.querySelector('.wallet-amount');
+        if (!walletEl) return;
+
+        const { balance, currency } = getWalletState();
+        const formatted = formatBalance(balance, currency);
+
+        if (walletEl.textContent !== formatted) {
+            walletEl.textContent = formatted;
+            // Animación sutil
+            walletEl.style.transition = 'color 0.3s';
+            walletEl.style.color = '#10b981';
+            setTimeout(() => walletEl.style.color = '', 500);
+        }
+    }
+
+    // === INICIALIZACIÓN ===
+    document.addEventListener('DOMContentLoaded', () => {
+        // Carga inicial
+        setTimeout(updateWalletDisplay, 100);
+
+        // Refrescar cada 2 segundos
+        setInterval(updateWalletDisplay, 2000);
+    });
+
+    // Escuchar cambios desde otras pestañas (gift-cards.html)
+    window.addEventListener('storage', (e) => {
+        if (e.key === STORAGE_KEY) {
+            setTimeout(updateWalletDisplay, 50);
+        }
+    });
+
+    // === MANTENER FUNCIONES EXISTENTES (modal, dropdown) ===
+    function toggleUserDropdown() {
+        const dropdown = document.querySelector('.user-dropdown');
+        if (dropdown) dropdown.classList.toggle('active');
+    }
+
+    function showModal(feature) {
+        const modal = document.getElementById('modal');
+        if (modal) modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('modal');
+        if (modal) modal.style.display = 'none';
+    }
+
+    // Cierre al hacer clic fuera
+    document.addEventListener('click', e => {
+        const userDropdown = document.querySelector('.user-dropdown');
+        const userBtn = document.querySelector('.user-dropdown .navbar-icon-button');
+        if (userDropdown && !userDropdown.contains(e.target) && e.target !== userBtn) {
+            userDropdown.classList.remove('active');
+        }
+    });
+
+    const modalEl = document.getElementById('modal');
+    if (modalEl) {
+        modalEl.addEventListener('click', e => {
+            if (e.target === modalEl) closeModal();
+        });
+    }
+
+    // === FUNCIÓN DE EMERGENCIA (F12) ===
+    window.resetWallet = () => {
+        localStorage.removeItem(STORAGE_KEY);
+        updateWalletDisplay();
+        alert('Billetera reiniciada');
+    };
+</script>
 </body>
 </html>
 
