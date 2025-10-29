@@ -64,6 +64,8 @@
         .navbar-links a:hover {
             color: #fff;
         }
+
+        /* ===== DROPDOWN HOVER (Recursos & Comunidad) ===== */
         .dropdown {
             position: relative;
         }
@@ -76,6 +78,7 @@
             align-items: center;
             gap: 5px;
             cursor: pointer;
+            transition: color 0.2s;
         }
         .dropdown-toggle:hover {
             color: #fff;
@@ -84,20 +87,20 @@
             position: absolute;
             top: 100%;
             left: 50%;
-            transform: translateX(-50%);
-            background: rgba(20, 20, 20, 0.98);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            transform: translateX(-50%) translateY(-10px);
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
             padding: 12px 0;
             min-width: 220px;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
             z-index: 999;
         }
-        .dropdown.active .dropdown-menu {
+        .dropdown:hover .dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(8px);
@@ -122,6 +125,7 @@
             font-size: 0.9rem;
             color: #8b5cf6;
         }
+
         .navbar-search {
             position: relative;
             width: 380px;
@@ -149,12 +153,12 @@
             color: #666;
             font-size: 0.9rem;
         }
-        .navbar-right {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
+
+        /* ===== USER DROPDOWN (Hover) ===== */
+        .user-dropdown {
+            position: relative;
         }
-        .navbar-icon-button {
+        .user-dropdown-toggle {
             width: 36px;
             height: 36px;
             background: rgba(255, 255, 255, 0.05);
@@ -168,34 +172,93 @@
             font-size: 16px;
             transition: all 0.2s;
         }
-        .navbar-icon-button:hover {
+        .user-dropdown-toggle:hover {
             background: rgba(255, 255, 255, 0.08);
             color: #fff;
             border-color: rgba(255, 255, 255, 0.15);
-        }
-        .user-dropdown {
-            position: relative;
         }
         .user-dropdown-menu {
             position: absolute;
             top: calc(100% + 12px);
             right: 0;
-            background: rgba(20, 20, 20, 0.98);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 12px;
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 16px;
             min-width: 260px;
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s ease;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
+            z-index: 999;
         }
-        .user-dropdown.active .user-dropdown-menu {
+        .user-dropdown:hover .user-dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
+        }
+        .user-dropdown-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .user-dropdown-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
+        .user-dropdown-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .user-dropdown-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+        .user-dropdown-email {
+            color: #888;
+            font-size: 0.8rem;
+        }
+        .user-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+        .user-dropdown-item:hover {
+            color: #fff;
+        }
+        .user-dropdown-item i {
+            width: 18px;
+            text-align: center;
+            color: #8b5cf6;
+            font-size: 0.9rem;
+        }
+        .user-dropdown-item.logout {
+            color: #ef4444;
+            margin-top: 8px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .user-dropdown-item.logout:hover {
+            color: #fca5a5;
         }
 
         /* ===== SIDEBAR ===== */
@@ -487,6 +550,19 @@
             transform: translateY(-1px);
         }
 
+        /* ===== MENSAJE DE ERROR (NUEVO) ===== */
+        .error-message {
+            color: #fca5a5;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            display: none;
+            align-items: center;
+            gap: 6px;
+        }
+        .error-message.show {
+            display: flex;
+        }
+
         /* ===== POSTS ISLA ===== */
         .posts-list {
             display: flex;
@@ -713,19 +789,19 @@
             <ul class="navbar-links">
                 <li><a href="index.html">INICIO</a></li>
                 <li class="dropdown">
-                    <div class="dropdown-toggle" onclick="toggleDropdown(this)">
+                    <div class="dropdown-toggle">
                         RECURSOS <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item"><i class="fas fa-music"></i> Beats & Instrumentales</a>
-                        <a href="#" class="dropdown-item"><i class="fas fa-drum"></i> Drum Kits</a>
-                        <a href="#" class="dropdown-item"><i class="fas fa-sliders-h"></i> Presets & Plugins</a>
-                        <a href="#" class="dropdown-item"><i class="fas fa-wave-square"></i> Samples & Loops</a>
+                        <a href="#" class="dropdown-item"><i class="fas fa-book"></i> Guías</a>
+                        <a href="#" class="dropdown-item"><i class="fas fa-file-alt"></i> Plantillas</a>
+                        <a href="#" class="dropdown-item"><i class="fas fa-video"></i> Tutoriales</a>
+                        <a href="#" class="dropdown-item"><i class="fas fa-music"></i> Beats</a>
                         <a href="#" class="dropdown-item"><i class="fas fa-gift"></i> Recursos Gratis</a>
                     </div>
                 </li>
                 <li class="dropdown">
-                    <div class="dropdown-toggle" onclick="toggleDropdown(this)">
+                    <div class="dropdown-toggle">
                         COMUNIDAD <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="dropdown-menu">
@@ -744,7 +820,7 @@
         </div>
         <div class="navbar-right">
             <div class="user-dropdown">
-                <div class="navbar-icon-button" onclick="toggleUserDropdown()">
+                <div class="user-dropdown-toggle">
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="user-dropdown-menu">
@@ -756,12 +832,28 @@
                         </div>
                     </div>
                     <a href="profile.html" class="user-dropdown-item">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Mi Perfil</span>
+                        <i class="fas fa-user-circle"></i> Mi Perfil
+                    </a>
+                    <a href="dashboard.html" class="user-dropdown-item">
+                        <i class="fas fa-th-large"></i> Dashboard
+                    </a>
+                    <a href="#" class="user-dropdown-item">
+                        <i class="fas fa-wallet"></i> Billetera
+                    </a>
+                    <a href="mis-compras.html" class="user-dropdown-item">
+                        <i class="fas fa-shopping-bag"></i> Mis Compras
+                    </a>
+                    <a href="#" class="user-dropdown-item">
+                        <i class="fas fa-chart-line"></i> Analíticas
+                    </a>
+                    <a href="account-settings.html" class="user-dropdown-item">
+                        <i class="fas fa-cog"></i> Configuración
+                    </a>
+                    <a href="#" class="user-dropdown-item">
+                        <i class="fas fa-question-circle"></i> Ayuda
                     </a>
                     <a href="logout.html" class="user-dropdown-item logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Cerrar Sesión</span>
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                     </a>
                 </div>
             </div>
@@ -865,6 +957,11 @@
                         <div class="file-name" id="file-name"></div>
                         <input type="text" class="hashtags-input" id="post-hashtags" placeholder="#produccion #beats">
                     </div>
+                    <!-- MENSAJE DE ERROR -->
+                    <div class="error-message" id="file-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span></span>
+                    </div>
                 </div>
                 <button class="btn-publish" id="btn-publish">
                     <i class="fas fa-paper-plane"></i>
@@ -900,14 +997,30 @@
             }
         }
 
+        // === VALIDACIÓN DE ARCHIVO: MÁXIMO 10 MB ===
         document.getElementById('post-file').addEventListener('change', (e) => {
             const file = e.target.files[0];
             const nameEl = document.getElementById('file-name');
-            if (file) {
-                nameEl.textContent = `${file.name} (${formatBytes(file.size)})`;
-            } else {
-                nameEl.textContent = '';
+            const errorEl = document.getElementById('file-error');
+
+            // Reiniciar
+            nameEl.textContent = '';
+            errorEl.classList.remove('show');
+
+            if (!file) return;
+
+            const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+
+            // Validar tamaño
+            if (file.size > MAX_FILE_SIZE) {
+                errorEl.querySelector('span').textContent = 'El archivo es demasiado grande. Máximo 10 MB.';
+                errorEl.classList.add('show');
+                e.target.value = ''; // Limpiar input
+                return;
             }
+
+            // Mostrar nombre y tamaño
+            nameEl.textContent = `${file.name} (${formatBytes(file.size)})`;
         });
 
         document.getElementById('btn-publish').addEventListener('click', () => {
@@ -941,6 +1054,7 @@
             document.getElementById('post-file').value = '';
             document.getElementById('post-hashtags').value = '';
             document.getElementById('file-name').textContent = '';
+            document.getElementById('file-error').classList.remove('show');
             document.getElementById('create-post-form').classList.remove('active');
 
             showSuccess();
@@ -1049,24 +1163,6 @@
             div.textContent = text;
             return div.innerHTML;
         }
-
-        function toggleDropdown(el) {
-            const dropdown = el.parentElement;
-            document.querySelectorAll('.dropdown').forEach(d => {
-                if (d !== dropdown) d.classList.remove('active');
-            });
-            dropdown.classList.toggle('active');
-        }
-
-        function toggleUserDropdown() {
-            document.querySelector('.user-dropdown').classList.toggle('active');
-        }
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.dropdown') && !e.target.closest('.user-dropdown') && !e.target.closest('.btn-create-post') && !e.target.closest('.create-post-form')) {
-                document.querySelectorAll('.dropdown, .user-dropdown').forEach(d => d.classList.remove('active'));
-            }
-        });
 
         document.addEventListener('DOMContentLoaded', renderPosts);
     </script>
