@@ -334,7 +334,7 @@
                         <i class="fas fa-search"></i> Explorar Contenido
                     </a>
                 </div>
-
+z
                 <!-- Consejos para primera compra -->
                 <div class="tips-section">
                     <h3 class="tips-title">💡 Consejos para tu primera compra</h3>
@@ -396,6 +396,56 @@
             if (e.target === document.getElementById('modal')) closeModal();
         });
     </script>
+    <script>
+    // === SINCRONIZACIÓN DE BILLETERA CON GIFT-CARDS.HTML ===
+    const STORAGE_KEY = 'offszn_giftcards_state';
+    const EXCHANGE_RATE = 3.8; // 1 USD = 3.8 PEN
+    let currentCurrency = 'USD';
+
+    // Cargar estado desde localStorage
+    function loadWalletState() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            const state = JSON.parse(saved);
+            currentCurrency = state.currentCurrency || 'USD';
+            return state.totalBalance || 0;
+        }
+        return 0;
+    }
+
+    // Formatear monto según moneda
+    function formatBalance(amount) {
+        if (currentCurrency === 'PEN') {
+            const pen = (amount * EXCHANGE_RATE).toFixed(2);
+            return `S/${pen}`;
+        }
+        return `$${amount.toFixed(2)}`;
+    }
+
+    // Actualizar saldo en sidebar
+    function updateWalletDisplay() {
+        const balance = loadWalletState();
+        const formatted = formatBalance(balance);
+        document.querySelectorAll('.wallet-amount').forEach(el => {
+            el.textContent = formatted;
+        });
+    }
+
+    // Escuchar cambios en localStorage desde otras pestañas/páginas
+    window.addEventListener('storage', (e) => {
+        if (e.key === STORAGE_KEY) {
+            updateWalletDisplay();
+        }
+    });
+
+    // Actualizar al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+        updateWalletDisplay();
+
+        // También actualizamos cada 2 segundos (por si cambia en otra pestaña)
+        setInterval(updateWalletDisplay, 2000);
+    });
+</script>
 </body>
 </html>
 
