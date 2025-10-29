@@ -96,7 +96,7 @@
             transform: translateY(-10px);
             transition: all 0.3s ease;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(20px);
+             backdrop-filter: blur(20px);
         }
 
         .navbar-links li:hover .dropdown-menu {
@@ -378,20 +378,6 @@
             font-size: 0.95rem;
         }
 
-        .profile-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #000;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
         .wallet-section {
             padding: 16px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -519,16 +505,6 @@
             width: 18px;
             text-align: center;
             font-size: 0.95rem;
-        }
-
-        .menu-item .badge {
-            margin-left: auto;
-            background: #8b5cf6;
-            color: #fff;
-            padding: 2px 7px;
-            border-radius: 10px;
-            font-size: 0.65rem;
-            font-weight: 700;
         }
 
         .menu-item .soon-badge {
@@ -843,21 +819,10 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
         }
 
-        .wheel-label:nth-child(1) {
-            transform: rotate(45deg);
-        }
-
-        .wheel-label:nth-child(2) {
-            transform: rotate(135deg);
-        }
-
-        .wheel-label:nth-child(3) {
-            transform: rotate(225deg);
-        }
-
-        .wheel-label:nth-child(4) {
-            transform: rotate(315deg);
-        }
+        .wheel-label:nth-child(1) { transform: rotate(45deg); }
+        .wheel-label:nth-child(2) { transform: rotate(135deg); }
+        .wheel-label:nth-child(3) { transform: rotate(225deg); }
+        .wheel-label:nth-child(4) { transform: rotate(315deg); }
 
         .wheel-label span {
             display: block;
@@ -1013,153 +978,117 @@
         }
 
         .gift-card-type {
-            display: inline-flex;
+            font-size: 0.8rem;
+            color: #8b5cf6;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
             align-items: center;
             gap: 6px;
-            padding: 5px 10px;
-            background: rgba(139, 92, 246, 0.2);
-            border-radius: 8px;
-            color: #8b5cf6;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 10px;
         }
 
         .gift-card-value {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             color: #fff;
             margin-bottom: 6px;
         }
 
         .gift-card-desc {
-            color: #666;
             font-size: 0.85rem;
+            color: #666;
             margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
-        .gift-card-status {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #22c55e;
-        }
-
-        .discount-card {
-            background: rgba(236, 72, 153, 0.05);
-            border-color: rgba(236, 72, 153, 0.2);
-        }
-
-        .discount-card::before {
-            background: linear-gradient(90deg, #ec4899, #db2777);
-        }
-
-        .discount-card .gift-card-type {
-            background: rgba(236, 72, 153, 0.2);
-            color: #ec4899;
-        }
-
-        .how-to-use {
-            background: rgba(139, 92, 246, 0.05);
-            border: 1px dashed rgba(139, 92, 246, 0.3);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 32px;
-        }
-
-        .how-to-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 28px;
-            text-align: center;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 24px;
-        }
-
-        .step {
-            text-align: center;
-        }
-
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #8b5cf6, #6366f1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #fff;
-            margin: 0 auto 12px;
-        }
-
-        .step-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 6px;
-        }
-
-        .step-desc {
-            color: #666;
-            font-size: 0.85rem;
             line-height: 1.5;
         }
 
-        .rules-section {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 28px;
-            margin-bottom: 32px;
+        .gift-card-status {
+            font-size: 0.75rem;
+            color: #22c55e;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .rules-title {
-            font-size: 1.4rem;
+        .how-to-use, .rules-section {
+            margin-bottom: 40px;
+        }
+
+        .how-to-title, .rules-title {
+            font-size: 1.5rem;
             font-weight: 800;
             color: #fff;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .rules-list {
-            list-style: none;
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
         }
 
-        .rule-item {
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
+        .step {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
         }
 
-        .rule-item:last-child {
-            border-bottom: none;
-        }
-
-        .rule-icon {
-            width: 36px;
-            height: 36px;
-            background: rgba(139, 92, 246, 0.1);
-            border-radius: 8px;
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #8b5cf6;
+            color: #fff;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin: 0 auto 16px;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .step-desc {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .rules-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .rule-item {
+            display: flex;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .rule-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
             color: #8b5cf6;
-            font-size: 1rem;
             flex-shrink: 0;
         }
 
@@ -1168,46 +1097,44 @@
         }
 
         .rule-title {
-            font-weight: 700;
+            font-weight: 600;
             color: #fff;
-            margin-bottom: 3px;
-            font-size: 0.95rem;
+            margin-bottom: 4px;
         }
 
         .rule-desc {
-            color: #666;
             font-size: 0.85rem;
+            color: #666;
             line-height: 1.5;
         }
 
         .terms-section {
             text-align: center;
-            padding: 24px;
+            margin-top: 40px;
         }
 
         .terms-link {
             color: #8b5cf6;
             text-decoration: none;
+            font-size: 0.9rem;
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            transition: all 0.2s;
         }
 
         .terms-link:hover {
             color: #a78bfa;
         }
 
+        /* ===== MODAL ===== */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
             z-index: 9999;
             align-items: center;
@@ -1221,30 +1148,17 @@
         .modal-content {
             background: rgba(20, 20, 20, 0.98);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 450px;
-            width: 90%;
+            border-radius: 16px;
+            padding: 44px;
+            max-width: 460px;
             text-align: center;
             position: relative;
-            animation: modalIn 0.3s ease;
-        }
-
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
         }
 
         .modal-close {
             position: absolute;
-            top: 16px;
-            right: 16px;
+            top: 18px;
+            right: 18px;
             background: none;
             border: none;
             color: #666;
@@ -1258,47 +1172,44 @@
         }
 
         .modal-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        .modal-icon.success {
-            color: #22c55e;
-        }
-
-        .modal-icon.gift {
+            font-size: 3.5rem;
+            margin-bottom: 18px;
             color: #8b5cf6;
         }
 
+        .modal-icon.success { color: #22c55e; }
+        .modal-icon.gift { color: #f59e0b; }
+
         .modal-title {
-            font-size: 1.8rem;
-            font-weight: 800;
+            font-size: 1.6rem;
+            font-weight: 700;
             color: #fff;
             margin-bottom: 12px;
+            letter-spacing: -0.3px;
         }
 
         .modal-text {
             color: #999;
-            font-size: 0.95rem;
             margin-bottom: 24px;
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         .modal-prize {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 800;
             color: #8b5cf6;
-            margin: 20px 0;
+            margin: 16px 0;
         }
 
         .modal-btn {
-            padding: 14px 40px;
+            padding: 12px 32px;
             background: #8b5cf6;
             border: none;
             border-radius: 10px;
             color: #fff;
-            font-weight: 700;
-            font-size: 1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -1307,57 +1218,26 @@
             background: #7c3aed;
         }
 
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 1200px) {
-            .dashboard-container {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                position: relative;
-                top: 0;
-                height: auto;
-            }
+            .dashboard-container { grid-template-columns: 1fr; }
+            .sidebar { position: relative; top: 0; height: auto; }
+            .navbar-search { width: 300px; }
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                padding: 0.75rem 1.5rem;
-            }
-
-            .navbar-center {
-                display: none;
-            }
-
-            .main-content {
-                padding: 20px;
-            }
-
-            .wheel {
-                width: 300px;
-                height: 300px;
-            }
-
-            .gift-cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .steps-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-header {
-                flex-direction: column;
-                gap: 12px;
-                align-items: flex-start;
-            }
+            .navbar { padding: 0.75rem 1.5rem; }
+            .navbar-center { display: none; }
+            .main-content { padding: 20px; }
+            .currency-toggle, .steps-grid, .rules-list { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">
-            <a href="index.html">OFFSZN</a>
-        </div>
+        <div class="logo"><a href="index.html">OFFSZN</a></div>
 
         <div class="navbar-center">
             <ul class="navbar-links">
@@ -1365,53 +1245,23 @@
                 <li>
                     <a>RECURSOS <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
-                        <a href="beats.html" class="dropdown-item">
-                            <i class="fas fa-music"></i>
-                            <span>Beats & Instrumentales</span>
-                        </a>
-                        <a href="drum-kits.html" class="dropdown-item">
-                            <i class="fas fa-drum"></i>
-                            <span>Drum Kits</span>
-                        </a>
-                        <a href="presets.html" class="dropdown-item">
-                            <i class="fas fa-sliders-h"></i>
-                            <span>Presets & Plugins</span>
-                        </a>
-                        <a href="samples.html" class="dropdown-item">
-                            <i class="fas fa-wave-square"></i>
-                            <span>Samples & Loops</span>
-                        </a>
+                        <a href="beats.html" class="dropdown-item"><i class="fas fa-music"></i><span>Beats & Instrumentales</span></a>
+                        <a href="drum-kits.html" class="dropdown-item"><i class="fas fa-drum"></i><span>Drum Kits</span></a>
+                        <a href="presets.html" class="dropdown-item"><i class="fas fa-sliders-h"></i><span>Presets & Plugins</span></a>
+                        <a href="samples.html" class="dropdown-item"><i class="fas fa-wave-square"></i><span>Samples & Loops</span></a>
                         <div class="dropdown-divider"></div>
-                        <a href="free-resources.html" class="dropdown-item">
-                            <i class="fas fa-gift"></i>
-                            <span>Recursos Gratis</span>
-                        </a>
+                        <a href="free-resources.html" class="dropdown-item"><i class="fas fa-gift"></i><span>Recursos Gratis</span></a>
                     </div>
                 </li>
                 <li>
                     <a>COMUNIDAD <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
-                        <a href="feed.html" class="dropdown-item">
-                            <i class="fas fa-home"></i>
-                            <span>Feed</span>
-                        </a>
-                        <a href="productores.html" class="dropdown-item">
-                            <i class="fas fa-users"></i>
-                            <span>Productores</span>
-                        </a>
-                        <a href="colaboraciones.html" class="dropdown-item">
-                            <i class="fas fa-handshake"></i>
-                            <span>Colaboraciones</span>
-                        </a>
+                        <a href="feed.html" class="dropdown-item"><i class="fas fa-home"></i><span>Feed</span></a>
+                        <a href="productores.html" class="dropdown-item"><i class="fas fa-users"></i><span>Productores</span></a>
+                        <a href="colaboraciones.html" class="dropdown-item"><i class="fas fa-handshake"></i><span>Colaboraciones</span></a>
                         <div class="dropdown-divider"></div>
-                        <a href="foros.html" class="dropdown-item">
-                            <i class="fas fa-comments"></i>
-                            <span>Foros</span>
-                        </a>
-                        <a href="eventos.html" class="dropdown-item">
-                            <i class="fas fa-calendar"></i>
-                            <span>Eventos</span>
-                        </a>
+                        <a href="foros.html" class="dropdown-item"><i class="fas fa-comments"></i><span>Foros</span></a>
+                        <a href="eventos.html" class="dropdown-item"><i class="fas fa-calendar"></i><span>Eventos</span></a>
                     </div>
                 </li>
             </ul>
@@ -1423,16 +1273,10 @@
         </div>
 
         <div class="navbar-right">
-            <a href="notifications.html" class="navbar-icon-button">
-                <i class="fas fa-bell"></i>
-            </a>
-            <a href="cart.html" class="navbar-icon-button">
-                <i class="fas fa-shopping-cart"></i>
-            </a>
+            <a href="notifications.html" class="navbar-icon-button"><i class="fas fa-bell"></i></a>
+            <a href="cart.html" class="navbar-icon-button"><i class="fas fa-shopping-cart"></i></a>
             <div class="user-dropdown">
-                <div class="navbar-icon-button" onclick="toggleUserDropdown()">
-                    <i class="fas fa-user"></i>
-                </div>
+                <div class="navbar-icon-button" onclick="toggleUserDropdown()"><i class="fas fa-user"></i></div>
                 <div class="user-dropdown-menu">
                     <div class="user-dropdown-header">
                         <div class="user-dropdown-avatar">U</div>
@@ -1441,57 +1285,28 @@
                             <div class="user-dropdown-email">usuario@offszn.com</div>
                         </div>
                     </div>
-                    <a href="profile.html" class="user-dropdown-item">
-                        <i class="fas fa-user-circle"></i>
-                        <span>Mi Perfil</span>
-                    </a>
-                    <a href="dashboard.html" class="user-dropdown-item">
-                        <i class="fas fa-th-large"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    <a href="wallet.html" class="user-dropdown-item">
-                        <i class="fas fa-wallet"></i>
-                        <span>Billetera</span>
-                    </a>
-                    <a href="#" class="user-dropdown-item disabled">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span>Mis Compras</span>
-                        <span class="soon-badge">Pronto</span>
-                    </a>
-                    <a href="#" class="user-dropdown-item disabled">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Analíticas</span>
-                        <span class="soon-badge">Pronto</span>
-                    </a>
-                    <a href="account-settings.html" class="user-dropdown-item">
-                        <i class="fas fa-cog"></i>
-                        <span>Configuración</span>
-                    </a>
-                    <a href="help.html" class="user-dropdown-item">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Ayuda</span>
-                    </a>
-                    <a href="logout.html" class="user-dropdown-item logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Cerrar Sesión</span>
-                    </a>
+                    <a href="profile.html" class="user-dropdown-item"><i class="fas fa-user-circle"></i><span>Mi Perfil</span></a>
+                    <a href="dashboard.html" class="user-dropdown-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+                    <a href="wallet.html" class="user-dropdown-item"><i class="fas fa-wallet"></i><span>Billetera</span></a>
+                    <a href="mis-compras.html" class="user-dropdown-item"><i class="fas fa-shopping-bag"></i><span>Mis Compras</span></a>
+                    <a href="#" class="user-dropdown-item disabled" onclick="showModal('Analíticas'); return false;"><i class="fas fa-chart-line"></i><span>Analíticas</span><span class="soon-badge">Pronto</span></a>
+                    <a href="account-settings.html" class="user-dropdown-item"><i class="fas fa-cog"></i><span>Configuración</span></a>
+                    <a href="help.html" class="user-dropdown-item"><i class="fas fa-question-circle"></i><span>Ayuda</span></a>
+                    <a href="logout.html" class="user-dropdown-item logout"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- Dashboard Container -->
     <div class="dashboard-container">
+
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="profile-header">
                 <div class="profile-info">
                     <div class="profile-avatar">U</div>
-                    <div>
-                        <div class="profile-name">Usuario</div>
-                    </div>
-                </div>
-                <div class="profile-badge">
-                    <i class="fas fa-award"></i>
-                    Top Seller
+                    <div><div class="profile-name">Usuario</div></div>
                 </div>
             </div>
 
@@ -1501,8 +1316,7 @@
             </div>
 
             <button class="upload-btn" onclick="showModal('Subir Kit')">
-                <i class="fas fa-cloud-upload-alt"></i>
-                Subir Kit
+                <i class="fas fa-cloud-upload-alt"></i> Subir Kit
             </button>
 
             <div class="sidebar-search">
@@ -1512,90 +1326,38 @@
 
             <div class="sidebar-menu">
                 <div class="menu-section-title">Principal</div>
-                
-                <a href="dashboard.html" class="menu-item">
-                    <i class="fas fa-th-large"></i>
-                    <span>Dashboard</span>
-                </a>
-
-                <a href="#" class="menu-item disabled" onclick="showModal('Mis Kits'); return false;">
-                    <i class="fas fa-music"></i>
-                    <span>Mis Kits</span>
-                    <span class="soon-badge">Pronto</span>
-                </a>
-
-                <a href="#" class="menu-item disabled" onclick="showModal('Analíticas'); return false;">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Analíticas</span>
-                    <span class="soon-badge">Pronto</span>
-                </a>
-
-                <a href="#" class="menu-item disabled" onclick="showModal('Favoritos'); return false;">
-                    <i class="fas fa-heart"></i>
-                    <span>Favoritos</span>
-                    <span class="soon-badge">Pronto</span>
-                </a>
-
-                <a href="#" class="menu-item disabled" onclick="showModal('Historial'); return false;">
-                    <i class="fas fa-history"></i>
-                    <span>Historial</span>
-                    <span class="soon-badge">Pronto</span>
-                </a>
+                <a href="dashboard.html" class="menu-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+                <a href="#" class="menu-item disabled" onclick="showModal('Mis Kits'); return false;"><i class="fas fa-music"></i><span>Mis Kits</span><span class="soon-badge">Pronto</span></a>
+                <a href="#" class="menu-item disabled" onclick="showModal('Analíticas'); return false;"><i class="fas fa-chart-line"></i><span>Analíticas</span><span class="soon-badge">Pronto</span></a>
+                <a href="favoritos.html" class="menu-item"><i class="fas fa-heart"></i><span>Favoritos</span></a>
+                <a href="#" class="menu-item"><i class="fas fa-history"></i><span>Historial</span></a>
 
                 <div class="menu-divider"></div>
 
                 <div class="menu-section-title">Colaboración</div>
-
-                <a href="#" class="menu-item disabled" onclick="showModal('Colaboraciones'); return false;">
-                    <i class="fas fa-users"></i>
-                    <span>Colaboraciones</span>
-                    <span class="soon-badge">Pronto</span>
-                </a>
+                <a href="colaboraciones.html" class="menu-item"><i class="fas fa-users"></i><span>Colaboraciones</span></a>
 
                 <div class="menu-divider"></div>
 
                 <div class="menu-section-title">Compras</div>
-
-                <a href="#" class="menu-item disabled" onclick="showModal('Mis Compras'); return false;">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span>Mis Compras</span>
-                    <span class="soon-badge">Pronto</span>
-                </a>
-
-                <a href="gift-cards.html" class="menu-item active">
-                    <i class="fas fa-gift"></i>
-                    <span>Gift Cards</span>
-                </a>
-
-                <a href="messages.html" class="menu-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>Mensajes</span>
-                </a>
+                <a href="mis-compras.html" class="menu-item"><i class="fas fa-shopping-bag"></i><span>Mis Compras</span></a>
+                <a href="gift-cards.html" class="menu-item active"><i class="fas fa-gift"></i><span>Gift Cards</span></a>
+                <a href="messages.html" class="menu-item"><i class="fas fa-envelope"></i><span>Mensajes</span></a>
 
                 <div class="menu-divider"></div>
 
                 <div class="menu-section-title">Configuración</div>
-
-                <a href="account-settings.html" class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Configuración</span>
-                </a>
-
-                <a href="blog.html" class="menu-item">
-                    <i class="fas fa-book-open"></i>
-                    <span>Blog</span>
-                </a>
+                <a href="account-settings.html" class="menu-item"><i class="fas fa-cog"></i><span>Configuración</span></a>
+                <a href="blog.html" class="menu-item"><i class="fas fa-book-open"></i><span>Blog</span></a>
             </div>
 
-            <a href="logout.html" class="logout-btn">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Cerrar Sesión</span>
-            </a>
+            <a href="logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
         </aside>
 
+        <!-- Main Content -->
         <main class="main-content">
             <div class="breadcrumb">
-                <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="dashboard.html"><i class="fas fa-home"></i></a>
                 <span><i class="fas fa-chevron-right"></i></span>
                 <span class="active">Gift Cards</span>
             </div>
@@ -1809,15 +1571,11 @@
         </main>
     </div>
 
+    <!-- Modales -->
     <div class="modal" id="prize-modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <div class="modal-icon success">
-                <i class="fas fa-trophy"></i>
-            </div>
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-icon success"><i class="fas fa-trophy"></i></div>
             <h2 class="modal-title">¡Felicidades!</h2>
             <p class="modal-text">Has ganado:</p>
             <div class="modal-prize" id="prize-text">$1.00 USD</div>
@@ -1828,13 +1586,8 @@
 
     <div class="modal" id="welcome-modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <div class="modal-icon gift">
-                <i class="fas fa-gift"></i>
-            </div>
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-icon gift"><i class="fas fa-gift"></i></div>
             <h2 class="modal-title">¡Regalo Reclamado!</h2>
             <div class="modal-prize" id="welcome-prize">$5.00 USD</div>
             <p class="modal-text">Tu gift card de bienvenida ha sido activada. Ahora puedes usarla en cualquier producto.</p>
@@ -1844,16 +1597,11 @@
 
     <div class="modal" id="modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <div class="modal-icon">
-                <i class="fas fa-rocket"></i>
-            </div>
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-icon"><i class="fas fa-rocket"></i></div>
             <h2 class="modal-title">Próximamente</h2>
             <p class="modal-text">
-                Estamos trabajando en <strong id="featureName">esta función</strong>.<br/>
+                Estamos trabajando en <strong id="featureName">esta función</strong>.<br>
                 Será lanzada pronto.
             </p>
         </div>
@@ -1877,7 +1625,6 @@
         function saveState() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-                console.log('Estado guardado exitosamente');
             } catch (error) {
                 console.error('Error al guardar estado:', error);
             }
@@ -1889,7 +1636,6 @@
                 if (saved) {
                     const parsed = JSON.parse(saved);
                     appState = { ...appState, ...parsed };
-                    console.log('Estado cargado:', appState);
                     return true;
                 }
             } catch (error) {
@@ -1915,17 +1661,15 @@
         // ===== FUNCIONES DE MONEDA =====
         function changeCurrency(currency) {
             appState.currentCurrency = currency;
-            
             document.getElementById('usd-btn').classList.toggle('active', currency === 'USD');
             document.getElementById('pen-btn').classList.toggle('active', currency === 'PEN');
-
             updateAllAmounts();
             saveState();
         }
 
         function formatAmount(usd) {
             if (appState.currentCurrency === 'USD') {
-                return `${usd.toFixed(2)} USD`;
+                return `$${usd.toFixed(2)} USD`;
             } else {
                 const penAmount = (usd * EXCHANGE_RATE).toFixed(2);
                 return `S/${penAmount} PEN`;
@@ -1934,22 +1678,16 @@
 
         function updateAllAmounts() {
             const welcomeAmount = document.getElementById('welcome-amount');
-            if (welcomeAmount) {
-                welcomeAmount.textContent = formatAmount(5);
-            }
+            if (welcomeAmount) welcomeAmount.textContent = formatAmount(5);
 
             const totalBalance = document.getElementById('total-balance');
-            if (totalBalance) {
-                totalBalance.textContent = formatAmount(appState.totalBalance);
-            }
+            if (totalBalance) totalBalance.textContent = formatAmount(appState.totalBalance);
 
             const sidebarWallet = document.getElementById('sidebar-wallet');
             if (sidebarWallet) {
-                if (appState.currentCurrency === 'USD') {
-                    sidebarWallet.textContent = `$${appState.totalBalance.toFixed(2)}`;
-                } else {
-                    sidebarWallet.textContent = `S/${(appState.totalBalance * EXCHANGE_RATE).toFixed(2)}`;
-                }
+                sidebarWallet.textContent = appState.currentCurrency === 'USD' 
+                    ? `$${appState.totalBalance.toFixed(2)}` 
+                    : `S/${(appState.totalBalance * EXCHANGE_RATE).toFixed(2)}`;
             }
 
             renderGiftCards();
@@ -1968,10 +1706,7 @@
             };
 
             appState.giftCards.push(giftCard);
-            
-            if (!isDiscount) {
-                appState.totalBalance += value;
-            }
+            if (!isDiscount) appState.totalBalance += value;
 
             saveState();
             updateAllAmounts();
@@ -1979,7 +1714,6 @@
 
         function renderGiftCards() {
             const container = document.getElementById('gift-cards-container');
-            
             if (appState.giftCards.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
@@ -1992,13 +1726,12 @@
             }
 
             container.innerHTML = appState.giftCards.map(card => {
-                const cardClass = card.isDiscount ? 'gift-card-item discount-card' : 'gift-card-item';
                 const valueDisplay = card.isDiscount ? `${card.value}% OFF` : formatAmount(card.value);
                 const iconClass = card.isDiscount ? 'percent' : 'gift';
                 const statusText = card.isDiscount ? 'Disponible' : 'Activa';
                 
                 return `
-                    <div class="${cardClass}">
+                    <div class="gift-card-item">
                         <div class="gift-card-type">
                             <i class="fas fa-${iconClass}"></i> ${card.type}
                         </div>
@@ -2012,7 +1745,7 @@
             }).join('');
         }
 
-        // ===== FUNCIONES DE REGALO DE BIENVENIDA =====
+        // ===== REGALO DE BIENVENIDA =====
         function claimWelcomeGift() {
             if (appState.hasClaimedWelcome) {
                 alert('Ya has reclamado tu regalo de bienvenida.');
@@ -2020,7 +1753,6 @@
             }
 
             appState.hasClaimedWelcome = true;
-            
             addGiftCard('Bienvenida', 5, 'Gift card de bienvenida. Válida para cualquier producto.', false);
 
             const btn = document.getElementById('claim-welcome');
@@ -2029,14 +1761,13 @@
 
             enableWheel();
 
-            const welcomePrize = document.getElementById('welcome-prize');
-            welcomePrize.textContent = formatAmount(5);
+            document.getElementById('welcome-prize').textContent = formatAmount(5);
             document.getElementById('welcome-modal').classList.add('active');
 
             saveState();
         }
 
-        // ===== FUNCIONES DE RULETA =====
+        // ===== RULETA =====
         function enableWheel() {
             const spinBtn = document.getElementById('spin-btn');
             const spinInfo = document.getElementById('spin-info');
@@ -2064,127 +1795,64 @@
 
             const wheel = document.getElementById('wheel');
             const btn = document.getElementById('spin-btn');
-            
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Girando...';
 
             const prizes = [
-                { 
-                    text: '$1 USD',
-                    value: 1,
-                    type: 'money',
-                    isDiscount: false,
-                    description: 'Premio de la ruleta mensual.',
-                    label: `Ruleta ${monthNames[currentMonth]} ${currentYear}`,
-                    segmentStart: 0,
-                    segmentEnd: 90
-                },
-                { 
-                    text: '10% OFF',
-                    value: 10,
-                    type: 'discount',
-                    isDiscount: true,
-                    description: 'Aplica a 1 producto. No acumulable.',
-                    label: 'Descuento 10%',
-                    segmentStart: 90,
-                    segmentEnd: 180
-                },
-                { 
-                    text: '15% OFF',
-                    value: 15,
-                    type: 'discount',
-                    isDiscount: true,
-                    description: 'Aplica a 1 producto. No acumulable.',
-                    label: 'Descuento 15%',
-                    segmentStart: 180,
-                    segmentEnd: 270
-                },
-                { 
-                    text: '20% OFF',
-                    value: 20,
-                    type: 'discount',
-                    isDiscount: true,
-                    description: 'Aplica a 1 producto. No acumulable.',
-                    label: 'Descuento 20%',
-                    segmentStart: 270,
-                    segmentEnd: 360
-                }
+                { text: '$1 USD', value: 1, type: 'money', isDiscount: false, description: 'Premio de la ruleta mensual.', label: `Ruleta ${monthNames[currentMonth]} ${currentYear}`, segmentStart: 0, segmentEnd: 90 },
+                { text: '10% OFF', value: 10, type: 'discount', isDiscount: true, description: 'Aplica a 1 producto. No acumulable.', label: 'Descuento 10%', segmentStart: 90, segmentEnd: 180 },
+                { text: '15% OFF', value: 15, type: 'discount', isDiscount: true, description: 'Aplica a 1 producto. No acumulable.', label: 'Descuento 15%', segmentStart: 180, segmentEnd: 270 },
+                { text: '20% OFF', value: 20, type: 'discount', isDiscount: true, description: 'Aplica a 1 producto. No acumulable.', label: 'Descuento 20%', segmentStart: 270, segmentEnd: 360 }
             ];
 
             const randomIndex = Math.floor(Math.random() * 4);
             const selectedPrize = prizes[randomIndex];
-            
             const baseRotation = 3600;
             const segmentCenter = (selectedPrize.segmentStart + selectedPrize.segmentEnd) / 2;
             const randomOffset = (Math.random() * 40) - 20;
             const targetRotation = 360 - segmentCenter + randomOffset;
             const finalRotation = baseRotation + targetRotation;
 
-            console.log(`Premio seleccionado: ${selectedPrize.text} (índice ${randomIndex})`);
-            console.log(`Segmento: ${selectedPrize.segmentStart}° - ${selectedPrize.segmentEnd}°`);
-            console.log(`Rotación final: ${finalRotation}° (target: ${targetRotation}°)`);
-
             wheel.style.transform = `rotate(${finalRotation}deg)`;
 
             setTimeout(() => {
                 appState.lastSpinMonth = currentMonthKey;
-                
-                addGiftCard(
-                    selectedPrize.label, 
-                    selectedPrize.value, 
-                    selectedPrize.description, 
-                    selectedPrize.isDiscount
-                );
+                addGiftCard(selectedPrize.label, selectedPrize.value, selectedPrize.description, selectedPrize.isDiscount);
 
-                const prizeText = document.getElementById('prize-text');
-                prizeText.textContent = selectedPrize.isDiscount 
+                document.getElementById('prize-text').textContent = selectedPrize.isDiscount 
                     ? `${selectedPrize.value}% OFF` 
                     : formatAmount(selectedPrize.value);
                 
                 document.getElementById('prize-modal').classList.add('active');
 
                 btn.innerHTML = '<i class="fas fa-check"></i> Ya Giraste Este Mes';
-                
-                const spinInfo = document.getElementById('spin-info');
-                spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
+                document.getElementById('spin-info').innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
 
-                console.log(`Premio otorgado correctamente: ${selectedPrize.text}`);
                 saveState();
             }, 5000);
         }
 
-        // ===== FUNCIONES DE MODAL =====
+        // ===== MODALES =====
         function closeModal() {
-            document.querySelectorAll('.modal').forEach(modal => {
-                modal.classList.remove('active');
-            });
+            document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
         }
 
         function showModal(feature) {
-            const featureName = document.getElementById('featureName');
-            if (featureName) {
-                featureName.textContent = feature;
-            }
-            const modal = document.getElementById('modal');
-            if (modal) {
-                modal.classList.add('active');
-            }
+            document.getElementById('featureName').textContent = feature;
+            document.getElementById('modal').classList.add('active');
         }
 
         function toggleUserDropdown() {
-            const dropdown = document.querySelector('.user-dropdown');
-            if (dropdown) {
-                dropdown.classList.toggle('active');
-            }
+            document.querySelector('.user-dropdown').classList.toggle('active');
         }
 
         // ===== INICIALIZACIÓN =====
-        function initApp() {
+        document.addEventListener('DOMContentLoaded', () => {
             loadState();
 
             if (appState.currentCurrency === 'PEN') {
                 document.getElementById('usd-btn').classList.remove('active');
-                document.getElementById('pen-btn').classList.add('active');
+                document.getElementById('pen-btn').class();
             }
 
             if (appState.hasClaimedWelcome) {
@@ -2193,46 +1861,32 @@
                 btn.innerHTML = '<i class="fas fa-check"></i> Regalo Reclamado';
                 enableWheel();
             } else {
-                const spinBtn = document.getElementById('spin-btn');
-                spinBtn.disabled = true;
-                const spinInfo = document.getElementById('spin-info');
-                spinInfo.innerHTML = `<i class="fas fa-lock"></i> Reclama tu regalo de bienvenida primero`;
+                document.getElementById('spin-btn').disabled = true;
             }
 
             updateAllAmounts();
-        }
 
-        // ===== EVENT LISTENERS =====
-        document.addEventListener('DOMContentLoaded', function() {
-            initApp();
+            // Event Listeners
+            document.getElementById('usd-btn').onclick = () => changeCurrency('USD');
+            document.getElementById('pen-btn').onclick = () => changeCurrency('PEN');
+            document.getElementById('claim-welcome').onclick = claimWelcomeGift;
+            document.getElementById('spin-btn').onclick = spinWheel;
 
-            document.getElementById('usd-btn').addEventListener('click', () => changeCurrency('USD'));
-            document.getElementById('pen-btn').addEventListener('click', () => changeCurrency('PEN'));
-            document.getElementById('claim-welcome').addEventListener('click', claimWelcomeGift);
-            document.getElementById('spin-btn').addEventListener('click', spinWheel);
-
-            document.querySelectorAll('.modal').forEach(modal => {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        closeModal();
-                    }
-                });
+            document.querySelectorAll('.modal').forEach(m => {
+                m.onclick = e => { if (e.target === m) closeModal(); };
             });
 
-            document.addEventListener('click', function(e) {
-                const userDropdown = document.querySelector('.user-dropdown');
-                if (userDropdown && !userDropdown.contains(e.target)) {
-                    userDropdown.classList.remove('active');
+            document.addEventListener('click', e => {
+                const dropdown = document.querySelector('.user-dropdown');
+                if (dropdown && !dropdown.contains(e.target) && e.target !== dropdown.querySelector('.navbar-icon-button')) {
+                    dropdown.classList.remove('active');
                 }
             });
         });
 
-        // ===== PREVENIR PÉRDIDA DE DATOS =====
-        window.addEventListener('beforeunload', function(e) {
-            saveState();
-        });
-
+        // Guardado periódico
         setInterval(saveState, 30000);
+        window.addEventListener('beforeunload', saveState);
     </script>
 </body>
 </html>
