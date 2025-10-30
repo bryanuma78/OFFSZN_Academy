@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Kit - OFFSZN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== COPIADO 1:1 DE GIFT-CARDS.HTML ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+        /* ===== NAVBAR Y SIDEBAR (igual que en Gift-Cards.html) ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 3rem;
+            background: rgba(0, 0, 0, 0.98);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+        }
+        .navbar .logo a {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        .navbar-center {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+        .navbar-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        .navbar-links li {
+            position: relative;
+        }
+        .navbar-links a {
+            color: #999;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        .navbar-links a:hover {
+            color: #fff;
+        }
+        .navbar-links a i.fa-chevron-down {
+            font-size: 0.7rem;
+            transition: transform 0.2s;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 0;
+            background: rgba(20, 20, 20, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+        }
+        .navbar-links li:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .navbar-links li:hover a i.fa-chevron-down {
+            transform: rotate(180deg);
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .dropdown-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+        }
+        .dropdown-item i {
+            width: 18px;
+            text-align: center;
+        }
+        .dropdown-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 8px 0;
+        }
+        .navbar-search {
+            position: relative;
+            width: 380px;
+        }
+        .navbar-search input {
+            width: 100%;
+            padding: 0.6rem 2.5rem 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .navbar-search input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+        .navbar-search input::placeholder {
+            color: #666;
+        }
+        .navbar-search i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .navbar-right {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        .navbar-icon-button {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 16px;
+            transition: all 0.2s;
+            text-decoration: none;
+            position: relative;
+        }
+        .navbar-icon-button:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        .user-dropdown {
+            position: relative;
+        }
+        .user-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            background: rgba(20, 20, 20, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            min-width: 260px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+        }
+        .user-dropdown.active .user-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .user-dropdown-header {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .user-dropdown-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
+        .user-dropdown-info {
+            flex: 1;
+        }
+        .user-dropdown-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+        .user-dropdown-email {
+            font-size: 0.75rem;
+            color: #666;
+        }
+        .user-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .user-dropdown-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+        }
+        .user-dropdown-item.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .user-dropdown-item i {
+            width: 18px;
+            text-align: center;
+        }
+        .user-dropdown-item .soon-badge {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.08);
+            color: #666;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .user-dropdown-item.logout {
+            color: #ef4444;
+            margin-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 12px;
+        }
+        .user-dropdown-item.logout:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: calc(100vh - 57px);
+        }
+        .sidebar {
+            background: rgba(15, 15, 15, 0.6);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 57px;
+            height: calc(100vh - 57px);
+            overflow-y: auto;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+        .profile-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .profile-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .profile-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .wallet-section {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(139, 92, 246, 0.05);
+        }
+        .wallet-label {
+            font-size: 0.7rem;
+            color: #999;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        .wallet-amount {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .upload-btn {
+            margin: 20px 20px 0;
+            padding: 14px 18px;
+            background: #8b5cf6;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            width: calc(100% - 40px);
+        }
+        .upload-btn:hover {
+            background: #7c3aed;
+            transform: translateY(-1px);
+        }
+        .sidebar-search {
+            margin: 16px 20px;
+            position: relative;
+        }
+        .sidebar-search input {
+            width: 100%;
+            padding: 10px 36px 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .sidebar-search input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+        .sidebar-search input::placeholder {
+            color: #666;
+            font-size: 0.82rem;
+        }
+        .sidebar-search i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 0.85rem;
+        }
+        .sidebar-menu {
+            padding: 12px 0;
+        }
+        .menu-section-title {
+            padding: 16px 20px 8px;
+            font-size: 0.65rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 20px;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+            position: relative;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+        .menu-item.active {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+            border-left: 2px solid #8b5cf6;
+        }
+        .menu-item.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .menu-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        .menu-item .badge {
+            margin-left: auto;
+            background: #8b5cf6;
+            color: #fff;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+        .menu-item .soon-badge {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.08);
+            color: #666;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .menu-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 12px 20px;
+        }
+        .logout-btn {
+            margin: 20px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            padding: 11px 18px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+        }
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        .main-content {
+            padding: 36px 48px;
+            background: #0a0a0a;
+        }
+
+        /* ========== MODALS ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: rgba(20, 20, 20, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .modal-close:hover {
+            color: #fff;
+        }
+        .modal-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+        .modal-text {
+            color: #999;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .upload-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .upload-option {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .upload-option:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        .upload-option i {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: #8b5cf6;
+        }
+        .upload-option span {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* ========== UPLOAD MODAL ========== */
+        .upload-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        .upload-modal.active {
+            display: flex;
+        }
+        .upload-content {
+            background: rgba(20, 20, 20, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+        .upload-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .upload-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .upload-close {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .upload-close:hover {
+            color: #fff;
+        }
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin: 24px 0;
+            transition: border-color 0.2s;
+            cursor: pointer;
+        }
+        .upload-area.dragover {
+            border-color: rgba(139, 92, 246, 0.5);
+            background: rgba(139, 92, 246, 0.05);
+        }
+        .upload-icon {
+            font-size: 3rem;
+            color: #8b5cf6;
+            margin-bottom: 16px;
+        }
+        .upload-text {
+            color: #999;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        .file-input {
+            display: none;
+        }
+        .error-message {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 12px;
+            display: none;
+        }
+
+        /* ========== FILE PREVIEW & PROGRESS ========== */
+        .file-preview {
+            margin: 24px 0;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            display: none;
+        }
+        .file-name {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            word-break: break-all;
+        }
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+            transition: width 0.3s ease;
+        }
+        .file-status {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1200px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: relative;
+                top: 0;
+                height: auto;
+            }
+            .navbar-search {
+                width: 300px;
+            }
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.75rem 1.5rem;
+            }
+            .navbar-center {
+                display: none;
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .upload-options {
+                grid-template-columns: 1fr;
+            }
+            .upload-content {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar y Sidebar (1:1 de Gift-Cards.html) -->
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">OFFSZN</a></div>
+        <div class="navbar-center">
+            <ul class="navbar-links">
+                <li><a href="index.html">INICIO</a></li>
+                <li>
+                    <a>RECURSOS <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="beats.html" class="dropdown-item"><i class="fas fa-music"></i><span>Beats & Instrumentales</span></a>
+                        <a href="drum-kits.html" class="dropdown-item"><i class="fas fa-drum"></i><span>Drum Kits</span></a>
+                        <a href="presets.html" class="dropdown-item"><i class="fas fa-sliders-h"></i><span>Presets & Plugins</span></a>
+                        <a href="samples.html" class="dropdown-item"><i class="fas fa-wave-square"></i><span>Samples & Loops</span></a>
+                        <div class="dropdown-divider"></div>
+                        <a href="free-resources.html" class="dropdown-item"><i class="fas fa-gift"></i><span>Recursos Gratis</span></a>
+                    </div>
+                </li>
+                <li>
+                    <a>COMUNIDAD <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="feed.html" class="dropdown-item"><i class="fas fa-home"></i><span>Feed</span></a>
+                        <a href="productores.html" class="dropdown-item"><i class="fas fa-users"></i><span>Productores</span></a>
+                        <a href="colaboraciones.html" class="dropdown-item"><i class="fas fa-handshake"></i><span>Colaboraciones</span></a>
+                        <div class="dropdown-divider"></div>
+                        <a href="foros.html" class="dropdown-item"><i class="fas fa-comments"></i><span>Foros</span></a>
+                        <a href="eventos.html" class="dropdown-item"><i class="fas fa-calendar"></i><span>Eventos</span></a>
+                    </div>
+                </li>
+            </ul>
+            <div class="navbar-search">
+                <input type="text" placeholder="Buscar beats, kits, productores...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <a href="notifications.html" class="navbar-icon-button"><i class="fas fa-bell"></i></a>
+            <a href="cart.html" class="navbar-icon-button"><i class="fas fa-shopping-cart"></i></a>
+            <div class="user-dropdown">
+                <div class="navbar-icon-button" onclick="toggleUserDropdown()"><i class="fas fa-user"></i></div>
+                <div class="user-dropdown-menu">
+                    <div class="user-dropdown-header">
+                        <div class="user-dropdown-avatar">U</div>
+                        <div class="user-dropdown-info">
+                            <div class="user-dropdown-name">Usuario</div>
+                            <div class="user-dropdown-email">usuario@offszn.com</div>
+                        </div>
+                    </div>
+                    <a href="profile.html" class="user-dropdown-item"><i class="fas fa-user-circle"></i><span>Mi Perfil</span></a>
+                    <a href="dashboard.html" class="user-dropdown-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+                    <a href="wallet.html" class="user-dropdown-item"><i class="fas fa-wallet"></i><span>Billetera</span></a>
+                    <a href="#" class="user-dropdown-item disabled"><i class="fas fa-shopping-bag"></i><span>Mis Compras</span><span class="soon-badge">Pronto</span></a>
+                    <a href="#" class="user-dropdown-item disabled"><i class="fas fa-chart-line"></i><span>Analíticas</span><span class="soon-badge">Pronto</span></a>
+                    <a href="account-settings.html" class="user-dropdown-item"><i class="fas fa-cog"></i><span>Configuración</span></a>
+                    <a href="help.html" class="user-dropdown-item"><i class="fas fa-question-circle"></i><span>Ayuda</span></a>
+                    <a href="logout.html" class="user-dropdown-item logout"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="profile-header">
+                <div class="profile-info">
+                    <div class="profile-avatar">U</div>
+                    <div><div class="profile-name">Usuario</div></div>
+                </div>
+                <div class="profile-badge">
+                    <i class="fas fa-award"></i>
+                    Top Seller
+                </div>
+            </div>
+            <div class="wallet-section">
+                <div class="wallet-label">Saldo Disponible</div>
+                <div class="wallet-amount">$0.00</div>
+            </div>
+            <button class="upload-btn" onclick="showUploadTypeModal()">
+                <i class="fas fa-cloud-upload-alt"></i> Subir Kit
+            </button>
+            <div class="sidebar-search">
+                <input type="text" placeholder="Buscar mis productos...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="sidebar-menu">
+                <div class="menu-section-title">Principal</div>
+                <a href="dashboard.html" class="menu-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+                <a href="#" class="menu-item disabled" onclick="showModal('Mis Kits'); return false;"><i class="fas fa-music"></i><span>Mis Kits</span><span class="soon-badge">Pronto</span></a>
+                <a href="#" class="menu-item disabled" onclick="showModal('Analíticas'); return false;"><i class="fas fa-chart-line"></i><span>Analíticas</span><span class="soon-badge">Pronto</span></a>
+                <a href="#" class="menu-item disabled" onclick="showModal('Favoritos'); return false;"><i class="fas fa-heart"></i><span>Favoritos</span><span class="soon-badge">Pronto</span></a>
+                <a href="#" class="menu-item disabled" onclick="showModal('Historial'); return false;"><i class="fas fa-history"></i><span>Historial</span><span class="soon-badge">Pronto</span></a>
+                <div class="menu-divider"></div>
+                <div class="menu-section-title">Colaboración</div>
+                <a href="#" class="menu-item disabled" onclick="showModal('Colaboraciones'); return false;"><i class="fas fa-users"></i><span>Colaboraciones</span><span class="soon-badge">Pronto</span></a>
+                <div class="menu-divider"></div>
+                <div class="menu-section-title">Compras</div>
+                <a href="#" class="menu-item disabled" onclick="showModal('Mis Compras'); return false;"><i class="fas fa-shopping-bag"></i><span>Mis Compras</span><span class="soon-badge">Pronto</span></a>
+                <a href="gift-cards.html" class="menu-item"><i class="fas fa-gift"></i><span>Gift Cards</span></a>
+                <a href="messages.html" class="menu-item"><i class="fas fa-envelope"></i><span>Mensajes</span></a>
+                <div class="menu-divider"></div>
+                <div class="menu-section-title">Configuración</div>
+                <a href="account-settings.html" class="menu-item"><i class="fas fa-cog"></i><span>Configuración</span></a>
+                <a href="blog.html" class="menu-item"><i class="fas fa-book-open"></i><span>Blog</span></a>
+            </div>
+            <a href="logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
+        </aside>
+
+        <main class="main-content">
+            <div style="text-align:center;padding:60px;">
+                <h2 style="color:#fff;margin-bottom:16px;">Selecciona qué quieres subir</h2>
+                <p style="color:#666;">Haz clic en el botón "Subir Kit" del menú lateral para comenzar.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal 1: Elegir tipo -->
+    <div class="modal" id="upload-type-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeUploadTypeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="modal-title">¿Qué quieres subir hoy?</h2>
+            <p class="modal-text">Selecciona el tipo de contenido que deseas subir a OFFSZN.</p>
+            <div class="upload-options">
+                <div class="upload-option" onclick="selectUploadType('beats')">
+                    <i class="fas fa-music"></i>
+                    <span>Beats</span>
+                </div>
+                <div class="upload-option" onclick="selectUploadType('drumkits')">
+                    <i class="fas fa-drum"></i>
+                    <span>Drum Kits</span>
+                </div>
+                <div class="upload-option" onclick="selectUploadType('presets')">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>Presets</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Cargar archivo -->
+    <div class="upload-modal" id="upload-file-modal">
+        <div class="upload-content">
+            <div class="upload-header">
+                <h2 class="upload-title" id="upload-file-title">Cargar Archivo</h2>
+                <button class="upload-close" onclick="closeUploadFileModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="upload-area" id="upload-area">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <p class="upload-text" id="upload-file-text">
+                    Arrastra y suelta tu archivo aquí, o haz clic para buscarlo.
+                </p>
+                <input type="file" id="file-input" class="file-input">
+                <button class="upload-btn" onclick="document.getElementById('file-input').click()">
+                    <i class="fas fa-folder-open"></i> Buscar Archivo
+                </button>
+                <div class="error-message" id="error-message"></div>
+            </div>
+
+            <div class="file-preview" id="file-preview">
+                <div class="file-name" id="file-name">Archivo seleccionado</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="file-status" id="file-status">Listo para subir</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUploadType = null;
+
+        // Modal 1
+        function showUploadTypeModal() {
+            document.getElementById('upload-type-modal').classList.add('active');
+        }
+        function closeUploadTypeModal() {
+            document.getElementById('upload-type-modal').classList.remove('active');
+        }
+        function selectUploadType(type) {
+            currentUploadType = type;
+            closeUploadTypeModal();
+            openUploadFileModal();
+        }
+
+        // Modal 2
+        function openUploadFileModal() {
+            const title = document.getElementById('upload-file-title');
+            const text = document.getElementById('upload-file-text');
+            const fileInput = document.getElementById('file-input');
+
+            if (currentUploadType === 'beats') {
+                title.textContent = 'Cargar Beat';
+                text.innerHTML = 'Formatos permitidos: <strong>.mp3, .wav</strong>';
+                fileInput.accept = '.mp3,.wav';
+            } else if (currentUploadType === 'drumkits') {
+                title.textContent = 'Cargar Drum Kit';
+                text.innerHTML = 'Formatos permitidos: <strong>.zip, .rar</strong>';
+                fileInput.accept = '.zip,.rar';
+            } else if (currentUploadType === 'presets') {
+                title.textContent = 'Cargar Preset';
+                text.innerHTML = 'Formatos permitidos: <strong>.zip, .rar</strong>';
+                fileInput.accept = '.zip,.rar';
+            }
+
+            document.getElementById('upload-file-modal').classList.add('active');
+            document.getElementById('error-message').style.display = 'none';
+            document.getElementById('file-preview').style.display = 'none';
+        }
+
+        function closeUploadFileModal() {
+            document.getElementById('upload-file-modal').classList.remove('active');
+            currentUploadType = null;
+        }
+
+        // Drag & Drop
+        const uploadArea = document.getElementById('upload-area');
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileSelection(files[0]);
+            }
+        });
+
+        // File input change
+        document.getElementById('file-input').addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelection(e.target.files[0]);
+            }
+        });
+
+        function handleFileSelection(file) {
+            const errorMessage = document.getElementById('error-message');
+            let valid = false;
+            if (currentUploadType === 'beats') {
+                valid = file.name.endsWith('.mp3') || file.name.endsWith('.wav');
+            } else if (currentUploadType === 'drumkits' || currentUploadType === 'presets') {
+                valid = file.name.endsWith('.zip') || file.name.endsWith('.rar');
+            }
+
+            if (!valid) {
+                let formats = currentUploadType === 'beats' ? '.mp3 o .wav' : '.zip o .rar';
+                showError(`Formato no válido. Solo se permiten archivos ${formats}.`);
+                return;
+            }
+
+            // Mostrar preview y simular carga automática
+            document.getElementById('file-name').textContent = file.name;
+            document.getElementById('file-status').textContent = 'Cargando...';
+            document.getElementById('progress-bar').style.width = '0%';
+            document.getElementById('file-preview').style.display = 'block';
+            errorMessage.style.display = 'none';
+
+            // Simular carga automática
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        let path = '';
+                        if (currentUploadType === 'beats') path = 'cuenta/upload/beats';
+                        else if (currentUploadType === 'drumkits') path = 'cuenta/upload/drum-kits';
+                        else if (currentUploadType === 'presets') path = 'cuenta/upload/presets';
+                        window.location.href = path;
+                    }, 500);
+                }
+                document.getElementById('progress-bar').style.width = `${progress}%`;
+            }, 100);
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('error-message');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            document.getElementById('file-preview').style.display = 'none';
+        }
+
+        // Dropdown
+        function toggleUserDropdown() {
+            document.querySelector('.user-dropdown').classList.toggle('active');
+        }
+
+        // Cierre de modales
+        document.addEventListener('click', (e) => {
+            const userDropdown = document.querySelector('.user-dropdown');
+            const userBtn = document.querySelector('.user-dropdown .navbar-icon-button');
+            if (userDropdown && !userDropdown.contains(e.target) && e.target !== userBtn) {
+                userDropdown.classList.remove('active');
+            }
+            if (e.target === document.getElementById('upload-type-modal')) closeUploadTypeModal();
+            if (e.target === document.getElementById('upload-file-modal')) closeUploadFileModal();
+        });
+    </script>
+</body>
+</html>
