@@ -1,5 +1,5 @@
-// favoritos.js
 document.addEventListener('DOMContentLoaded', async () => {
+    
     const token = localStorage.getItem('authToken');
     const STORAGE_KEY = 'offszn_giftcards_state';
     const CACHE_KEY = 'offszn_user_cache';
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         API_URL = 'http://localhost:3000/api';
     } else {
-        API_URL = 'https://offszn-academy.onrender.com/api'; // ✅ Sin espacio
+        API_URL = 'https://offszn-academy.onrender.com/api';
     }
 
     // ---------- VERIFICAR AUTH ----------
@@ -22,12 +22,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ---------- CARGAR DATOS DEL USUARIO ----------
     async function loadUserData() {
         try {
+            // Intentar cargar desde caché primero
             const cached = localStorage.getItem(CACHE_KEY);
             if (cached) {
                 const cachedData = JSON.parse(cached);
                 updateUserUI(cachedData);
             }
 
+            // Cargar datos frescos del servidor
             const response = await fetch(`${API_URL}/me`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -43,33 +45,40 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             const userData = await response.json();
+            console.log('Datos del usuario:', userData);
+            
+            // Guardar en caché
             localStorage.setItem(CACHE_KEY, JSON.stringify(userData));
             updateUserUI(userData);
 
         } catch (error) {
             console.error('Error cargando usuario:', error);
+            // Mantener skeletons si hay error
         }
     }
 
     // ---------- ACTUALIZAR UI CON DATOS DEL USUARIO ----------
     function updateUserUI(userData) {
-        // Sidebar
+        // Actualizar nombre en sidebar
         const profileName = document.querySelector('.profile-name');
-        const profileAvatar = document.querySelector('.profile-avatar');
         if (profileName) {
             profileName.classList.remove('skeleton-text');
             profileName.textContent = `${userData.first_name || ''} ${userData.last_name || ''}`.trim() || userData.nickname || 'Usuario';
         }
+
+        // Actualizar avatar en sidebar
+        const profileAvatar = document.querySelector('.profile-avatar');
         if (profileAvatar) {
             profileAvatar.classList.remove('skeleton-avatar');
             const initial = (userData.first_name || userData.nickname || 'U').charAt(0).toUpperCase();
             profileAvatar.textContent = initial;
         }
 
-        // Dropdown
+        // Actualizar dropdown de usuario
         const dropdownName = document.querySelector('.user-dropdown-name');
         const dropdownEmail = document.querySelector('.user-dropdown-email');
         const dropdownAvatar = document.querySelector('.user-dropdown-avatar');
+
         if (dropdownName) {
             dropdownName.classList.remove('skeleton-text');
             dropdownName.textContent = userData.nickname || userData.first_name || 'Usuario';
@@ -95,9 +104,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (saved) {
                 const data = JSON.parse(saved);
                 const balance = typeof data.totalBalance === 'number' ? data.totalBalance : 0;
+                
                 walletAmount.classList.remove('skeleton-text');
                 walletAmount.textContent = `$${balance.toFixed(2)}`;
             } else {
+                // Si no hay datos guardados, mostrar $0.00
                 walletAmount.classList.remove('skeleton-text');
                 walletAmount.textContent = '$0.00';
             }
@@ -113,35 +124,52 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // ---------- TABS FUNCTIONALITY ----------
     const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
+            // Remover active de todos los tabs
             tabs.forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+            tabContents.forEach(tc => tc.style.display = 'none');
 
+            // Activar el tab clickeado
             tab.classList.add('active');
-            const target = tab.getAttribute('data-tab');
-            document.getElementById(`${target}-content`).style.display = 'block';
+            const tabName = tab.getAttribute('data-tab');
+            const content = document.getElementById(`${tabName}-content`);
+            if (content) {
+                content.style.display = 'block';
+            }
         });
     });
 
-    // ---------- MODAL & DROPDOWN ----------
+    // ---------- MODAL FUNCTIONS ----------
     window.showModal = function(feature) {
         const modal = document.getElementById('modal');
         const featureName = document.getElementById('featureName');
-        if (featureName && feature) featureName.textContent = feature;
-        if (modal) modal.classList.add('active');
+        if (featureName && feature) {
+            featureName.textContent = feature;
+        }
+        if (modal) {
+            modal.classList.add('active');
+        }
     };
 
     window.closeModal = function() {
         const modal = document.getElementById('modal');
-        if (modal) modal.classList.remove('active');
+        if (modal) {
+            modal.classList.remove('active');
+        }
     };
 
+    // ---------- USER DROPDOWN ----------
     window.toggleUserDropdown = function() {
         const dropdown = document.querySelector('.user-dropdown');
-        if (dropdown) dropdown.classList.toggle('active');
+        if (dropdown) {
+            dropdown.classList.toggle('active');
+        }
     };
 
+    // Cerrar dropdown al hacer clic fuera
     document.addEventListener('click', (e) => {
         const userDropdown = document.querySelector('.user-dropdown');
         const userBtn = document.querySelector('.user-dropdown .navbar-icon-button');
@@ -150,10 +178,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
+    // Cerrar modal al hacer clic fuera
     const modal = document.getElementById('modal');
     if (modal) {
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
+            if (e.target === modal) {
+                closeModal();
+            }
         });
     }
 
@@ -170,31 +201,37 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // También manejar el logout del dropdown
+    const logoutDropdownBtn = document.querySelector('.user-dropdown-item.logout');
+    if (logoutDropdownBtn) {
+        logoutDropdownBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('authToken');
+            localStorage.removeItem(CACHE_KEY);
+            localStorage.removeItem(STORAGE_KEY);
+            alert('¡Has cerrado sesión!');
+            window.location.replace('/pages/login.html');
+        });
+    }
+
     // ---------- SINCRONIZACIÓN DE BILLETERA ----------
     function updateWalletDisplay() {
         loadWalletBalance();
     }
-    setInterval(updateWalletDisplay, 2000);
-    window.addEventListener('storage', (e) => {
-        if (e.key === STORAGE_KEY) setTimeout(updateWalletDisplay, 50);
-    });
 
-    // ---------- FUTURA API DE FAVORITOS ----------
-    /*
-    async function loadFavorites() {
-        // cargar favoritos reales
-    }
-    */
+    // Actualizar cada 2 segundos
+    setInterval(updateWalletDisplay, 2000);
+
+    // Escuchar cambios desde otras pestañas
+    window.addEventListener('storage', (e) => {
+        if (e.key === STORAGE_KEY) {
+            setTimeout(updateWalletDisplay, 50);
+        }
+    });
 
     // ---------- INICIALIZACIÓN ----------
     await loadUserData();
     loadWalletBalance();
-
-    // ✅ Mini carga para el contenido principal (mejor UX)
-    setTimeout(() => {
-        document.getElementById('favorites-loader')?.style.display = 'none';
-        document.getElementById('favorites-content')?.style.display = 'block';
-    }, 1200);
 
     console.log('Favoritos inicializado correctamente');
 });
