@@ -21,7 +21,7 @@
             overflow-x: hidden;
         }
 
-        /* NAVBAR */
+        /* ===== NAVBAR ===== */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -77,6 +77,11 @@
             color: #fff;
         }
 
+        .navbar-links a i.fa-chevron-down {
+            font-size: 0.7rem;
+            transition: transform 0.2s;
+        }
+
         .dropdown-menu {
             position: absolute;
             top: calc(100% + 12px);
@@ -100,6 +105,10 @@
             transform: translateY(0);
         }
 
+        .navbar-links li:hover a i.fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
         .dropdown-item {
             display: flex;
             align-items: center;
@@ -118,6 +127,17 @@
             color: #fff;
         }
 
+        .dropdown-item i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 8px 0;
+        }
+
         .navbar-search {
             position: relative;
             width: 380px;
@@ -133,6 +153,24 @@
             font-size: 0.85rem;
             outline: none;
             transition: all 0.2s;
+        }
+
+        .navbar-search input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .navbar-search input::placeholder {
+            color: #666;
+        }
+
+        .navbar-search i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 0.9rem;
         }
 
         .navbar-right {
@@ -157,14 +195,135 @@
             text-decoration: none;
         }
 
-        /* DASHBOARD CONTAINER */
+        .navbar-icon-button:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .user-dropdown {
+            position: relative;
+        }
+
+        .user-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            background: rgba(20, 20, 20, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            min-width: 260px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+        }
+
+        .user-dropdown.active .user-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .user-dropdown-header {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-dropdown-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .user-dropdown-info {
+            flex: 1;
+        }
+
+        .user-dropdown-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .user-dropdown-email {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .user-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .user-dropdown-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #fff;
+        }
+
+        .user-dropdown-item.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .user-dropdown-item i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .soon-badge {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.08);
+            color: #666;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .user-dropdown-item.logout {
+            color: #ef4444;
+            margin-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 12px;
+        }
+
+        .user-dropdown-item.logout:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* ===== DASHBOARD CONTAINER ===== */
         .dashboard-container {
             display: grid;
             grid-template-columns: 260px 1fr;
             min-height: calc(100vh - 57px);
         }
 
-        /* SIDEBAR */
+        /* ===== SIDEBAR ===== */
         .sidebar {
             background: rgba(15, 15, 15, 0.6);
             border-right: 1px solid rgba(255, 255, 255, 0.08);
@@ -174,8 +333,21 @@
             overflow-y: auto;
         }
 
+        .sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
         .profile-header {
-            padding: 24px 20px;
+            padding: 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
@@ -183,37 +355,46 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 12px;
         }
 
         .profile-avatar {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: linear-gradient(135deg, #8b5cf6, #6366f1);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #fff;
+            flex-shrink: 0;
+        }
+
+        .profile-details {
+            flex: 1;
+            min-width: 0;
         }
 
         .profile-name {
             font-weight: 600;
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .profile-badge {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: #000;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.6rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.3px;
@@ -222,12 +403,11 @@
         .wallet-section {
             padding: 16px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(139, 92, 246, 0.05);
         }
 
         .wallet-label {
             font-size: 0.7rem;
-            color: #999;
+            color: #666;
             margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -235,7 +415,7 @@
         }
 
         .wallet-amount {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: #fff;
         }
@@ -256,6 +436,48 @@
             transition: all 0.2s;
             font-size: 0.9rem;
             width: calc(100% - 40px);
+            text-decoration: none;
+        }
+
+        .upload-btn:hover {
+            background: #7c3aed;
+            transform: translateY(-1px);
+        }
+
+        .sidebar-search {
+            margin: 16px 20px;
+            position: relative;
+        }
+
+        .sidebar-search input {
+            width: 100%;
+            padding: 10px 36px 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .sidebar-search input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .sidebar-search input::placeholder {
+            color: #666;
+            font-size: 0.82rem;
+        }
+
+        .sidebar-search i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 0.85rem;
         }
 
         .sidebar-menu {
@@ -307,24 +529,35 @@
             font-size: 0.95rem;
         }
 
-        .soon-badge {
-            margin-left: auto;
-            background: rgba(255, 255, 255, 0.08);
-            color: #666;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.6rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
         .menu-divider {
             height: 1px;
             background: rgba(255, 255, 255, 0.08);
             margin: 12px 20px;
         }
 
-        /* MAIN CONTENT */
+        .logout-btn {
+            margin: 20px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            padding: 11px 18px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        /* ===== MAIN CONTENT ===== */
         .main-content {
             padding: 36px 48px;
             background: #0a0a0a;
@@ -346,7 +579,7 @@
             color: #666;
         }
 
-        /* FORM SECTIONS */
+        /* ===== FORM STYLES ===== */
         .upload-form {
             max-width: 1200px;
             margin: 0 auto;
@@ -437,9 +670,13 @@
         .error-message {
             font-size: 0.8rem;
             color: #ef4444;
-            display: flex;
+            display: none;
             align-items: center;
             gap: 5px;
+        }
+
+        .error-message.show {
+            display: flex;
         }
 
         .form-textarea {
@@ -448,7 +685,7 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* FILE UPLOAD */
+        /* ===== FILE UPLOAD ===== */
         .file-upload-area {
             position: relative;
             border: 2px dashed rgba(255, 255, 255, 0.1);
@@ -463,11 +700,6 @@
         .file-upload-area:hover {
             border-color: rgba(139, 92, 246, 0.5);
             background: rgba(139, 92, 246, 0.05);
-        }
-
-        .file-upload-area.dragover {
-            border-color: #8b5cf6;
-            background: rgba(139, 92, 246, 0.1);
         }
 
         .file-upload-icon {
@@ -548,7 +780,7 @@
             background: rgba(239, 68, 68, 0.2);
         }
 
-        /* ARTWORK PREVIEW */
+        /* ===== ARTWORK PREVIEW ===== */
         .artwork-preview-container {
             display: flex;
             gap: 20px;
@@ -567,7 +799,7 @@
             flex: 1;
         }
 
-        /* TAGS INPUT */
+        /* ===== TAGS INPUT ===== */
         .tags-container {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -630,7 +862,7 @@
             color: #555;
         }
 
-        /* CUSTOM SELECT */
+        /* ===== CUSTOM SELECT ===== */
         .custom-select {
             position: relative;
         }
@@ -704,7 +936,7 @@
             color: #a78bfa;
         }
 
-        /* LICENSES */
+        /* ===== LICENSES ===== */
         .licenses-grid {
             display: grid;
             gap: 16px;
@@ -748,10 +980,6 @@
             left: 3px;
             transition: all 0.3s;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .license-card.active .license-toggle {
-            background: #8b5cf6;
         }
 
         .license-card.active .license-toggle::before {
@@ -799,16 +1027,10 @@
             border-color: rgba(139, 92, 246, 0.5);
         }
 
-        /* DISCOUNT SECTION */
+        /* ===== DISCOUNT SECTION ===== */
         .discount-options {
             display: grid;
             gap: 16px;
-        }
-
-        .discount-type {
-            display: flex;
-            align-items: center;
-            gap: 12px;
         }
 
         .radio-group {
@@ -835,7 +1057,7 @@
             gap: 16px;
         }
 
-        /* CHECKBOX */
+        /* ===== CHECKBOX ===== */
         .checkbox-group {
             display: flex;
             align-items: center;
@@ -864,7 +1086,7 @@
             cursor: pointer;
         }
 
-        /* SUBMIT BUTTON */
+        /* ===== SUBMIT BUTTON ===== */
         .form-actions {
             display: flex;
             gap: 16px;
@@ -909,7 +1131,7 @@
             color: #fff;
         }
 
-        /* ALERT/NOTIFICATION */
+        /* ===== ALERT ===== */
         .alert {
             padding: 16px 20px;
             border-radius: 10px;
@@ -938,7 +1160,58 @@
             color: #fcd34d;
         }
 
-        /* RESPONSIVE */
+        /* ===== NOTIFICATION TOAST ===== */
+        .toast {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 10000;
+            max-width: 400px;
+            padding: 16px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .toast.success {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #86efac;
+        }
+
+        .toast.error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .dashboard-container {
                 grid-template-columns: 1fr;
@@ -954,6 +1227,10 @@
         @media (max-width: 768px) {
             .navbar-center {
                 display: none;
+            }
+
+            .navbar {
+                padding: 0.75rem 1.5rem;
             }
 
             .main-content {
@@ -976,6 +1253,14 @@
             .form-actions {
                 flex-direction: column;
             }
+
+            .artwork-preview-container {
+                flex-direction: column;
+            }
+
+            .discount-input-group {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -993,6 +1278,7 @@
                         <a href="../../drum-kits.html" class="dropdown-item"><i class="fas fa-drum"></i><span>Drum Kits</span></a>
                         <a href="../../presets.html" class="dropdown-item"><i class="fas fa-sliders-h"></i><span>Presets & Plugins</span></a>
                         <a href="../../samples.html" class="dropdown-item"><i class="fas fa-wave-square"></i><span>Samples & Loops</span></a>
+                        <div class="dropdown-divider"></div>
                         <a href="../../pages/presets/gratis.html" class="dropdown-item"><i class="fas fa-gift"></i><span>Recursos Gratis</span></a>
                     </div>
                 </li>
@@ -1002,6 +1288,7 @@
                         <a href="../feed.html" class="dropdown-item"><i class="fas fa-home"></i><span>Feed</span></a>
                         <a href="../../productores.html" class="dropdown-item"><i class="fas fa-users"></i><span>Productores</span></a>
                         <a href="../colaboraciones.html" class="dropdown-item"><i class="fas fa-handshake"></i><span>Colaboraciones</span></a>
+                        <div class="dropdown-divider"></div>
                         <a href="../../foros.html" class="dropdown-item"><i class="fas fa-comments"></i><span>Foros</span></a>
                         <a href="../../eventos.html" class="dropdown-item"><i class="fas fa-calendar"></i><span>Eventos</span></a>
                     </div>
@@ -1015,7 +1302,26 @@
         <div class="navbar-right">
             <a href="../notifications.html" class="navbar-icon-button"><i class="fas fa-bell"></i></a>
             <a href="../../cart.html" class="navbar-icon-button"><i class="fas fa-shopping-cart"></i></a>
-            <a href="../dashboard.html" class="navbar-icon-button"><i class="fas fa-user"></i></a>
+            <div class="user-dropdown">
+                <div class="navbar-icon-button" onclick="toggleUserDropdown()"><i class="fas fa-user"></i></div>
+                <div class="user-dropdown-menu">
+                    <div class="user-dropdown-header">
+                        <div class="user-dropdown-avatar">U</div>
+                        <div class="user-dropdown-info">
+                            <div class="user-dropdown-name">Usuario</div>
+                            <div class="user-dropdown-email">usuario@offszn.com</div>
+                        </div>
+                    </div>
+                    <a href="../profile.html" class="user-dropdown-item"><i class="fas fa-user-circle"></i><span>Mi Perfil</span></a>
+                    <a href="../dashboard.html" class="user-dropdown-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+                    <a href="../wallet.html" class="user-dropdown-item"><i class="fas fa-wallet"></i><span>Billetera</span></a>
+                    <a href="#" class="user-dropdown-item disabled"><i class="fas fa-shopping-bag"></i><span>Mis Compras</span><span class="soon-badge">Pronto</span></a>
+                    <a href="#" class="user-dropdown-item disabled"><i class="fas fa-chart-line"></i><span>Analíticas</span><span class="soon-badge">Pronto</span></a>
+                    <a href="../account-settings.html" class="user-dropdown-item"><i class="fas fa-cog"></i><span>Configuración</span></a>
+                    <a href="../help.html" class="user-dropdown-item"><i class="fas fa-question-circle"></i><span>Ayuda</span></a>
+                    <a href="../logout.html" class="user-dropdown-item logout"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -1026,24 +1332,29 @@
             <div class="profile-header">
                 <div class="profile-info">
                     <div class="profile-avatar">U</div>
-                    <div>
+                    <div class="profile-details">
                         <div class="profile-name">Usuario</div>
+                        <div class="profile-badge">
+                            <i class="fas fa-award"></i>
+                            TOP SELLER
+                        </div>
                     </div>
-                </div>
-                <div class="profile-badge">
-                    <i class="fas fa-award"></i>
-                    Top Seller
                 </div>
             </div>
 
             <div class="wallet-section">
                 <div class="wallet-label">Saldo Disponible</div>
-                <div class="wallet-amount">$0.00</div>
+                <div class="wallet-amount">$5.00</div>
             </div>
 
-            <button class="upload-btn" onclick="window.location.href='../upload/subir-kit.html'">
+            <a href="subir-kit.html" class="upload-btn">
                 <i class="fas fa-cloud-upload-alt"></i> Subir Kit
-            </button>
+            </a>
+
+            <div class="sidebar-search">
+                <input type="text" placeholder="Buscar mis productos...">
+                <i class="fas fa-search"></i>
+            </div>
 
             <div class="sidebar-menu">
                 <div class="menu-section-title">Principal</div>
@@ -1068,6 +1379,8 @@
                 <a href="../account-settings.html" class="menu-item"><i class="fas fa-cog"></i><span>Configuración</span></a>
                 <a href="../../blog.html" class="menu-item"><i class="fas fa-book-open"></i><span>Blog</span></a>
             </div>
+
+            <a href="../logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
         </aside>
 
         <!-- Main Content -->
@@ -1103,7 +1416,7 @@
                         <div class="form-group">
                             <label class="form-label">Título del Beat <span class="required">*</span></label>
                             <input type="text" id="beatTitle" class="form-input" placeholder="Ej: magic - 140 bpm - E minor - @willieinspired" maxlength="100" oninput="parseTitle(this.value)">
-                            <div class="error-message" id="titleError" style="display:none;"><i class="fas fa-exclamation-circle"></i> El título es requerido</div>
+                            <div class="error-message" id="titleError"><i class="fas fa-exclamation-circle"></i> El título es requerido</div>
                         </div>
                     </div>
 
@@ -1130,9 +1443,9 @@
                                 <div class="file-upload-text">Click para subir archivo maestro</div>
                                 <div class="file-upload-hint">WAV o MP3 (máx. 50MB)</div>
                             </div>
-                            <input type="file" id="masterFile" class="file-upload-input" accept=".wav,.mp3" onchange="handleFileUpload(event, 'master')">
+                            <input type="file" id="masterFile" class="file-upload-input" accept=".wav,.mp3,audio/wav,audio/mpeg" onchange="handleFileUpload(event, 'master')">
                             <div id="masterFilePreview"></div>
-                            <div class="error-message" id="masterError" style="display:none;"><i class="fas fa-exclamation-circle"></i> El archivo maestro es requerido</div>
+                            <div class="error-message" id="masterError"><i class="fas fa-exclamation-circle"></i> El archivo maestro es requerido</div>
                         </div>
 
                         <div class="form-group">
@@ -1140,9 +1453,9 @@
                             <div class="file-upload-area" onclick="document.getElementById('previewFile').click()">
                                 <div class="file-upload-icon"><i class="fas fa-play"></i></div>
                                 <div class="file-upload-text">Click para subir preview</div>
-                                <div class="file-upload-hint">MP3 (máx. 20MB, 30-60s recomendado)</div>
+                                <div class="file-upload-hint">MP3 (máx. 20MB)</div>
                             </div>
-                            <input type="file" id="previewFile" class="file-upload-input" accept=".mp3" onchange="handleFileUpload(event, 'preview')">
+                            <input type="file" id="previewFile" class="file-upload-input" accept=".mp3,audio/mpeg" onchange="handleFileUpload(event, 'preview')">
                             <div id="previewFilePreview"></div>
                         </div>
                     </div>
@@ -1154,7 +1467,7 @@
                             <div class="file-upload-text">Click para subir stems</div>
                             <div class="file-upload-hint">ZIP o RAR (máx. 200MB)</div>
                         </div>
-                        <input type="file" id="stemsFile" class="file-upload-input" accept=".zip,.rar" onchange="handleFileUpload(event, 'stems')">
+                        <input type="file" id="stemsFile" class="file-upload-input" accept=".zip,.rar,application/zip,application/x-rar-compressed" onchange="handleFileUpload(event, 'stems')">
                         <div id="stemsFilePreview"></div>
                     </div>
                 </div>
@@ -1206,7 +1519,7 @@
                     <div class="form-group">
                         <label class="form-label">Tags (máx. 3)</label>
                         <div class="tags-container" onclick="document.getElementById('tagInput').focus()">
-                            <div id="tagsList"></div>
+                            <div id="tagsList" style="display: contents;"></div>
                             <input type="text" id="tagInput" class="tag-input" placeholder="Escribe y presiona Enter" onkeydown="handleTagInput(event)">
                         </div>
                     </div>
@@ -1214,42 +1527,42 @@
                     <div class="form-group">
                         <label class="form-label">Géneros (máx. 3) <span class="required">*</span></label>
                         <div class="custom-select">
-                            <div class="select-trigger" id="genreTrigger" onclick="toggleDropdown('genre')">
+                            <div class="select-trigger" id="genreTrigger" onclick="toggleDropdown('genre', event)">
                                 <div id="genreDisplay" class="select-placeholder">Selecciona géneros</div>
                             </div>
                             <div class="select-dropdown" id="genreDropdown">
-                                <div class="select-option" onclick="addItem('genre', 'Trap')">Trap</div>
-                                <div class="select-option" onclick="addItem('genre', 'Hip Hop')">Hip Hop</div>
-                                <div class="select-option" onclick="addItem('genre', 'R&B')">R&B</div>
-                                <div class="select-option" onclick="addItem('genre', 'Pop')">Pop</div>
-                                <div class="select-option" onclick="addItem('genre', 'Rock')">Rock</div>
-                                <div class="select-option" onclick="addItem('genre', 'Electronic')">Electronic</div>
-                                <div class="select-option" onclick="addItem('genre', 'Lo-Fi')">Lo-Fi</div>
-                                <div class="select-option" onclick="addItem('genre', 'Drill')">Drill</div>
-                                <div class="select-option" onclick="addItem('genre', 'Afrobeats')">Afrobeats</div>
-                                <div class="select-option" onclick="addItem('genre', 'Reggaeton')">Reggaeton</div>
+                                <div class="select-option" onclick="addItem('genre', 'Trap', event)">Trap</div>
+                                <div class="select-option" onclick="addItem('genre', 'Hip Hop', event)">Hip Hop</div>
+                                <div class="select-option" onclick="addItem('genre', 'R&B', event)">R&B</div>
+                                <div class="select-option" onclick="addItem('genre', 'Pop', event)">Pop</div>
+                                <div class="select-option" onclick="addItem('genre', 'Rock', event)">Rock</div>
+                                <div class="select-option" onclick="addItem('genre', 'Electronic', event)">Electronic</div>
+                                <div class="select-option" onclick="addItem('genre', 'Lo-Fi', event)">Lo-Fi</div>
+                                <div class="select-option" onclick="addItem('genre', 'Drill', event)">Drill</div>
+                                <div class="select-option" onclick="addItem('genre', 'Afrobeats', event)">Afrobeats</div>
+                                <div class="select-option" onclick="addItem('genre', 'Reggaeton', event)">Reggaeton</div>
                             </div>
                         </div>
-                        <div class="error-message" id="genreError" style="display:none;"><i class="fas fa-exclamation-circle"></i> Selecciona al menos un género</div>
+                        <div class="error-message" id="genreError"><i class="fas fa-exclamation-circle"></i> Selecciona al menos un género</div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Mood (máx. 5)</label>
                         <div class="custom-select">
-                            <div class="select-trigger" id="moodTrigger" onclick="toggleDropdown('mood')">
+                            <div class="select-trigger" id="moodTrigger" onclick="toggleDropdown('mood', event)">
                                 <div id="moodDisplay" class="select-placeholder">Selecciona mood</div>
                             </div>
                             <div class="select-dropdown" id="moodDropdown">
-                                <div class="select-option" onclick="addItem('mood', 'Agresivo')">Agresivo</div>
-                                <div class="select-option" onclick="addItem('mood', 'Triste')">Triste</div>
-                                <div class="select-option" onclick="addItem('mood', 'Feliz')">Feliz</div>
-                                <div class="select-option" onclick="addItem('mood', 'Romántico')">Romántico</div>
-                                <div class="select-option" onclick="addItem('mood', 'Relajado')">Relajado</div>
-                                <div class="select-option" onclick="addItem('mood', 'Motivador')">Motivador</div>
-                                <div class="select-option" onclick="addItem('mood', 'Misterioso')">Misterioso</div>
-                                <div class="select-option" onclick="addItem('mood', 'Épico')">Épico</div>
-                                <div class="select-option" onclick="addItem('mood', 'Melancólico')">Melancólico</div>
-                                <div class="select-option" onclick="addItem('mood', 'Enérgico')">Enérgico</div>
+                                <div class="select-option" onclick="addItem('mood', 'Agresivo', event)">Agresivo</div>
+                                <div class="select-option" onclick="addItem('mood', 'Triste', event)">Triste</div>
+                                <div class="select-option" onclick="addItem('mood', 'Feliz', event)">Feliz</div>
+                                <div class="select-option" onclick="addItem('mood', 'Romántico', event)">Romántico</div>
+                                <div class="select-option" onclick="addItem('mood', 'Relajado', event)">Relajado</div>
+                                <div class="select-option" onclick="addItem('mood', 'Motivador', event)">Motivador</div>
+                                <div class="select-option" onclick="addItem('mood', 'Misterioso', event)">Misterioso</div>
+                                <div class="select-option" onclick="addItem('mood', 'Épico', event)">Épico</div>
+                                <div class="select-option" onclick="addItem('mood', 'Melancólico', event)">Melancólico</div>
+                                <div class="select-option" onclick="addItem('mood', 'Enérgico', event)">Enérgico</div>
                             </div>
                         </div>
                     </div>
@@ -1257,20 +1570,20 @@
                     <div class="form-group">
                         <label class="form-label">Instrumentos (máx. 10)</label>
                         <div class="custom-select">
-                            <div class="select-trigger" id="instrumentTrigger" onclick="toggleDropdown('instrument')">
+                            <div class="select-trigger" id="instrumentTrigger" onclick="toggleDropdown('instrument', event)">
                                 <div id="instrumentDisplay" class="select-placeholder">Selecciona instrumentos</div>
                             </div>
                             <div class="select-dropdown" id="instrumentDropdown">
-                                <div class="select-option" onclick="addItem('instrument', 'Piano')">Piano</div>
-                                <div class="select-option" onclick="addItem('instrument', 'Bajo')">Bajo</div>
-                                <div class="select-option" onclick="addItem('instrument', 'Batería')">Batería</div>
-                                <div class="select-option" onclick="addItem('instrument', 'Sintetizador')">Sintetizador</div>
-                                <div class="select-option" onclick="addItem('instrument', 'Guitarra')">Guitarra</div>
-                                <div class="select-option" onclick="addItem('instrument', 'Violín')">Violín</div>
-                                <div class="select-option" onclick="addItem('instrument', 'Flauta')">Flauta</div>
-                                <div class="select-option" onclick="addItem('instrument', 'Coro')">Coro</div>
-                                <div class="select-option" onclick="addItem('instrument', 'Pad')">Pad</div>
-                                <div class="select-option" onclick="addItem('instrument', 'FX')">FX</div>
+                                <div class="select-option" onclick="addItem('instrument', 'Piano', event)">Piano</div>
+                                <div class="select-option" onclick="addItem('instrument', 'Bajo', event)">Bajo</div>
+                                <div class="select-option" onclick="addItem('instrument', 'Batería', event)">Batería</div>
+                                <div class="select-option" onclick="addItem('instrument', 'Sintetizador', event)">Sintetizador</div>
+                                <div class="select-option" onclick="addItem('instrument', 'Guitarra', event)">Guitarra</div>
+                                <div class="select-option" onclick="addItem('instrument', 'Violín', event)">Violín</div>
+                                <div class="select-option" onclick="addItem('instrument', 'Flauta', event)">Flauta</div>
+                                <div class="select-option" onclick="addItem('instrument', 'Coro', event)">Coro</div>
+                                <div class="select-option" onclick="addItem('instrument', 'Pad', event)">Pad</div>
+                                <div class="select-option" onclick="addItem('instrument', 'FX', event)">FX</div>
                             </div>
                         </div>
                     </div>
@@ -1351,7 +1664,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="error-message" id="licenseError" style="display:none; margin-top: 16px;"><i class="fas fa-exclamation-circle"></i> Activa al menos una licencia o marca como gratis</div>
+                        <div class="error-message" id="licenseError"><i class="fas fa-exclamation-circle"></i> Activa al menos una licencia o marca como gratis</div>
                     </div>
 
                     <div class="form-group" style="margin-top: 24px;">
@@ -1382,7 +1695,7 @@
                                         <input type="date" id="discountExpiry" class="form-input">
                                     </div>
                                 </div>
-                                <div class="error-message" id="discountError" style="display:none; margin-top: 8px;"><i class="fas fa-exclamation-circle"></i> El descuento no puede ser mayor que el precio</div>
+                                <div class="error-message" id="discountError"><i class="fas fa-exclamation-circle"></i> El descuento no puede ser mayor que el precio</div>
                             </div>
                         </div>
                     </div>
@@ -1413,7 +1726,7 @@
                         <div class="form-group">
                             <label class="form-label">Fecha de publicación</label>
                             <input type="datetime-local" id="releaseDate" class="form-input">
-                            <div class="error-message" id="dateError" style="display:none;"><i class="fas fa-exclamation-circle"></i> La fecha debe ser hoy o posterior</div>
+                            <div class="error-message" id="dateError"><i class="fas fa-exclamation-circle"></i> La fecha debe ser hoy o posterior</div>
                         </div>
                     </div>
                 </div>
@@ -1454,6 +1767,34 @@
         const MIN_PRICE = 1;
         const MAX_PRICE = 1000;
 
+        // ===== VALIDACIÓN DE FORMATOS =====
+        const FILE_VALIDATIONS = {
+            artwork: {
+                extensions: ['jpg', 'jpeg', 'png', 'webp'],
+                mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+                maxSize: 5 * 1024 * 1024,
+                label: 'Imagen de portada'
+            },
+            master: {
+                extensions: ['wav', 'mp3'],
+                mimeTypes: ['audio/wav', 'audio/mpeg', 'audio/x-wav'],
+                maxSize: 50 * 1024 * 1024,
+                label: 'Archivo maestro'
+            },
+            preview: {
+                extensions: ['mp3'],
+                mimeTypes: ['audio/mpeg'],
+                maxSize: 20 * 1024 * 1024,
+                label: 'Preview'
+            },
+            stems: {
+                extensions: ['zip', 'rar'],
+                mimeTypes: ['application/zip', 'application/x-zip-compressed', 'application/x-rar-compressed'],
+                maxSize: 200 * 1024 * 1024,
+                label: 'Stems'
+            }
+        };
+
         // ===== INICIALIZACIÓN =====
         document.addEventListener('DOMContentLoaded', () => {
             initializeDateTime();
@@ -1469,12 +1810,10 @@
         }
 
         function initializeEventListeners() {
-            // Contador de descripción
             document.getElementById('beatDescription').addEventListener('input', (e) => {
                 document.getElementById('descriptionCount').textContent = e.target.value.length;
             });
 
-            // Prevenir envío del formulario con Enter en inputs
             document.querySelectorAll('.form-input').forEach(input => {
                 input.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
@@ -1483,14 +1822,15 @@
                 });
             });
 
-            // Cerrar dropdowns al hacer click fuera
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('.custom-select')) {
                     closeAllDropdowns();
                 }
+                if (!e.target.closest('.user-dropdown')) {
+                    document.querySelector('.user-dropdown')?.classList.remove('active');
+                }
             });
 
-            // Form submit
             document.getElementById('uploadForm').addEventListener('submit', handleSubmit);
         }
 
@@ -1499,24 +1839,14 @@
             const file = event.target.files[0];
             if (!file) return;
 
-            // Validar tipo
-            const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
-            if (!validTypes.includes(file.type)) {
-                showError('Formato de imagen no válido. Usa JPG, PNG o WEBP.');
-                event.target.value = '';
-                return;
-            }
-
-            // Validar tamaño (5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                showError('La imagen no puede superar los 5MB.');
+            const validation = FILE_VALIDATIONS.artwork;
+            if (!validateFile(file, validation)) {
                 event.target.value = '';
                 return;
             }
 
             state.files.artwork = file;
 
-            // Mostrar preview
             const reader = new FileReader();
             reader.onload = (e) => {
                 document.getElementById('artworkPreview').src = e.target.result;
@@ -1528,32 +1858,36 @@
             const file = event.target.files[0];
             if (!file) return;
 
-            const validations = {
-                master: { types: ['.wav', '.mp3'], maxSize: 50 * 1024 * 1024, label: 'Archivo maestro' },
-                preview: { types: ['.mp3'], maxSize: 20 * 1024 * 1024, label: 'Preview' },
-                stems: { types: ['.zip', '.rar'], maxSize: 200 * 1024 * 1024, label: 'Stems' }
-            };
-
-            const validation = validations[type];
-            const fileExt = '.' + file.name.split('.').pop().toLowerCase();
-
-            // Validar tipo
-            if (!validation.types.includes(fileExt)) {
-                showError(`${validation.label}: Formato no válido. Usa ${validation.types.join(', ')}`);
-                event.target.value = '';
-                return;
-            }
-
-            // Validar tamaño
-            if (file.size > validation.maxSize) {
-                const maxMB = Math.floor(validation.maxSize / (1024 * 1024));
-                showError(`${validation.label}: El archivo no puede superar los ${maxMB}MB`);
+            const validation = FILE_VALIDATIONS[type];
+            if (!validateFile(file, validation)) {
                 event.target.value = '';
                 return;
             }
 
             state.files[type] = file;
             showFilePreview(type, file);
+        }
+
+        function validateFile(file, validation) {
+            const fileExt = file.name.split('.').pop().toLowerCase();
+            
+            if (!validation.extensions.includes(fileExt)) {
+                showToast(`${validation.label}: Formato no válido. Solo se permiten: ${validation.extensions.join(', ').toUpperCase()}`, 'error');
+                return false;
+            }
+
+            if (!validation.mimeTypes.includes(file.type)) {
+                showToast(`${validation.label}: Tipo de archivo no válido`, 'error');
+                return false;
+            }
+
+            if (file.size > validation.maxSize) {
+                const maxMB = Math.floor(validation.maxSize / (1024 * 1024));
+                showToast(`${validation.label}: El archivo no puede superar los ${maxMB}MB`, 'error');
+                return false;
+            }
+
+            return true;
         }
 
         function showFilePreview(type, file) {
@@ -1579,15 +1913,20 @@
 
         function removeFile(type) {
             state.files[type] = null;
-            document.getElementById(type + 'File').value = '';
-            document.getElementById(type + 'FilePreview').innerHTML = '';
+            const inputId = type === 'artwork' ? 'artworkInput' : type + 'File';
+            document.getElementById(inputId).value = '';
+            
+            if (type === 'artwork') {
+                document.getElementById('artworkPreview').src = 'https://via.placeholder.com/140/1a1a1a/8b5cf6?text=Upload';
+            } else {
+                document.getElementById(type + 'FilePreview').innerHTML = '';
+            }
         }
 
         // ===== PARSEO AUTOMÁTICO DEL TÍTULO =====
         function parseTitle(title) {
             if (!title) return;
 
-            // Extraer BPM
             const bpmMatch = title.match(/(\d{2,3})\s*(?:bpm)?/i);
             if (bpmMatch) {
                 const bpm = parseInt(bpmMatch[1]);
@@ -1596,7 +1935,6 @@
                 }
             }
 
-            // Extraer clave
             const keyOptions = [
                 'C minor', 'C# minor', 'D minor', 'D# minor', 'E minor', 'F minor', 
                 'F# minor', 'G minor', 'G# minor', 'A minor', 'A# minor', 'B minor',
@@ -1612,7 +1950,6 @@
                 }
             }
 
-            // Extraer productor como tag
             const producerMatch = title.match(/@(\w+)/);
             if (producerMatch && state.tags.length < MAX_TAGS) {
                 const producerTag = `@${producerMatch[1]}`;
@@ -1643,7 +1980,7 @@
             }
 
             if (state.tags.length >= MAX_TAGS) {
-                showError(`Máximo ${MAX_TAGS} tags permitidos`);
+                showToast(`Máximo ${MAX_TAGS} tags permitidos`, 'error');
                 return;
             }
 
@@ -1670,11 +2007,12 @@
         }
 
         // ===== CUSTOM SELECTS =====
-        function toggleDropdown(type) {
+        function toggleDropdown(type, event) {
+            if (event) event.stopPropagation();
+            
             const dropdown = document.getElementById(type + 'Dropdown');
             const trigger = document.getElementById(type + 'Trigger');
             
-            // Cerrar otros dropdowns
             ['genre', 'mood', 'instrument'].forEach(t => {
                 if (t !== type) {
                     document.getElementById(t + 'Dropdown').classList.remove('show');
@@ -1693,7 +2031,9 @@
             });
         }
 
-        function addItem(type, item) {
+        function addItem(type, item, event) {
+            if (event) event.stopPropagation();
+            
             const limits = { genre: MAX_GENRES, mood: MAX_MOODS, instrument: MAX_INSTRUMENTS };
             const arrays = { genre: state.genres, mood: state.moods, instrument: state.instruments };
             
@@ -1706,7 +2046,8 @@
             } else if (array.length < limit) {
                 array.push(item);
             } else {
-                showError(`Máximo ${limit} ${type === 'genre' ? 'géneros' : type === 'mood' ? 'moods' : 'instrumentos'} permitidos`);
+                const labels = { genre: 'géneros', mood: 'moods', instrument: 'instrumentos' };
+                showToast(`Máximo ${limit} ${labels[type]} permitidos`, 'error');
                 return;
             }
 
@@ -1730,20 +2071,13 @@
             if (array.length === 0) {
                 display.innerHTML = `<span class="select-placeholder">${placeholder}</span>`;
             } else {
-                display.innerHTML = array.map(item => `
-                    <div class="tag">${item}</div>
-                `).join('');
+                display.innerHTML = array.map(item => `<div class="tag">${item}</div>`).join('');
             }
 
-            // Actualizar opciones seleccionadas en el dropdown
             const dropdown = document.getElementById(type + 'Dropdown');
             dropdown.querySelectorAll('.select-option').forEach(option => {
                 const itemText = option.textContent.trim();
-                if (array.includes(itemText)) {
-                    option.classList.add('selected');
-                } else {
-                    option.classList.remove('selected');
-                }
+                option.classList.toggle('selected', array.includes(itemText));
             });
         }
 
@@ -1756,17 +2090,16 @@
                 state.activeLicenses.push(license);
                 card.classList.add('active');
             } else {
-                // No permitir desactivar si es la única activa y no está en modo gratis
                 const isFree = document.getElementById('isFree').checked;
                 if (state.activeLicenses.length === 1 && !isFree) {
-                    showError('Debes tener al menos una licencia activa o marcar como gratis');
+                    showToast('Debes tener al menos una licencia activa o marcar como gratis', 'error');
                     return;
                 }
                 state.activeLicenses.splice(index, 1);
                 card.classList.remove('active');
             }
 
-            document.getElementById('licenseError').style.display = 'none';
+            document.getElementById('licenseError').classList.remove('show');
         }
 
         function toggleFreeMode() {
@@ -1780,7 +2113,6 @@
                 licensesSection.style.opacity = '1';
                 licensesSection.style.pointerEvents = 'auto';
                 
-                // Asegurar al menos una licencia activa
                 if (state.activeLicenses.length === 0) {
                     state.activeLicenses.push('basic');
                     document.querySelector('.license-card[data-license="basic"]').classList.add('active');
@@ -1795,7 +2127,7 @@
                 input.value = MIN_PRICE.toFixed(2);
             } else if (value > MAX_PRICE) {
                 input.value = MAX_PRICE.toFixed(2);
-                showError(`El precio máximo es ${MAX_PRICE}`);
+                showToast(`El precio máximo es ${MAX_PRICE}`, 'error');
             } else {
                 input.value = value.toFixed(2);
             }
@@ -1822,101 +2154,82 @@
             const errorDiv = document.getElementById('discountError');
 
             if (discountType === 'none' || !discountValue) {
-                errorDiv.style.display = 'none';
+                errorDiv.classList.remove('show');
                 return true;
             }
 
             if (discountType === 'percentage') {
                 if (discountValue > 100) {
                     errorDiv.textContent = 'El porcentaje no puede ser mayor a 100%';
-                    errorDiv.style.display = 'block';
+                    errorDiv.classList.add('show');
                     return false;
                 }
             } else if (discountType === 'fixed') {
-                // Validar contra el precio más bajo de las licencias activas
                 const prices = state.activeLicenses.map(license => {
                     return parseFloat(document.getElementById(license + 'Price').value);
                 });
                 const minPrice = Math.min(...prices);
 
                 if (discountValue >= minPrice) {
-                    errorDiv.textContent = 'El descuento no puede ser mayor o igual que el precio más bajo ( + minPrice.toFixed(2) + ')';
-                    errorDiv.style.display = 'block';
+                    errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> El descuento no puede ser mayor o igual que el precio más bajo (${minPrice.toFixed(2)})`;
+                    errorDiv.classList.add('show');
                     return false;
                 }
             }
 
-            errorDiv.style.display = 'none';
+            errorDiv.classList.remove('show');
             return true;
         }
 
         // ===== VALIDACIÓN =====
         function validateForm() {
             let isValid = true;
-            const errors = [];
 
-            // Título
+            document.getElementById('titleError').classList.remove('show');
+            document.getElementById('masterError').classList.remove('show');
+            document.getElementById('genreError').classList.remove('show');
+            document.getElementById('licenseError').classList.remove('show');
+            document.getElementById('dateError').classList.remove('show');
+
             const title = document.getElementById('beatTitle').value.trim();
             if (!title) {
-                document.getElementById('titleError').style.display = 'block';
-                errors.push('título');
+                document.getElementById('titleError').classList.add('show');
                 isValid = false;
-            } else {
-                document.getElementById('titleError').style.display = 'none';
             }
 
-            // Archivo maestro
             if (!state.files.master) {
-                document.getElementById('masterError').style.display = 'block';
-                errors.push('archivo maestro');
+                document.getElementById('masterError').classList.add('show');
                 isValid = false;
-            } else {
-                document.getElementById('masterError').style.display = 'none';
             }
 
-            // Géneros
             if (state.genres.length === 0) {
-                document.getElementById('genreError').style.display = 'block';
-                errors.push('género');
+                document.getElementById('genreError').classList.add('show');
                 isValid = false;
-            } else {
-                document.getElementById('genreError').style.display = 'none';
             }
 
-            // Licencias o gratis
             const isFree = document.getElementById('isFree').checked;
             if (!isFree && state.activeLicenses.length === 0) {
-                document.getElementById('licenseError').style.display = 'block';
-                errors.push('licencias');
+                document.getElementById('licenseError').classList.add('show');
                 isValid = false;
-            } else {
-                document.getElementById('licenseError').style.display = 'none';
             }
 
-            // Fecha de publicación
             const releaseDate = new Date(document.getElementById('releaseDate').value);
             const now = new Date();
             now.setHours(0, 0, 0, 0);
             releaseDate.setHours(0, 0, 0, 0);
 
             if (releaseDate < now) {
-                document.getElementById('dateError').style.display = 'block';
-                errors.push('fecha de publicación');
+                document.getElementById('dateError').classList.add('show');
                 isValid = false;
-            } else {
-                document.getElementById('dateError').style.display = 'none';
             }
 
-            // Validar descuentos
             if (!validateDiscount()) {
-                errors.push('descuento');
                 isValid = false;
             }
 
             if (!isValid) {
-                showError('Por favor, completa los campos requeridos: ' + errors.join(', '));
-                // Scroll al primer error
-                const firstError = document.querySelector('.error-message[style*="block"]');
+                showToast('Por favor, completa todos los campos requeridos', 'error');
+                const firstError = document.querySelector('.error-message.show');
                 if (firstError) {
                     firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
@@ -1933,7 +2246,6 @@
                 return;
             }
 
-            // Recopilar datos
             const formData = {
                 title: document.getElementById('beatTitle').value.trim(),
                 description: document.getElementById('beatDescription').value.trim(),
@@ -1953,14 +2265,12 @@
                 files: state.files
             };
 
-            // Licencias y precios
             if (!formData.isFree) {
                 state.activeLicenses.forEach(license => {
                     formData.licenses[license] = parseFloat(document.getElementById(license + 'Price').value);
                 });
             }
 
-            // Descuento
             const discountType = document.querySelector('input[name="discountType"]:checked').value;
             if (discountType !== 'none') {
                 formData.discount = {
@@ -1972,10 +2282,8 @@
 
             console.log('Datos del formulario:', formData);
 
-            // Simulación de subida
-            showSuccess('¡Beat publicado exitosamente!');
+            showToast('¡Beat publicado exitosamente!', 'success');
             
-            // Redirigir después de 2 segundos
             setTimeout(() => {
                 window.location.href = '../mis-kits.html';
             }, 2000);
@@ -1983,80 +2291,33 @@
 
         function saveDraft() {
             console.log('Guardando borrador...');
-            showSuccess('Borrador guardado correctamente');
+            showToast('Borrador guardado correctamente', 'success');
         }
 
         // ===== UTILIDADES =====
-        function showError(message) {
-            // Crear notificación temporal
-            const alert = document.createElement('div');
-            alert.className = 'alert alert-error';
-            alert.style.position = 'fixed';
-            alert.style.top = '80px';
-            alert.style.right = '20px';
-            alert.style.zIndex = '10000';
-            alert.style.maxWidth = '400px';
-            alert.style.animation = 'slideIn 0.3s ease';
-            alert.innerHTML = `
-                <i class="fas fa-exclamation-circle"></i>
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
                 <span>${message}</span>
             `;
 
-            document.body.appendChild(alert);
+            document.body.appendChild(toast);
 
             setTimeout(() => {
-                alert.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => alert.remove(), 300);
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
             }, 4000);
         }
 
-        function showSuccess(message) {
-            const alert = document.createElement('div');
-            alert.className = 'alert alert-success';
-            alert.style.position = 'fixed';
-            alert.style.top = '80px';
-            alert.style.right = '20px';
-            alert.style.zIndex = '10000';
-            alert.style.maxWidth = '400px';
-            alert.style.animation = 'slideIn 0.3s ease';
-            alert.innerHTML = `
-                <i class="fas fa-check-circle"></i>
-                <span>${message}</span>
-            `;
-
-            document.body.appendChild(alert);
-
-            setTimeout(() => {
-                alert.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => alert.remove(), 300);
-            }, 4000);
+        function toggleUserDropdown() {
+            document.querySelector('.user-dropdown')?.classList.toggle('active');
         }
-
-        // Animaciones CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from {
-                    transform: translateX(400px);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-            @keyframes slideOut {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(400px);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
-</html>
+</html> {
+            background: #8b5cf6;
+        }
+
+        .license-card.active .license-toggle
