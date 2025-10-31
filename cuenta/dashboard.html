@@ -1,6 +1,20 @@
-<!DOCTYPE html>
-<html lang="es">
 
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+    
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +22,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background: #0a0a0a;
             color: #e5e5e5;
             overflow-x: hidden;
         }
-
         /* ---------- NAVBAR ---------- */
         .navbar {
             display: flex;
@@ -36,7 +47,6 @@
             border-bottom: 1px solid rgba(255, 255, 255, .08);
             backdrop-filter: blur(20px);
         }
-
         .navbar .logo a {
             font-size: 1.5rem;
             font-weight: 800;
@@ -44,24 +54,20 @@
             text-decoration: none;
             letter-spacing: -.5px;
         }
-
         .navbar-center {
             display: flex;
             align-items: center;
             gap: 2.5rem;
         }
-
         .navbar-links {
             list-style: none;
             display: flex;
             gap: 2rem;
             align-items: center;
         }
-
         .navbar-links li {
             position: relative;
         }
-
         .navbar-links a {
             color: #999;
             text-decoration: none;
@@ -73,16 +79,13 @@
             gap: 5px;
             cursor: pointer;
         }
-
         .navbar-links a:hover {
             color: #fff;
         }
-
         .navbar-links a i {
             font-size: .7rem;
             transition: transform .2s;
         }
-
         .dropdown-menu {
             position: absolute;
             top: calc(100%+12px);
@@ -99,17 +102,14 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
             backdrop-filter: blur(20px);
         }
-
         .navbar-links li:hover .dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
-
         .navbar-links li:hover a i {
             transform: rotate(180deg);
         }
-
         .dropdown-item {
             display: flex;
             align-items: center;
@@ -122,28 +122,23 @@
             transition: all .2s;
             font-weight: 500;
         }
-
         .dropdown-item:hover {
             background: rgba(139, 92, 246, .1);
             color: #fff;
         }
-
         .dropdown-item i {
             width: 18px;
             text-align: center;
         }
-
         .dropdown-divider {
             height: 1px;
             background: rgba(255, 255, 255, .08);
             margin: 8px 0;
         }
-
         .navbar-search {
             position: relative;
             width: 380px;
         }
-
         .navbar-search input {
             width: 100%;
             padding: .6rem 2.5rem .6rem 1rem;
@@ -155,16 +150,13 @@
             outline: none;
             transition: all .2s;
         }
-
         .navbar-search input:focus {
             background: rgba(255, 255, 255, .08);
             border-color: rgba(139, 92, 246, .5);
         }
-
         .navbar-search input::placeholder {
             color: #666;
         }
-
         .navbar-search i {
             position: absolute;
             right: 1rem;
@@ -173,13 +165,11 @@
             color: #666;
             font-size: .9rem;
         }
-
         .navbar-right {
             display: flex;
             gap: .75rem;
             align-items: center;
         }
-
         .navbar-icon-button {
             width: 36px;
             height: 36px;
@@ -196,17 +186,14 @@
             text-decoration: none;
             position: relative;
         }
-
         .navbar-icon-button:hover {
             background: rgba(255, 255, 255, .08);
             color: #fff;
             border-color: rgba(255, 255, 255, .15);
         }
-
         .user-dropdown {
             position: relative;
         }
-
         .user-dropdown-menu {
             position: absolute;
             top: calc(100%+12px);
@@ -223,13 +210,11 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
             backdrop-filter: blur(20px);
         }
-
         .user-dropdown.active .user-dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
-
         .user-dropdown-header {
             padding: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, .08);
@@ -238,7 +223,6 @@
             align-items: center;
             gap: 12px;
         }
-
         .user-dropdown-avatar {
             width: 40px;
             height: 40px;
@@ -251,23 +235,19 @@
             font-size: 1rem;
             color: #666;
         }
-
         .user-dropdown-info {
             flex: 1;
         }
-
         .user-dropdown-name {
             font-weight: 600;
             color: #fff;
             font-size: .9rem;
             margin-bottom: 2px;
         }
-
         .user-dropdown-email {
             font-size: .75rem;
             color: #666;
         }
-
         .user-dropdown-item {
             display: flex;
             align-items: center;
@@ -280,22 +260,18 @@
             transition: all .2s;
             font-weight: 500;
         }
-
         .user-dropdown-item:hover {
             background: rgba(139, 92, 246, .1);
             color: #fff;
         }
-
         .user-dropdown-item.disabled {
             opacity: .4;
             cursor: not-allowed;
         }
-
         .user-dropdown-item i {
             width: 18px;
             text-align: center;
         }
-
         .user-dropdown-item .soon-badge {
             margin-left: auto;
             background: rgba(255, 255, 255, .08);
@@ -306,25 +282,21 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-
         .user-dropdown-item.logout {
             color: #ef4444;
             margin-top: 8px;
             border-top: 1px solid rgba(255, 255, 255, .08);
             padding-top: 12px;
         }
-
         .user-dropdown-item.logout:hover {
             background: rgba(239, 68, 68, .1);
         }
-
         /* ---------- DASHBOARD LAYOUT ---------- */
         .dashboard-container {
             display: grid;
             grid-template-columns: 260px 1fr;
             min-height: calc(100vh - 57px);
         }
-
         .sidebar {
             background: rgba(15, 15, 15, .6);
             border-right: 1px solid rgba(255, 255, 255, .08);
@@ -333,32 +305,26 @@
             height: calc(100vh - 57px);
             overflow-y: auto;
         }
-
         .sidebar::-webkit-scrollbar {
             width: 5px;
         }
-
         .sidebar::-webkit-scrollbar-track {
             background: transparent;
         }
-
         .sidebar::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, .1);
             border-radius: 3px;
         }
-
         .profile-header {
             padding: 24px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, .08);
         }
-
         .profile-info {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 12px;
         }
-
         .profile-avatar {
             width: 44px;
             height: 44px;
@@ -371,27 +337,22 @@
             font-size: 1.1rem;
             color: #666;
         }
-
         .profile-name {
             font-weight: 600;
             color: #fff;
             font-size: .95rem;
         }
-
         .wallet-section {
             padding: 16px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, .08);
             background: rgba(139, 92, 246, .05);
         }
-
         .producer-only {
             display: none;
         }
-
         body.user-is-producer .producer-only {
             display: block;
         }
-
         .wallet-label {
             font-size: .7rem;
             color: #999;
@@ -400,13 +361,11 @@
             letter-spacing: .5px;
             font-weight: 600;
         }
-
         .wallet-amount {
             font-size: 1.6rem;
             font-weight: 700;
             color: #fff;
         }
-
         .upload-btn {
             margin: 20px 20px 0;
             padding: 14px 18px;
@@ -424,17 +383,14 @@
             font-size: .9rem;
             width: calc(100% - 40px);
         }
-
         .upload-btn:hover {
             background: #7c3aed;
             transform: translateY(-1px);
         }
-
         .sidebar-search {
             margin: 16px 20px;
             position: relative;
         }
-
         .sidebar-search input {
             width: 100%;
             padding: 10px 36px 10px 12px;
@@ -446,17 +402,14 @@
             outline: none;
             transition: all .2s;
         }
-
         .sidebar-search input:focus {
             background: rgba(255, 255, 255, .08);
             border-color: rgba(139, 92, 246, .5);
         }
-
         .sidebar-search input::placeholder {
             color: #666;
             font-size: .82rem;
         }
-
         .sidebar-search i {
             position: absolute;
             right: 12px;
@@ -465,11 +418,9 @@
             color: #666;
             font-size: .85rem;
         }
-
         .sidebar-menu {
             padding: 12px 0;
         }
-
         .menu-section-title {
             padding: 16px 20px 8px;
             font-size: .65rem;
@@ -478,7 +429,6 @@
             letter-spacing: 1px;
             font-weight: 700;
         }
-
         .menu-item {
             display: flex;
             align-items: center;
@@ -492,29 +442,24 @@
             cursor: pointer;
             font-weight: 500;
         }
-
         .menu-item:hover {
             background: rgba(255, 255, 255, .05);
             color: #fff;
         }
-
         .menu-item.active {
             background: rgba(139, 92, 246, .1);
             color: #fff;
             border-left: 2px solid #8b5cf6;
         }
-
         .menu-item.disabled {
             opacity: .4;
             cursor: not-allowed;
         }
-
         .menu-item i {
             width: 18px;
             text-align: center;
             font-size: .95rem;
         }
-
         .menu-item .badge {
             margin-left: auto;
             background: #8b5cf6;
@@ -524,7 +469,6 @@
             font-size: .65rem;
             font-weight: 700;
         }
-
         .menu-item .soon-badge {
             margin-left: auto;
             background: rgba(255, 255, 255, .08);
@@ -535,13 +479,11 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-
         .menu-divider {
             height: 1px;
             background: rgba(255, 255, 255, .08);
             margin: 12px 20px;
         }
-
         .logout-btn {
             margin: 20px;
             background: rgba(239, 68, 68, .1);
@@ -558,22 +500,18 @@
             font-size: .88rem;
             transition: all .2s;
         }
-
         .logout-btn:hover {
             background: rgba(239, 68, 68, .15);
             border-color: rgba(239, 68, 68, .3);
         }
-
         /* ---------- MAIN CONTENT ---------- */
         .main-content {
             padding: 36px 48px;
             background: #0a0a0a;
         }
-
         .dashboard-header {
             margin-bottom: 32px;
         }
-
         .welcome-text {
             font-size: 2rem;
             font-weight: 700;
@@ -581,20 +519,17 @@
             margin-bottom: 6px;
             letter-spacing: -.5px;
         }
-
         .welcome-subtitle {
             color: #666;
             font-size: .95rem;
             font-weight: 400;
         }
-
         .streak-bar {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
             margin-bottom: 32px;
         }
-
         .streak-card {
             background: rgba(255, 255, 255, .02);
             border: 1px solid rgba(255, 255, 255, .08);
@@ -605,12 +540,10 @@
             gap: 14px;
             transition: all .2s;
         }
-
         .streak-card:hover {
             border-color: rgba(255, 255, 255, .15);
             background: rgba(255, 255, 255, .04);
         }
-
         .streak-icon {
             width: 44px;
             height: 44px;
@@ -622,11 +555,9 @@
             font-size: 1.3rem;
             flex-shrink: 0;
         }
-
         .streak-info {
             flex: 1;
         }
-
         .streak-label {
             font-size: .7rem;
             color: #666;
@@ -635,20 +566,17 @@
             letter-spacing: .5px;
             font-weight: 600;
         }
-
         .streak-value {
             font-size: 1.4rem;
             font-weight: 700;
             color: #fff;
         }
-
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             margin-bottom: 32px;
         }
-
         .stat-card {
             background: rgba(255, 255, 255, .02);
             border: 1px solid rgba(255, 255, 255, .08);
@@ -656,20 +584,17 @@
             padding: 24px;
             transition: all .2s;
         }
-
         .stat-card:hover {
             border-color: rgba(255, 255, 255, .15);
             background: rgba(255, 255, 255, .04);
             transform: translateY(-2px);
         }
-
         .stat-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 16px;
         }
-
         .stat-icon {
             width: 40px;
             height: 40px;
@@ -680,7 +605,6 @@
             justify-content: center;
             font-size: 1.1rem;
         }
-
         .stat-trend {
             display: flex;
             align-items: center;
@@ -690,30 +614,25 @@
             padding: 4px 8px;
             border-radius: 8px;
         }
-
         .stat-trend.up {
             background: rgba(34, 197, 94, .1);
             color: #22c55e;
         }
-
         .stat-trend.down {
             background: rgba(239, 68, 68, .1);
             color: #ef4444;
         }
-
         .stat-value {
             font-size: 2rem;
             font-weight: 700;
             color: #fff;
             margin-bottom: 6px;
         }
-
         .stat-label {
             color: #666;
             font-size: .85rem;
             font-weight: 500;
         }
-
         .section {
             background: rgba(255, 255, 255, .02);
             border: 1px solid rgba(255, 255, 255, .08);
@@ -721,21 +640,18 @@
             padding: 28px;
             margin-bottom: 24px;
         }
-
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
         }
-
         .section-title {
             font-size: 1.25rem;
             font-weight: 700;
             color: #fff;
             letter-spacing: -.3px;
         }
-
         .section-link {
             color: #8b5cf6;
             text-decoration: none;
@@ -743,17 +659,14 @@
             font-weight: 600;
             transition: all .2s;
         }
-
         .section-link:hover {
             color: #a78bfa;
         }
-
         .payment-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 16px;
         }
-
         .payment-card {
             background: rgba(255, 255, 255, .03);
             border: 1px solid rgba(255, 255, 255, .08);
@@ -767,12 +680,10 @@
             cursor: pointer;
             text-align: center;
         }
-
         .payment-card:hover {
             border-color: rgba(255, 255, 255, .15);
             background: rgba(255, 255, 255, .05);
         }
-
         .payment-icon {
             width: 52px;
             height: 52px;
@@ -783,25 +694,21 @@
             justify-content: center;
             font-size: 1.6rem;
         }
-
         .payment-name {
             font-weight: 600;
             color: #fff;
             font-size: .95rem;
         }
-
         .payment-status {
             font-size: .75rem;
             color: #666;
             font-weight: 500;
         }
-
         .products-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
-
         .product-card {
             background: rgba(255, 255, 255, .02);
             border: 1px solid rgba(255, 255, 255, .08);
@@ -809,13 +716,11 @@
             overflow: hidden;
             transition: all .2s;
         }
-
         .product-card:hover {
             transform: translateY(-4px);
             border-color: rgba(255, 255, 255, .15);
             box-shadow: 0 8px 30px rgba(0, 0, 0, .3);
         }
-
         .product-image {
             width: 100%;
             height: 160px;
@@ -825,12 +730,10 @@
             justify-content: center;
             position: relative;
         }
-
         .product-image i {
             font-size: 3rem;
             color: rgba(255, 255, 255, .9);
         }
-
         .product-badge {
             position: absolute;
             top: 10px;
@@ -844,18 +747,15 @@
             text-transform: uppercase;
             letter-spacing: .3px;
         }
-
         .product-info {
             padding: 18px;
         }
-
         .product-title {
             font-size: 1rem;
             font-weight: 600;
             color: #fff;
             margin-bottom: 10px;
         }
-
         .product-meta {
             display: flex;
             justify-content: space-between;
@@ -863,14 +763,12 @@
             font-size: .8rem;
             color: #666;
         }
-
         .product-price {
             font-size: 1.3rem;
             font-weight: 700;
             color: #8b5cf6;
             margin-bottom: 12px;
         }
-
         .product-stats {
             display: flex;
             gap: 16px;
@@ -879,7 +777,6 @@
             font-size: .8rem;
             color: #666;
         }
-
         /* ---------- MODAL ---------- */
         .modal {
             display: none;
@@ -894,11 +791,9 @@
             align-items: center;
             justify-content: center;
         }
-
         .modal.active {
             display: flex;
         }
-
         .modal-content {
             background: rgba(20, 20, 20, .98);
             border: 1px solid rgba(255, 255, 255, .1);
@@ -908,7 +803,6 @@
             text-align: center;
             position: relative;
         }
-
         .modal-close {
             position: absolute;
             top: 18px;
@@ -920,17 +814,14 @@
             cursor: pointer;
             transition: all .2s;
         }
-
         .modal-close:hover {
             color: #fff;
         }
-
         .modal-icon {
             font-size: 3.5rem;
             margin-bottom: 18px;
             color: #8b5cf6;
         }
-
         .modal-title {
             font-size: 1.6rem;
             font-weight: 700;
@@ -938,54 +829,44 @@
             margin-bottom: 12px;
             letter-spacing: -.3px;
         }
-
         .modal-text {
             color: #999;
             margin-bottom: 24px;
             line-height: 1.6;
             font-size: .95rem;
         }
-
         /* ---------- RESPONSIVE ---------- */
         @media (max-width:1400px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
         @media (max-width:1200px) {
             .dashboard-container {
                 grid-template-columns: 1fr;
             }
-
             .sidebar {
                 position: relative;
                 top: 0;
                 height: auto;
             }
-
             .navbar-search {
                 width: 300px;
             }
         }
-
         @media (max-width:768px) {
             .navbar {
                 padding: .75rem 1.5rem;
             }
-
             .navbar-center {
                 display: none;
             }
-
             .main-content {
                 padding: 20px;
             }
-
             .streak-bar,
             .stats-grid,
             .payment-grid,
@@ -995,57 +876,44 @@
         }
     </style>
 </head>
-
 <body>
-
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo"><a href="index.html">OFFSZN</a></div>
-
+        <div class="logo"><a href="/index.html">OFFSZN</a></div>
         <div class="navbar-center">
             <ul class="navbar-links">
-                <li><a href="index.html">INICIO</a></li>
+                <li><a href="/index.html">INICIO</a></li>
                 <li>
                     <a>RECURSOS <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
-                        <a href="beats.html" class="dropdown-item"><i class="fas fa-music"></i><span>Beats &
-                                Instrumentales</span></a>
-                        <a href="drum-kits.html" class="dropdown-item"><i class="fas fa-drum"></i><span>Drum
-                                Kits</span></a>
-                        <a href="presets.html" class="dropdown-item"><i class="fas fa-sliders-h"></i><span>Presets &
-                                Plugins</span></a>
-                        <a href="samples.html" class="dropdown-item"><i class="fas fa-wave-square"></i><span>Samples &
-                                Loops</span></a>
+                        <a href="/beats.html" class="dropdown-item"><i class="fas fa-music"></i><span>Beats & Instrumentales</span></a>
+                        <a href="/drum-kits.html" class="dropdown-item"><i class="fas fa-drum"></i><span>Drum Kits</span></a>
+                        <a href="/presets.html" class="dropdown-item"><i class="fas fa-sliders-h"></i><span>Presets & Plugins</span></a>
+                        <a href="/samples.html" class="dropdown-item"><i class="fas fa-wave-square"></i><span>Samples & Loops</span></a>
                         <div class="dropdown-divider"></div>
-                        <a href="free-resources.html" class="dropdown-item"><i class="fas fa-gift"></i><span>Recursos
-                                Gratis</span></a>
+                        <a href="/free-resources.html" class="dropdown-item"><i class="fas fa-gift"></i><span>Recursos Gratis</span></a>
                     </div>
                 </li>
                 <li>
                     <a>COMUNIDAD <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
-                        <a href="feed.html" class="dropdown-item"><i class="fas fa-home"></i><span>Feed</span></a>
-                        <a href="productores.html" class="dropdown-item"><i
-                                class="fas fa-users"></i><span>Productores</span></a>
-                        <a href="colaboraciones.html" class="dropdown-item"><i
-                                class="fas fa-handshake"></i><span>Colaboraciones</span></a>
+                        <a href="/feed.html" class="dropdown-item"><i class="fas fa-home"></i><span>Feed</span></a>
+                        <a href="/productores.html" class="dropdown-item"><i class="fas fa-users"></i><span>Productores</span></a>
+                        <a href="/colaboraciones.html" class="dropdown-item"><i class="fas fa-handshake"></i><span>Colaboraciones</span></a>
                         <div class="dropdown-divider"></div>
-                        <a href="foros.html" class="dropdown-item"><i class="fas fa-comments"></i><span>Foros</span></a>
-                        <a href="eventos.html" class="dropdown-item"><i
-                                class="fas fa-calendar"></i><span>Eventos</span></a>
+                        <a href="/foros.html" class="dropdown-item"><i class="fas fa-comments"></i><span>Foros</span></a>
+                        <a href="/eventos.html" class="dropdown-item"><i class="fas fa-calendar"></i><span>Eventos</span></a>
                     </div>
                 </li>
             </ul>
-
             <div class="navbar-search">
                 <input type="text" placeholder="Buscar beats, kits, productores...">
                 <i class="fas fa-search"></i>
             </div>
         </div>
-
         <div class="navbar-right">
-            <a href="notifications.html" class="navbar-icon-button"><i class="fas fa-bell"></i></a>
-            <a href="cart.html" class="navbar-icon-button"><i class="fas fa-shopping-cart"></i></a>
+            <a href="/notifications.html" class="navbar-icon-button"><i class="fas fa-bell"></i></a>
+            <a href="/cart.html" class="navbar-icon-button"><i class="fas fa-shopping-cart"></i></a>
             <div class="user-dropdown">
                 <div class="navbar-icon-button" onclick="toggleUserDropdown()"><i class="fas fa-user"></i></div>
                 <div class="user-dropdown-menu">
@@ -1056,22 +924,14 @@
                             <div class="user-dropdown-email">usuario@offszn.com</div>
                         </div>
                     </div>
-                    <a href="profile.html" class="user-dropdown-item"><i class="fas fa-user-circle"></i><span>Mi
-                            Perfil</span></a>
-                    <a href="dashboard.html" class="user-dropdown-item"><i
-                            class="fas fa-th-large"></i><span>Dashboard</span></a>
-                    <a href="wallet.html" class="user-dropdown-item"><i
-                            class="fas fa-wallet"></i><span>Billetera</span></a>
-                    <a href="mis-compras.html" class="user-dropdown-item"><i class="fas fa-shopping-bag"></i><span>Mis
-                            Compras</span></a>
-                    <a href="analiticas.html" class="user-dropdown-item"><i
-                            class="fas fa-chart-line"></i><span>Analíticas</span></a>
-                    <a href="account-settings.html" class="user-dropdown-item"><i
-                            class="fas fa-cog"></i><span>Configuración</span></a>
-                    <a href="help.html" class="user-dropdown-item"><i
-                            class="fas fa-question-circle"></i><span>Ayuda</span></a>
-                    <a href="logout.html" class="user-dropdown-item logout"><i
-                            class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
+                    <a href="/profile.html" class="user-dropdown-item"><i class="fas fa-user-circle"></i><span>Mi Perfil</span></a>
+                    <a href="/cuenta/dashboard.html" class="user-dropdown-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+                    <a href="/cuenta/wallet.html" class="user-dropdown-item"><i class="fas fa-wallet"></i><span>Billetera</span></a>
+                    <a href="/cuenta/mis-compras.html" class="user-dropdown-item"><i class="fas fa-shopping-bag"></i><span>Mis Compras</span></a>
+                    <a href="/cuenta/analiticas.html" class="user-dropdown-item"><i class="fas fa-chart-line"></i><span>Analíticas</span></a>
+                    <a href="/cuenta/account-settings.html" class="user-dropdown-item"><i class="fas fa-cog"></i><span>Configuración</span></a>
+                    <a href="/cuenta/help.html" class="user-dropdown-item"><i class="fas fa-question-circle"></i><span>Ayuda</span></a>
+                    <a href="/cuenta/logout.html" class="user-dropdown-item logout"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
                 </div>
             </div>
         </div>
@@ -1079,7 +939,6 @@
 
     <!-- Dashboard Container -->
     <div class="dashboard-container">
-
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="profile-header">
@@ -1090,53 +949,39 @@
                     </div>
                 </div>
             </div>
-
             <div class="wallet-section">
                 <div class="wallet-label">Saldo Disponible</div>
                 <div class="wallet-amount">$0.00</div>
             </div>
-
-            <button class="upload-btn" onclick="window.location.href='subir-kit.html'">
+            <button class="upload-btn" onclick="window.location.href='/cuenta/subir-kit.html'">
                 <i class="fas fa-cloud-upload-alt"></i> Subir Kit
             </button>
-
             <div class="sidebar-search">
                 <input type="text" placeholder="Buscar mis productos...">
                 <i class="fas fa-search"></i>
             </div>
-
             <div class="sidebar-menu">
                 <div class="menu-section-title">Principal</div>
-                <a href="dashboard.html" class="menu-item active"><i
-                        class="fas fa-th-large"></i><span>Dashboard</span></a>
-                <a href="mis-kits.html" class="menu-item"><i class="fas fa-music"></i><span>Mis Kits</span></a>
-                <a href="analiticas.html" class="menu-item"><i class="fas fa-chart-line"></i><span>Analíticas</span></a>
-                <a href="favoritos.html" class="menu-item"><i class="fas fa-heart"></i><span>Favoritos</span></a>
+                <a href="/cuenta/dashboard.html" class="menu-item active"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+                <a href="/cuenta/mis-kits.html" class="menu-item"><i class="fas fa-music"></i><span>Mis Kits</span></a>
+                <!-- ⚠️ Aquí eliminamos "Analíticas" del sidebar -->
+                <!-- <a href="/cuenta/analiticas.html" class="menu-item"><i class="fas fa-chart-line"></i><span>Analíticas</span></a> -->
+                <a href="/cuenta/favoritos.html" class="menu-item"><i class="fas fa-heart"></i><span>Favoritos</span></a>
                 <a href="#" class="menu-item"><i class="fas fa-history"></i><span>Historial</span></a>
-
                 <div class="menu-divider"></div>
-
                 <div class="menu-section-title">Colaboración</div>
-                <a href="colaboraciones.html" class="menu-item"><i
-                        class="fas fa-users"></i><span>Colaboraciones</span></a>
-
+                <a href="/cuenta/colaboraciones.html" class="menu-item"><i class="fas fa-users"></i><span>Colaboraciones</span></a>
                 <div class="menu-divider"></div>
-
                 <div class="menu-section-title">Compras</div>
-                <a href="mis-compras.html" class="menu-item"><i class="fas fa-shopping-bag"></i><span>Mis
-                        Compras</span></a>
-                <a href="gift-cards.html" class="menu-item"><i class="fas fa-gift"></i><span>Gift Cards</span></a>
-                <a href="messages.html" class="menu-item"><i class="fas fa-envelope"></i><span>Mensajes</span></a>
-
+                <a href="/cuenta/mis-compras.html" class="menu-item"><i class="fas fa-shopping-bag"></i><span>Mis Compras</span></a>
+                <a href="/cuenta/gift-cards.html" class="menu-item"><i class="fas fa-gift"></i><span>Gift Cards</span></a>
+                <a href="/cuenta/messages.html" class="menu-item"><i class="fas fa-envelope"></i><span>Mensajes</span></a>
                 <div class="menu-divider"></div>
-
                 <div class="menu-section-title">Configuración</div>
-                <a href="account-settings.html" class="menu-item"><i
-                        class="fas fa-cog"></i><span>Configuración</span></a>
-                <a href="blog.html" class="menu-item"><i class="fas fa-book-open"></i><span>Blog</span></a>
+                <a href="/cuenta/account-settings.html" class="menu-item"><i class="fas fa-cog"></i><span>Configuración</span></a>
+                <a href="/cuenta/blog.html" class="menu-item"><i class="fas fa-book-open"></i><span>Blog</span></a>
             </div>
-
-            <a href="logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
+            <a href="/cuenta/logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
         </aside>
 
         <!-- Main Content -->
@@ -1145,7 +990,6 @@
                 <h1 class="welcome-text">Bienvenido</h1>
                 <p class="welcome-subtitle">Gestiona tu negocio musical desde aquí</p>
             </div>
-
             <div class="streak-bar">
                 <div class="streak-card">
                     <div class="streak-icon"><i class="fas fa-fire" style="color:#666;"></i></div>
@@ -1162,7 +1006,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-header">
@@ -1193,13 +1036,11 @@
                     <div class="stat-label">Rating promedio</div>
                 </div>
             </div>
-
             <!-- Métodos de Pago -->
             <div class="section">
                 <div class="section-header">
                     <h2 class="section-title">Métodos de Pago</h2>
-                    <a href="#" class="section-link" onclick="showModal('Configurar Pagos'); return false;">Configurar
-                        →</a>
+                    <a href="#" class="section-link" onclick="showModal('Configurar Pagos'); return false;">Configurar →</a>
                 </div>
                 <div class="payment-grid">
                     <div class="payment-card">
@@ -1219,52 +1060,45 @@
                     </div>
                 </div>
             </div>
-
             <!-- Mis Productos Top (estado vacío + botón) -->
             <div class="section">
                 <div class="section-header">
                     <h2 class="section-title">Mis Productos Top</h2>
-                    <a href="mis-kits.html" class="section-link">Ver todos →</a>
+                    <a href="/cuenta/mis-kits.html" class="section-link">Ver todos →</a>
                 </div>
-
                 <!-- Estado vacío -->
                 <div id="empty-products-state"
                     style="text-align:center;padding:48px 20px;background:rgba(255,255,255,.02);border:1px dashed rgba(255,255,255,.15);border-radius:12px;">
                     <div style="font-size:3.5rem;margin-bottom:18px;opacity:.5;color:#666;">
                         <i class="fas fa-box-open"></i>
                     </div>
-                    <h3 style="color:#fff;margin-bottom:10px;font-size:1.2rem;font-weight:600;">No tienes productos
-                        activos aún</h3>
+                    <h3 style="color:#fff;margin-bottom:10px;font-size:1.2rem;font-weight:600;">No tienes productos activos aún</h3>
                     <p
                         style="color:#666;margin-bottom:24px;line-height:1.6;font-size:.95rem;max-width:500px;margin-left:auto;margin-right:auto;">
                         Comienza a vender tus beats, kits o presets. Haz click en <strong>“Subir Kit”</strong> en el
                         menú lateral y lanza tu primer producto.
                     </p>
-                    <button onclick="window.location.href='subir-kit.html'"
+                    <button onclick="window.location.href='/cuenta/subir-kit.html'"
                         style="display:inline-flex;align-items:center;gap:8px;background:#8b5cf6;color:#fff;padding:12px 28px;border-radius:10px;font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:all .2s;"
                         onmouseover="this.style.background='#7c3aed'" onmouseout="this.style.background='#8b5cf6'">
                         <i class="fas fa-cloud-upload-alt"></i> Subir Mi Primer Kit
                     </button>
                 </div>
-
                 <!-- Grilla de productos (oculta por defecto) -->
                 <div class="products-grid" id="products-grid" style="display:none;">
                     <!-- Los productos reales se insertarán aquí dinámicamente -->
                 </div>
             </div>
-
             <!-- Personalización -->
             <div class="section">
                 <div class="section-header">
                     <h2 class="section-title">Personaliza Tu Tienda</h2>
-                    <a href="#" class="section-link" onclick="showModal('Editor de Tienda'); return false;">Personalizar
-                        →</a>
+                    <a href="#" class="section-link" onclick="showModal('Editor de Tienda'); return false;">Personalizar →</a>
                 </div>
                 <div
                     style="background:rgba(139,92,246,.05);border:1px dashed rgba(139,92,246,.3);border-radius:12px;padding:44px;text-align:center;">
                     <div style="font-size:3.5rem;margin-bottom:18px;opacity:.5;"><i class="fas fa-palette"></i></div>
-                    <h3 style="color:#fff;margin-bottom:10px;font-size:1.2rem;font-weight:600;">Diseña Tu Tienda Única
-                    </h3>
+                    <h3 style="color:#fff;margin-bottom:10px;font-size:1.2rem;font-weight:600;">Diseña Tu Tienda Única</h3>
                     <p style="color:#666;margin-bottom:24px;line-height:1.6;font-size:.95rem;">
                         Customiza colores, logo, banner y más para que tu tienda<br>refleje tu identidad como productor.
                     </p>
@@ -1299,13 +1133,11 @@
             document.getElementById('modal').classList.add('active');
         }
         function closeModal() { document.getElementById('modal').classList.remove('active'); }
-
         /* ---------- USER DROPDOWN ---------- */
         function toggleUserDropdown() {
             const dropdown = document.querySelector('.user-dropdown');
             dropdown.classList.toggle('active');
         }
-
         /* ---------- CIERRE DE MODALES AL HACER CLIC FUERA ---------- */
         document.getElementById('modal').addEventListener('click', e => { if (e.target === this) closeModal(); });
         document.addEventListener('click', e => {
@@ -1313,11 +1145,9 @@
             const userBtn = document.querySelector('.user-dropdown .navbar-icon-button');
             if (!userDropdown.contains(e.target) && e.target !== userBtn) userDropdown.classList.remove('active');
         });
-
         /* ---------- CARGA DE SALDO (localStorage) ---------- */
         const STORAGE_KEY = 'offszn_giftcards_state';
         let appState = { totalBalance: 0, giftCards: [] };
-
         function loadState() {
             try {
                 const saved = localStorage.getItem(STORAGE_KEY);
@@ -1331,7 +1161,6 @@
             const el = document.querySelector('.wallet-amount');
             if (el) el.textContent = `$${appState.totalBalance.toFixed(2)}`;
         }
-
         /* ---------- DETECCIÓN DE PRODUCTOS (estado vacío) ---------- */
         function checkProducts() {
             const grid = document.getElementById('products-grid');
@@ -1340,67 +1169,118 @@
             grid.style.display = hasProducts ? 'grid' : 'none';
             empty.style.display = hasProducts ? 'none' : 'block';
         }
-
         /* ---------- INICIALIZACIÓN ---------- */
         document.addEventListener('DOMContentLoaded', () => {
             loadState();
             checkProducts();
         });
     </script>
-    <script src="dashboard.js"></script>
-
-    <div class="modal" id="upload-modal">
-    <div class="modal-content" style="text-align: left; max-width: 600px;">
-        <button class="modal-close" onclick="closeModal('upload-modal')"><i class="fas fa-times"></i></button>
-        <h2 class="modal-title">Subir Nuevo Producto</h2>
-        <form id="upload-product-form" enctype="multipart/form-data">
-            
-            <label for="product-name">Nombre del Producto:*</label>
-            <input type="text" id="product-name" name="name" required>
-
-            <label for="product-type">Tipo:*</label>
-            <select id="product-type" name="product_type" required>
-                <option value="">-- Selecciona --</option>
-                <option value="beat">Beat / Instrumental</option>
-                <option value="drumkit">Drum Kit</option>
-                <option value="preset">Preset / Plugin</option>
-                <option value="sample">Sample / Loop</option>
-                <option value="otro">Otro</option>
-            </select>
-
-            <label for="product-price-usd">Precio (USD):*</label>
-            <input type="number" id="product-price-usd" name="price_usd" step="0.01" required>
-
-            <label for="product-price-pen">Precio (Soles PEN):</label>
-            <input type="number" id="product-price-pen" name="price_pen" step="0.01">
-
-            <label for="product-description">Descripción:</label>
-            <textarea id="product-description" name="description"></textarea>
-
-            <label for="product-bpm">BPM (si aplica):</label>
-            <input type="number" id="product-bpm" name="bpm">
-
-            <label for="product-key">Key / Tonalidad (si aplica):</label>
-            <input type="text" id="product-key" name="key">
-
-            <label for="product-tags">Tags (separados por coma):</label>
-            <input type="text" id="product-tags" name="tags" placeholder="Ej: trap, dark, 808">
-
-            <label for="product-image">URL de Imagen de Portada:</label>
-            <input type="url" id="product-image" name="image_url" placeholder="https://...">
-
-            <label for="product-file">Archivo del Producto (.zip, .wav, .mp3 - Máx 50MB):*</label>
-            <input type="file" id="product-file" name="productFile" required accept=".zip,.wav,.mp3">
-
-            <div class="upload-progress" style="margin-top: 10px; display:none;">
-                 Subiendo: <progress id="upload-progress-bar" value="0" max="100"></progress> <span id="upload-progress-text">0%</span>
-            </div>
-
-            <button type="submit" class="btn" style="width: 100%; margin-top: 1.5rem;">Subir Producto</button>
-            <div id="upload-message" class="message" role="alert"></div>
-        </form>
-    </div>
-</div>
+    <script src="/cuenta/dashboard.js"></script>
 </body>
-
 </html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Subir Beat - OFFSZN</title>
+    <style>body{background:#0a0a0a;color:#fff;text-align:center;padding:60px;}</style>
+</head>
+<body>
+    <h1>Subir Beat</h1>
+    <p>Comparte tu música con miles de artistas alrededor del mundo.</p>
+    <p>Esta funcionalidad está en desarrollo.</p>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Subir Drum Kit - OFFSZN</title>
+    <style>body{background:#0a0a0a;color:#fff;text-align:center;padding:60px;}</style>
+</head>
+<body>
+    <h1>Subir Drum Kit</h1>
+    <p>Comparte tus kits de batería con miles de productores alrededor del mundo.</p>
+    <p>Esta funcionalidad está en desarrollo.</p>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Subir Preset - OFFSZN</title>
+    <style>body{background:#0a0a0a;color:#fff;text-align:center;padding:60px;}</style>
+</head>
+<body>
+    <h1>Subir Preset</h1>
+    <p>Comparte tus presets y plugins con la comunidad OFFSZN.</p>
+    <p>Esta funcionalidad está en desarrollo.</p>
+</body>
+</html>
+
+
+    
+              <script>
+                              const uploadModal = document.getElementById('upload-modal');
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+    const welcomeText = document.querySelector('.welcome-text');
+    const profileAvatar = document.querySelector('.profile-avatar');
+    const profileName = document.querySelector('.profile-name');
+    const walletAmount = document.querySelector('.wallet-amount');
+    const statsGrid = document.querySelector('.stats-grid');
+    const productsGrid = document.querySelector('.products-grid');
+    const uploadButton = document.querySelector('.upload-btn');
+
+    // Eliminamos todo lo relacionado con API y XHR
+    // Por ahora, solo mostramos un mensaje de "funcionalidad en desarrollo"
+
+    if (uploadButton) {
+        uploadButton.disabled = false;
+        uploadButton.onclick = null;
+        uploadButton.addEventListener('click', () => {
+            // Usamos el modal existente
+            document.getElementById('featureName').textContent = 'Subir Producto';
+            document.getElementById('modal').classList.add('active');
+        });
+    }
+
+    // Resto del código que no depende de API (opcional)
+    // Si quieres mantener la carga de datos del usuario, necesitas una API real
+
+    // Ejemplo: Simular que el usuario es productor
+    if (welcomeText) welcomeText.textContent = 'Bienvenido, Usuario';
+    if (profileName) profileName.textContent = 'Usuario';
+    if (profileAvatar) profileAvatar.textContent = 'U';
+
+    // Mostrar el contenido para productor (simulado)
+    document.querySelectorAll('.producer-only').forEach(el => el.style.display = '');
+
+    if (walletAmount) walletAmount.textContent = '$0.00';
+
+    if (productsGrid) {
+        productsGrid.innerHTML = '<p>Aún no tienes productos.</p>';
+    }
+
+    // Cierre de sesión
+    const sidebarLogoutButton = document.querySelector('.logout-btn');
+    if (sidebarLogoutButton) {
+        sidebarLogoutButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('authToken');
+            alert('¡Has cerrado sesión!');
+            window.location.replace('/pages/login.html');
+        });
+    }
+
+});
+
+
+              </script>
+                        </body>
+                        </html>
+                    
