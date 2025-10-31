@@ -57,6 +57,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     await loadProducerProducts(userData.id);
                 }
 
+                // COMENTADO: El botón "Subir Kit" redirige directamente a subir-kit.html desde el HTML
+                /*
                 if (uploadButton) {
                     uploadButton.disabled = false;
                     uploadButton.onclick = null;
@@ -64,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         if (uploadModal) uploadModal.classList.add('active');
                     });
                 }
-
+                */
 
             } else {
                 console.log("Usuario NO es productor.");
