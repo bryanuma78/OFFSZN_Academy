@@ -1,5 +1,5 @@
+// favoritos.js
 document.addEventListener('DOMContentLoaded', async () => {
-    
     const token = localStorage.getItem('authToken');
     const STORAGE_KEY = 'offszn_giftcards_state';
     const CACHE_KEY = 'offszn_user_cache';
@@ -22,14 +22,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ---------- CARGAR DATOS DEL USUARIO ----------
     async function loadUserData() {
         try {
-            // Intentar cargar desde caché primero
             const cached = localStorage.getItem(CACHE_KEY);
             if (cached) {
                 const cachedData = JSON.parse(cached);
                 updateUserUI(cachedData);
             }
 
-            // Cargar datos frescos
             const response = await fetch(`${API_URL}/me`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -45,9 +43,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             const userData = await response.json();
-            console.log('Datos del usuario:', userData);
-            
-            // Guardar en caché
             localStorage.setItem(CACHE_KEY, JSON.stringify(userData));
             updateUserUI(userData);
 
@@ -58,31 +53,33 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // ---------- ACTUALIZAR UI CON DATOS DEL USUARIO ----------
     function updateUserUI(userData) {
-        // Actualizar nombre en sidebar
+        // Sidebar
         const profileName = document.querySelector('.profile-name');
+        const profileAvatar = document.querySelector('.profile-avatar');
         if (profileName) {
+            profileName.classList.remove('skeleton-text');
             profileName.textContent = `${userData.first_name || ''} ${userData.last_name || ''}`.trim() || userData.nickname || 'Usuario';
         }
-
-        // Actualizar avatar
-        const profileAvatar = document.querySelector('.profile-avatar');
         if (profileAvatar) {
+            profileAvatar.classList.remove('skeleton-avatar');
             const initial = (userData.first_name || userData.nickname || 'U').charAt(0).toUpperCase();
             profileAvatar.textContent = initial;
         }
 
-        // Actualizar dropdown de usuario
+        // Dropdown
         const dropdownName = document.querySelector('.user-dropdown-name');
         const dropdownEmail = document.querySelector('.user-dropdown-email');
         const dropdownAvatar = document.querySelector('.user-dropdown-avatar');
-
         if (dropdownName) {
+            dropdownName.classList.remove('skeleton-text');
             dropdownName.textContent = userData.nickname || userData.first_name || 'Usuario';
         }
         if (dropdownEmail) {
+            dropdownEmail.classList.remove('skeleton-text');
             dropdownEmail.textContent = userData.email || 'usuario@offszn.com';
         }
         if (dropdownAvatar) {
+            dropdownAvatar.classList.remove('skeleton-avatar');
             const initial = (userData.first_name || userData.nickname || 'U').charAt(0).toUpperCase();
             dropdownAvatar.textContent = initial;
         }
@@ -91,53 +88,51 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ---------- CARGAR SALDO DE GIFT CARDS ----------
     function loadWalletBalance() {
         try {
+            const walletAmount = document.querySelector('.wallet-amount');
+            if (!walletAmount) return;
+
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) {
                 const data = JSON.parse(saved);
                 const balance = typeof data.totalBalance === 'number' ? data.totalBalance : 0;
-                
-                const walletAmount = document.querySelector('.wallet-amount');
-                if (walletAmount) {
-                    walletAmount.textContent = `$${balance.toFixed(2)}`;
-                }
+                walletAmount.classList.remove('skeleton-text');
+                walletAmount.textContent = `$${balance.toFixed(2)}`;
+            } else {
+                walletAmount.classList.remove('skeleton-text');
+                walletAmount.textContent = '$0.00';
             }
         } catch (err) {
             console.error('Error al cargar saldo:', err);
+            const walletAmount = document.querySelector('.wallet-amount');
+            if (walletAmount) {
+                walletAmount.classList.remove('skeleton-text');
+                walletAmount.textContent = '$0.00';
+            }
         }
     }
 
-    // ---------- TABS FUNCIONALIDAD ----------
-    function initTabs() {
-        const tabs = document.querySelectorAll('.tab');
-        const contents = document.querySelectorAll('.tab-content');
+    // ---------- TABS FUNCTIONALITY ----------
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const tabName = tab.getAttribute('data-tab');
-                
-                // Remover active de todos los tabs
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => {
-                    c.style.display = 'none';
-                    c.classList.remove('active');
-                });
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active from all
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(c => c.style.display = 'none');
 
-                // Activar tab seleccionado
-                tab.classList.add('active');
-                const activeContent = document.getElementById(`${tabName}-content`);
-                if (activeContent) {
-                    activeContent.style.display = 'block';
-                    activeContent.classList.add('active');
-                }
-            });
+            // Add active to clicked
+            tab.classList.add('active');
+            const target = tab.getAttribute('data-tab');
+            document.getElementById(`${target}-content`).style.display = 'block';
         });
-    }
+    });
 
     // ---------- MODAL FUNCTIONS ----------
     window.showModal = function(feature) {
         const modal = document.getElementById('modal');
         const featureName = document.getElementById('featureName');
-        if (featureName) {
+        if (featureName && feature) {
             featureName.textContent = feature;
         }
         if (modal) {
@@ -160,7 +155,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    // Cerrar dropdown al hacer clic fuera
     document.addEventListener('click', (e) => {
         const userDropdown = document.querySelector('.user-dropdown');
         const userBtn = document.querySelector('.user-dropdown .navbar-icon-button');
@@ -169,7 +163,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // Cerrar modal al hacer clic fuera
     const modal = document.getElementById('modal');
     if (modal) {
         modal.addEventListener('click', (e) => {
@@ -186,6 +179,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             e.preventDefault();
             localStorage.removeItem('authToken');
             localStorage.removeItem(CACHE_KEY);
+            localStorage.removeItem(STORAGE_KEY);
             alert('¡Has cerrado sesión!');
             window.location.replace('/pages/login.html');
         });
@@ -196,20 +190,52 @@ document.addEventListener('DOMContentLoaded', async () => {
         loadWalletBalance();
     }
 
-    // Actualizar cada 2 segundos
     setInterval(updateWalletDisplay, 2000);
-
-    // Escuchar cambios desde otras pestañas
     window.addEventListener('storage', (e) => {
         if (e.key === STORAGE_KEY) {
             setTimeout(updateWalletDisplay, 50);
         }
     });
 
+    // ---------- FUTURAS APIS DE FAVORITOS (POR TIPO) ----------
+    /*
+    async function loadFavorites(type) {
+        // type: 'beats', 'kits', 'presets', 'productores'
+        try {
+            const response = await fetch(`${API_URL}/favorites/${type}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json();
+            renderFavorites(type, data);
+        } catch (error) {
+            console.error(`Error al cargar favoritos de ${type}:`, error);
+        }
+    }
+
+    function renderFavorites(type, items) {
+        const container = document.getElementById(`${type}-content`);
+        if (items.length === 0) {
+            // Mostrar estado vacío (ya existe en HTML)
+            return;
+        }
+        // Aquí iría el renderizado real de los items
+        container.innerHTML = `<div>Cargando ${items.length} favoritos...</div>`;
+    }
+
+    // Ejemplo de cómo usarlo:
+    // loadFavorites('beats');
+    */
+
+    // Simular carga de 2 segundos antes de "mostrar datos"
+    setTimeout(() => {
+        console.log('Favoritos: carga simulada completada');
+        // Cuando tengas las APIs, descomenta:
+        // ['beats', 'kits', 'presets', 'productores'].forEach(loadFavorites);
+    }, 2000);
+
     // ---------- INICIALIZACIÓN ----------
     await loadUserData();
     loadWalletBalance();
-    initTabs();
 
     console.log('Favoritos inicializado correctamente');
-});  
+});
