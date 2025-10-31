@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Favoritos - OFFSZN</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css ">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
@@ -863,10 +863,11 @@
                 <div class="navbar-icon-button" onclick="toggleUserDropdown()"><i class="fas fa-user"></i></div>
                 <div class="user-dropdown-menu">
                     <div class="user-dropdown-header">
-                        <div class="user-dropdown-avatar">?</div>
+                        <!-- ✅ Skeleton classes added -->
+                        <div class="user-dropdown-avatar skeleton-avatar">?</div>
                         <div class="user-dropdown-info">
-                            <div class="user-dropdown-name">Usuario</div>
-                            <div class="user-dropdown-email">usuario@offszn.com</div>
+                            <div class="user-dropdown-name skeleton-text">Usuario</div>
+                            <div class="user-dropdown-email skeleton-text">usuario@offszn.com</div>
                         </div>
                     </div>
                     <a href="profile.html" class="user-dropdown-item"><i class="fas fa-user-circle"></i><span>Mi Perfil</span></a>
@@ -889,16 +890,18 @@
         <aside class="sidebar">
             <div class="profile-header">
                 <div class="profile-info">
-                    <div class="profile-avatar">?</div>
+                    <!-- ✅ Skeleton classes added -->
+                    <div class="profile-avatar skeleton-avatar">?</div>
                     <div>
-                        <div class="profile-name">Usuario</div>
+                        <div class="profile-name skeleton-text">Usuario</div>
                     </div>
                 </div>
             </div>
 
             <div class="wallet-section">
                 <div class="wallet-label">Saldo Disponible</div>
-                <div class="wallet-amount">$0.00</div>
+                <!-- ✅ Skeleton class added -->
+                <div class="wallet-amount skeleton-text">$0.00</div>
             </div>
 
             <button class="upload-btn" onclick="window.location.href='subir-kit.html'">
@@ -1054,3 +1057,4 @@
     <script src="favoritos.js"></script>
 </body>
 </html>
+
