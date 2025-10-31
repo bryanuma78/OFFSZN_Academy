@@ -85,24 +85,25 @@
         .dropdown-menu {
             position: absolute;
             top: calc(100% + 12px);
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
             background: rgba(20, 20, 20, 0.98);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             padding: 8px;
-            min-width: 220px;
+            min-width: 240px;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-10px);
             transition: all 0.3s ease;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(20px);
+            z-index: 1001;
         }
 
         .navbar-links li:hover .dropdown-menu {
             opacity: 1;
             visibility: visible;
-            transform: translateY(0);
+            transform: translateX(-50%) translateY(0);
         }
 
         .navbar-links li:hover a i.fa-chevron-down {
@@ -112,7 +113,7 @@
         .dropdown-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             padding: 10px 14px;
             color: #999;
             text-decoration: none;
@@ -128,8 +129,9 @@
         }
 
         .dropdown-item i {
-            width: 18px;
+            width: 20px;
             text-align: center;
+            flex-shrink: 0;
         }
 
         .dropdown-divider {
@@ -242,13 +244,13 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            background: #333;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             font-size: 1rem;
-            color: #fff;
+            color: #666;
         }
 
         .user-dropdown-info {
@@ -317,6 +319,47 @@
             background: rgba(239, 68, 68, 0.1);
         }
 
+        /* Skeleton Loading Styles */
+        .skeleton-avatar,
+        .skeleton-text {
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0.05) 25%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0.05) 75%
+            );
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        .skeleton-avatar {
+            border-radius: 50% !important;
+        }
+
+        .skeleton-text {
+            height: 1em;
+            min-width: 80px;
+            display: inline-block;
+        }
+
+        .user-dropdown-email.skeleton-text {
+            min-width: 120px;
+        }
+
+        .wallet-amount.skeleton-text {
+            min-width: 60px;
+            height: 1.6rem;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
         /* ===== LAYOUT ===== */
         .dashboard-container {
             display: grid;
@@ -363,13 +406,13 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            background: #333;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             font-size: 1.1rem;
-            color: #fff;
+            color: #666;
         }
 
         .profile-name {
@@ -1356,12 +1399,12 @@
 <body>
     <nav class="navbar">
         <div class="logo">
-            <a href="index.html">OFFSZN</a>
+            <a href="dashboard.html">OFFSZN</a>
         </div>
 
         <div class="navbar-center">
             <ul class="navbar-links">
-                <li><a href="index.html">INICIO</a></li>
+                <li><a href="dashboard.html">INICIO</a></li>
                 <li>
                     <a>RECURSOS <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
@@ -1435,10 +1478,10 @@
                 </div>
                 <div class="user-dropdown-menu">
                     <div class="user-dropdown-header">
-                        <div class="user-dropdown-avatar">U</div>
+                        <div class="user-dropdown-avatar skeleton-avatar"></div>
                         <div class="user-dropdown-info">
-                            <div class="user-dropdown-name">Usuario</div>
-                            <div class="user-dropdown-email">usuario@offszn.com</div>
+                            <div class="user-dropdown-name skeleton-text"></div>
+                            <div class="user-dropdown-email skeleton-text"></div>
                         </div>
                     </div>
                     <a href="profile.html" class="user-dropdown-item">
@@ -1453,10 +1496,13 @@
                         <i class="fas fa-wallet"></i>
                         <span>Billetera</span>
                     </a>
-                    <a href="#" class="user-dropdown-item disabled">
+                    <a href="mis-compras.html" class="user-dropdown-item">
                         <i class="fas fa-shopping-bag"></i>
                         <span>Mis Compras</span>
-                        <span class="soon-badge">Pronto</span>
+                    </a>
+                    <a href="favoritos.html" class="user-dropdown-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Favoritos</span>
                     </a>
                     <a href="#" class="user-dropdown-item disabled">
                         <i class="fas fa-chart-line"></i>
@@ -1484,9 +1530,9 @@
         <aside class="sidebar">
             <div class="profile-header">
                 <div class="profile-info">
-                    <div class="profile-avatar">U</div>
+                    <div class="profile-avatar skeleton-avatar"></div>
                     <div>
-                        <div class="profile-name">Usuario</div>
+                        <div class="profile-name skeleton-text"></div>
                     </div>
                 </div>
                 <div class="profile-badge">
@@ -1497,10 +1543,10 @@
 
             <div class="wallet-section">
                 <div class="wallet-label">Saldo Disponible</div>
-                <div class="wallet-amount" id="sidebar-wallet">$0.00</div>
+                <div class="wallet-amount skeleton-text" id="sidebar-wallet"></div>
             </div>
 
-            <button class="upload-btn" onclick="showModal('Subir Kit')">
+            <button class="upload-btn" onclick="window.location.href='subir-kit.html'">
                 <i class="fas fa-cloud-upload-alt"></i>
                 Subir Kit
             </button>
@@ -1518,51 +1564,46 @@
                     <span>Dashboard</span>
                 </a>
 
-                <a href="#" class="menu-item disabled" onclick="showModal('Mis Kits'); return false;">
+                <a href="mis-kits.html" class="menu-item">
                     <i class="fas fa-music"></i>
                     <span>Mis Kits</span>
-                    <span class="soon-badge">Pronto</span>
                 </a>
 
-                <a href="#" class="menu-item disabled" onclick="showModal('Analíticas'); return false;">
+                <a href="#" class="menu-item disabled">
                     <i class="fas fa-chart-line"></i>
                     <span>Analíticas</span>
                     <span class="soon-badge">Pronto</span>
                 </a>
 
-                <a href="#" class="menu-item disabled" onclick="showModal('Favoritos'); return false;">
+                <a href="favoritos.html" class="menu-item">
                     <i class="fas fa-heart"></i>
                     <span>Favoritos</span>
-                    <span class="soon-badge">Pronto</span>
                 </a>
 
-                <a href="#" class="menu-item disabled" onclick="showModal('Historial'); return false;">
+                <a href="#" class="menu-item">
                     <i class="fas fa-history"></i>
                     <span>Historial</span>
-                    <span class="soon-badge">Pronto</span>
                 </a>
 
                 <div class="menu-divider"></div>
 
                 <div class="menu-section-title">Colaboración</div>
 
-                <a href="#" class="menu-item disabled" onclick="showModal('Colaboraciones'); return false;">
+                <a href="colaboraciones.html" class="menu-item">
                     <i class="fas fa-users"></i>
                     <span>Colaboraciones</span>
-                    <span class="soon-badge">Pronto</span>
                 </a>
 
                 <div class="menu-divider"></div>
 
                 <div class="menu-section-title">Compras</div>
 
-                <a href="#" class="menu-item disabled" onclick="showModal('Mis Compras'); return false;">
+                <a href="mis-compras.html" class="menu-item">
                     <i class="fas fa-shopping-bag"></i>
                     <span>Mis Compras</span>
-                    <span class="soon-badge">Pronto</span>
                 </a>
 
-                <a href="gift-cards.html" class="menu-item active">
+                <a href="Gift-Cards.html" class="menu-item active">
                     <i class="fas fa-gift"></i>
                     <span>Gift Cards</span>
                 </a>
@@ -1859,390 +1900,6 @@
         </div>
     </div>
 
-    <script>
-      // ===== CONFIGURACIÓN =====
-const EXCHANGE_RATE = 3.8;
-const STORAGE_KEY = 'offszn_giftcards_state';
-
-// ===== ESTADO DE LA APLICACIÓN =====
-let appState = {
-    currentCurrency: 'USD',
-    hasClaimedWelcome: false,
-    lastSpinMonth: null,
-    totalBalance: 0,
-    giftCards: []
-};
-
-// ===== FUNCIONES DE ALMACENAMIENTO =====
-function saveState() {
-    try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-        console.log('Estado guardado exitosamente');
-    } catch (error) {
-        console.error('Error al guardar estado:', error);
-    }
-}
-
-function loadState() {
-    try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-            const parsed = JSON.parse(saved);
-            appState = { ...appState, ...parsed };
-            console.log('Estado cargado:', appState);
-            return true;
-        }
-    } catch (error) {
-        console.error('Error al cargar estado:', error);
-    }
-    return false;
-}
-
-// ===== FECHA Y MES =====
-const today = new Date();
-const currentMonth = today.getMonth();
-const currentYear = today.getFullYear();
-const currentMonthKey = `${currentYear}-${currentMonth}`;
-const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
-const nextMonthYear = currentMonth === 11 ? currentYear + 1 : currentYear;
-const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
-                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-
-function hasSpunThisMonth() {
-    return appState.lastSpinMonth === currentMonthKey;
-}
-
-// ===== FUNCIONES DE MONEDA =====
-function changeCurrency(currency) {
-    appState.currentCurrency = currency;
-    
-    document.getElementById('usd-btn').classList.toggle('active', currency === 'USD');
-    document.getElementById('pen-btn').classList.toggle('active', currency === 'PEN');
-
-    updateAllAmounts();
-    saveState();
-}
-
-function formatAmount(usd) {
-    if (appState.currentCurrency === 'USD') {
-        return `$${usd.toFixed(2)} USD`;
-    } else {
-        const penAmount = (usd * EXCHANGE_RATE).toFixed(2);
-        return `S/${penAmount} PEN`;
-    }
-}
-
-function updateAllAmounts() {
-    const welcomeAmount = document.getElementById('welcome-amount');
-    if (welcomeAmount) {
-        welcomeAmount.textContent = formatAmount(5);
-    }
-
-    const totalBalance = document.getElementById('total-balance');
-    if (totalBalance) {
-        totalBalance.textContent = formatAmount(appState.totalBalance);
-    }
-
-    const sidebarWallet = document.getElementById('sidebar-wallet');
-    if (sidebarWallet) {
-        if (appState.currentCurrency === 'USD') {
-            sidebarWallet.textContent = `$${appState.totalBalance.toFixed(2)}`;
-        } else {
-            sidebarWallet.textContent = `S/${(appState.totalBalance * EXCHANGE_RATE).toFixed(2)}`;
-        }
-    }
-
-    renderGiftCards();
-}
-
-// ===== FUNCIONES DE GIFT CARDS =====
-function addGiftCard(type, value, description, isDiscount = false) {
-    const giftCard = {
-        id: Date.now(),
-        type: type,
-        value: value,
-        description: description,
-        isDiscount: isDiscount,
-        active: true,
-        claimedDate: new Date().toLocaleDateString('es-ES')
-    };
-
-    appState.giftCards.push(giftCard);
-    
-    if (!isDiscount) {
-        appState.totalBalance += value;
-    }
-
-    saveState();
-    updateAllAmounts();
-}
-
-function renderGiftCards() {
-    const container = document.getElementById('gift-cards-container');
-    
-    if (appState.giftCards.length === 0) {
-        container.innerHTML = `
-            <div class="empty-state">
-                <i class="fas fa-gift"></i>
-                <h3>No tienes gift cards activas aún</h3>
-                <p>Reclama tu regalo de bienvenida o gira la ruleta mensual para obtener tus primeras recompensas.</p>
-            </div>
-        `;
-        return;
-    }
-
-    container.innerHTML = appState.giftCards.map(card => {
-        const cardClass = card.isDiscount ? 'gift-card-item discount-card' : 'gift-card-item';
-        const valueDisplay = card.isDiscount ? `${card.value}% OFF` : formatAmount(card.value);
-        const iconClass = card.isDiscount ? 'percent' : 'gift';
-        const statusText = card.isDiscount ? 'Disponible' : 'Activa';
-        
-        return `
-            <div class="${cardClass}">
-                <div class="gift-card-type">
-                    <i class="fas fa-${iconClass}"></i> ${card.type}
-                </div>
-                <div class="gift-card-value">${valueDisplay}</div>
-                <div class="gift-card-desc">${card.description}</div>
-                <div class="gift-card-status">
-                    <i class="fas fa-check-circle"></i> ${statusText}
-                </div>
-            </div>
-        `;
-    }).join('');
-}
-
-// ===== FUNCIONES DE REGALO DE BIENVENIDA =====
-function claimWelcomeGift() {
-    if (appState.hasClaimedWelcome) {
-        alert('Ya has reclamado tu regalo de bienvenida.');
-        return;
-    }
-
-    appState.hasClaimedWelcome = true;
-    
-    addGiftCard('Bienvenida', 5, 'Gift card de bienvenida. Válida para cualquier producto.', false);
-
-    const btn = document.getElementById('claim-welcome');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-check"></i> Regalo Reclamado';
-
-    enableWheel();
-
-    const welcomePrize = document.getElementById('welcome-prize');
-    welcomePrize.textContent = formatAmount(5);
-    document.getElementById('welcome-modal').classList.add('active');
-
-    saveState();
-}
-
-// ===== FUNCIONES DE RULETA =====
-function enableWheel() {
-    const spinBtn = document.getElementById('spin-btn');
-    const spinInfo = document.getElementById('spin-info');
-    
-    if (hasSpunThisMonth()) {
-        spinBtn.disabled = true;
-        spinBtn.innerHTML = '<i class="fas fa-check"></i> Ya Giraste Este Mes';
-        spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
-    } else {
-        spinBtn.disabled = false;
-        spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Disponible ahora - ¡Gira y gana!`;
-    }
-}
-
-function spinWheel() {
-    if (hasSpunThisMonth()) {
-        alert(`Ya has girado la ruleta este mes. Podrás girar nuevamente el 1 de ${monthNames[nextMonth]} ${nextMonthYear}.`);
-        return;
-    }
-
-    if (!appState.hasClaimedWelcome) {
-        alert('Primero debes reclamar tu regalo de bienvenida.');
-        return;
-    }
-
-    const wheel = document.getElementById('wheel');
-    const btn = document.getElementById('spin-btn');
-    
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Girando...';
-
-    const prizes = [
-        { 
-            text: '$1 USD',
-            value: 1,
-            type: 'money',
-            isDiscount: false,
-            description: 'Premio de la ruleta mensual.',
-            label: `Ruleta ${monthNames[currentMonth]} ${currentYear}`,
-            segmentStart: 0,
-            segmentEnd: 90
-        },
-        { 
-            text: '10% OFF',
-            value: 10,
-            type: 'discount',
-            isDiscount: true,
-            description: 'Aplica a 1 producto. No acumulable.',
-            label: 'Descuento 10%',
-            segmentStart: 90,
-            segmentEnd: 180
-        },
-        { 
-            text: '15% OFF',
-            value: 15,
-            type: 'discount',
-            isDiscount: true,
-            description: 'Aplica a 1 producto. No acumulable.',
-            label: 'Descuento 15%',
-            segmentStart: 180,
-            segmentEnd: 270
-        },
-        { 
-            text: '20% OFF',
-            value: 20,
-            type: 'discount',
-            isDiscount: true,
-            description: 'Aplica a 1 producto. No acumulable.',
-            label: 'Descuento 20%',
-            segmentStart: 270,
-            segmentEnd: 360
-        }
-    ];
-
-    const randomIndex = Math.floor(Math.random() * 4);
-    const selectedPrize = prizes[randomIndex];
-    
-    const baseRotation = 3600;
-    const segmentCenter = (selectedPrize.segmentStart + selectedPrize.segmentEnd) / 2;
-    const randomOffset = (Math.random() * 40) - 20;
-    const targetRotation = 360 - segmentCenter + randomOffset;
-    const finalRotation = baseRotation + targetRotation;
-
-    wheel.style.transform = `rotate(${finalRotation}deg)`;
-
-    setTimeout(() => {
-        appState.lastSpinMonth = currentMonthKey;
-        
-        addGiftCard(
-            selectedPrize.label, 
-            selectedPrize.value, 
-            selectedPrize.description, 
-            selectedPrize.isDiscount
-        );
-
-        const prizeText = document.getElementById('prize-text');
-        prizeText.textContent = selectedPrize.isDiscount 
-            ? `${selectedPrize.value}% OFF` 
-            : formatAmount(selectedPrize.value);
-        
-        document.getElementById('prize-modal').classList.add('active');
-
-        btn.innerHTML = '<i class="fas fa-check"></i> Ya Giraste Este Mes';
-        
-        const spinInfo = document.getElementById('spin-info');
-        spinInfo.innerHTML = `<i class="fas fa-calendar"></i> Próxima ruleta: 1 de ${monthNames[nextMonth]} ${nextMonthYear}`;
-
-        saveState();
-    }, 5000);
-}
-
-// ===== FUNCIONES DE MODAL =====
-function closeModal() {
-    document.querySelectorAll('.modal').forEach(modal => {
-        modal.classList.remove('active');
-    });
-}
-
-function showModal(feature) {
-    const featureName = document.getElementById('featureName');
-    if (featureName) {
-        featureName.textContent = feature;
-    }
-    const modal = document.getElementById('modal');
-    if (modal) {
-        modal.classList.add('active');
-    }
-}
-
-function toggleUserDropdown() {
-    const dropdown = document.querySelector('.user-dropdown');
-    if (dropdown) {
-        dropdown.classList.toggle('active');
-    }
-}
-
-// ===== INICIALIZACIÓN =====
-function initApp() {
-    loadState();
-
-    const usdBtn = document.getElementById('usd-btn');
-    const penBtn = document.getElementById('pen-btn');
-    if (usdBtn && penBtn) {
-        usdBtn.classList.toggle('active', appState.currentCurrency === 'USD');
-        penBtn.classList.toggle('active', appState.currentCurrency === 'PEN');
-    }
-
-    if (appState.hasClaimedWelcome) {
-        const btn = document.getElementById('claim-welcome');
-        if (btn) {
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-check"></i> Regalo Reclamado';
-        }
-        enableWheel();
-    } else {
-        const spinBtn = document.getElementById('spin-btn');
-        if (spinBtn) {
-            spinBtn.disabled = true;
-        }
-        const spinInfo = document.getElementById('spin-info');
-        if (spinInfo) {
-            spinInfo.innerHTML = `<i class="fas fa-lock"></i> Reclama tu regalo de bienvenida primero`;
-        }
-    }
-
-    updateAllAmounts();
-    renderGiftCards();
-}
-
-// ===== EVENT LISTENERS =====
-document.addEventListener('DOMContentLoaded', function() {
-    initApp();
-
-    const usdBtn = document.getElementById('usd-btn');
-    const penBtn = document.getElementById('pen-btn');
-    if (usdBtn) usdBtn.addEventListener('click', () => changeCurrency('USD'));
-    if (penBtn) penBtn.addEventListener('click', () => changeCurrency('PEN'));
-
-    const claimBtn = document.getElementById('claim-welcome');
-    if (claimBtn) claimBtn.addEventListener('click', claimWelcomeGift);
-
-    const spinBtn = document.getElementById('spin-btn');
-    if (spinBtn) spinBtn.addEventListener('click', spinWheel);
-
-    document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-    });
-
-    document.addEventListener('click', function(e) {
-        const userDropdown = document.querySelector('.user-dropdown');
-        if (userDropdown && !userDropdown.contains(e.target)) {
-            userDropdown.classList.remove('active');
-        }
-    });
-});
-
-// ===== PREVENIR PÉRDIDA DE DATOS =====
-window.addEventListener('beforeunload', function(e) {
-    saveState();
-});
-
-setInterval(saveState, 30000);
-    </script>
+    <script src="Gift-Cards.js"></script>
 </body>
 </html>
