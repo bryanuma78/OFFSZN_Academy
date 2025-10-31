@@ -8,12 +8,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const productsGrid = document.querySelector('.products-grid');
     const uploadButton = document.querySelector('.upload-btn');
     const token = localStorage.getItem('authToken');
-    const uploadModal = document.getElementById('upload-modal');
-    const uploadForm = document.getElementById('upload-product-form');
-    const uploadMessageDiv = document.getElementById('upload-message');
-    const uploadProgressBar = document.getElementById('upload-progress-bar');
-    const uploadProgressText = document.getElementById('upload-progress-text');
-    const uploadProgressContainer = document.querySelector('.upload-progress');
 
     let API_URL = '';
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
@@ -57,16 +51,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     await loadProducerProducts(userData.id);
                 }
 
-                // COMENTADO: El botón "Subir Kit" redirige directamente a subir-kit.html desde el HTML
-                /*
-                if (uploadButton) {
-                    uploadButton.disabled = false;
-                    uploadButton.onclick = null;
-                    uploadButton.addEventListener('click', () => {
-                        if (uploadModal) uploadModal.classList.add('active');
-                    });
-                }
-                */
+                // El botón ya tiene onclick="window.location.href='subir-kit.html'" en el HTML
+                // No necesitamos modificarlo aquí
 
             } else {
                 console.log("Usuario NO es productor.");
@@ -107,82 +93,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             closeBtn.addEventListener('click', () => closeModal(modal.id));
         }
     });
-
-    if (uploadForm) {
-        uploadForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const submitButton = uploadForm.querySelector('button[type="submit"]');
-
-            const formData = new FormData(uploadForm);
-
-            uploadMessageDiv.textContent = '';
-            uploadMessageDiv.className = 'message';
-            submitButton.disabled = true;
-            submitButton.textContent = 'Subiendo...';
-            if (uploadProgressContainer) uploadProgressContainer.style.display = 'block';
-            if (uploadProgressBar) uploadProgressBar.value = 0;
-            if (uploadProgressText) uploadProgressText.textContent = '0%';
-
-
-            try {
-                const xhr = new XMLHttpRequest();
-
-                xhr.upload.addEventListener('progress', (event) => {
-                    if (event.lengthComputable) {
-                        const percentComplete = Math.round((event.loaded / event.total) * 100);
-                        if (uploadProgressBar) uploadProgressBar.value = percentComplete;
-                        if (uploadProgressText) uploadProgressText.textContent = `${percentComplete}%`;
-                    }
-                });
-
-                xhr.addEventListener('load', () => {
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Subir Producto';
-                    if (uploadProgressContainer) uploadProgressContainer.style.display = 'none';
-
-                    try {
-                        const data = JSON.parse(xhr.responseText);
-
-                        if (xhr.status >= 200 && xhr.status < 300) {
-                            uploadMessageDiv.textContent = data.message || '¡Producto subido!';
-                            uploadMessageDiv.classList.add('success');
-                            uploadForm.reset();
-                            setTimeout(() => {
-                                closeModal('upload-modal');
-                                loadDashboardData();
-                            }, 2000);
-                        } else {
-                            throw new Error(data.error || `Error ${xhr.status}`);
-                        }
-                    } catch (parseError) {
-                        console.error("Error parseando respuesta o error XHR:", parseError, xhr.status, xhr.responseText);
-                        throw new Error(`Error del servidor (${xhr.status}). Revisa la consola.`);
-                    }
-                });
-
-                xhr.addEventListener('error', () => {
-                    console.error("Error de red XHR");
-                    uploadMessageDiv.textContent = 'Error de red al subir el archivo.';
-                    uploadMessageDiv.classList.add('error');
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Subir Producto';
-                    if (uploadProgressContainer) uploadProgressContainer.style.display = 'none';
-                });
-
-                xhr.open('POST', `${API_URL}/products`);
-                xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-                xhr.send(formData);
-
-            } catch (error) {
-                console.error('Error configurando XHR:', error);
-                uploadMessageDiv.textContent = `Error: ${error.message}`;
-                uploadMessageDiv.classList.add('error');
-                submitButton.disabled = false;
-                submitButton.textContent = 'Subir Producto';
-                if (uploadProgressContainer) uploadProgressContainer.style.display = 'none';
-            }
-        });
-    }
 
     async function loadProducerProducts(userId) {
         productsGrid.innerHTML = '<p>Cargando tus productos...</p>';
