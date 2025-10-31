@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         API_URL = 'http://localhost:3000/api';
     } else {
-        API_URL = 'https://offszn-academy.onrender.com/api';
+        API_URL = 'https://offszn-academy.onrender.com/api'; // ⚠️ Quitar espacio al final
     }
 
     // ---------- VERIFICAR AUTH ----------
@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         } catch (error) {
             console.error('Error cargando usuario:', error);
+            // Los skeletons permanecen si falla
         }
     }
 
@@ -113,46 +114,33 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // ---------- TABS FUNCTIONALITY ----------
     const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            // Remove active from all
             tabs.forEach(t => t.classList.remove('active'));
-            tabContents.forEach(c => c.style.display = 'none');
+            document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
 
-            // Add active to clicked
             tab.classList.add('active');
             const target = tab.getAttribute('data-tab');
             document.getElementById(`${target}-content`).style.display = 'block';
         });
     });
 
-    // ---------- MODAL FUNCTIONS ----------
+    // ---------- MODAL & DROPDOWN (igual que mis-compras) ----------
     window.showModal = function(feature) {
         const modal = document.getElementById('modal');
         const featureName = document.getElementById('featureName');
-        if (featureName && feature) {
-            featureName.textContent = feature;
-        }
-        if (modal) {
-            modal.classList.add('active');
-        }
+        if (featureName && feature) featureName.textContent = feature;
+        if (modal) modal.classList.add('active');
     };
 
     window.closeModal = function() {
         const modal = document.getElementById('modal');
-        if (modal) {
-            modal.classList.remove('active');
-        }
+        if (modal) modal.classList.remove('active');
     };
 
-    // ---------- USER DROPDOWN ----------
     window.toggleUserDropdown = function() {
         const dropdown = document.querySelector('.user-dropdown');
-        if (dropdown) {
-            dropdown.classList.toggle('active');
-        }
+        if (dropdown) dropdown.classList.toggle('active');
     };
 
     document.addEventListener('click', (e) => {
@@ -166,9 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const modal = document.getElementById('modal');
     if (modal) {
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
+            if (e.target === modal) closeModal();
         });
     }
 
@@ -189,49 +175,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     function updateWalletDisplay() {
         loadWalletBalance();
     }
-
     setInterval(updateWalletDisplay, 2000);
     window.addEventListener('storage', (e) => {
-        if (e.key === STORAGE_KEY) {
-            setTimeout(updateWalletDisplay, 50);
-        }
+        if (e.key === STORAGE_KEY) setTimeout(updateWalletDisplay, 50);
     });
 
-    // ---------- FUTURAS APIS DE FAVORITOS (POR TIPO) ----------
+    // ---------- FUTURA API DE FAVORITOS (ESPACIO RESERVADO) ----------
     /*
+    // Cuando implementes la API, descomenta y usa:
     async function loadFavorites(type) {
-        // type: 'beats', 'kits', 'presets', 'productores'
-        try {
-            const response = await fetch(`${API_URL}/favorites/${type}`, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const data = await response.json();
-            renderFavorites(type, data);
-        } catch (error) {
-            console.error(`Error al cargar favoritos de ${type}:`, error);
-        }
+        const res = await fetch(`${API_URL}/favorites/${type}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const items = await res.json();
+        renderFavorites(type, items);
     }
 
     function renderFavorites(type, items) {
         const container = document.getElementById(`${type}-content`);
-        if (items.length === 0) {
-            // Mostrar estado vacío (ya existe en HTML)
-            return;
-        }
-        // Aquí iría el renderizado real de los items
-        container.innerHTML = `<div>Cargando ${items.length} favoritos...</div>`;
+        if (items.length === 0) return; // mantener estado vacío
+        // Renderizar tarjetas reales aquí
     }
-
-    // Ejemplo de cómo usarlo:
-    // loadFavorites('beats');
     */
-
-    // Simular carga de 2 segundos antes de "mostrar datos"
-    setTimeout(() => {
-        console.log('Favoritos: carga simulada completada');
-        // Cuando tengas las APIs, descomenta:
-        // ['beats', 'kits', 'presets', 'productores'].forEach(loadFavorites);
-    }, 2000);
 
     // ---------- INICIALIZACIÓN ----------
     await loadUserData();
