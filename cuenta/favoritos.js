@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         API_URL = 'http://localhost:3000/api';
     } else {
-        API_URL = 'https://offszn-academy.onrender.com/api'; // ✅ Sin espacio al final
+        API_URL = 'https://offszn-academy.onrender.com/api'; // ✅ Sin espacio
     }
 
     // ---------- VERIFICAR AUTH ----------
@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         } catch (error) {
             console.error('Error cargando usuario:', error);
-            // Los skeletons permanecen si falla
         }
     }
 
@@ -180,26 +179,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (e.key === STORAGE_KEY) setTimeout(updateWalletDisplay, 50);
     });
 
-    // ---------- FUTURA API DE FAVORITOS (ESPACIO RESERVADO) ----------
+    // ---------- FUTURA API DE FAVORITOS ----------
     /*
-    async function loadFavorites(type) {
-        const res = await fetch(`${API_URL}/favorites/${type}`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-        const items = await res.json();
-        renderFavorites(type, items);
-    }
-
-    function renderFavorites(type, items) {
-        const container = document.getElementById(`${type}-content`);
-        if (items.length === 0) return;
-        // Renderizar tarjetas reales aquí
+    async function loadFavorites() {
+        // cargar favoritos reales
     }
     */
 
     // ---------- INICIALIZACIÓN ----------
     await loadUserData();
     loadWalletBalance();
+
+    // ✅ Mini carga para el contenido principal (mejor UX)
+    setTimeout(() => {
+        document.getElementById('favorites-loader')?.style.display = 'none';
+        document.getElementById('favorites-content')?.style.display = 'block';
+    }, 1200);
 
     console.log('Favoritos inicializado correctamente');
 });
