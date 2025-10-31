@@ -347,7 +347,7 @@
         }
 
         .profile-header {
-            padding: 24px 20px;
+            padding: 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
@@ -355,37 +355,46 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 12px;
         }
 
         .profile-avatar {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: linear-gradient(135deg, #8b5cf6, #6366f1);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #fff;
+            flex-shrink: 0;
+        }
+
+        .profile-details {
+            flex: 1;
+            min-width: 0;
         }
 
         .profile-name {
             font-weight: 600;
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .profile-badge {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: #000;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.6rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.3px;
@@ -394,12 +403,11 @@
         .wallet-section {
             padding: 16px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(139, 92, 246, 0.05);
         }
 
         .wallet-label {
             font-size: 0.7rem;
-            color: #999;
+            color: #666;
             margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -407,7 +415,7 @@
         }
 
         .wallet-amount {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: #fff;
         }
@@ -1324,19 +1332,19 @@
             <div class="profile-header">
                 <div class="profile-info">
                     <div class="profile-avatar">U</div>
-                    <div>
+                    <div class="profile-details">
                         <div class="profile-name">Usuario</div>
+                        <div class="profile-badge">
+                            <i class="fas fa-award"></i>
+                            TOP SELLER
+                        </div>
                     </div>
-                </div>
-                <div class="profile-badge">
-                    <i class="fas fa-award"></i>
-                    Top Seller
                 </div>
             </div>
 
             <div class="wallet-section">
                 <div class="wallet-label">Saldo Disponible</div>
-                <div class="wallet-amount">$0.00</div>
+                <div class="wallet-amount">$5.00</div>
             </div>
 
             <a href="subir-kit.html" class="upload-btn">
