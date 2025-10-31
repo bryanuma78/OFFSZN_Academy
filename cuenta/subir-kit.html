@@ -1015,9 +1015,9 @@
                     clearInterval(interval);
                     setTimeout(() => {
                         let path = '';
-                        if (currentUploadType === 'beats') path = 'cuenta/upload/beats';
-                        else if (currentUploadType === 'drumkits') path = 'cuenta/upload/drum-kits';
-                        else if (currentUploadType === 'presets') path = 'cuenta/upload/presets';
+                        if (currentUploadType === 'beats') path = '/cuenta/upload/beats';
+                        else if (currentUploadType === 'drumkits') path = '/cuenta/upload/drum-kits';
+                        else if (currentUploadType === 'presets') path = /'cuenta/upload/presets';
                         window.location.href = path;
                     }, 500);
                 }
