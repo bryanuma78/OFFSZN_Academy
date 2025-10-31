@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         API_URL = 'http://localhost:3000/api';
     } else {
-        API_URL = 'https://offszn-academy.onrender.com/api'; // ⚠️ Quitar espacio al final
+        API_URL = 'https://offszn-academy.onrender.com/api'; // ✅ Sin espacio al final
     }
 
     // ---------- VERIFICAR AUTH ----------
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    // ---------- MODAL & DROPDOWN (igual que mis-compras) ----------
+    // ---------- MODAL & DROPDOWN ----------
     window.showModal = function(feature) {
         const modal = document.getElementById('modal');
         const featureName = document.getElementById('featureName');
@@ -182,7 +182,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // ---------- FUTURA API DE FAVORITOS (ESPACIO RESERVADO) ----------
     /*
-    // Cuando implementes la API, descomenta y usa:
     async function loadFavorites(type) {
         const res = await fetch(`${API_URL}/favorites/${type}`, {
             headers: { 'Authorization': `Bearer ${token}` }
@@ -193,7 +192,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function renderFavorites(type, items) {
         const container = document.getElementById(`${type}-content`);
-        if (items.length === 0) return; // mantener estado vacío
+        if (items.length === 0) return;
         // Renderizar tarjetas reales aquí
     }
     */
