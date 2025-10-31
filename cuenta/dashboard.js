@@ -9,6 +9,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     const uploadButton = document.querySelector('.upload-btn');
     const token = localStorage.getItem('authToken');
 
+    // ---------- GIFT CARDS STATE ----------
+    const STORAGE_KEY = 'offszn_giftcards_state';
+    let appState = { totalBalance: 0, giftCards: [] };
+
+    function loadGiftCardsState() {
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                appState = JSON.parse(saved);
+                updateWalletAmount();
+            }
+        } catch (err) { 
+            console.error('Error al cargar estado de gift cards:', err); 
+        }
+    }
+
+    function updateWalletAmount() {
+        if (walletAmount) {
+            walletAmount.textContent = `$${appState.totalBalance.toFixed(2)}`;
+        }
+    }
+
     let API_URL = '';
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         API_URL = 'http://localhost:3000/api';
@@ -41,11 +63,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 profileAvatar.textContent = initial;
             }
 
+            // Cargar saldo de gift cards desde localStorage
+            loadGiftCardsState();
+
             if (userData.is_producer === true) {
                 console.log("Usuario es productor. Cargando datos de productor...");
                 document.querySelectorAll('.producer-only').forEach(el => el.style.display = '');
-
-                if (walletAmount) walletAmount.textContent = '$0.00';
 
                 if (productsGrid) {
                     await loadProducerProducts(userData.id);
