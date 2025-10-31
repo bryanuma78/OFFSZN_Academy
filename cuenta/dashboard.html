@@ -1041,7 +1041,7 @@
                 <input type="text" placeholder="Buscar beats, kits, productores...">
                 <i class="fas fa-search"></i>
             </div>
-        </div>
+            </div>
 
         <div class="navbar-right">
             <a href="notifications.html" class="navbar-icon-button"><i class="fas fa-bell"></i></a>
@@ -1064,8 +1064,7 @@
                             class="fas fa-wallet"></i><span>Billetera</span></a>
                     <a href="mis-compras.html" class="user-dropdown-item"><i class="fas fa-shopping-bag"></i><span>Mis
                             Compras</span></a>
-                    <a href="analiticas.html" class="user-dropdown-item"><i
-                            class="fas fa-chart-line"></i><span>Analíticas</span></a>
+                    <a href="#" class="user-dropdown-item disabled"><i class="fas fa-chart-line"></i><span>Analíticas</span><span class="soon-badge">Pronto</span></a>
                     <a href="account-settings.html" class="user-dropdown-item"><i
                             class="fas fa-cog"></i><span>Configuración</span></a>
                     <a href="help.html" class="user-dropdown-item"><i
@@ -1110,7 +1109,7 @@
                 <a href="dashboard.html" class="menu-item active"><i
                         class="fas fa-th-large"></i><span>Dashboard</span></a>
                 <a href="mis-kits.html" class="menu-item"><i class="fas fa-music"></i><span>Mis Kits</span></a>
-                <a href="analiticas.html" class="menu-item"><i class="fas fa-chart-line"></i><span>Analíticas</span></a>
+                <a href="#" class="menu-item disabled"><i class="fas fa-chart-line"></i><span>Analíticas</span><span class="soon-badge">Pronto</span></a>
                 <a href="favoritos.html" class="menu-item"><i class="fas fa-heart"></i><span>Favoritos</span></a>
                 <a href="#" class="menu-item"><i class="fas fa-history"></i><span>Historial</span></a>
 
@@ -1237,7 +1236,7 @@
                         activos aún</h3>
                     <p
                         style="color:#666;margin-bottom:24px;line-height:1.6;font-size:.95rem;max-width:500px;margin-left:auto;margin-right:auto;">
-                        Comienza a vender tus beats, kits o presets. Haz click en <strong>“Subir Kit”</strong> en el
+                        Comienza a vender tus beats, kits o presets. Haz click en <strong>"Subir Kit"</strong> en el
                         menú lateral y lanza tu primer producto.
                     </p>
                     <button onclick="window.location.href='subir-kit.html'"
@@ -1307,7 +1306,7 @@
         }
 
         /* ---------- CIERRE DE MODALES AL HACER CLIC FUERA ---------- */
-        document.getElementById('modal').addEventListener('click', e => { if (e.target === this) closeModal(); });
+        document.getElementById('modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
         document.addEventListener('click', e => {
             const userDropdown = document.querySelector('.user-dropdown');
             const userBtn = document.querySelector('.user-dropdown .navbar-icon-button');
@@ -1348,59 +1347,6 @@
         });
     </script>
     <script src="dashboard.js"></script>
-
-    <div class="modal" id="upload-modal">
-    <div class="modal-content" style="text-align: left; max-width: 600px;">
-        <button class="modal-close" onclick="closeModal('upload-modal')"><i class="fas fa-times"></i></button>
-        <h2 class="modal-title">Subir Nuevo Producto</h2>
-        <form id="upload-product-form" enctype="multipart/form-data">
-            
-            <label for="product-name">Nombre del Producto:*</label>
-            <input type="text" id="product-name" name="name" required>
-
-            <label for="product-type">Tipo:*</label>
-            <select id="product-type" name="product_type" required>
-                <option value="">-- Selecciona --</option>
-                <option value="beat">Beat / Instrumental</option>
-                <option value="drumkit">Drum Kit</option>
-                <option value="preset">Preset / Plugin</option>
-                <option value="sample">Sample / Loop</option>
-                <option value="otro">Otro</option>
-            </select>
-
-            <label for="product-price-usd">Precio (USD):*</label>
-            <input type="number" id="product-price-usd" name="price_usd" step="0.01" required>
-
-            <label for="product-price-pen">Precio (Soles PEN):</label>
-            <input type="number" id="product-price-pen" name="price_pen" step="0.01">
-
-            <label for="product-description">Descripción:</label>
-            <textarea id="product-description" name="description"></textarea>
-
-            <label for="product-bpm">BPM (si aplica):</label>
-            <input type="number" id="product-bpm" name="bpm">
-
-            <label for="product-key">Key / Tonalidad (si aplica):</label>
-            <input type="text" id="product-key" name="key">
-
-            <label for="product-tags">Tags (separados por coma):</label>
-            <input type="text" id="product-tags" name="tags" placeholder="Ej: trap, dark, 808">
-
-            <label for="product-image">URL de Imagen de Portada:</label>
-            <input type="url" id="product-image" name="image_url" placeholder="https://...">
-
-            <label for="product-file">Archivo del Producto (.zip, .wav, .mp3 - Máx 50MB):*</label>
-            <input type="file" id="product-file" name="productFile" required accept=".zip,.wav,.mp3">
-
-            <div class="upload-progress" style="margin-top: 10px; display:none;">
-                 Subiendo: <progress id="upload-progress-bar" value="0" max="100"></progress> <span id="upload-progress-text">0%</span>
-            </div>
-
-            <button type="submit" class="btn" style="width: 100%; margin-top: 1.5rem;">Subir Producto</button>
-            <div id="upload-message" class="message" role="alert"></div>
-        </form>
-    </div>
-</div>
 </body>
 
 </html>
