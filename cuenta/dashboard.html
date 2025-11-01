@@ -106,7 +106,11 @@
             transform: translateX(-50%) translateY(0);
         }
         
-        .navbar-links > li:hover > a > i {
+        .navbar-links a i.fa-chevron-down {
+            transition: transform .2s;
+        }
+
+        .navbar-links > li:hover > a > i.fa-chevron-down {
             transform: rotate(180deg);
         }
 
@@ -1027,6 +1031,74 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .logout-overlay {
+            display: none;
+            /* Oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.9);
+            /* Fondo oscuro */
+            backdrop-filter: blur(8px);
+            z-index: 10001;
+            /* Encima de todo */
+
+            /* Para centrar */
+            align-items: center;
+            justify-content: center;
+
+            /* Para la animación */
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            /* Duración del fade-in/out */
+        }
+
+        /* Clase que JS añade para MOSTRARLO */
+        .logout-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Clase que JS añade para DESVANECERLO */
+        .logout-overlay.fading-out {
+            opacity: 0;
+        }
+
+        .logout-content {
+            text-align: center;
+            color: #fff;
+        }
+
+        .logout-content i {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #8b5cf6;
+            /* Tu color morado */
+        }
+
+        .logout-content h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #e5e5e5;
+        }
+
+        /* Animación de spin (por si acaso) */
+        @keyframes fa-spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .fa-spin {
+            animation: fa-spin 1.5s linear infinite;
+        }
     </style>
 </head>
 
@@ -1125,8 +1197,8 @@
                             class="fas fa-cog"></i><span>Configuración</span></a>
                     <a href="help.html" class="user-dropdown-item"><i
                             class="fas fa-question-circle"></i><span>Ayuda</span></a>
-                    <a href="logout.html" class="user-dropdown-item logout"><i
-                            class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
+                    <a href="#" class="user-dropdown-item logout"><i class="fas fa-sign-out-alt"></i><span>Cerrar
+                            Sesión</span></a>
                 </div>
             </div>
         </div>
@@ -1191,7 +1263,8 @@
                 <a href="blog.html" class="menu-item"><i class="fas fa-book-open"></i><span>Blog</span></a>
             </div>
 
-            <a href="logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
+            <a href="#" id="navbar-logout-btn" class="user-dropdown-item logout logout-btn"><i
+                    class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a>
         </aside>
 
         <!-- Main Content -->
@@ -1332,6 +1405,13 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <div id="logout-overlay">
+        <div class="logout-content">
+            <i class="fas fa-spinner fa-spin"></i>
+            <h2 id="logout-message">Te veremos pronto...</h2>
+        </div>
     </div>
 
     <!-- Modal -->
