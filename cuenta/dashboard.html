@@ -1036,7 +1036,7 @@
             }
         }
 
-        .logout-overlay {
+        #logout-overlay {
             display: none;
             /* Oculto por defecto */
             position: fixed;
@@ -1061,13 +1061,13 @@
         }
 
         /* Clase que JS añade para MOSTRARLO */
-        .logout-overlay.active {
+        #logout-overlay.active {
             display: flex;
             opacity: 1;
         }
 
         /* Clase que JS añade para DESVANECERLO */
-        .logout-overlay.fading-out {
+        #logout-overlay.fading-out {
             opacity: 0;
         }
 
@@ -1201,7 +1201,7 @@
                             class="fas fa-cog"></i><span>Configuración</span></a>
                     <a href="help.html" class="user-dropdown-item"><i
                             class="fas fa-question-circle"></i><span>Ayuda</span></a>
-                    <a href="#" class="user-dropdown-item logout"><i class="fas fa-sign-out-alt"></i><span>Cerrar
+                    <a href="#" id="navbar-logout-btn" class="user-dropdown-item logout"><i class="fas fa-sign-out-alt"></i><span>Cerrar
                             Sesión</span></a>
                 </div>
             </div>
